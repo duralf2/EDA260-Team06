@@ -1,5 +1,7 @@
 package tests;
 
+import io.IOHandler;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.logic.IOHandler;
 import register.model.DataStructure;
 
 public class OutputTest {

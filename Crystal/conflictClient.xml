@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccConfig tempDirectory="/h/d3/k/Användarnamn här/Crystal/" refresh="60">
+  <project Kind="GIT" ShortName="Enduro" Clone="/h/d3/k/ANVÄNDARNAMN HÄR/SÖKVÄG TILL WORKSPACE/EDA260-Team09" commonParent="MASTER">
+    <source ShortName="MASTER" Clone="https://RichardSimko@github.com/RichardSimko/EDA260-Team09.git" Hidden="false" commonParent="MASTER" />
+  </project>
+</ccConfig>

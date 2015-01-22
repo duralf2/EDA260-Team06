@@ -13,6 +13,7 @@ docs/api/
 *.aux
 *.toc
 *.out
+Crystal
 
 local.properties
 .settings/

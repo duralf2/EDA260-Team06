@@ -13,7 +13,6 @@ docs/api/
 *.aux
 *.toc
 *.out
-.project
 
 local.properties
 .settings/

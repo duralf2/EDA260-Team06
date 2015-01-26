@@ -5,9 +5,11 @@ import java.util.Map;
 
 public class DataStructure {
 	private HashMap<String, Time> timeEntries;
+	private HashMap<String, Contestant> contestantEntries;
 
 	public DataStructure() {
 		timeEntries = new HashMap<String, Time>();
+		contestantEntries = new HashMap<String, Contestant>();
 	}
 
 	public void addEntry(String startNumber, Time time) {
@@ -16,5 +18,14 @@ public class DataStructure {
 
 	public Map<String, Time> getAllEntries() {
 		return timeEntries;
+	}
+
+	public void addContestantEntry(String startNumber, Contestant contestant) {
+		
+		contestantEntries.put(startNumber, contestant);
+	}
+
+	public Map<String, Contestant> getAllContestantEntries() {
+		return contestantEntries;
 	}
 }

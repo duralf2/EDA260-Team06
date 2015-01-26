@@ -16,7 +16,7 @@ public class ContestantTest {
 	public void setUp() throws Exception {
 		startNumber = "1";
 		name = "David";
-		contestant = new Contestant(startNumber,name);
+		contestant = new Contestant(name);
 	}
 
 	@Test

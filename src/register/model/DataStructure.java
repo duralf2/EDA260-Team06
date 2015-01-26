@@ -33,7 +33,11 @@ public class DataStructure {
 	}
 
 	public boolean equals(Object obj) {
-		DataStructure ds = (DataStructure) obj;
-		return ds.getAllContestantEntries().equals(getAllContestantEntries());
+		if (obj instanceof DataStructure)
+		{
+			DataStructure ds = (DataStructure) obj;
+			return ds.getAllContestantEntries().equals(getAllContestantEntries());
+		}
+		return false;
 	}
 }

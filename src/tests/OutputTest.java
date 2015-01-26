@@ -61,7 +61,7 @@ public class OutputTest {
 	@Test
 	public void testWriteStartTimes() {
 		IOHandler.writeStartTimes(pw, ds);
-		assert(f.exists());
+		assertTrue(f.exists());
 		assertEquals("1;", sc.next());
 		assertEquals("12.00.00",  sc.next());
 	}
@@ -69,7 +69,7 @@ public class OutputTest {
 	@Test
 	public void testWriteGoalTimes() {
 		IOHandler.writeGoalTimes(pw, ds);
-		assert(f.exists());
+		assertTrue(f.exists());
 		assertEquals("1;", sc.next());
 		assertEquals("13.23.34", sc.next());
 	}
@@ -77,7 +77,7 @@ public class OutputTest {
 	@Test
 	public void testWriteResults() {
 		IOHandler.writeResult(pw, ds);
-		assert(f.exists());
+		assertTrue(f.exists());
 		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
 		assertEquals("1;", sc.next());
 		assertEquals("--.--.--;",  sc.next());

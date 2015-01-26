@@ -20,7 +20,7 @@ public class IOHandler {
 			contestant = entries.get(startNumber);
 			sb.append(startNumber + ";");
 			sb.append(contestant.getName()+";");
-			sb.append("--.--.--;");
+			sb.append(contestant.getTotalTime()+";");
 			sb.append(contestant.getStartTime() + ";");
 			sb.append(contestant.getFinishTime() + "\n");
 		}

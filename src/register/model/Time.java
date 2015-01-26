@@ -31,10 +31,11 @@ public class Time {
 		return timeToString(hours, minutes, seconds);
 	}
 	
-	public static String getTotalTime(Time t1, Time t2) {
-		int totalHours = t2.hours - t1.hours;
-		int totalMinutes = t2.minutes - t1.minutes;
-		int totalSeconds = t2.seconds - t1.seconds;
+	public static String getTotalTime(Time startTime, Time finishTime) {
+		
+		int totalHours = finishTime.hours - startTime.hours;
+		int totalMinutes = finishTime.minutes - startTime.minutes;
+		int totalSeconds = finishTime.seconds - startTime.seconds;
 		if (totalSeconds < 0) {
 			totalSeconds += 60;
 			totalMinutes--;
@@ -58,5 +59,10 @@ public class Time {
 	
 	private static String format(int time) {
 		return time < 10? "0" + time : Integer.toString(time);
+	}
+	
+	public boolean equals(Object obj) {
+		Time t = (Time)obj;
+		return t.hours == hours && t.minutes == minutes && t.seconds == seconds;
 	}
 }

@@ -88,7 +88,7 @@ public class OutputTest {
 		String[] line = sc.nextLine().split(";");
 		assertEquals("1", line[0]);
 		assertEquals("Göran-Victor Hansson", line[1]);
-		assertEquals("--.--.--",  line[2]);
+		assertEquals("01.23.34",  line[2]);
 		assertEquals("12.00.00",  line[3]);
 		assertEquals("13.23.34", line[4]);
 	}

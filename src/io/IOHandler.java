@@ -21,7 +21,8 @@ public class IOHandler {
 			if(entries.get(s).getStartTime() == null){
 				sb.append("Start?" + "; ");
 			}else{
-			sb.append(entries.get(s).getStartTime() + "; ");
+
+			sb.append(entries.get(s).getTotalTime() + "; ");
 			}
 			if(entries.get(s).getFinishTime() == null){
 				sb.append("Slut?" + "\n");

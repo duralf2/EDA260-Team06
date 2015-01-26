@@ -70,5 +70,29 @@ public class OddInputsTest {
 		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
 		assertEquals("1;Göran;00.07.00;13.23.34;13.30.34;Omöjlig totaltid?", sc.nextLine());
 	}
+	
+	@Test
+	public void testMultipleStart() {
+		Contestant contestant = new Contestant("Göran");
+		contestant.addStartTime(new Time("13.23.34"));
+		contestant.addStartTime(new Time("13.24.35"));
+		contestant.setFinishTime(new Time("14.30.34"));
+		ds.addContestantEntry("1", contestant);
+		IOHandler.writeResult(pw, ds);
+		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
+		assertEquals("1;Göran;01.07.00;13.23.34;14.30.34; Flera starttider? 13.24.35", sc.nextLine());
+	}
+	
+	@Test
+	public void testMultipleFinish() {
+		Contestant contestant = new Contestant("Göran");
+		contestant.addStartTime(new Time("13.23.34"));
+		contestant.addFinishTime(new Time("14.30.34"));
+		contestant.addFinishTime(new Time("14.31.34"));
+		ds.addContestantEntry("1", contestant);
+		IOHandler.writeResult(pw, ds);
+		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
+		assertEquals("1;Göran;01.07.00;13.23.34;14.30.34; Flera måltider? 14.31.34", sc.nextLine());
+	}
 }
 	

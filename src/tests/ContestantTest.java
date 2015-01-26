@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.LinkedList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,5 +64,25 @@ public class ContestantTest {
 		Contestant contestant1 = new Contestant("Testname");
 		ContestantTest test = new ContestantTest();
 		assertFalse(contestant1.equals(test));
+	}
+	
+	@Test
+	public void testGetStartTimes() {
+		Time t = new Time("00.00.02");
+		contestant.addStartTime(startTime);
+		contestant.addStartTime(t);
+		LinkedList<Time> start = contestant.getStartTimes();
+		assertEquals(startTime, start.get(0));
+		assertEquals(t, start.get(1));
+	}
+	
+	@Test
+	public void testGetFinishTimes() {
+		Time t = new Time("00.00.02");
+		contestant.addFinishTime(startTime);
+		contestant.addFinishTime(t);
+		LinkedList<Time> finish = contestant.getFinishTimes();
+		assertEquals(startTime, finish.get(0));
+		assertEquals(t, finish.get(1));
 	}
 }

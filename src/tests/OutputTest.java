@@ -95,30 +95,4 @@ public class OutputTest {
 		assertEquals("12.00.00",  line[3]);
 		assertEquals("13.23.34", line[4]);
 	}
-	
-	@Test
-	public void testNoStartTime(){
-		Contestant contestant = new Contestant("Göran");
-		contestant.setFinishTime(new Time("13.23.34"));
-		ds.addContestantEntry("1", contestant);
-		IOHandler.writeResult(pw, ds);
-		assertEquals("StartNr; TotalTid; StartTider; Måltider", sc.nextLine());
-		assertEquals("1;", sc.next());
-		assertEquals("--.--.--;",  sc.next());
-		assertEquals("Start?;",  sc.next());
-		assertEquals("13.23.34",  sc.next());
-	}
-	
-	@Test
-	public void testNoFinishTime(){
-		Contestant contestant = new Contestant("Göran");
-		contestant.setStartTime(new Time("13.23.34"));
-		ds.addContestantEntry("1", contestant);
-		IOHandler.writeResult(pw, ds);
-		assertEquals("StartNr; TotalTid; StartTider; Måltider", sc.nextLine());
-		assertEquals("1;", sc.next());
-		assertEquals("--.--.--;",  sc.next());
-		assertEquals("13.23.34;",  sc.next());
-		assertEquals("Slut?",  sc.next());
-	}
 }

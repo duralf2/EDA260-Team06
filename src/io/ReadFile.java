@@ -20,6 +20,7 @@ public class ReadFile {
 	public ReadFile() {
 	}
 
+	//Template method
 	public boolean readStartTime(File file, DataStructure ds) throws IOException {
 		try {
 			Reader reader = new FileReader(file);
@@ -46,6 +47,7 @@ public class ReadFile {
 		return true;
 	}
 
+	//Template method
 	public boolean readFinishTime(File file, DataStructure ds) throws IOException {
 		try {
 			Reader reader = new FileReader(file);

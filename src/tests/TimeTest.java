@@ -20,4 +20,8 @@ public class TimeTest {
 		assertTrue(t1.getStartTime().equals("10.15.34"));
 	}
 
+	@Test
+	public void testGetFinishTime() {
+		assertTrue(t1.getFinishTime().equals("17.65.12"));
+	}
 }

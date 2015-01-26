@@ -80,17 +80,17 @@ public class IOHandler {
 		List<String[]> data = csvParser.readAll();
 		
 		Iterator<String[]> iterator = data.iterator();
-		String[] contestantColums = iterator.next();
-		readContestantColumns(ds, contestantColums);
+		String[] contestantColumns = iterator.next();
+		readContestantColumns(ds, contestantColumns);
 		readContestants(ds, iterator);
 	}
 
 	private static void readContestantColumns(DataStructure ds,
-			String[] contestantColums) {
-		for (int i = 0; i < contestantColums.length; i++) {
-			contestantColums[i] = contestantColums[i].trim();
+			String[] contestantColumns) {
+		for (int i = 0; i < contestantColumns.length; i++) {
+			contestantColumns[i] = contestantColumns[i].trim();
 		}
-		ds.setContestantColumnNames(contestantColums);
+		ds.setContestantColumnNames(contestantColumns);
 	}
 
 	private static void readContestants(DataStructure ds,

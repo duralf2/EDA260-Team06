@@ -17,22 +17,16 @@ public class Register {
 		this.ds = times;
 	}
 
-	public void readStartTimes() throws IOException {
-		File startTimes = new File("starttider.txt");
-		readStartTimes(startTimes);
-	}
-
 	public void readStartTimes(File startTimes) throws IOException {
-		ReadFile.readStartTime(startTimes, ds);
-	}
-
-	public void readGoalTimes() throws IOException {
-		File goalTimes = new File("maltider.txt");
-		readGoalTimes(goalTimes);
+		if(startTimes.isFile()){
+			ReadFile.readStartTime(startTimes, ds);
+		}
 	}
 
 	public void readGoalTimes(File goalTimes) throws IOException {
-		ReadFile.readFinishTime(goalTimes, ds);
+		if(goalTimes.isFile()){
+			ReadFile.readFinishTime(goalTimes, ds);
+		}
 	}
 
 	public void writeResult() {

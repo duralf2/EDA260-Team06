@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Enduro.makejar" default="main" basedir=".">
+<project name="Enduro.makejar" default="main" basedir=".">  <!--Starts script at main-->
 
-	<target name="clean" description="Destroys all generated files and dirs.">
+	<target name="clean" description="Destroys all previously generated files and dirs.">
 		<delete dir="build" />
 		<delete dir="testreports" />
 	</target>
@@ -14,12 +14,12 @@
 		<mkdir dir="build/jar" />
 		<jar destfile="build/jar/programme.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="sorter.SorterMain" />
+				<attribute name="Main-Class" value="sorter.SorterMain" /> <!--Sets the main class of the program -->
 			</manifest>
 		</jar>
 	</target>
 
-	<target name="main" depends="clean,jar,test" />
+	<target name="main" depends="clean,jar,test" />  <!--Runs clean, jar and test in order-->
 
 	<target name="test">
 
@@ -40,8 +40,13 @@
 					<include name="tests/*" />
 				</fileset>
 			</batchtest>
-
 		</junit>
+		
+		<junitreport todir="testreports"> <!--Merge test results into one file (TestSuites.xml)-->
+	            <fileset dir="testreports">
+	                    <include name="TEST-*.xml" />
+	            </fileset>
+	    </junitreport>
 
 	</target>
 </project>

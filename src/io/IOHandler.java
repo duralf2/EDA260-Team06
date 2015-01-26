@@ -13,22 +13,15 @@ public class IOHandler {
 	{
 		StringBuilder sb = new StringBuilder();
 		Map <String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; TotalTid; StartTider; Måltider\n");
-		// loopa genom ds.driver/time
-		for (String s: entries.keySet()){
-			sb.append(s + "; ");
-			sb.append("--.--.--; ");
-			if(entries.get(s).getStartTime() == null){
-				sb.append("Start?" + "; ");
-			}else{
-
-			sb.append(entries.get(s).getTotalTime() + "; ");
-			}
-			if(entries.get(s).getFinishTime() == null){
-				sb.append("Slut?" + "\n");
-			}else{
-			sb.append(entries.get(s).getFinishTime() + "\n");
-			}
+		sb.append("StartNr; Namn; TotalTid; Starttid; Måltid\n");
+		Contestant contestant;
+		for (String startNumber: entries.keySet()){
+			contestant = entries.get(startNumber);
+			sb.append(startNumber + ";");
+			sb.append(contestant.getName()+";");
+			sb.append(contestant.getTotalTime()+";");
+			sb.append(contestant.getStartTime() + ";");
+			sb.append(contestant.getFinishTime() + "\n");
 		}
 		pw.write(sb.toString());
 		pw.close();
@@ -40,21 +33,20 @@ public class IOHandler {
 
 		StringBuilder sb = new StringBuilder();
 		for (String s: entries.keySet()){
-			sb.append(s + "; ");
+			sb.append(s + ";");
 			sb.append(entries.get(s).getStartTime() + "\n");
 		}
 		pw.write(sb.toString());
 		pw.close();
 	}
 
-	public static void writeGoalTimes(PrintWriter pw, DataStructure ds)
+	public static void writeFinishTimes(PrintWriter pw, DataStructure ds)
 	{
-		// loopa genom ds.driver/time
 		Map <String, Contestant> entries = ds.getAllContestantEntries();
 		StringBuilder sb = new StringBuilder();
 		for (String s: entries.keySet()){
-			sb.append(s + "; ");
-			sb.append(entries.get(s).getFinishTime() );
+			sb.append(s + ";");
+			sb.append(entries.get(s).getFinishTime() + "\n");
 		}
 		pw.write(sb.toString());
 		pw.close();

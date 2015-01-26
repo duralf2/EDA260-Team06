@@ -31,16 +31,21 @@ public class OutputTest {
 		FileOutputStream fos = new FileOutputStream(f);
 		pw = new PrintWriter(fos);
 		ds = new DataStructure();
+
+		Contestant contestant = new Contestant("Göran-Victor Hansson");
+		contestant.setStartTime(new Time("12.00.00"));
+		contestant.setFinishTime(new Time("13.23.34"));
+		ds.addContestantEntry("1", contestant);
 		sc = new Scanner(f);
 	}
 	
-//	@After
-//	public void tearDown()
-//	{
-//		f.delete();
-//	}
+	@After
+	public void tearDown()
+	{
+		f.delete();
+	}
 
-//	Gör om när vi har en sortmetod!!
+//	TODO: Gör om när vi har en sortmetod!!
 //	@Test
 //	public void testWriteTwoResults() {
 //		ds.addEntry("2", new Time("13.37.00", "13.37.01"));
@@ -60,41 +65,33 @@ public class OutputTest {
 	
 	@Test
 	public void testWriteStartTimes() {
-		Contestant contestant = new Contestant("Göran");
-		contestant.setStartTime(new Time("12.00.00"));
-		contestant.setFinishTime(new Time("13.23.34"));
-		ds.addContestantEntry("1", contestant);
 		IOHandler.writeStartTimes(pw, ds);
+		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
-		assertEquals("1;", sc.next());
-		assertEquals("12.00.00",  sc.next());
+		assertEquals("1", line[0]);
+		assertEquals("12.00.00",  line[1]);
 	}
 
 	@Test
-	public void testWriteGoalTimes() {
-		Contestant contestant = new Contestant("Göran");
-		contestant.setStartTime(new Time("12.00.00"));
-		contestant.setFinishTime(new Time("13.23.34"));
-		ds.addContestantEntry("1", contestant);
-		IOHandler.writeGoalTimes(pw, ds);
+	public void testWriteFinishTimes() {
+		IOHandler.writeFinishTimes(pw, ds);
+		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
-		assertEquals("1;", sc.next());
-		assertEquals("13.23.34", sc.next());
+		assertEquals("1", line[0]);
+		assertEquals("13.23.34",  line[1]);
 	}
 	
 	@Test
 	public void testWriteResults() {
-		Contestant contestant = new Contestant("Göran");
-		contestant.setStartTime(new Time("12.00.00"));
-		contestant.setFinishTime(new Time("13.23.34"));
-		ds.addContestantEntry("1", contestant);
 		IOHandler.writeResult(pw, ds);
 		assertTrue(f.exists());
-		assertEquals("StartNr; TotalTid; StartTider; Måltider", sc.nextLine());
-		assertEquals("1;", sc.next());
-		assertEquals("--.--.--;",  sc.next());
-		assertEquals("12.00.00;",  sc.next());
-		assertEquals("13.23.34",  sc.next());
+		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
+		String[] line = sc.nextLine().split(";");
+		assertEquals("1", line[0]);
+		assertEquals("Göran-Victor Hansson", line[1]);
+		assertEquals("01.23.34",  line[2]);
+		assertEquals("12.00.00",  line[3]);
+		assertEquals("13.23.34", line[4]);
 	}
 	
 	@Test

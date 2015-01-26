@@ -5,26 +5,16 @@ import io.ReadFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.googlecode.jcsv.reader.CSVReader;
-import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
-
-import register.model.Contestant;
 import register.model.DataStructure;
-import register.model.Time;
-import junit.framework.TestCase;
 
 public class AcceptanceTest extends TestCase {
 	private String namesFilepath = "testfiles/acceptanstest/acceptanstest5/namnfil.txt";

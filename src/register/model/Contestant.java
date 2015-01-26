@@ -36,6 +36,10 @@ public class Contestant {
 		return finishTime;
 	}
 	
+	public String getTotalTime() {
+		return Time.getTotalTime(startTime, finishTime);
+	}
+	
 	public boolean equals(Object obj) {
 		// TODO: Also use time when doing eq op?
 		return ((Contestant)obj).name.equalsIgnoreCase(name);

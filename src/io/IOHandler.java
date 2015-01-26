@@ -17,7 +17,7 @@ public class IOHandler {
 		// loopa genom ds.driver/time
 		for (String s: entries.keySet()){
 			sb.append(s + "; ");
-			sb.append("--.--.--; ");
+			sb.append(entries.get(s).getTotalTime() + "; ");
 			sb.append(entries.get(s).getStartTime() + "; ");
 			sb.append(entries.get(s).getFinishTime() + "\n");
 		}

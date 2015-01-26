@@ -2,6 +2,7 @@ package io;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -17,62 +18,48 @@ import register.model.Time;
 
 public class ReadFile {
 
-	public ReadFile() {
+	public static List<String[]> readCSV(File file) throws IOException {
+		Reader reader = new FileReader(file);
+		CSVReader<String[]> csvParser = CSVReaderBuilder
+				.newDefaultReader(reader);
+		return csvParser.readAll();
 	}
-
-	//TODO Template method
-	public boolean readStartTime(File file, DataStructure ds) throws IOException {
-		try {
-			Reader reader = new FileReader(file);
-			CSVReader<String[]> csvParser = CSVReaderBuilder
-					.newDefaultReader(reader);
-			List<String[]> data = csvParser.readAll();
-			String startNr, time;
-			Contestant contestant;
-			for (String[] line : data) {
-				startNr = line[0];
-				time = line[1];
-				time = time.replaceAll("\\s+", "");
-				contestant = ds.getContestant(startNr);
-				if (contestant == null) {
-					contestant = new Contestant("");
-					ds.addContestantEntry(startNr, contestant);
-				}
-				contestant.setStartTime(new Time(time));
-			}
-		} catch (IOException e) {
-			throw e;
-		} finally {
+	
+	public static void readStartTime(File file, DataStructure ds)
+			throws IOException {
+		List<String[]> data = readCSV(file);
+		
+		String startNr, time;
+		Contestant contestant;
+		for (String[] line : data) {
+			startNr = line[0];
+			time = line[1].trim();
+			contestant = getContestant(startNr, ds);
+			contestant.setStartTime(new Time(time));
 		}
-		return true;
 	}
 
-	//TODO Template method
-	public boolean readFinishTime(File file, DataStructure ds) throws IOException {
-		try {
-			Reader reader = new FileReader(file);
-			CSVReader<String[]> csvParser = CSVReaderBuilder
-					.newDefaultReader(reader);
-			List<String[]> data = csvParser.readAll();
-			String startNr, time;
-			Contestant contestant;
-			for (String[] line : data) {
-				startNr = line[0];
-				time = line[1];
-				time = time.replaceAll("\\s+", "");
-				contestant = ds.getContestant(startNr);
-				if (contestant == null) {
-					contestant = new Contestant("");
-					ds.addContestantEntry(startNr, contestant);
-				}
-				contestant.setFinishTime(new Time(time));
-			}
-		} catch (IOException e) {
-			throw e;
-		} finally {
+	public static void readFinishTime(File file, DataStructure ds)
+			throws IOException {
+		List<String[]> data = readCSV(file);
+		
+		String startNr, time;
+		Contestant contestant;
+		for (String[] line : data) {
+			startNr = line[0];
+			time = line[1].trim();
+			contestant = getContestant(startNr, ds);
+			contestant.setFinishTime(new Time(time));
 		}
-		return true;
 	}
-
-
+	
+	private static Contestant getContestant(String startNr, DataStructure ds) {
+		Contestant contestant = ds.getContestant(startNr);
+		if (contestant == null) {
+			// TODO: Is there a better way? I don't know... Perhaps throw an exception?
+			contestant = new Contestant("NAME MISSING");
+			ds.addContestantEntry(startNr, contestant);
+		}
+		return contestant;
+	}
 }

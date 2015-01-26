@@ -10,6 +10,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
 import io.ReadFile;
@@ -24,34 +25,33 @@ public class ReadFileTest {
 		ds = new DataStructure();
 	}
 	
-	@Test(expected=ArrayIndexOutOfBoundsException.class)
+	@Test(expected=StringIndexOutOfBoundsException.class)
 	public void wrongStructure() throws IOException {
-		fr.read(new File("testfiles/emptyFileTest"),ds);
-		
+		fr.readFinishTime(new File("testfiles/emptyFileTest"),ds);
 	}
-	
-//	@Test
-//	public void noStartNumber() {
-//		
-//	}
+
 	
 	@Test(expected=FileNotFoundException.class)
 	public void nonExistingFile() throws IOException{
 		try{
-			fr.read(new File("asd"),ds);
+			fr.readFinishTime(new File("asd"),ds);
 		}catch (FileNotFoundException e) {
             throw e;
            }
 	}
 	
 	@Test
-	public void workingStructure() throws IOException {
-		fr.read(new File("testfiles/validFileTest"), ds);
-		fr.toString();
-		Map<String,Time> entries= ds.getAllTimeEntries();
-		Time entry = entries.get("1");
-		String time = entry.getStartTime()+","+entry.getFinishTime();
-		assertEquals(time,"12.00.00,13.23.34");
+	public void readStartFile() throws IOException {
+		fr.readStartTime(new File("testfiles/acceptanstest/acceptanstest3/starttider.txt"), ds);
+		Contestant contestant = ds.getContestant("1");
+		assertEquals("12.00.00",contestant.getStartTime().toString());
+	}
+	
+	@Test
+	public void readEndFile() throws IOException {
+		fr.readFinishTime(new File("testfiles/acceptanstest/acceptanstest3/maltider.txt"), ds);
+		Contestant contestant = ds.getContestant("1");
+		assertEquals("13.23.34",contestant.getFinishTime().toString());
 	}
 
 }

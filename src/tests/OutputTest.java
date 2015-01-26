@@ -44,7 +44,7 @@ public class OutputTest {
 		f.delete();
 	}
 
-//	Gör om när vi har en sortmetod!!
+//	TODO: Gör om när vi har en sortmetod!!
 //	@Test
 //	public void testWriteTwoResults() {
 //		ds.addEntry("2", new Time("13.37.00", "13.37.01"));
@@ -72,8 +72,8 @@ public class OutputTest {
 	}
 
 	@Test
-	public void testWriteGoalTimes() {
-		IOHandler.writeGoalTimes(pw, ds);
+	public void testWriteFinishTimes() {
+		IOHandler.writeFinishTimes(pw, ds);
 		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
 		assertEquals("1", line[0]);

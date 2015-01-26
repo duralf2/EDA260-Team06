@@ -23,7 +23,6 @@ public class Time {
 				 hours < 0 || minutes < 0 || seconds < 0) {
 			throw new IllegalArgumentException();
 		}
-		
 	}
 
 	@Override

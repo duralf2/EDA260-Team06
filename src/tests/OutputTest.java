@@ -31,18 +31,14 @@ public class OutputTest {
 		FileOutputStream fos = new FileOutputStream(f);
 		pw = new PrintWriter(fos);
 		ds = new DataStructure();
-		Contestant contestant = new Contestant("Göran");
-		contestant.setStartTime(new Time("12.00.00"));
-		contestant.setFinishTime(new Time("13.23.34"));
-		ds.addContestantEntry("1", contestant);
 		sc = new Scanner(f);
 	}
 	
-	@After
-	public void tearDown()
-	{
-		f.delete();
-	}
+//	@After
+//	public void tearDown()
+//	{
+//		f.delete();
+//	}
 
 //	Gör om när vi har en sortmetod!!
 //	@Test
@@ -64,6 +60,10 @@ public class OutputTest {
 	
 	@Test
 	public void testWriteStartTimes() {
+		Contestant contestant = new Contestant("Göran");
+		contestant.setStartTime(new Time("12.00.00"));
+		contestant.setFinishTime(new Time("13.23.34"));
+		ds.addContestantEntry("1", contestant);
 		IOHandler.writeStartTimes(pw, ds);
 		assertTrue(f.exists());
 		assertEquals("1;", sc.next());
@@ -72,6 +72,10 @@ public class OutputTest {
 
 	@Test
 	public void testWriteGoalTimes() {
+		Contestant contestant = new Contestant("Göran");
+		contestant.setStartTime(new Time("12.00.00"));
+		contestant.setFinishTime(new Time("13.23.34"));
+		ds.addContestantEntry("1", contestant);
 		IOHandler.writeGoalTimes(pw, ds);
 		assertTrue(f.exists());
 		assertEquals("1;", sc.next());
@@ -80,13 +84,42 @@ public class OutputTest {
 	
 	@Test
 	public void testWriteResults() {
+		Contestant contestant = new Contestant("Göran");
+		contestant.setStartTime(new Time("12.00.00"));
+		contestant.setFinishTime(new Time("13.23.34"));
+		ds.addContestantEntry("1", contestant);
 		IOHandler.writeResult(pw, ds);
 		assertTrue(f.exists());
-		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
+		assertEquals("StartNr; TotalTid; StartTider; Måltider", sc.nextLine());
 		assertEquals("1;", sc.next());
 		assertEquals("--.--.--;",  sc.next());
 		assertEquals("12.00.00;",  sc.next());
 		assertEquals("13.23.34",  sc.next());
 	}
 	
+	@Test
+	public void testNoStartTime(){
+		Contestant contestant = new Contestant("Göran");
+		contestant.setFinishTime(new Time("13.23.34"));
+		ds.addContestantEntry("1", contestant);
+		IOHandler.writeResult(pw, ds);
+		assertEquals("StartNr; TotalTid; StartTider; Måltider", sc.nextLine());
+		assertEquals("1;", sc.next());
+		assertEquals("--.--.--;",  sc.next());
+		assertEquals("Start?;",  sc.next());
+		assertEquals("13.23.34",  sc.next());
+	}
+	
+	@Test
+	public void testNoFinishTime(){
+		Contestant contestant = new Contestant("Göran");
+		contestant.setStartTime(new Time("13.23.34"));
+		ds.addContestantEntry("1", contestant);
+		IOHandler.writeResult(pw, ds);
+		assertEquals("StartNr; TotalTid; StartTider; Måltider", sc.nextLine());
+		assertEquals("1;", sc.next());
+		assertEquals("--.--.--;",  sc.next());
+		assertEquals("13.23.34;",  sc.next());
+		assertEquals("Slut?",  sc.next());
+	}
 }

@@ -61,7 +61,11 @@ public class Time {
 	}
 	
 	public boolean equals(Object obj) {
-		Time t = (Time)obj;
-		return t.hours == hours && t.minutes == minutes && t.seconds == seconds;
+		if (obj instanceof Time)
+		{
+			Time t = (Time)obj;
+			return t.hours == hours && t.minutes == minutes && t.seconds == seconds;
+		}
+		return false;
 	}
 }

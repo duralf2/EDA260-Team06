@@ -4,7 +4,10 @@ public class Contestant {
 	private String name;
 	private Time startTime;
 	private Time finishTime;
-
+	
+	public Contestant() {
+		this("");
+	}
 	public Contestant(String name) {
 		this.name = name;
 	}

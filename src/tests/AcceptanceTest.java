@@ -56,7 +56,11 @@ public class AcceptanceTest extends TestCase {
 		
 		DataStructure dsOut = new DataStructure();
 		ReadFile.readResult(outfile, dsOut);
-		assertTrue(dsOut.equals(ds));
+		
+		DataStructure dsCorrect = new DataStructure();
+		ReadFile.readResult(new File(resultFilepath), dsCorrect);
+		
+		assertTrue(dsOut.equals(dsCorrect));
 	}
 
 	@Test

@@ -1,11 +1,17 @@
 package io;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import register.model.Contestant;
 import register.model.DataStructure;
-import register.model.Time;
+
+import com.googlecode.jcsv.reader.CSVReader;
+import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
 public class IOHandler {
 
@@ -50,5 +56,22 @@ public class IOHandler {
 		}
 		pw.write(sb.toString());
 		pw.close();
+	}
+	
+	public static void readContestantList(FileReader reader, DataStructure ds) {
+		CSVReader<String[]> csvParser = CSVReaderBuilder.newDefaultReader(reader);
+		try {
+			List<String[]> data = csvParser.readAll();
+			
+			Iterator<String[]> iter = data.iterator();
+			iter.next();
+			while(iter.hasNext()) {
+				String[] line = iter.next();
+				ds.addContestantEntry(line[0].trim(), new Contestant(line[1].trim()));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

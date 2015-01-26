@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
 
@@ -30,7 +31,10 @@ public class OutputTest {
 		FileOutputStream fos = new FileOutputStream(f);
 		pw = new PrintWriter(fos);
 		ds = new DataStructure();
-		ds.addTimeEntry("1", new Time("12.00.00", "13.23.34"));
+		Contestant contestant = new Contestant("Göran");
+		contestant.setStartTime(new Time("12.00.00"));
+		contestant.setFinishTime(new Time("13.23.34"));
+		ds.addContestantEntry("1", contestant);
 		sc = new Scanner(f);
 	}
 	

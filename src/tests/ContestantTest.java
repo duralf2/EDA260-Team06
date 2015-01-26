@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.Contestant;
+import register.model.Time;
 
 public class ContestantTest {
 	private Contestant contestant;
@@ -22,4 +23,14 @@ public class ContestantTest {
 		assertTrue(contestant.getName().equals(name));
 	}
 
+	@Test
+	public void testSetTime()
+	{
+		Time startTime = new Time("10.10.10");
+		Time finishTime = new Time("10.10.12");
+		contestant.setStartTime(startTime);
+		contestant.setFinishTime(finishTime);
+		assertEquals(contestant.getStartTime(), startTime);
+		assertEquals(contestant.getFinishTime(), finishTime);
+	}
 }

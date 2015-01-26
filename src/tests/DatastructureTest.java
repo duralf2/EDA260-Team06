@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import register.model.Contestant;
 import register.model.DataStructure;
-import register.model.Time;
 
 public class DatastructureTest {
 	
@@ -25,31 +24,6 @@ public class DatastructureTest {
 	@After
 	public void tearDown(){
 		data = null;
-	}
-
-	@Test
-	public void testGetAllTimeEntries() {
-		
-		Time time1 = new Time("10.15.34", "17.65.12");
-		Time time2 = new Time("10.15.34", "17.65.12");
-		Time time3 = new Time("10.15.34", "17.65.12");
-		data.addTimeEntry("1", time1);
-		data.addTimeEntry("2", time2);
-		data.addTimeEntry("3", time3);
-		
-		Map<String, Time> entries = data.getAllTimeEntries();
-		assertTrue(entries.get("1").equals(time1));
-		assertTrue(entries.get("2").equals(time2));
-		assertTrue(entries.get("3").equals(time3));
-		assertEquals(entries.get("4"), null);
-	}
-	
-	@Test
-	public void testAddTimeEntry()
-	{	
-		Time time =  new Time("10.15.34", "17.65.12");
-		data.addTimeEntry("1", time);
-		assertEquals(time, data.getAllTimeEntries().get("1"));
 	}
 
 	@Test

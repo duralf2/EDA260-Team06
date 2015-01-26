@@ -1,14 +1,14 @@
 package register.model;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class DataStructure {
-	private HashMap<String, Contestant> contestantEntries;
+	private Map<String, Contestant> contestantEntries;
 	private String[] contestantColumnNames;
 
 	public DataStructure() {
-		contestantEntries = new HashMap<String, Contestant>();
+		contestantEntries = new TreeMap<String, Contestant>();
 	}
 
 	public void addContestantEntry(String startNumber, Contestant contestant) {
@@ -33,7 +33,11 @@ public class DataStructure {
 	}
 
 	public boolean equals(Object obj) {
-		DataStructure ds = (DataStructure) obj;
-		return ds.getAllContestantEntries().equals(getAllContestantEntries());
+		if (obj instanceof DataStructure)
+		{
+			DataStructure ds = (DataStructure) obj;
+			return ds.getAllContestantEntries().equals(getAllContestantEntries());
+		}
+		return false;
 	}
 }

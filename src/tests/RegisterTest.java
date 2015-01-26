@@ -45,9 +45,9 @@ public class RegisterTest {
 		File start = new File(
 				"testfiles/acceptanstest/acceptanstest3/starttider.txt");
 		register.readStartTimes(start);
-		for (String s : entries.keySet()) {
-			int index = Integer.parseInt(s) - 1;
-			assertEquals(startTimes[index], entries.get(s).getStartTime());
+		for (String startNumber : entries.keySet()) {
+			int index = Integer.parseInt(startNumber) - 1;
+			assertEquals(startTimes[index], entries.get(startNumber).getStartTime());
 		}
 	}
 
@@ -56,9 +56,9 @@ public class RegisterTest {
 		File goal = new File(
 				"testfiles/acceptanstest/acceptanstest3/maltider.txt");
 		register.readGoalTimes(goal);
-		for (String s : entries.keySet()) {
-			int index = Integer.parseInt(s) - 1;
-			assertEquals(finishTimes[index], entries.get(s).getFinishTime());
+		for (String startNumber : entries.keySet()) {
+			int index = Integer.parseInt(startNumber) - 1;
+			assertEquals(finishTimes[index], entries.get(startNumber).getFinishTime());
 		}
 	}
 

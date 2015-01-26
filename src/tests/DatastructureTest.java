@@ -1,9 +1,9 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Map;
+import java.util.Scanner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -66,6 +66,11 @@ public class DatastructureTest {
 		data.addContestantEntry("1", contestant);
 
 		assertTrue(data.equals(ds2));
+	}
+
+	@Test
+	public void testEqualsNotDatastructure() {
+		assertFalse(data.equals(new Scanner(System.in)));
 	}
 
 }

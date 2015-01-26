@@ -43,8 +43,10 @@ public class DatastructureTest {
 	
 	@Test
 	public void testAddEntry()
-	{
-		data.addEntry("1", new Time("10.15.34", "17.65.12"));
+	{	
+		Time time =  new Time("10.15.34", "17.65.12");
+		data.addEntry("1", time);
+		assertEquals(time, data.getAllEntries().get("1"));
 	}
 
 }

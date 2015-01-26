@@ -1,6 +1,8 @@
 package register.model;
 
-public class Time {
+import java.util.LinkedList;
+
+public class Time{
 	private int hours;
 	private int minutes;
 	private int seconds;

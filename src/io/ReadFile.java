@@ -28,7 +28,7 @@ public class ReadFile {
 	public static void readNames(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
-		
+
 		// Remove column names
 		data.remove(0);
 
@@ -62,6 +62,7 @@ public class ReadFile {
 
 		String startNr, time;
 		Contestant contestant;
+		//TODO: loop below is almost identical to readStartTime()
 		for (String[] line : data) {
 			startNr = line[0];
 			time = line[1].trim();
@@ -69,7 +70,7 @@ public class ReadFile {
 			contestant.setFinishTime(new Time(time));
 		}
 	}
-
+	
 	public static void readResult(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
@@ -85,10 +86,10 @@ public class ReadFile {
 			finishTime = line[4].trim();
 			contestant = new Contestant(name);
 			System.out.println(startTime + ";" + finishTime);
-			if(!startTime.equals("Start?")) {
+			if (!startTime.equals("Start?")) {
 				contestant.setStartTime(new Time(startTime));
 			}
-			if(!finishTime.equals("Slut?")) {
+			if (!finishTime.equals("Slut?")) {
 				contestant.setFinishTime(new Time(finishTime));
 			}
 			ds.addContestantEntry(startNumber, contestant);

@@ -22,7 +22,7 @@ public class DataStructure {
 
     @Override
 	public boolean equals(Object obj) {
-		return ((DataStructure)obj).getAllEntries().equals(getAllEntries());
+		return ((DataStructure)obj).getAllTimeEntries().equals(getAllTimeEntries());
     }
 
 	public void addContestantEntry(String startNumber, Contestant contestant) {

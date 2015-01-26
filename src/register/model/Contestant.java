@@ -70,6 +70,8 @@ public class Contestant {
 	
 	public boolean equals(Object obj) {
 		// TODO: Also use time when doing eq op?
-		return ((Contestant)obj).name.equalsIgnoreCase(name);
+		if (obj instanceof Contestant)
+			return ((Contestant)obj).name.equalsIgnoreCase(name);
+		return false;
 	}
 }

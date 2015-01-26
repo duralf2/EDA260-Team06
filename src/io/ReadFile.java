@@ -20,59 +20,54 @@ public class ReadFile {
 	public ReadFile() {
 	}
 
-	//TODO Template method
-	public boolean readStartTime(File file, DataStructure ds) throws IOException {
-		try {
-			Reader reader = new FileReader(file);
-			CSVReader<String[]> csvParser = CSVReaderBuilder
-					.newDefaultReader(reader);
-			List<String[]> data = csvParser.readAll();
-			String startNr, time;
-			Contestant contestant;
-			for (String[] line : data) {
-				startNr = line[0];
-				time = line[1];
-				time = time.replaceAll("\\s+", "");
-				contestant = ds.getContestant(startNr);
-				if (contestant == null) {
-					contestant = new Contestant("");
-					ds.addContestantEntry(startNr, contestant);
-				}
-				contestant.setStartTime(new Time(time));
+	// TODO Template method
+	public boolean readStartTime(File file, DataStructure ds)
+			throws IOException {
+
+		Reader reader = new FileReader(file);
+		CSVReader<String[]> csvParser = CSVReaderBuilder
+				.newDefaultReader(reader);
+		List<String[]> data = csvParser.readAll();
+		String startNr, time;
+		Contestant contestant;
+		for (String[] line : data) {
+			startNr = line[0];
+			time = line[1];
+			time = time.replaceAll("\\s+", "");
+			contestant = ds.getContestant(startNr);
+			if (contestant == null) {
+				contestant = new Contestant("");
+				ds.addContestantEntry(startNr, contestant);
 			}
-		} catch (IOException e) {
-			throw e;
-		} finally {
+			contestant.setStartTime(new Time(time));
 		}
+
 		return true;
 	}
 
-	//TODO Template method
-	public boolean readFinishTime(File file, DataStructure ds) throws IOException {
-		try {
-			Reader reader = new FileReader(file);
-			CSVReader<String[]> csvParser = CSVReaderBuilder
-					.newDefaultReader(reader);
-			List<String[]> data = csvParser.readAll();
-			String startNr, time;
-			Contestant contestant;
-			for (String[] line : data) {
-				startNr = line[0];
-				time = line[1];
-				time = time.replaceAll("\\s+", "");
-				contestant = ds.getContestant(startNr);
-				if (contestant == null) {
-					contestant = new Contestant("");
-					ds.addContestantEntry(startNr, contestant);
-				}
-				contestant.setFinishTime(new Time(time));
+	// TODO Template method
+	public boolean readFinishTime(File file, DataStructure ds)
+			throws IOException {
+
+		Reader reader = new FileReader(file);
+		CSVReader<String[]> csvParser = CSVReaderBuilder
+				.newDefaultReader(reader);
+		List<String[]> data = csvParser.readAll();
+		String startNr, time;
+		Contestant contestant;
+		for (String[] line : data) {
+			startNr = line[0];
+			time = line[1];
+			time = time.replaceAll("\\s+", "");
+			contestant = ds.getContestant(startNr);
+			if (contestant == null) {
+				contestant = new Contestant("");
+				ds.addContestantEntry(startNr, contestant);
 			}
-		} catch (IOException e) {
-			throw e;
-		} finally {
+			contestant.setFinishTime(new Time(time));
 		}
+
 		return true;
 	}
-
 
 }

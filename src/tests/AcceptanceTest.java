@@ -23,34 +23,30 @@ import junit.framework.TestCase;
 
 public class AcceptanceTest extends TestCase {
 	private String startTimesFilepath;
-	
+	private String finishTimesFilepath;
+
 	@Before
 	public void setUp() {
 		startTimesFilepath = "testfiles/acceptanstest/acceptanstest3_5/starttider.txt";
+		finishTimesFilepath = "testfiles/acceptanstest/acceptanstest3_5/maltider.txt";
 	}
-	
+
 	@After
 	public void tearDown() {
-		
+
 	}
-	
+
 	@Test
-	public void testStarttimes() {
-		try {
-			Reader reader = new FileReader(startTimesFilepath);
-			CSVReader<String[]> csvParser = CSVReaderBuilder.newDefaultReader(reader);
-			List<String[]> data = csvParser.readAll();
-			
-			DataStructure ds = new DataStructure();
-			for(String[] entry : data) {
-				ds.addEntry(entry[0], new Time(entry[1], null));
-			}
-			
-			System.out.println(ds.getAllEntries());
-		} catch(FileNotFoundException e) {
-			fail("FileNotFound");
-		} catch(IOException e) {
-			fail("IOException");
+	public void testStarttimes() throws IOException, FileNotFoundException {
+		Reader reader = new FileReader(startTimesFilepath);
+		CSVReader<String[]> csvParser = CSVReaderBuilder
+				.newDefaultReader(reader);
+		List<String[]> data = csvParser.readAll();
+
+		DataStructure ds = new DataStructure();
+		for (String[] entry : data) {
+			ds.addEntry(entry[0], new Time(entry[1], null));
 		}
+		System.out.println(ds.getAllEntries());
 	}
 }

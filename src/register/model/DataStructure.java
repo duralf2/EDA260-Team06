@@ -14,6 +14,10 @@ public class DataStructure {
 		contestantEntries.put(startNumber, contestant);
 	}
 
+	public Contestant getContestant(String startNumber) {
+		return contestantEntries.get(startNumber);
+	}
+
 	public Map<String, Contestant> getAllContestantEntries() {
 		return contestantEntries;
 	}

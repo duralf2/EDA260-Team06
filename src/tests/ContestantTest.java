@@ -10,17 +10,15 @@ import register.model.Time;
 
 public class ContestantTest {
 	private Contestant contestant;
-	private String name;
 
 	@Before
 	public void setUp() throws Exception {
-		name = "David";
-		contestant = new Contestant(name);
+		contestant = new Contestant("David");
 	}
 
 	@Test
 	public void testGetName() {
-		assertTrue(contestant.getName().equals(name));
+		assertTrue(contestant.getName().equals("David"));
 	}
 
 	@Test
@@ -32,5 +30,11 @@ public class ContestantTest {
 		contestant.setFinishTime(finishTime);
 		assertEquals(contestant.getStartTime(), startTime);
 		assertEquals(contestant.getFinishTime(), finishTime);
+	}
+	
+	@Test
+	public void testSetName() {
+		contestant.setName("Bob");
+		assertEquals("Bob", contestant.getName());
 	}
 }

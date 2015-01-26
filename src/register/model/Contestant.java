@@ -28,4 +28,9 @@ public class Contestant {
 	public Time getFinishTime() {
 		return finishTime;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

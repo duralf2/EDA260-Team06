@@ -26,12 +26,11 @@ public class IOHandler {
 	
 	public static void writeStartTimes(PrintWriter pw, DataStructure ds)
 	{
-		// loopa genom ds.driver/time
 		Map <String, Time> entries = ds.getAllEntries();
 		StringBuilder sb = new StringBuilder();
 		for (String s: entries.keySet()){
-			sb.append(s + "; ");
-			sb.append(entries.get(s).getStartTime() );
+			sb.append(s + ";");
+			sb.append(entries.get(s).getStartTime() + "\n");
 		}
 		pw.write(sb.toString());
 		pw.close();

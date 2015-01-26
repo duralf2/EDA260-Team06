@@ -1,6 +1,8 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,5 +55,12 @@ public class ContestantTest {
 		Contestant contestant1 = new Contestant("Testname");
 		Contestant contestant2 = new Contestant("Testname");
 		assertTrue(contestant1.equals(contestant2));
+	}
+	
+	@Test
+	public void testEqualsNotContestant() {
+		Contestant contestant1 = new Contestant("Testname");
+		ContestantTest test = new ContestantTest();
+		assertFalse(contestant1.equals(test));
 	}
 }

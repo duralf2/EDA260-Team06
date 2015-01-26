@@ -24,21 +24,29 @@ public class IOHandler {
 			contestant = entries.get(startNumber);
 			sb.append(startNumber + ";");
 			sb.append(contestant.getName() + ";");
-			if(contestant.getStartTime() == null || contestant.getFinishTime() == null){
+			if (contestant.startTimeSize() == 0
+					|| contestant.finishTimeSize() == 0) {
 				sb.append("--.--.--" + ";");
-			}else{
-			sb.append(contestant.getTotalTime() + ";");
+			} else {
+				sb.append(contestant.getTotalTime() + ";");
 			}
-			if (contestant.getStartTime() == null) {
+			if (contestant.startTimeSize() == 0) {
 				sb.append("Start?" + ";");
 			} else {
 				sb.append(contestant.getStartTime() + ";");
 			}
-			if (contestant.getFinishTime() == null) {
+			if (contestant.finishTimeSize() == 0) {
 				sb.append("Slut?" + "\n");
 			} else {
-				sb.append(contestant.getFinishTime() + "\n");
+				if (contestant.startTimeSize() != 0 &&
+						Integer.parseInt(contestant.getTotalTime().substring(0, 2)) < 1
+						&& Integer.parseInt(contestant.getTotalTime().substring(3, 5)) <= 15) {
+					sb.append(contestant.getFinishTime() + ";" + "Omöjlig totaltid?" + "\n");
+				} else {
+					sb.append(contestant.getFinishTime() + "\n");
+				}
 			}
+
 		}
 		pw.write(sb.toString());
 		pw.close();

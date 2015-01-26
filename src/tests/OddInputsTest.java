@@ -58,7 +58,17 @@ public class OddInputsTest {
 		IOHandler.writeResult(pw, ds);
 		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
 		assertEquals("1;Göran;--.--.--;13.23.34;Slut?", sc.next());
-
+	}
+	
+	@Test
+	public void testToFast(){
+		Contestant contestant = new Contestant("Göran");
+		contestant.setStartTime(new Time("13.23.34"));
+		contestant.setFinishTime(new Time("13.30.34"));
+		ds.addContestantEntry("1", contestant);
+		IOHandler.writeResult(pw, ds);
+		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
+		assertEquals("1;Göran;00.07.00;13.23.34;13.30.34;Omöjlig totaltid?", sc.nextLine());
 	}
 }
 	

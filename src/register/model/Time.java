@@ -1,6 +1,8 @@
 package register.model;
 
-public class Time {
+import java.util.LinkedList;
+
+public class Time{
 	private int hours;
 	private int minutes;
 	private int seconds;
@@ -61,7 +63,11 @@ public class Time {
 	}
 	
 	public boolean equals(Object obj) {
-		Time t = (Time)obj;
-		return t.hours == hours && t.minutes == minutes && t.seconds == seconds;
+		if (obj instanceof Time)
+		{
+			Time t = (Time)obj;
+			return t.hours == hours && t.minutes == minutes && t.seconds == seconds;
+		}
+		return false;
 	}
 }

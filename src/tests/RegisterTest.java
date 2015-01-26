@@ -3,12 +3,11 @@ package tests;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.Reader;
+import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +16,9 @@ import register.logic.Register;
 import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
+
+import com.googlecode.jcsv.reader.CSVReader;
+import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
 public class RegisterTest {
 	private DataStructure ds;
@@ -59,9 +61,9 @@ public class RegisterTest {
 			assertEquals(finishTimes[index], entries.get(s).getFinishTime());
 		}
 	}
-	
+
 	@Test
-	public void testWriteResultNoSort() throws FileNotFoundException {
+	public void testWriteResultNoSort() throws IOException {
 		for (int i = 0; i < startTimes.length; i++) {
 			Contestant c = new Contestant("TestContestant " + 1);
 			c.setStartTime(startTimes[i]);
@@ -70,19 +72,26 @@ public class RegisterTest {
 		}
 		File file = new File("testNoSort.txt");
 		register.writeResult(file);
-		Scanner sc = new Scanner(file);
-		sc.nextLine();
-		while(sc.hasNext()) {
-			String tempIndex = sc.next(); //index + ;
-			int index = Integer.parseInt(tempIndex.substring(0, tempIndex.length() - 1)) - 1;
-			sc.next(); //--.--.--
-			String tempStart = sc.next(); //startTime + ;
-			String start = tempStart.substring(0, tempStart.length() - 1);
-			String finish = sc.next();
-			assertEquals(startTimes[index].toString(), start);
-			assertEquals(finishTimes[index].toString(), finish);
+
+		Reader reader = new FileReader(file);
+		CSVReader<String[]> csvParser = CSVReaderBuilder
+				.newDefaultReader(reader);
+		List<String[]> data = csvParser.readAll();
+
+		for (String[] s : data) {
+			try {
+				int index = Integer.parseInt(s[0]) - 1;
+				assertEquals(
+						Time.getTotalTime(startTimes[index], finishTimes[index])
+								.toString(), s[2]);
+				assertEquals(startTimes[index].toString(), s[3]);
+				assertEquals(finishTimes[index].toString(), s[4]);
+			} catch (NumberFormatException e) {
+			}
+			;
 		}
-		sc.close();
+		reader.close();
+		csvParser.close();
 		file.delete();
 	}
 }

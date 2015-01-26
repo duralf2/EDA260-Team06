@@ -1,23 +1,35 @@
 package register.model;
 
+import java.util.LinkedList;
+
 public class Contestant {
 	private String name;
-	private Time startTime;
-	private Time finishTime;
+	private LinkedList<Time> startTime;
+	private LinkedList<Time> finishTime;
 	
 	public Contestant() {
 		this("");
 	}
 	public Contestant(String name) {
 		this.name = name;
+		startTime = new LinkedList<Time>();
+		finishTime = new LinkedList<Time>();
 	}
 
 	public void setStartTime(Time time) {
-		startTime = time;
+		startTime.add(0,time);
 	}
 
+	public void setStartTime(int index, Time time) {
+		startTime.add(index,time);
+	}
+	
 	public void setFinishTime(Time time) {
-		finishTime = time;
+		finishTime.add(0,time);
+	}
+	
+	public void setFinishTime(int index, Time time) {
+		finishTime.add(index,time);
 	}
 
 	public void setName(String name) {
@@ -29,19 +41,37 @@ public class Contestant {
 	}
 
 	public Time getStartTime() {
-		return startTime;
+		return startTime.get(0);
+	}
+	
+	public Time getStartTime(int index) {
+		return startTime.get(index);
 	}
 
 	public Time getFinishTime() {
-		return finishTime;
+		return finishTime.get(0);
+	}
+	
+	public Time getFinishTime(int index) {
+		return finishTime.get(index);
 	}
 	
 	public String getTotalTime() {
-		return Time.getTotalTime(startTime, finishTime);
+		return Time.getTotalTime(startTime.get(0), finishTime.get(0));
+	}
+	
+	public int startTimeSize(){
+		return startTime.size();
+	}
+	
+	public int finishTimeSize(){
+		return finishTime.size();
 	}
 	
 	public boolean equals(Object obj) {
 		// TODO: Also use time when doing eq op?
-		return ((Contestant)obj).name.equalsIgnoreCase(name);
+		if (obj instanceof Contestant)
+			return ((Contestant)obj).name.equalsIgnoreCase(name);
+		return false;
 	}
 }

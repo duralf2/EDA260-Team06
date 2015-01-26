@@ -58,5 +58,9 @@ public class TimeTest {
 		assertTrue(new Time(st).equals(new Time(st)));
 	}
 	
-	
+	@Test
+	public void testEqualsNotTime() {
+		String st = "12.01.12";
+		assertFalse(new Time(st).equals(null));
+	}
 }

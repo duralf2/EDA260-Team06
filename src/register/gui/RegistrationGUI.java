@@ -4,6 +4,7 @@ package register.gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -45,10 +46,9 @@ public class RegistrationGUI extends JFrame
 		startNumberField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		startNumberField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
 		
-		
 		JLabel nameLabel = new JLabel("Contestant name:");
 		nameLabel.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
-		JTextField nameField = new JTextField(registerText);
+		final JTextField nameField = new JTextField(registerText);
 		nameField.setToolTipText("Input contestant name.");
 		nameField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		nameField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
@@ -56,26 +56,65 @@ public class RegistrationGUI extends JFrame
 		
 		JLabel startTimeLabel = new JLabel("Start time:");
 		startTimeLabel.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
-		JTextField startTimeField = new JTextField(registerText);
+		final JTextField startTimeField = new JTextField(registerText);
 		startTimeField.setToolTipText("Input start time.");
 		startTimeField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		startTimeField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
 		
 		JLabel finishTimeLabel = new JLabel("Finish time:");
 		finishTimeLabel.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
-		JTextField finishTimeField = new JTextField(registerText);
+		final JTextField finishTimeField = new JTextField(registerText);
 		finishTimeField.setToolTipText("Input finish number.");
 		finishTimeField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		finishTimeField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
 		
 		
-		JButton registerButton = new JButton("Register");
+		final JButton registerButton = new JButton("Register");
 		registerButton.setToolTipText("Register entry.");
 		registerButton.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
 		registerButton.setForeground(Color.WHITE);
 		registerButton.setBackground(new Color(63, 181, 50));
 		registerButton.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		registerButton.setBorder(new BevelBorder(BevelBorder.RAISED));
+		
+		startNumberField.addActionListener(new ActionListener() {
+			   @Override
+			    public void actionPerformed(ActionEvent e) {
+				   nameField.requestFocusInWindow();    
+			    }
+			});
+		
+		nameField.addActionListener(new ActionListener() {
+			   @Override
+			    public void actionPerformed(ActionEvent e) {
+				   startTimeField.requestFocusInWindow();    
+			    }
+			});
+		
+		startTimeField.addActionListener(new ActionListener() {
+			   @Override
+			    public void actionPerformed(ActionEvent e) {
+				   finishTimeField.requestFocusInWindow();    
+			    }
+			});
+		
+		finishTimeField.addActionListener(new ActionListener() {
+			   @Override
+			    public void actionPerformed(ActionEvent e) {
+				   registerButton.requestFocusInWindow(); 
+			    }
+			});
+	
+		registerButton.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startTimeField.setText("OK");
+				
+			}
+			
+			
+		});
 		
 		panelTop.add(startNumberLabel);
 		panelTop.add(startNumberField);

@@ -29,6 +29,7 @@
 			<classpath>
 				<pathelement location="lib/hamcrest-core-1.3.jar" />
 				<pathelement location="lib/junit-4.12.jar" />
+				<pathelement location="lib/jcsv-1.4.0.jar" />
 				<pathelement path="bin" />
 			</classpath>
 

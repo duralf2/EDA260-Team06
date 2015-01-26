@@ -48,7 +48,7 @@ public class DatastructureTest {
 	{	
 		Contestant contestant =  new Contestant("Karl");
 		data.addContestantEntry("1", contestant);
-		assertEquals(contestant, data.getAllContestantEntries().get("1"));
+		assertEquals(contestant, data.getContestant("1"));
 	}
 
 }

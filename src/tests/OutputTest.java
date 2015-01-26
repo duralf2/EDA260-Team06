@@ -66,8 +66,7 @@ public class OutputTest {
 	public void testWriteStartTimes() {
 		IOHandler.writeStartTimes(pw, ds);
 		assertTrue(f.exists());
-		assertEquals("1;", sc.next());
-		assertEquals("12.00.00",  sc.next());
+		assertEquals("1;12.00.00", sc.nextLine());
 	}
 
 	@Test
@@ -78,13 +77,15 @@ public class OutputTest {
 		assertEquals("13.23.34", sc.next());
 	}
 	
+	
+	
 	@Test
 	public void testWriteResults() {
 		IOHandler.writeResult(pw, ds);
 		assertTrue(f.exists());
 		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
 		assertEquals("1;", sc.next());
-		assertEquals("--.--.--;",  sc.next());
+		assertEquals("01.23.34;",  sc.next());
 		assertEquals("12.00.00;",  sc.next());
 		assertEquals("13.23.34",  sc.next());
 	}

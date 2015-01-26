@@ -17,4 +17,9 @@ public class DataStructure {
 	public Map<String, Time> getAllEntries() {
 		return timeEntries;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return ((DataStructure)obj).getAllEntries().equals(getAllEntries());
+	}
 }

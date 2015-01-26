@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class DataStructure {
 	private HashMap<String, Contestant> contestantEntries;
+	private String[] contestantColumnNames;
 
 	public DataStructure() {
 		contestantEntries = new HashMap<String, Contestant>();
@@ -12,6 +13,10 @@ public class DataStructure {
 
 	public void addContestantEntry(String startNumber, Contestant contestant) {
 		contestantEntries.put(startNumber, contestant);
+	}
+
+	public void setContestantColumnNames(String[] columns) {
+		contestantColumnNames = columns;
 	}
 
 	public Contestant getContestant(String startNumber) {
@@ -22,8 +27,13 @@ public class DataStructure {
 		return contestantEntries;
 	}
 	
+	public String[] getContestantColumnNames()
+	{
+		return contestantColumnNames;
+	}
+
 	public boolean equals(Object obj) {
-		DataStructure ds = (DataStructure)obj;
+		DataStructure ds = (DataStructure) obj;
 		return ds.getAllContestantEntries().equals(getAllContestantEntries());
 	}
 }

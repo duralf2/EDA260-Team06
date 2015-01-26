@@ -1,10 +1,9 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import io.IOHandler;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -12,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.Contestant;
 import register.model.DataStructure;
 
 public class InputTest {
@@ -29,13 +29,12 @@ public class InputTest {
 		try {
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@Test
-	public void testReadContestantList() {
+	public void testReadContestantList() throws IOException {
 		IOHandler.readContestantList(reader, ds);
 		assertEquals("Anders Asson", ds.getContestant("1").getName());
 		assertEquals("Bengt Bsson", ds.getContestant("2").getName());
@@ -44,6 +43,17 @@ public class InputTest {
 		assertEquals("Erik Esson", ds.getContestant("5").getName());
 	}
 	
+	@Test
+	public void testReadContestantListWhenContestantsAlreadyExists() throws IOException {
+		ds.addContestantEntry("1", new Contestant("Gunnar"));
+		IOHandler.readContestantList(reader, ds);
+		assertEquals("Anders Asson", ds.getContestant("1").getName());
+	}
 	
-
+	@Test
+	public void testReadContestantColumnNames() throws IOException {
+		IOHandler.readContestantList(reader, ds);
+		assertEquals("StartNo", ds.getContestantColumnNames()[0]);
+		assertEquals("Namn", ds.getContestantColumnNames()[1]);
+	}
 }

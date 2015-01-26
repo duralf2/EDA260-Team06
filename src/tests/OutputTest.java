@@ -80,6 +80,8 @@ public class OutputTest {
 		assertEquals("13.23.34",  line[1]);
 	}
 	
+	
+	
 	@Test
 	public void testWriteResults() {
 		IOHandler.writeResult(pw, ds);

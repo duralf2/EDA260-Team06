@@ -24,12 +24,12 @@ public class ReadFile {
 				.newDefaultReader(reader);
 		return csvParser.readAll();
 	}
-	
+
 	public static void readStartTime(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
-		
-		String startNr, time;
+
+        String startNr, time;
 		Contestant contestant;
 		for (String[] line : data) {
 			startNr = line[0];
@@ -42,7 +42,7 @@ public class ReadFile {
 	public static void readFinishTime(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
-		
+
 		String startNr, time;
 		Contestant contestant;
 		for (String[] line : data) {
@@ -52,7 +52,7 @@ public class ReadFile {
 			contestant.setFinishTime(new Time(time));
 		}
 	}
-	
+
 	private static Contestant getContestant(String startNr, DataStructure ds) {
 		Contestant contestant = ds.getContestant(startNr);
 		if (contestant == null) {

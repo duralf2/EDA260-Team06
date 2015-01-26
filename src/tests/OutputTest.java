@@ -39,17 +39,6 @@ public class OutputTest {
 	{
 		f.delete();
 	}
-	
-	@Test
-	public void testWriteResults() {
-		IOHandler.writeResult(pw, ds);
-		assert(f.exists());
-		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1;", sc.next());
-		assertEquals("--.--.--;",  sc.next());
-		assertEquals("12.00.00;",  sc.next());
-		assertEquals("13.23.34",  sc.next());
-	}
 
 //	Gör om när vi har en sortmetod!!
 //	@Test
@@ -84,6 +73,16 @@ public class OutputTest {
 		assertEquals("1;", sc.next());
 		assertEquals("13.23.34", sc.next());
 	}
-
+	
+	@Test
+	public void testWriteResults() {
+		IOHandler.writeResult(pw, ds);
+		assert(f.exists());
+		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
+		assertEquals("1;", sc.next());
+		assertEquals("--.--.--;",  sc.next());
+		assertEquals("12.00.00;",  sc.next());
+		assertEquals("13.23.34",  sc.next());
+	}
 	
 }

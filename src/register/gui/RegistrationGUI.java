@@ -56,7 +56,7 @@ public class RegistrationGUI extends JFrame
 		entryList.setFont(new Font("MyriadPro", Font.PLAIN, 10));
 		
 		pack();
-		setSize(1900, 1500);
+		getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
 		this.setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

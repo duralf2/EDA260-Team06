@@ -4,7 +4,10 @@ public class Contestant {
 	private String name;
 	private Time startTime;
 	private Time finishTime;
-
+	
+	public Contestant() {
+		this("");
+	}
 	public Contestant(String name) {
 		this.name = name;
 	}
@@ -17,6 +20,10 @@ public class Contestant {
 		finishTime = time;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -27,6 +34,10 @@ public class Contestant {
 
 	public Time getFinishTime() {
 		return finishTime;
+	}
+	
+	public String getTotalTime() {
+		return Time.getTotalTime(startTime, finishTime);
 	}
 	
 	public boolean equals(Object obj) {

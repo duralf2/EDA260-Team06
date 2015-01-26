@@ -31,6 +31,7 @@ public class OutputTest {
 		FileOutputStream fos = new FileOutputStream(f);
 		pw = new PrintWriter(fos);
 		ds = new DataStructure();
+
 		Contestant contestant = new Contestant("Göran-Victor Hansson");
 		contestant.setStartTime(new Time("12.00.00"));
 		contestant.setFinishTime(new Time("13.23.34"));
@@ -94,5 +95,4 @@ public class OutputTest {
 		assertEquals("12.00.00",  line[3]);
 		assertEquals("13.23.34", line[4]);
 	}
-	
 }

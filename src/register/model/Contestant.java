@@ -69,9 +69,12 @@ public class Contestant {
 	}
 	
 	public boolean equals(Object obj) {
-		// TODO: Also use time when doing eq op?
-		if (obj instanceof Contestant)
-			return ((Contestant)obj).name.equalsIgnoreCase(name);
+		if (obj instanceof Contestant) {
+			Contestant otherContestant = (Contestant)obj;
+			return otherContestant.name.equalsIgnoreCase(name) &&
+					startTime.equals(otherContestant.startTime) &&
+					finishTime.equals(otherContestant.finishTime);
+		}
 		return false;
 	}
 }

@@ -20,6 +20,7 @@ import org.junit.Test;
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
+import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
 import junit.framework.TestCase;
@@ -72,7 +73,9 @@ public class AcceptanceTest extends TestCase {
 	private DataStructure inputToDataStructure(List<String[]> data) {
 		DataStructure ds = new DataStructure();
 		for (String[] entry : data) {
-			ds.addTimeEntry(entry[0], new Time(entry[1], null));
+			Contestant contestant = new Contestant("Testname");
+			contestant.setStartTime(new Time(entry[1]));
+			ds.addContestantEntry(entry[0], contestant);
 		}
 		return ds;
 	}

@@ -17,6 +17,10 @@ public class Contestant {
 		finishTime = time;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -28,9 +32,9 @@ public class Contestant {
 	public Time getFinishTime() {
 		return finishTime;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 	
+	public boolean equals(Object obj) {
+		// TODO: Also use time when doing eq op?
+		return ((Contestant)obj).name.equalsIgnoreCase(name);
+	}
 }

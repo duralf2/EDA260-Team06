@@ -8,17 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.swing.JFileChooser;
-
 import register.model.DataStructure;
 
 public class Register {
 	private DataStructure ds;
-	private ReadFile reader;
 
 	public Register(DataStructure times) {
 		this.ds = times;
-		reader = new ReadFile();
 	}
 
 	public void readStartTimes() throws IOException {
@@ -27,7 +23,7 @@ public class Register {
 	}
 
 	public void readStartTimes(File startTimes) throws IOException {
-		reader.readStartTime(startTimes, ds);
+		ReadFile.readStartTime(startTimes, ds);
 	}
 
 	public void readGoalTimes() throws IOException {
@@ -36,7 +32,7 @@ public class Register {
 	}
 
 	public void readGoalTimes(File goalTimes) throws IOException {
-		reader.readFinishTime(goalTimes, ds);
+		ReadFile.readFinishTime(goalTimes, ds);
 	}
 
 	public void writeResult() {

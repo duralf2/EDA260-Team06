@@ -16,7 +16,7 @@ public class IOHandler {
 		sb.append("StartNr; TotalTid; Starttid; Måltid\n");
 		// loopa genom ds.driver/time
 		for (String s: entries.keySet()){
-			sb.append(s + "; ");
+			sb.append(s + ";");
 			sb.append("--.--.--; ");
 			sb.append(entries.get(s).getStartTime() + "; ");
 			sb.append(entries.get(s).getFinishTime() + "\n");
@@ -38,14 +38,13 @@ public class IOHandler {
 		pw.close();
 	}
 
-	public static void writeGoalTimes(PrintWriter pw, DataStructure ds)
+	public static void writeFinishTimes(PrintWriter pw, DataStructure ds)
 	{
-		// loopa genom ds.driver/time
 		Map <String, Contestant> entries = ds.getAllContestantEntries();
 		StringBuilder sb = new StringBuilder();
 		for (String s: entries.keySet()){
-			sb.append(s + "; ");
-			sb.append(entries.get(s).getFinishTime() );
+			sb.append(s + ";");
+			sb.append(entries.get(s).getFinishTime() + "\n");
 		}
 		pw.write(sb.toString());
 		pw.close();

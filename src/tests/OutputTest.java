@@ -30,7 +30,7 @@ public class OutputTest {
 		FileOutputStream fos = new FileOutputStream(f);
 		pw = new PrintWriter(fos);
 		ds = new DataStructure();
-		ds.addEntry("1", new Time("12.00.00", "13.23.34"));
+		ds.addTimeEntry("1", new Time("12.00.00", "13.23.34"));
 		sc = new Scanner(f);
 	}
 	

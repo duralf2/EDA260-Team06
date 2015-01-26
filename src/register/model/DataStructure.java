@@ -12,16 +12,15 @@ public class DataStructure {
 		contestantEntries = new HashMap<String, Contestant>();
 	}
 
-	public void addEntry(String startNumber, Time time) {
+	public void addTimeEntry(String startNumber, Time time) {
 		timeEntries.put(startNumber, time);
 	}
 
-	public Map<String, Time> getAllEntries() {
+	public Map<String, Time> getAllTimeEntries() {
 		return timeEntries;
 	}
 
 	public void addContestantEntry(String startNumber, Contestant contestant) {
-		
 		contestantEntries.put(startNumber, contestant);
 	}
 

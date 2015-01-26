@@ -45,8 +45,8 @@ public class AcceptanceTest extends TestCase {
 
 		DataStructure ds = new DataStructure();
 		for (String[] entry : data) {
-			ds.addEntry(entry[0], new Time(entry[1], null));
+			ds.addTimeEntry(entry[0], new Time(entry[1], null));
 		}
-		System.out.println(ds.getAllEntries());
+		System.out.println(ds.getAllTimeEntries());
 	}
 }

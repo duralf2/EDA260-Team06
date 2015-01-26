@@ -33,11 +33,11 @@ public class DatastructureTest {
 		Time time1 = new Time("10.15.34", "17.65.12");
 		Time time2 = new Time("10.15.34", "17.65.12");
 		Time time3 = new Time("10.15.34", "17.65.12");
-		data.addEntry("1", time1);
-		data.addEntry("2", time2);
-		data.addEntry("3", time3);
+		data.addTimeEntry("1", time1);
+		data.addTimeEntry("2", time2);
+		data.addTimeEntry("3", time3);
 		
-		Map<String, Time> entries = data.getAllEntries();
+		Map<String, Time> entries = data.getAllTimeEntries();
 		assertTrue(entries.get("1").equals(time1));
 		assertTrue(entries.get("2").equals(time2));
 		assertTrue(entries.get("3").equals(time3));
@@ -48,8 +48,8 @@ public class DatastructureTest {
 	public void testAddTimeEntry()
 	{	
 		Time time =  new Time("10.15.34", "17.65.12");
-		data.addEntry("1", time);
-		assertEquals(time, data.getAllEntries().get("1"));
+		data.addTimeEntry("1", time);
+		assertEquals(time, data.getAllTimeEntries().get("1"));
 	}
 
 	@Test

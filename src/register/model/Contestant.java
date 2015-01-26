@@ -8,12 +8,11 @@ public class Contestant {
 	public Contestant(String name) {
 		this.name = name;
 	}
-	
-	public void setStartTime(Time time)
-	{
+
+	public void setStartTime(Time time) {
 		startTime = time;
 	}
-	
+
 	public void setFinishTime(Time time) {
 		finishTime = time;
 	}
@@ -25,7 +24,7 @@ public class Contestant {
 	public Time getStartTime() {
 		return startTime;
 	}
-	
+
 	public Time getFinishTime() {
 		return finishTime;
 	}

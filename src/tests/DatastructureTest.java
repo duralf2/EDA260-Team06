@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import register.model.Contestant;
 import register.model.DataStructure;
-import register.model.Time;
 
 public class DatastructureTest {
 	

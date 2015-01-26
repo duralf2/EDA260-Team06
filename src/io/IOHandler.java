@@ -13,13 +13,16 @@ public class IOHandler {
 	{
 		StringBuilder sb = new StringBuilder();
 		Map <String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; TotalTid; Starttid; Måltid\n");
+		sb.append("StartNr; Namn; TotalTid; Starttid; Måltid\n");
+		Contestant contestant;
 		// loopa genom ds.driver/time
-		for (String s: entries.keySet()){
-			sb.append(s + "; ");
-			sb.append("--.--.--; ");
-			sb.append(entries.get(s).getStartTime() + "; ");
-			sb.append(entries.get(s).getFinishTime() + "\n");
+		for (String startNumber: entries.keySet()){
+			contestant = entries.get(startNumber);
+			sb.append(startNumber + ";");
+			sb.append(contestant.getName()+";");
+			sb.append("--.--.--;");
+			sb.append(contestant.getStartTime() + ";");
+			sb.append(contestant.getFinishTime() + "\n");
 		}
 		pw.write(sb.toString());
 		pw.close();
@@ -44,7 +47,7 @@ public class IOHandler {
 		Map <String, Contestant> entries = ds.getAllContestantEntries();
 		StringBuilder sb = new StringBuilder();
 		for (String s: entries.keySet()){
-			sb.append(s + "; ");
+			sb.append(s + ";");
 			sb.append(entries.get(s).getFinishTime() );
 		}
 		pw.write(sb.toString());

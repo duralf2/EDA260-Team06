@@ -31,7 +31,7 @@ public class OutputTest {
 		FileOutputStream fos = new FileOutputStream(f);
 		pw = new PrintWriter(fos);
 		ds = new DataStructure();
-		Contestant contestant = new Contestant("Göran");
+		Contestant contestant = new Contestant("Göran-Victor Hansson");
 		contestant.setStartTime(new Time("12.00.00"));
 		contestant.setFinishTime(new Time("13.23.34"));
 		ds.addContestantEntry("1", contestant);
@@ -65,28 +65,32 @@ public class OutputTest {
 	@Test
 	public void testWriteStartTimes() {
 		IOHandler.writeStartTimes(pw, ds);
+		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
-		assertEquals("1;", sc.next());
-		assertEquals("12.00.00",  sc.next());
+		assertEquals("1", line[0]);
+		assertEquals("12.00.00",  line[1]);
 	}
 
 	@Test
 	public void testWriteGoalTimes() {
 		IOHandler.writeGoalTimes(pw, ds);
+		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
-		assertEquals("1;", sc.next());
-		assertEquals("13.23.34", sc.next());
+		assertEquals("1", line[0]);
+		assertEquals("13.23.34",  line[1]);
 	}
 	
 	@Test
 	public void testWriteResults() {
 		IOHandler.writeResult(pw, ds);
 		assertTrue(f.exists());
-		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1;", sc.next());
-		assertEquals("--.--.--;",  sc.next());
-		assertEquals("12.00.00;",  sc.next());
-		assertEquals("13.23.34",  sc.next());
+		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
+		String[] line = sc.nextLine().split(";");
+		assertEquals("1", line[0]);
+		assertEquals("Göran-Victor Hansson", line[1]);
+		assertEquals("--.--.--",  line[2]);
+		assertEquals("12.00.00",  line[3]);
+		assertEquals("13.23.34", line[4]);
 	}
 	
 }

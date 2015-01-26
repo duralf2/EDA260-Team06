@@ -72,7 +72,7 @@ public class AcceptanceTest extends TestCase {
 	private DataStructure inputToDataStructure(List<String[]> data) {
 		DataStructure ds = new DataStructure();
 		for (String[] entry : data) {
-			ds.addTimeEntry(entry[0], new Time(entry[1], null));
+			//ds.addTimeEntry(entry[0], new Time(entry[1], null));
 		}
 		return ds;
 	}

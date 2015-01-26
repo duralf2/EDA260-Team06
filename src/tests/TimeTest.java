@@ -52,5 +52,11 @@ public class TimeTest {
 		new Time("2.3.49");
 	}
 	
+	@Test
+	public void testEquals() {
+		String st = "12.01.12";
+		assertTrue(new Time(st).equals(new Time(st)));
+	}
+	
 	
 }

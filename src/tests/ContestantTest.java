@@ -24,13 +24,19 @@ public class ContestantTest {
 	}
 
 	@Test
-	public void testSetTime()
-	{
+	public void testSetTime() {
 		Time startTime = new Time("10.10.10");
 		Time finishTime = new Time("10.10.12");
 		contestant.setStartTime(startTime);
 		contestant.setFinishTime(finishTime);
 		assertEquals(contestant.getStartTime(), startTime);
 		assertEquals(contestant.getFinishTime(), finishTime);
+	}
+
+	@Test
+	public void testEquals() {
+		Contestant contestant1 = new Contestant("Testname");
+		Contestant contestant2 = new Contestant("Testname");
+		assertTrue(contestant1.equals(contestant2));
 	}
 }

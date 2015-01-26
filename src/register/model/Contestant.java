@@ -28,4 +28,9 @@ public class Contestant {
 	public Time getFinishTime() {
 		return finishTime;
 	}
+	
+	public boolean equals(Object obj) {
+		// TODO: Also use time when doing eq op?
+		return ((Contestant)obj).name.equalsIgnoreCase(name);
+	}
 }

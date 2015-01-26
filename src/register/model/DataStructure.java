@@ -17,4 +17,9 @@ public class DataStructure {
 	public Map<String, Contestant> getAllContestantEntries() {
 		return contestantEntries;
 	}
+	
+	public boolean equals(Object obj) {
+		DataStructure ds = (DataStructure)obj;
+		return ds.getAllContestantEntries().equals(getAllContestantEntries());
+	}
 }

@@ -59,4 +59,9 @@ public class Time {
 	private static String format(int time) {
 		return time < 10? "0" + time : Integer.toString(time);
 	}
+	
+	public boolean equals(Object obj) {
+		Time t = (Time)obj;
+		return t.hours == hours && t.minutes == minutes && t.seconds == seconds;
+	}
 }

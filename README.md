@@ -13,5 +13,6 @@ Nothing here yet
 ## Group members
 Add yourself to this list.
 
- - Example person
+ - Hannah Lindblad
+ - Niklas Jönsson
  - Erik Bjäreholt (@ErikBjare)

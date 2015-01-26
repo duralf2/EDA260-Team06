@@ -5,21 +5,31 @@ import java.util.Map;
 
 public class DataStructure {
 	private HashMap<String, Time> timeEntries;
+	private HashMap<String, Contestant> contestantEntries;
 
 	public DataStructure() {
 		timeEntries = new HashMap<String, Time>();
+		contestantEntries = new HashMap<String, Contestant>();
 	}
 
-	public void addEntry(String startNumber, Time time) {
+	public void addTimeEntry(String startNumber, Time time) {
 		timeEntries.put(startNumber, time);
 	}
 
-	public Map<String, Time> getAllEntries() {
+	public Map<String, Time> getAllTimeEntries() {
 		return timeEntries;
 	}
-	
-	@Override
+
+    @Override
 	public boolean equals(Object obj) {
 		return ((DataStructure)obj).getAllEntries().equals(getAllEntries());
+    }
+
+	public void addContestantEntry(String startNumber, Contestant contestant) {
+		contestantEntries.put(startNumber, contestant);
+	}
+
+	public Map<String, Contestant> getAllContestantEntries() {
+		return contestantEntries;
 	}
 }

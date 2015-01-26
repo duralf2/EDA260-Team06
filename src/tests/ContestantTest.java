@@ -5,23 +5,21 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.Driver;
+import register.model.Contestant;
 
-public class DriverTest {
-	private Driver driver;
-	private String startNumber;
+public class ContestantTest {
+	private Contestant contestant;
 	private String name;
 
 	@Before
 	public void setUp() throws Exception {
-		startNumber = "1";
 		name = "David";
-		driver = new Driver(startNumber,name);
+		contestant = new Contestant(name);
 	}
 
 	@Test
 	public void testGetName() {
-		assertTrue(driver.getName().equals("David"));
+		assertTrue(contestant.getName().equals(name));
 	}
 
 }

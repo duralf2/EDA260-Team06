@@ -25,11 +25,28 @@ public class ReadFile {
 		return csvParser.readAll();
 	}
 
+	public static void readNames(File file, DataStructure ds)
+			throws IOException {
+		List<String[]> data = readCSV(file);
+		
+		// Remove column names
+		data.remove(0);
+
+		String startNumber, name;
+		Contestant contestant;
+		for (String[] line : data) {
+			startNumber = line[0];
+			name = line[1].trim();
+			contestant = new Contestant(name);
+			ds.addContestantEntry(startNumber, contestant);
+		}
+	}
+
 	public static void readStartTime(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
 
-        String startNr, time;
+		String startNr, time;
 		Contestant contestant;
 		for (String[] line : data) {
 			startNr = line[0];
@@ -53,10 +70,36 @@ public class ReadFile {
 		}
 	}
 
+	public static void readResult(File file, DataStructure ds)
+			throws IOException {
+		List<String[]> data = readCSV(file);
+		// Remove column names
+		data.remove(0);
+
+		String startNumber, name, totalTime, startTime, finishTime;
+		Contestant contestant;
+		for (String[] line : data) {
+			startNumber = line[0];
+			name = line[1].trim();
+			startTime = line[3].trim();
+			finishTime = line[4].trim();
+			contestant = new Contestant(name);
+			System.out.println(startTime + ";" + finishTime);
+			if(!startTime.equals("Start?")) {
+				contestant.setStartTime(new Time(startTime));
+			}
+			if(!finishTime.equals("Slut?")) {
+				contestant.setFinishTime(new Time(finishTime));
+			}
+			ds.addContestantEntry(startNumber, contestant);
+		}
+	}
+
 	private static Contestant getContestant(String startNr, DataStructure ds) {
 		Contestant contestant = ds.getContestant(startNr);
 		if (contestant == null) {
-			// TODO: Is there a better way? I don't know... Perhaps throw an exception?
+			// TODO: Is there a better way? I don't know... Perhaps throw an
+			// exception?
 			contestant = new Contestant("NAME MISSING");
 			ds.addContestantEntry(startNr, contestant);
 		}

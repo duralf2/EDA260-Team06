@@ -24,20 +24,20 @@ public class IOHandler {
 		pw.write(sb.toString());
 		pw.close();
 	}
-	
+
 	public static void writeStartTimes(PrintWriter pw, DataStructure ds)
 	{
-		// loopa genom ds.driver/time
 		Map <String, Contestant> entries = ds.getAllContestantEntries();
+
 		StringBuilder sb = new StringBuilder();
 		for (String s: entries.keySet()){
-			sb.append(s + "; ");
-			sb.append(entries.get(s).getStartTime() );
+			sb.append(s + ";");
+			sb.append(entries.get(s).getStartTime() + "\n");
 		}
 		pw.write(sb.toString());
 		pw.close();
 	}
-	
+
 	public static void writeGoalTimes(PrintWriter pw, DataStructure ds)
 	{
 		// loopa genom ds.driver/time

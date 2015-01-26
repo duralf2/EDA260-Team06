@@ -128,7 +128,7 @@ public class RegistrationGUI extends JFrame
 		leftPanel.add(addButtonAndFields());
 		
 		pack();
-		setSize(1900, 1500);
+		getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
 		this.setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

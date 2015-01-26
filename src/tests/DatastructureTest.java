@@ -40,7 +40,7 @@ public class DatastructureTest {
 		assertTrue(entries.get("1").equals(contestant1));
 		assertTrue(entries.get("2").equals(contestant2));
 		assertTrue(entries.get("3").equals(contestant3));
-		assertEquals(entries.get("4"), null);
+		assertEquals(null, entries.get("4"));
 	}
 
 	@Test
@@ -48,6 +48,13 @@ public class DatastructureTest {
 		Contestant contestant = new Contestant("Karl");
 		data.addContestantEntry("1", contestant);
 		assertEquals(contestant, data.getContestant("1"));
+	}
+
+	@Test
+	public void testContestantColumnNames() {
+		String[] columns = new String[] {"c1", "c2", "c3"};
+		data.setContestantColumnNames(columns);
+		assertTrue(columns.equals(data.getContestantColumnNames()));
 	}
 
 	@Test

@@ -1,19 +1,13 @@
 package io;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
-
-import com.googlecode.jcsv.reader.CSVReader;
-import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
 public class IOHandler {
 
@@ -110,40 +104,5 @@ public class IOHandler {
 		}
 		pw.write(sb.toString());
 		pw.close();
-	}
-
-	public static void readContestantList(FileReader reader, DataStructure ds)
-			throws IOException {
-		CSVReader<String[]> csvParser = CSVReaderBuilder
-				.newDefaultReader(reader);
-		List<String[]> data = csvParser.readAll();
-
-		Iterator<String[]> iterator = data.iterator();
-		String[] contestantColums = iterator.next();
-		readContestantColumns(ds, contestantColums);
-		readContestants(ds, iterator);
-	}
-
-	private static void readContestantColumns(DataStructure ds,
-			String[] contestantColums) {
-		for (int i = 0; i < contestantColums.length; i++) {
-			contestantColums[i] = contestantColums[i].trim();
-		}
-		ds.setContestantColumnNames(contestantColums);
-	}
-
-	private static void readContestants(DataStructure ds,
-			Iterator<String[]> iterator) {
-		while (iterator.hasNext()) {
-			String[] line = iterator.next();
-			String startNumber = line[0].trim();
-
-			Contestant contestant = ds.getContestant(startNumber);
-			if (contestant == null)
-				contestant = new Contestant();
-			contestant.setName(line[1].trim());
-
-			ds.addContestantEntry(startNumber, contestant);
-		}
 	}
 }

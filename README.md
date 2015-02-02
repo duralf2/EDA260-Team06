@@ -1,5 +1,7 @@
 # Enduro Project
 
+[![Build Status](https://travis-ci.org/duralf2/EDA260-Team06.svg?branch=master)](https://travis-ci.org/duralf2/EDA260-Team06)
+
 **Course:**  EDA260  
 **Team:**    #6
 

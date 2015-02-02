@@ -41,6 +41,14 @@ public class Register {
 	}
 
 	
+	public Time preRegisterTime() {
+		return ds.preRegisterTime();
+	}
+	
+	public Time removePreRegisteredTime() {
+		return ds.removePreRegisteredTime();
+	}
+
 
 	public void writeResult() {
 		File result = new File("resultat.txt");

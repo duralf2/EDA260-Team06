@@ -1,6 +1,8 @@
 package register.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Contestant {
 	private String name;
@@ -47,9 +49,23 @@ public class Contestant {
 		return finishTime.get(0);
 	}
 
+    public List<String> getLapDurations() {
+        ArrayList<String> lapDurations = new ArrayList<String>();
+        for(int i = 0; i < lapTimes.size()-1; i++) {
+            lapDurations.add(Time.getTotalTime(lapTimes.get(i), lapTimes.get(i + 1)).toString());
+        }
+        if(lapTimes.size() > 0)
+            lapDurations.add(Time.getTotalTime(lapTimes.getLast(), finishTime.getFirst()).toString());
+        return lapDurations;
+    }
+
 	public String getTotalTime() {
 		return Time.getTotalTime(startTime.get(0), finishTime.get(0)).toString();
 	}
+
+    public int getLapsCompleted() {
+        return lapTimes.size() + finishTime.size();
+    }
 
 	public int startTimeSize() {
 		return startTime.size();

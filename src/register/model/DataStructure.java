@@ -33,9 +33,9 @@ public class DataStructure {
 		return contestantColumnNames;
 	}
 	
-	public void preRegisterTime() {
+	public Time preRegisterTime() {
 		//TODO: change when time registration is implemented. (system time dependent, notify gui)
-		preRegisteredTime = new Time(Time.getCurrentTime());
+		return preRegisteredTime = new Time(Time.getCurrentTime());
 	}
 	
 	public Time removePreRegisteredTime() {
@@ -53,4 +53,13 @@ public class DataStructure {
 		}
 		return false;
 	}
+
+    public int getMaxLaps() {
+        int maxLaps = 0;
+        for(Contestant c : contestantEntries.values()) {
+            if(c.getLapsCompleted() > maxLaps)
+                maxLaps = c.getLapsCompleted();
+        }
+        return maxLaps;
+    }
 }

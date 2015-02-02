@@ -95,8 +95,8 @@ public class RegistrationGUI extends JFrame {
 	
 	public void register() {
 
-		// TODO RegistrationGUI; Registrera den inmatade informationen h�r!
-
+		// TODO: Registrera den inmatade informationen här!
+		
 		startNumberField.setText("");
 	}
 

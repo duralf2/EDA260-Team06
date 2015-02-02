@@ -1,4 +1,3 @@
-
 package io;
 
 import java.io.PrintWriter;
@@ -8,17 +7,18 @@ import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
 
-
 public class FileWriter {
 
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n"); // TODO how to
-																	// handle
-																	// setContestantColumnNames()
-																	// in
-																	// Datastrucure?
+		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n"); // TODO
+																		// how
+																		// to
+																		// handle
+																		// setContestantColumnNames()
+																		// in
+																		// Datastrucure?
 		Contestant contestant;
 		for (String startNumber : entries.keySet()) {
 			contestant = entries.get(startNumber);
@@ -46,22 +46,16 @@ public class FileWriter {
 			sb.append("\n");
 
 		}
-		
-		Time preRegistered = ds.removePreRegisteredTime();
-		if (preRegistered != null) {
-			sb.append("\n");
-			sb.append("Förregistrerad tid;");
-			sb.append(preRegistered.toString());
-		}
-		
+
 		pw.write(sb.toString());
 		pw.close();
 	}
 
-    public static void writeLapResult(PrintWriter pw, DataStructure ds) {
-        StringBuilder sb = new StringBuilder();
-        Map<String, Contestant> entries = ds.getAllContestantEntries();
-        int maxLaps = ds.getMaxLaps();
+	public static void writeLapResult(PrintWriter pw, DataStructure ds) {
+		StringBuilder sb = new StringBuilder();
+		Map<String, Contestant> entries = ds.getAllContestantEntries();
+		int maxLaps = ds.getMaxLaps();
+
 
         sb.append("StartNr;Namn;");
         if(maxLaps > 1) {
@@ -81,11 +75,11 @@ public class FileWriter {
             contestant = entries.get(startNumber);
             sb.append(startNumber + ";");
             sb.append(contestant.getName() + ";");
+        
 
-            if(maxLaps > 1) {
-                sb.append(contestant.getLapsCompleted()).append(";");
-            }
-
+			if (maxLaps > 1) {
+				sb.append(contestant.getLapsCompleted()).append(";");
+			}
             LinkedList<Time> finishTimes = contestant.getFinishTimes();
             LinkedList<Time> lapTimes = contestant.getLapTimes();
             if(finishTimes.size() > 0) {
@@ -104,10 +98,11 @@ public class FileWriter {
             for(int i=contestant.getLapDurations().size(); i < maxLaps; i++)
                 sb.append(" ;");
 
-            if (contestant.startTimeSize() == 0)
-                sb.append("Start?;");
-            else
-                sb.append(contestant.getStartTime() + ";");
+			if (contestant.startTimeSize() == 0)
+				sb.append("Start?;");
+			else
+				sb.append(contestant.getStartTime() + ";");
+
 
             for(Time time : lapTimes)
                 sb.append(time.toString() + ";");
@@ -186,5 +181,24 @@ public class FileWriter {
 			return true; // negative total time throws the exception.
 		}
 		return impossible;
+	}
+
+	public static void writeFinishTimes(PrintWriter pw, DataStructure ds) {
+		Map<String, Contestant> entries = ds.getAllContestantEntries();
+		StringBuilder sb = new StringBuilder();
+		Contestant contestant;
+		for (String startNumber : entries.keySet()) {
+			contestant = entries.get(startNumber);
+			printTimes(contestant.getFinishTimes(), sb, startNumber);
+		}
+		pw.append(sb.toString());
+	}
+
+	private static void printTimes(LinkedList<Time> timeList, StringBuilder sb,
+			String startNumber) {
+		for (Time time : timeList) {
+			sb.append(startNumber.toString() + "; ");
+			sb.append(time.toString() + "\n");
+		}
 	}
 }

@@ -74,17 +74,6 @@ public class DatastructureTest {
 	}
 	
 	@Test
-	public void testRemovePreRegisteredTime() {
-		ds.preRegisterTime();
-		Time diff = Time.getTotalTime(ds.removePreRegisteredTime(), new Time(Time.getCurrentTime()));
-		char digit = diff.toString().charAt(diff.toString().length() - 1);
-		if (digit != '0' && digit != '1') {
-			fail();
-		}
-		assertNull(ds.removePreRegisteredTime());
-	}
-	
-	@Test
 	public void testClearContestantEntries(){
 		ds.addContestantEntry("1", new Contestant("Karl"));
 		ds.clearContestantEntries();

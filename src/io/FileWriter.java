@@ -34,7 +34,7 @@ public class FileWriter {
 		}
 
 		if (!incorrectRegistrations.isEmpty()) {
-			sb.append("Icke existerande startnummer");
+			sb.append("Icke existerande startnummer\n");
 			for (String startNumber : incorrectRegistrations) {
 				writeContestant(sb, startNumber, ds.getContestant(startNumber));
 			}

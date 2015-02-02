@@ -35,7 +35,10 @@ public class ReadFile {
 		for (String[] line : data) {
 			startNumber = line[0];
 			name = line[1].trim();
-			contestant = new Contestant(name);
+			contestant = ds.getContestant(startNumber);
+			if (contestant == null)
+				contestant = new Contestant();
+			contestant.setName(name);
 			ds.addContestantEntry(startNumber, contestant);
 		}
 	}

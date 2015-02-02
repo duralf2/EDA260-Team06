@@ -63,7 +63,10 @@ public class OutputTest {
 //	}
 	
 	
-	@Test
+	/*
+	 * Tests have been removed since the methods have been removed (not necessary) TODO
+	 * 
+	 * @Test
 	public void testWriteStartTimes() {
 		FileWriter.writeStartTimes(pw, ds);
 		String[] line = sc.nextLine().split(";");
@@ -80,6 +83,7 @@ public class OutputTest {
 		assertEquals("1", line[0]);
 		assertEquals(" 13.23.34",  line[1]);
 	}
+	 */
 	
 	
 	

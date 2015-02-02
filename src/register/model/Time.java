@@ -13,7 +13,7 @@ public class Time implements Comparable {
 	public Time(String time) {
 		time = time.trim();
 		if (time.charAt(2) != '.' || time.charAt(5) != '.') {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(time);
 		}
 
 		try {

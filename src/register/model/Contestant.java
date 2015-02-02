@@ -51,10 +51,12 @@ public class Contestant {
 
     public List<String> getLapDurations() {
         ArrayList<String> lapDurations = new ArrayList<String>();
-        for(int i = 0; i < lapTimes.size()-1; i++) {
+        if(lapTimes.size() > 0 && startTime.size() > 0)
+            lapDurations.add(Time.getTotalTime(startTime.getFirst(), lapTimes.getFirst()).toString());
+        for(int i=0; i < lapTimes.size()-1; i++) {
             lapDurations.add(Time.getTotalTime(lapTimes.get(i), lapTimes.get(i + 1)).toString());
         }
-        if(lapTimes.size() > 0)
+        if(lapTimes.size() > 0 && finishTime.size() > 0)
             lapDurations.add(Time.getTotalTime(lapTimes.getLast(), finishTime.getFirst()).toString());
         return lapDurations;
     }

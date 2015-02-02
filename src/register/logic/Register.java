@@ -38,6 +38,14 @@ public class Register {
 			ReadFile.readNames(names, ds);
 		}
 	}
+	
+	public Time preRegisterTime() {
+		return ds.preRegisterTime();
+	}
+	
+	public Time removePreRegisteredTime() {
+		return ds.removePreRegisteredTime();
+	}
 
 	
 

@@ -33,9 +33,9 @@ public class DataStructure {
 		return contestantColumnNames;
 	}
 	
-	public void preRegisterTime() {
+	public Time preRegisterTime() {
 		//TODO: change when time registration is implemented. (system time dependent, notify gui)
-		preRegisteredTime = new Time(Time.getCurrentTime());
+		return preRegisteredTime = new Time(Time.getCurrentTime());
 	}
 	
 	public Time removePreRegisteredTime() {

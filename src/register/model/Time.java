@@ -87,9 +87,7 @@ public class Time implements Comparable {
     @Override
     public int compareTo(Object o) {
         Time t2 = (Time)o;
-//        if(laps - laps 2 == 0){
         return totalSeconds() - t2.totalSeconds();
-//        }
     }
     
     private int totalSeconds(){

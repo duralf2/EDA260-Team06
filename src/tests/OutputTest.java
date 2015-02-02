@@ -63,13 +63,16 @@ public class OutputTest {
 //	}
 	
 	
-	@Test
+	/*
+	 * Tests have been removed since the methods have been removed (not necessary) TODO
+	 * 
+	 * @Test
 	public void testWriteStartTimes() {
 		FileWriter.writeStartTimes(pw, ds);
 		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
 		assertEquals("1", line[0]);
-		assertEquals("12.00.00",  line[1]);
+		assertEquals(" 12.00.00",  line[1]);
 	}
 
 	@Test
@@ -78,8 +81,9 @@ public class OutputTest {
 		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
 		assertEquals("1", line[0]);
-		assertEquals("13.23.34",  line[1]);
+		assertEquals(" 13.23.34",  line[1]);
 	}
+	 */
 	
 	
 	
@@ -87,12 +91,12 @@ public class OutputTest {
 	public void testWriteResults() {
 		FileWriter.writeResult(pw, ds);
 		assertTrue(f.exists());
-		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
 		String[] line = sc.nextLine().split(";");
 		assertEquals("1", line[0]);
-		assertEquals("Göran-Victor Hansson", line[1]);
-		assertEquals("01.23.34",  line[2]);
-		assertEquals("12.00.00",  line[3]);
-		assertEquals("13.23.34", line[4]);
+		assertEquals(" Göran-Victor Hansson", line[1]);
+		assertEquals(" 01.23.34",  line[2]);
+		assertEquals(" 12.00.00",  line[3]);
+		assertEquals(" 13.23.34", line[4]);
 	}
 }

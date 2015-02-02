@@ -6,6 +6,7 @@ import java.util.TreeMap;
 public class DataStructure {
 	private Map<String, Contestant> contestantEntries;
 	private String[] contestantColumnNames;
+	private Time preRegisteredTime;
 
 	public DataStructure() {
 		contestantEntries = new TreeMap<String, Contestant>();
@@ -31,6 +32,18 @@ public class DataStructure {
 	{
 		return contestantColumnNames;
 	}
+	
+	public void preRegisterTime() {
+		//TODO: change when time registration is implemented. (system time dependent, notify gui)
+		preRegisteredTime = new Time(Time.getCurrentTime());
+	}
+	
+	public Time removePreRegisteredTime() {
+		//TODO: notify gui
+		Time temp = preRegisteredTime;
+		preRegisteredTime = null;
+		return temp;
+	}
 
 	public boolean equals(Object obj) {
 		if (obj instanceof DataStructure)
@@ -40,4 +53,13 @@ public class DataStructure {
 		}
 		return false;
 	}
+
+    public int getMaxLaps() {
+        int maxLaps = 0;
+        for(Contestant c : contestantEntries.values()) {
+            if(c.getLapsCompleted() > maxLaps)
+                maxLaps = c.getLapsCompleted();
+        }
+        return maxLaps;
+    }
 }

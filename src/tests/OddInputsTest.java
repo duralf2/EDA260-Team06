@@ -2,10 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 import io.FileWriter;
+import io.ReadFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -41,13 +43,13 @@ public class OddInputsTest {
 	}
 
 	@Test
-	public void testNoStartTime(){
+	public void testNoStartTime() throws FileNotFoundException{
 		Contestant contestant = new Contestant("Göran");
 		contestant.addFinishTime(new Time("13.23.34"));
 		ds.addContestantEntry("1", contestant);
 		FileWriter.writeResult(pw, ds);
-		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1;Göran;--.--.--;Start?;13.23.34", sc.next());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; --.--.--; Start?; 13.23.34", sc.nextLine());
 	}
 	
 	@Test
@@ -56,19 +58,19 @@ public class OddInputsTest {
 		contestant.addStartTime(new Time("13.23.34"));
 		ds.addContestantEntry("1", contestant);
 		FileWriter.writeResult(pw, ds);
-		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1;Göran;--.--.--;13.23.34;Slut?", sc.next());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; --.--.--; 13.23.34; Slut?", sc.nextLine());
 	}
 	
 	@Test
-	public void testToFast(){
+	public void testTooFast(){
 		Contestant contestant = new Contestant("Göran");
 		contestant.addStartTime(new Time("13.23.34"));
 		contestant.addFinishTime(new Time("13.30.34"));
 		ds.addContestantEntry("1", contestant);
 		FileWriter.writeResult(pw, ds);
-		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1;Göran;00.07.00;13.23.34;13.30.34;Omöjlig totaltid?", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; 00.07.00; 13.23.34; 13.30.34; Omöjlig totaltid?", sc.nextLine());
 	}
 	
 	@Test
@@ -79,8 +81,8 @@ public class OddInputsTest {
 		contestant.addFinishTime(new Time("14.30.34"));
 		ds.addContestantEntry("1", contestant);
 		FileWriter.writeResult(pw, ds);
-		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1;Göran;01.07.00;13.23.34;14.30.34; Flera starttider? 13.24.35", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; 01.07.00; 13.23.34; 14.30.34; Flera starttider? 13.24.35", sc.nextLine());
 	}
 	
 	@Test
@@ -91,8 +93,9 @@ public class OddInputsTest {
 		contestant.addFinishTime(new Time("14.31.34"));
 		ds.addContestantEntry("1", contestant);
 		FileWriter.writeResult(pw, ds);
-		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1;Göran;01.07.00;13.23.34;14.30.34; Flera måltider? 14.31.34", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; 01.07.00; 13.23.34; 14.30.34; Flera måltider? 14.31.34", sc.nextLine());
 	}
+	
 }
 	

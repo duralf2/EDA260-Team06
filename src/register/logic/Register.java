@@ -39,7 +39,6 @@ public class Register {
 			ReadFile.readNames(names, ds);
 		}
 	}
-
 	
 
 	public void writeResult() {

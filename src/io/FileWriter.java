@@ -119,4 +119,49 @@ public class FileWriter {
 		}
 		return impossible;
 	}
+	/*
+	 * 
+	 * Removed since not used... Or do we need them? TODO
+	 
+- public static void writeStartTimes(PrintWriter pw, DataStructure ds) {
+- Map<String, Contestant> entries = ds.getAllContestantEntries();
+- Contestant contestant;
+- StringBuilder sb = new StringBuilder();
+- for (String startNumber : entries.keySet()) {
+- contestant = entries.get(startNumber);
+-
+- printTimes(contestant.getStartTimes(), sb, startNumber);
+-
+- }
+- pw.write(sb.toString());
+- pw.close();
+- }
+-
+- public static void writeFinishTimes(PrintWriter pw, DataStructure ds) {
+- Map<String, Contestant> entries = ds.getAllContestantEntries();
+- StringBuilder sb = new StringBuilder();
+- Contestant contestant;
+- for (String startNumber : entries.keySet()) {
+- contestant = entries.get(startNumber);
+- printTimes(contestant.getFinishTimes(), sb, startNumber);
+- }
+- Time preRegistered = ds.removePreRegisteredTime();
+- if (preRegistered != null) {
+- sb.append("\n");
+- sb.append("Förregistrerad tid;");
+- sb.append(preRegistered.toString());
+- }
+-
+- pw.write(sb.toString());
+- pw.close();
+- }
+-
+- private static void printTimes(LinkedList<Time> timeList, StringBuilder sb,
+- String startNumber) {
+- for (Time time : timeList) {
+- sb.append(startNumber.toString() + "; ");
+- sb.append(time.toString() + "\n");
+- }
+- }
+	 */
 }

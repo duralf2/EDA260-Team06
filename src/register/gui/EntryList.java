@@ -1,18 +1,52 @@
 package register.gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
-import javax.swing.JScrollPane;
-import javax.swing.border.TitledBorder;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-public class EntryList extends JScrollPane {
-	public EntryList(int fontSize) {
-		
-		setPreferredSize(new Dimension(800, 600));
+import register.logic.Register;
+import register.model.Contestant;
+import register.model.DataStructure;
+
+public class EntryList extends JTable {
+	
+	private DataStructure ds;
+	
+	public EntryList(int fontSize, register.logic.Register register) {
+		super(1, 2);
+		setFillsViewportHeight(true);
+		setFont(new Font("Arial", Font.BOLD, fontSize));
+		setRowHeight(fontSize);
 		setOpaque(true);
-		getViewport().setBackground(new Color(173, 193, 214));
 		setToolTipText("Old registrations.");
+		this.ds = register.getDataStructure();
+		try {
+			register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
+		} catch (IOException e) {
+			//TODO: exception handling
+		}
+		update();
+	}
+	
+	// TODO:
+	public void update(){
+		Map<String, Contestant> entries = ds.getAllContestantEntries();
+		Set<String> keys = entries.keySet();
+		String[] header = {"Startnummer", "Måltid"};
+		String[][] rowData = new String[keys.size()][2];
+		int i = 0;
+		for (String key : keys) {
+			rowData[i][0] = key;
+			rowData[i][1] = entries.get(key).getFinishTime().toString();
+			i++;
+		}
+		DefaultTableModel model = new DefaultTableModel(rowData, header);
+		setModel(model);
+		
 	}
 }

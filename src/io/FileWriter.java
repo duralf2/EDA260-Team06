@@ -1,14 +1,18 @@
+
 package io;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+
 import java.util.Map;
 
 import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
+
 
 public class FileWriter {
 

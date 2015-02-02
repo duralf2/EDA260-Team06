@@ -87,7 +87,7 @@ public class OutputTest {
 	public void testWriteResults() {
 		FileWriter.writeResult(pw, ds);
 		assertTrue(f.exists());
-		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
 		String[] line = sc.nextLine().split(";");
 		assertEquals("1", line[0]);
 		assertEquals(" Göran-Victor Hansson", line[1]);

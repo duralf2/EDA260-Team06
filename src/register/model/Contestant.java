@@ -48,7 +48,7 @@ public class Contestant {
 	}
 
 	public String getTotalTime() {
-		return Time.getTotalTime(startTime.get(0), finishTime.get(0));
+		return Time.getTotalTime(startTime.get(0), finishTime.get(0)).toString();
 	}
 
 	public int startTimeSize() {

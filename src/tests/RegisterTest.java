@@ -87,6 +87,7 @@ public class RegisterTest {
 				assertEquals(startTimes[index].toString(), s[3].trim());
 				assertEquals(finishTimes[index].toString(), s[4].trim());
 			} catch (NumberFormatException e) {
+				e.printStackTrace();
 			}
 			;
 		}

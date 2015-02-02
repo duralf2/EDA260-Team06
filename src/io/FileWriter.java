@@ -172,7 +172,8 @@ public class FileWriter {
 					&& Integer.parseInt(contestant.getTotalTime().substring(3,
 							5)) <= 15;
 		} catch (IllegalArgumentException e) {
-			return true; // negative total time throws the exception.
+			e.printStackTrace(); // negative total time throws the exception.
+			return true;
 		}
 		return impossible;
 	}

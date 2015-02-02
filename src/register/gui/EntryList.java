@@ -32,7 +32,7 @@ public class EntryList extends JTable {
 			register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
 			register.readNames(Register.DEFAULT_NAME_FILE);
 		} catch (IOException e) {
-			//TODO: exception handling
+			e.printStackTrace();
 		}
 		update();
 	}

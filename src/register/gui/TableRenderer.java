@@ -24,8 +24,10 @@ public class TableRenderer extends DefaultTableCellRenderer {
 				row, column);
 		
 		Contestant contestant = data.getContestant((String)value);
-		if (contestant == null || contestant.getName().equals(""))
-			component.setBackground(Color.RED);
+		if (column == 0 && (contestant == null || contestant.getName().equals("")))
+			component.setBackground(Color.PINK);
+		else
+			component.setBackground(table.getBackground());
 		
 		return component;
 	}

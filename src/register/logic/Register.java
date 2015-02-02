@@ -92,4 +92,9 @@ public class Register {
 	public DataStructure getDataStructure() {
 		return ds;
 	}
+	
+	public void clear()
+	{
+		ds.getAllContestantEntries().clear();
+	}
 }

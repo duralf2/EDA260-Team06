@@ -69,7 +69,7 @@ public class Register {
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(
 					new java.io.FileWriter(file, true)));
-//			if (writeHeader(file))
+//		if (writeHeader(file))
 //				pw.println("StartNr; Tid");
 			pw.println(startNumber + "; " + Time.getCurrentTime());
 			pw.close();

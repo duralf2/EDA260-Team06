@@ -12,7 +12,7 @@
 
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
-		<jar destfile="build/jar/programme.jar" basedir="bin">
+		<jar destfile="build/jar/program.jar" basedir="bin">
 			<manifest>
 				<attribute name="Main-Class" value="sorter.SorterMain" /> <!--Sets the main class of the program -->
 			</manifest>

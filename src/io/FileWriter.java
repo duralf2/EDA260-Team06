@@ -1,10 +1,10 @@
-
 package io;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import register.model.Contestant;
@@ -13,43 +13,65 @@ import register.model.Time;
 
 public class FileWriter {
 
-	public static void writeResult(PrintWriter pw, DataStructure ds) {
+	public static void writeResult(PrintWriter pw, DataStructure dataStructure) {
 		StringBuilder sb = new StringBuilder();
-		Map<String, Contestant> entries = ds.getAllContestantEntries();
+		Map<String, Contestant> entries = dataStructure.getAllContestantEntries();
 		sb.append("StartNr; Namn; TotalTid; Starttid; Måltid\n"); // TODO how to
 																	// handle
 																	// setContestantColumnNames()
 																	// in
 																	// Datastrucure?
-		Contestant contestant;
+		List<String> incorrectRegistrations = new ArrayList<String>();
 		for (String startNumber : entries.keySet()) {
-			contestant = entries.get(startNumber);
-			sb.append(startNumber + ";");
-			sb.append(contestant.getName() + ";");
+			Contestant contestant = entries.get(startNumber);
 
-			writeTotalTime(contestant, sb);
-
-			if (contestant.startTimeSize() == 0) {
-				sb.append("Start?" + ";");
-			} else {
-				sb.append(contestant.getStartTime() + ";");
+			if (contestant.getName().equals(""))
+				incorrectRegistrations.add(startNumber);
+			else
+			{
+				writeContestant(sb, contestant, startNumber);
 			}
-			if (contestant.finishTimeSize() == 0) {
-				sb.append("Slut?");
-			} else {
-				if (isImpossibleTime(contestant)) {
-					sb.append(contestant.getFinishTime() + ";"
-							+ "Omöjlig totaltid?");
-				} else {
-					sb.append(contestant.getFinishTime());
-				}
-			}
-			checkMultipleTimes(contestant, sb);
-			sb.append("\n");
 
 		}
+		
+		if (!incorrectRegistrations.isEmpty())
+		{
+			sb.append("Icke existerande startnummer");
+			for (String startNumber : incorrectRegistrations)
+			{
+				writeContestant(sb, dataStructure.getContestant(startNumber), startNumber);
+			}
+		}
+		
+		
 		pw.write(sb.toString());
 		pw.close();
+	}
+
+	private static void writeContestant(StringBuilder sb,
+			Contestant contestant, String startNumber) {
+		sb.append(startNumber + ";");
+		sb.append(contestant.getName() + ";");
+
+		writeTotalTime(contestant, sb);
+
+		if (contestant.startTimeSize() == 0) {
+			sb.append("Start?" + ";");
+		} else {
+			sb.append(contestant.getStartTime() + ";");
+		}
+		if (contestant.finishTimeSize() == 0) {
+			sb.append("Slut?");
+		} else {
+			if (isImpossibleTime(contestant)) {
+				sb.append(contestant.getFinishTime() + ";"
+						+ "Omöjlig totaltid?");
+			} else {
+				sb.append(contestant.getFinishTime());
+			}
+		}
+		checkMultipleTimes(contestant, sb);
+		sb.append("\n");
 	}
 
 	// TODO - implement task 6.3 6.4
@@ -117,7 +139,7 @@ public class FileWriter {
 			contestant = entries.get(startNumber);
 
 			printTimes(contestant.getFinishTimes(), sb, startNumber);
-			
+
 			checkMultipleTimesStart(contestant, sb);
 		}
 		pw.write(sb.toString());
@@ -137,14 +159,14 @@ public class FileWriter {
 
 			sb.append("\n");
 		}
-		//copy
+		// copy
 		Time preRegistered = ds.removePreRegisteredTime();
 		if (preRegistered != null) {
 			sb.append("\n");
 			sb.append("Förregistrerad tid;");
 			sb.append(preRegistered.toString());
 		}
-		
+
 		pw.write(sb.toString());
 		pw.close();
 	}
@@ -157,4 +179,3 @@ public class FileWriter {
 		}
 	}
 }
-

@@ -7,7 +7,7 @@ import register.model.DataStructure;
 public class SorterMain {
 
 	public static void main(String[] args) {
-		new RegistrationGUI("", new Register(new DataStructure()));
+		new RegistrationGUI("Registration GUI", new Register(new DataStructure()));
 	}
 
 }

@@ -2,6 +2,7 @@
 package io;
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -15,7 +16,11 @@ public class FileWriter {
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; Namn; TotalTid; Starttid; Måltid\n");
+		sb.append("StartNr; Namn; TotalTid; Starttid; Måltid\n"); // TODO how to
+																	// handle
+																	// setContestantColumnNames()
+																	// in
+																	// Datastrucure?
 		Contestant contestant;
 		for (String startNumber : entries.keySet()) {
 			contestant = entries.get(startNumber);
@@ -81,6 +86,8 @@ public class FileWriter {
 	}
 
 	private static void writeTotalTime(Contestant contestant, StringBuilder sb) {
+		// Getting sizes of lists containing starttimes and finishtimes, if size
+		// = 0 time is missing
 		if (contestant.startTimeSize() == 0 || contestant.finishTimeSize() == 0) {
 			sb.append("--.--.--" + ";");
 		} else {
@@ -92,10 +99,12 @@ public class FileWriter {
 		boolean impossible;
 		try {
 			impossible = contestant.startTimeSize() != 0
-					&& Integer.parseInt(contestant.getTotalTime().substring(0, 2)) < 1
-					&& Integer.parseInt(contestant.getTotalTime().substring(3, 5)) <= 15;
+					&& Integer.parseInt(contestant.getTotalTime().substring(0,
+							2)) < 1
+					&& Integer.parseInt(contestant.getTotalTime().substring(3,
+							5)) <= 15;
 		} catch (IllegalArgumentException e) {
-			return true;		// negative total time throws the exception.
+			return true; // negative total time throws the exception.
 		}
 		return impossible;
 	}
@@ -104,16 +113,12 @@ public class FileWriter {
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		Contestant contestant;
 		StringBuilder sb = new StringBuilder();
-		for (String s : entries.keySet()) {
-			sb.append(s + ";");
-			contestant = entries.get(s);
-			if(contestant.startTimeSize() == 0)
-				sb.append("Start?" + ";");
-			else{
-			sb.append(contestant.getStartTime());
-			checkMultipleTimesStart(contestant,sb);
-			}
-			sb.append("\n");
+		for (String startNumber : entries.keySet()) {
+			contestant = entries.get(startNumber);
+
+			printTimes(contestant.getFinishTimes(), sb, startNumber);
+			
+			checkMultipleTimesStart(contestant, sb);
 		}
 		pw.write(sb.toString());
 		pw.close();
@@ -123,21 +128,27 @@ public class FileWriter {
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		StringBuilder sb = new StringBuilder();
 		Contestant contestant;
-		for (String s : entries.keySet()) {
-			sb.append(s + ";");
-			contestant = entries.get(s);
-			if(contestant.startTimeSize() == 0)
-				sb.append("Start?" + ";");
-			else{
-			sb.append(contestant.getFinishTime());
-			checkMultipleTimesStart(contestant,sb);
-			}
+		for (String startNumber : entries.keySet()) {
+			contestant = entries.get(startNumber);
+
+			printTimes(contestant.getFinishTimes(), sb, startNumber);
+
+			checkMultipleTimesStart(contestant, sb);
+
 			sb.append("\n");
 		}
 	
 		
 		pw.write(sb.toString());
 		pw.close();
+	}
+
+	private static void printTimes(LinkedList<Time> timeList, StringBuilder sb,
+			String startNumber) {
+		for (Time time : timeList) {
+			sb.append(startNumber.toString() + "; ");
+			sb.append(time.toString() + "\n");
+		}
 	}
 }
 

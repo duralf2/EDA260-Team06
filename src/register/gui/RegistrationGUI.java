@@ -97,6 +97,7 @@ public class RegistrationGUI extends JFrame {
 			try {
 				register.clear();
 				register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
+				register.readNames(Register.DEFAULT_NAME_FILE);
 				entryTable.update();
 
 				if (register.getDataStructure().getContestant(startNumber).getName().equals(""))

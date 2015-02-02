@@ -96,34 +96,4 @@ public class AcceptanceTest extends TestCase {
 			assertEquals(sc3.nextLine(), sc2.nextLine());
 		}
 	}
-
-	@Test
-	public void testFileWriterWriteStartTimes() throws IOException{
-		Scanner sc2 = new Scanner(new File(
-				"testfiles/acceptanstest/acceptanstest6/starttider.txt"));
-		FileOutputStream fos = new FileOutputStream(outfile);
-		PrintWriter pw = new PrintWriter(fos);
-		
-		FileWriter.writeStartTimes(pw, ds);
-		
-		Scanner sc3 = new Scanner(outfile);
-		while (sc2.hasNext()) {
-			assertEquals(sc2.nextLine(), sc3.nextLine());
-		}
-	}
-	
-	@Test
-	public void testFileWriterWriteFinishTimes() throws IOException{
-		Scanner sc4 = new Scanner(new File(
-				"testfiles/acceptanstest/acceptanstest6/maltider.txt"));
-		FileOutputStream fos = new FileOutputStream(outfile);
-		PrintWriter pw = new PrintWriter(fos);
-		
-		FileWriter.writeFinishTimes(pw, ds);
-		
-		Scanner sc5 = new Scanner(outfile);
-		while (sc4.hasNext()) {
-			assertEquals(sc4.nextLine(), sc5.nextLine());
-		}
-	}
 }

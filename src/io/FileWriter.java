@@ -1,4 +1,3 @@
-
 package io;
 
 import java.io.PrintWriter;
@@ -16,7 +15,7 @@ public class FileWriter {
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; Namn; TotalTid; Starttid; Måltid\n"); // TODO how to
+		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n"); // TODO how to
 																	// handle
 																	// setContestantColumnNames()
 																	// in
@@ -117,8 +116,7 @@ public class FileWriter {
 			contestant = entries.get(startNumber);
 
 			printTimes(contestant.getStartTimes(), sb, startNumber);
-			
-			checkMultipleTimesStart(contestant, sb);
+
 		}
 		pw.write(sb.toString());
 		pw.close();
@@ -130,21 +128,16 @@ public class FileWriter {
 		Contestant contestant;
 		for (String startNumber : entries.keySet()) {
 			contestant = entries.get(startNumber);
-
 			printTimes(contestant.getFinishTimes(), sb, startNumber);
-
-			checkMultipleTimesStart(contestant, sb);
-
 			sb.append("\n");
 		}
-		//copy
 		Time preRegistered = ds.removePreRegisteredTime();
 		if (preRegistered != null) {
 			sb.append("\n");
 			sb.append("Förregistrerad tid;");
 			sb.append(preRegistered.toString());
 		}
-		
+
 		pw.write(sb.toString());
 		pw.close();
 	}
@@ -157,4 +150,3 @@ public class FileWriter {
 		}
 	}
 }
-

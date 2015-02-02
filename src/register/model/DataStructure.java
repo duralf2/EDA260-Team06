@@ -6,6 +6,7 @@ import java.util.TreeMap;
 public class DataStructure {
 	private Map<String, Contestant> contestantEntries;
 	private String[] contestantColumnNames;
+	private Time preRegisteredTime;
 
 	public DataStructure() {
 		contestantEntries = new TreeMap<String, Contestant>();
@@ -30,6 +31,18 @@ public class DataStructure {
 	public String[] getContestantColumnNames()
 	{
 		return contestantColumnNames;
+	}
+	
+	public void preRegisterTime() {
+		//TODO: change when time registration is implemented. (system time dependent, notify gui)
+		preRegisteredTime = new Time("00.00.00");
+	}
+	
+	public Time removePreRegisteredTime() {
+		//TODO: notify gui
+		Time temp = preRegisteredTime;
+		preRegisteredTime = null;
+		return temp;
 	}
 
 	public boolean equals(Object obj) {

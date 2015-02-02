@@ -6,6 +6,7 @@ public class Contestant {
 	private String name;
 	private LinkedList<Time> startTime;
 	private LinkedList<Time> finishTime;
+    private LinkedList<Time> lapTimes;
 
 	public Contestant() {
 		this("");
@@ -14,6 +15,7 @@ public class Contestant {
 	public Contestant(String name) {
 		this.name = name;
 		startTime = new LinkedList<Time>();
+        lapTimes = new LinkedList<Time>();
 		finishTime = new LinkedList<Time>();
 	}
 
@@ -21,7 +23,11 @@ public class Contestant {
 		startTime.add(time);
 	}
 
-	public void addFinishTime(Time time) {
+    public void addLapTime(Time time){
+        lapTimes.add(time);
+    }
+
+    public void addFinishTime(Time time) {
 		finishTime.add(time);
 	}
 
@@ -57,6 +63,10 @@ public class Contestant {
 		return startTime;
 	}
 
+    public LinkedList<Time> getLapTimes() {
+        return lapTimes;
+    }
+
 	public LinkedList<Time> getFinishTimes() {
 		return finishTime;
 	}
@@ -66,6 +76,7 @@ public class Contestant {
 			Contestant otherContestant = (Contestant)obj;
 			return otherContestant.name.equalsIgnoreCase(name) &&
 					startTime.equals(otherContestant.startTime) &&
+                    lapTimes.equals(otherContestant.lapTimes) &&
 					finishTime.equals(otherContestant.finishTime);
 		}
 		return false;

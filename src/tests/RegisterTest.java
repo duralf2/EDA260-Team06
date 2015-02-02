@@ -55,7 +55,7 @@ public class RegisterTest {
 	public void testReadFinishTimes() throws IOException {
 		File goal = new File(
 				"testfiles/acceptanstest/acceptanstest3/maltider.txt");
-		register.readFinishTimes(goal);
+		register.readGoalTimes(goal);
 		for (String startNumber : entries.keySet()) {
 			int index = Integer.parseInt(startNumber) - 1;
 			assertEquals(finishTimes[index], entries.get(startNumber).getFinishTime());

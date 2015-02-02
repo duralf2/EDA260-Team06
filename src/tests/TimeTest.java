@@ -23,49 +23,48 @@ public class TimeTest {
 	public void testToString() {
 		assertEquals("10.15.34", t1.toString());
 	}
-	
+
 	@Test
 	public void testTimeFormat() {
 		new Time("01.03.04");
 	}
-	
+
 	@Test
 	public void testGetTotalTime() {
-		assertEquals("01.59.05", Time.getTotalTime(t1, t2));
+		assertEquals("01.59.05", Time.getTotalTime(t1, t2).toString());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testGetTotalTimeNegativeTime(){
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetTotalTimeNegativeTime() {
 		Time.getTotalTime(t1, t3);
 	}
-	
-	
-	@Test (expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidConstructorParameters() {
 		new Time("isdjf");
 	}
-	
-	@Test (expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testWrongNumbers() {
 		new Time("11.64.77");
 	}
-	
-	@Test (expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testWrongHours() {
 		new Time("100.55.34");
 	}
-	
-	@Test (expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testWrongFormat() {
 		new Time("2.3.49");
 	}
-	
+
 	@Test
 	public void testEquals() {
 		String st = "12.01.12";
 		assertTrue(new Time(st).equals(new Time(st)));
 	}
-	
+
 	@Test
 	public void testEqualsNotTime() {
 		String st = "12.01.12";

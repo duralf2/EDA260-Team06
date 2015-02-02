@@ -41,16 +41,6 @@ public class Register {
 		}
 	}
 
-	
-	public Time preRegisterTime() {
-		return ds.preRegisterTime();
-	}
-	
-	public Time removePreRegisteredTime() {
-		return ds.removePreRegisteredTime();
-	}
-
-
 	public void writeResult() {
 		File result = new File("resultat.txt");
 		writeResult(result);
@@ -73,7 +63,7 @@ public class Register {
 			}
 			PrintWriter pw = new PrintWriter(new BufferedWriter(
 					new java.io.FileWriter(file, true)));
-//			if (writeHeader(file))
+//		if (writeHeader(file))
 //				pw.println("StartNr; Tid");
 			pw.println(startNumber + "; " + Time.getCurrentTime());
 			pw.close();
@@ -94,6 +84,18 @@ public class Register {
 		return ds;
 	}
 	
+	public void writeFinishTimes() {
+		try {
+			PrintWriter pw = new PrintWriter(DEFAULT_RESULT_FILE);
+			FileWriter.writeFinishTimes(pw, ds);
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//TODO remove?
 	public boolean isPreRegisteredTime() {
 		try {
 			List<String[]> data = ReadFile.readCSV(DEFAULT_RESULT_FILE);

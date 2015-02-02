@@ -10,15 +10,17 @@
 	<target name="clean" description="Destroys all previously generated files and dirs.">
 		<delete dir="build" />
 		<delete dir="testreports" />
+        <delete dir="bin" />
 	</target>
 
 	<target name="compile">
+        <mkdir dir="bin" />
 		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath"/>
 	</target>
 
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
-		<jar destfile="build/jar/programme.jar" basedir="bin">
+		<jar destfile="build/jar/program.jar" basedir="bin">
 			<manifest>
 				<attribute name="Main-Class" value="sorter.SorterMain" />
 				<!--Sets the main class of the program -->
@@ -30,7 +32,7 @@
 	<target name="main" depends="clean,jar,test" />
 	<!--Runs clean, jar and test in order-->
 
-	<target name="test">
+	<target name="testreports">
 
 		<mkdir dir="testreports" />
 
@@ -59,4 +61,21 @@
 		</junitreport>
 
 	</target>
+
+    <target name="test" depends="compile">
+        <junit printsummary="yes" haltonfailure="yes" haltonerror="yes">
+            <classpath>
+                <pathelement location="lib/hamcrest-core-1.3.jar" />
+                <pathelement location="lib/junit-4.12.jar" />
+                <pathelement location="lib/jcsv-1.4.0.jar" />
+                <pathelement path="bin" />
+            </classpath>
+
+            <batchtest fork="yes">
+                <fileset dir="src">
+                    <include name="tests/*" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
 </project>

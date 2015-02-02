@@ -41,7 +41,7 @@ public class EntryList extends JTable {
 	public void update() {
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		Set<String> keys = entries.keySet();
-		String[] header = { "Startnummer", "Måltid" };
+		String[] header = {"Start number", "Time"};
 		List<String[]> rowData = new ArrayList<String[]>();
 		for (String key : keys) {
 			if (entries.get(key).finishTimeSize() > 0) {

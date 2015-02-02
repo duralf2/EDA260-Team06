@@ -1,6 +1,5 @@
 package register.model;
 
-import java.util.LinkedList;
 
 public class Time{
 	private int hours;
@@ -32,8 +31,7 @@ public class Time{
 		return timeToString(hours, minutes, seconds);
 	}
 	
-	public static String getTotalTime(Time startTime, Time finishTime) {
-		
+	public static String getTotalTime(Time startTime, Time finishTime) throws IllegalArgumentException{
 		int totalHours = finishTime.hours - startTime.hours;
 		int totalMinutes = finishTime.minutes - startTime.minutes;
 		int totalSeconds = finishTime.seconds - startTime.seconds;
@@ -45,6 +43,8 @@ public class Time{
 			totalMinutes += 60;
 			totalHours--;
 		}
+		if(totalHours < 0)
+			throw new IllegalArgumentException("Can not use negative time");
 		return timeToString(totalHours, totalMinutes, totalSeconds);
 	}
 	

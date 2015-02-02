@@ -1,6 +1,6 @@
 package tests;
 
-import io.IOHandler;
+import io.FileWriter;
 import io.ReadFile;
 
 import java.io.File;
@@ -42,7 +42,7 @@ public class AcceptanceTest extends TestCase {
 		ReadFile.readFinishTime(new File(finishTimesFilepath), ds);
 		
 		PrintWriter pw = new PrintWriter(outfile);
-		IOHandler.writeResult(pw, ds);
+		FileWriter.writeResult(pw, ds);
 		
 		DataStructure dsOut = new DataStructure();
 		ReadFile.readResult(outfile, dsOut);

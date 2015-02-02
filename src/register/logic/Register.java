@@ -1,6 +1,6 @@
 package register.logic;
 
-import io.IOHandler;
+import io.FileWriter;
 import io.ReadFile;
 
 import java.io.File;
@@ -18,6 +18,7 @@ public class Register {
 	}
 
 	public void readStartTimes(File startTimes) throws IOException {
+
 		if(startTimes.isFile()){
 			ReadFile.readStartTime(startTimes, ds);
 		}
@@ -37,7 +38,7 @@ public class Register {
 	public void writeResult(File result) {
 		try {
 			PrintWriter pw = new PrintWriter(result);
-			IOHandler.writeResult(pw, ds);
+			FileWriter.writeResult(pw, ds);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<ccConfig tempDirectory="<full sökväg till Crystal temp directory>" refresh="30">
-  <project Kind="GIT" ShortName="Enduro" Clone="<full sökväg till git repo>" commonParent="MASTER">
+<ccConfig tempDirectory="/h/d1/t/fte10kso/CrystalTemp" refresh="30">
+  <project Kind="GIT" ShortName="Enduro" Clone="</h/d1/t/fte10kso/EDA260-Team06" commonParent="MASTER">
     <source ShortName="MASTER" Clone="https://github.com/duralf2/EDA260-Team06.git" Hidden="false" commonParent="MASTER" />
     <source ShortName="Magnus" Clone="/h/d7/c/mat12mtu/EDA260-Team06" Hidden="false" commonParent="MASTER" />
     <source ShortName="Sebastian" Clone="/h/d2/u/dat13shj/EDA260-Projekt/EDA260-Team06" Hidden="false" commonParent="MASTER" />

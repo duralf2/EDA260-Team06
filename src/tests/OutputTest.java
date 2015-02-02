@@ -1,7 +1,7 @@
 package tests;
 
 import static org.junit.Assert.*;
-import io.IOHandler;
+import io.FileWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,8 +33,8 @@ public class OutputTest {
 		ds = new DataStructure();
 
 		Contestant contestant = new Contestant("Göran-Victor Hansson");
-		contestant.setStartTime(new Time("12.00.00"));
-		contestant.setFinishTime(new Time("13.23.34"));
+		contestant.addStartTime(new Time("12.00.00"));
+		contestant.addFinishTime(new Time("13.23.34"));
 		ds.addContestantEntry("1", contestant);
 		sc = new Scanner(f);
 	}
@@ -65,7 +65,7 @@ public class OutputTest {
 	
 	@Test
 	public void testWriteStartTimes() {
-		IOHandler.writeStartTimes(pw, ds);
+		FileWriter.writeStartTimes(pw, ds);
 		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
 		assertEquals("1", line[0]);
@@ -74,7 +74,7 @@ public class OutputTest {
 
 	@Test
 	public void testWriteFinishTimes() {
-		IOHandler.writeFinishTimes(pw, ds);
+		FileWriter.writeFinishTimes(pw, ds);
 		String[] line = sc.nextLine().split(";");
 		assertTrue(f.exists());
 		assertEquals("1", line[0]);
@@ -85,7 +85,7 @@ public class OutputTest {
 	
 	@Test
 	public void testWriteResults() {
-		IOHandler.writeResult(pw, ds);
+		FileWriter.writeResult(pw, ds);
 		assertTrue(f.exists());
 		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
 		String[] line = sc.nextLine().split(";");

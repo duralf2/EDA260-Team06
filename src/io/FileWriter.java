@@ -134,13 +134,7 @@ public class FileWriter {
 			}
 			sb.append("\n");
 		}
-		//copy
-		Time preRegistered = ds.removePreRegisteredTime();
-		if (preRegistered != null) {
-			sb.append("\n");
-			sb.append("Förregistrerad tid;");
-			sb.append(preRegistered.toString());
-		}
+	
 		
 		pw.write(sb.toString());
 		pw.close();

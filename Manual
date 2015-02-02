@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+<html>
+<head>
+ <title>Manual</title>
+</head>
+
+<body>
+	
+<h1>Installation</h1>
+
+<h1>Förberedelser</h1>
+
+<h2>Hur du startar programmet</h2>
+
+<h1>Beskrivning av programmet</h1>
+
+<p>Det här är en manual som beskriver hur man använder Programmet för idrottstävlingar utomhus.
+
+Programmet har funktioner för att registrera tävlingsdeltagare, samt tider vid start och målgång.
+
+Det finns ett användargränssnitt tillgängligt där det är möjligt att som tävlingsfunktionärer registrera start- och måltider.
+
+</p>
+<h2>Format</h2>
+
+<p> Funktionerna för utskrift har följande format: StartNr; Namn; TotalTid; Starttid; Måltid. </p>
+
+<ul>
+<li> Startnr: Individuellt startnummer </li>
+<li> Namn: Namn på tävlande </li>
+<li> TotalTid: Den totala tiden för ett lopp enligt </li>
+<li> StartTid: Starttiden för den tävlande </li>
+<li> Måltid: Tid för målgång för tävlande </li>
+</ul>
+
+
+<p>Ifall tider för start eller mål saknas skrivs "start?" respektive "slut?" ut istället.
+Om något av dessa saknas skrivs "--.--.--" ut istället för en total tid för loppet.
+Om den totala tiden för loppet understiger 15 minuter skrivs istället "Omöjlig totaltid?" ut.
+Om fler än en starttid för en tävlande har registrerats, skrivs "Flera starttider?" ut sist i fältet följt av de övriga starttiderna.
+Motsvarande gäller för flera måltider. </p>
+
+<h2>Registreringsfönster</h2>
+<p> Programmet har ett fönster där tävlingsfunktionärer kan registrera startnummer för en tävlande.
+
+Fönstret har ett fält för manuell inmatning av startnummer, en knapp för att registrera det givna startnumret, samt en logg som visar alla tidigare registrerade tävlande.
+
+Användarfönstret har en rubrik "Registration window".
+
+Knappen för registrering har en grön färg och på den står "Register".
+
+Framför fältet för inmatning av ett startnummer står "Start number:".
+
+Loggen för tidigare registreringar är placerad under fältet för startnummer och registreringsknappen, har en lätt grå bakgrundsfärg och en titel "Registrations".</p> 
+
+<h1>Användarmanual</h1>
+
+<h2>Registrering av ett startnummer</h2>
+
+<ol>  
+<li> Skriv in startnummer i registreringsfältet </li>
+<li> Tryck på "Register" knappen </li>
+<li> Registreringen ska nu ha hamnat i registreringsloggen </li>
+</ol>
+
+<p> Alternativt </p>
+
+<ol>  
+<li> Skriv in startnummer i registreringsfältet </li>
+<li> Tryck på "Enter" tangenten </li>
+<li> Registreringen ska nu ha hamnat i registreringsloggen </li>
+</ol>
+
+
+</body>
+
+</html> 
+

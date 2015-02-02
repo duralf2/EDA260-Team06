@@ -83,9 +83,9 @@ public class RegisterTest {
 				int index = Integer.parseInt(s[0]) - 1;
 				assertEquals(
 						Time.getTotalTime(startTimes[index], finishTimes[index])
-								.toString(), s[2]);
-				assertEquals(startTimes[index].toString(), s[3]);
-				assertEquals(finishTimes[index].toString(), s[4]);
+								.toString(), s[2].trim());
+				assertEquals(startTimes[index].toString(), s[3].trim());
+				assertEquals(finishTimes[index].toString(), s[4].trim());
 			} catch (NumberFormatException e) {
 			}
 			;

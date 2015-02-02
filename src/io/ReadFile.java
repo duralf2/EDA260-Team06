@@ -107,7 +107,7 @@ public class ReadFile {
 		if (contestant == null) {
 			// TODO: Is there a better way? I don't know... Perhaps throw an
 			// exception?
-			contestant = new Contestant("NAME MISSING");
+			contestant = new Contestant("");
 			ds.addContestantEntry(startNr, contestant);
 		}
 		return contestant;

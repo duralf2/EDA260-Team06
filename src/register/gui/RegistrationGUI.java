@@ -1,13 +1,15 @@
 package register.gui;
 
+import io.FileWriter;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-
 import java.io.IOException;
+import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -18,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import register.logic.Register;
+import register.model.Contestant;
+import register.model.Time;
 
 public class RegistrationGUI extends JFrame {
 
@@ -90,15 +94,12 @@ public class RegistrationGUI extends JFrame {
 	
 	public void register() {
 		// TODO: Registrera den inmatade informationen här!
-		String startNumber = startNumberField.getText();
+		String startNumber = startNumberField.getText().trim();
 		if(isNumerical(startNumber)){
 			
 			register.appendToFile(Register.DEFAULT_RESULT_FILE, startNumber);
 			try {
-				register.getDataStructure().clearContestantEntries(); // TODO RegGui; Add the new time directly to the datastructure instead of clearing it and reading it all from a file
-				register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
-				register.readNames(Register.DEFAULT_NAME_FILE);
-				entryTable.update();
+				refreshEntryList();
 
 				if (register.getDataStructure().getContestant(startNumber).getName().equals(""))
 				{
@@ -106,9 +107,27 @@ public class RegistrationGUI extends JFrame {
 				}
 			} catch (IOException ioe) {
 				//TODO: exception handling
+				ioe.printStackTrace();
+			}
+		}
+		else if (startNumber.equals("*"))
+		{
+			register.performMassStart(Register.DEFAULT_RESULT_FILE);
+			try {
+				refreshEntryList();
+			} catch (IOException e) {
+				//TODO: exception handling
+				e.printStackTrace();
 			}
 		}
 		startNumberField.setText("");
+	}
+
+	private void refreshEntryList() throws IOException {
+		register.getDataStructure().clearContestantEntries(); // TODO RegGui; Add the new time directly to the datastructure instead of clearing it and reading it all from a file
+		register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
+		register.readNames(Register.DEFAULT_NAME_FILE);
+		entryTable.update();
 	}
 
 	private boolean isNumerical(String startNumber){

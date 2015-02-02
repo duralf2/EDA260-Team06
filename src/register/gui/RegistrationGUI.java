@@ -25,14 +25,18 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 
+import register.logic.Register;
+
 public class RegistrationGUI extends JFrame {
 
 	private StartNumberField startNumberField;
-
+	private Register register;
 	
-	public RegistrationGUI(String registrationString) {
+	public RegistrationGUI(String registrationString, Register register) {
 		super(registrationString);
 
+		this.register = register;
+		
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		setLayout(gbl);
@@ -94,13 +98,20 @@ public class RegistrationGUI extends JFrame {
 
 	
 	public void register() {
-
 		// TODO: Registrera den inmatade informationen här!
-		
+		String startNumber = startNumberField.getText();
+		if(isNumerical(startNumber)){
+			register.appendToFile(new java.io.File("testfiles/utdata.txt"), startNumber);
+		}
 		startNumberField.setText("");
 	}
 
-	public static void main(String[] args) {
-		RegistrationGUI screen = new RegistrationGUI("Registration window");
+//	public static void main(String[] args) {
+//		RegistrationGUI screen = new RegistrationGUI("Registration window");
+//	}
+
+	private boolean isNumerical(String startNumber){
+		return startNumber.matches("[0-9]+");
 	}
+	
 }

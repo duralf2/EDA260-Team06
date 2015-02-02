@@ -1,5 +1,8 @@
 package register.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class Time{
 	private int hours;
@@ -69,5 +72,13 @@ public class Time{
 			return t.hours == hours && t.minutes == minutes && t.seconds == seconds;
 		}
 		return false;
+	}
+	
+	/**
+	 * @return Get the current system time in HH:mm:ss
+	 */
+	//TODO: check if am/pm
+	public static String getCurrentTime() {
+		return new SimpleDateFormat("HH.mm.ss").format(new Date().getTime());
 	}
 }

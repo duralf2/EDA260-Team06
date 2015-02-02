@@ -66,19 +66,29 @@ public class ReadFile {
 		}
 	}
 
+    public static void readFinishTime(File file, DataStructure ds)
+            throws IOException {
+        readFinishTime(file, ds, new Time("00.00.00"));
+    }
 
-	public static void readFinishTime(File file, DataStructure ds)
+	public static void readFinishTime(File file, DataStructure ds, Time racetime)
 			throws IOException {
 		List<String[]> data = readCSV(file);
 
-		String startNr, time;
+		String startNr;
 		Contestant contestant;
 		//TODO: loop below is almost identical to readStartTime()
 		for (String[] line : data) {
 			startNr = line[0];
-			time = line[1].trim();
+			Time time = new Time(line[1].trim());
 			contestant = getContestant(startNr, ds);
-			contestant.addFinishTime(new Time(time));
+            if(time.compareTo(racetime) <= 0) {
+                // If time is less than racetime, it is a lap
+                contestant.addLapTime(time);
+            } else {
+                // If time is more than racetime, it is a finish time
+                contestant.addFinishTime(time);
+            }
 		}
 	}
 	
@@ -113,9 +123,9 @@ public class ReadFile {
                 contestant.addStartTime(new Time(startTime));
 
             int laps = hasLaps ? Integer.parseInt(line[2].trim()) : 1;
-            for(int i=1; i<maxLaps; i++) {
+            for(int i=1; i <= maxLaps; i++) {
                 String ts = line[startTime_index+i].trim();
-                if(!ts.isEmpty()) {
+                if(!ts.isEmpty() && !ts.contains("?")) {
                     Time t = new Time(ts);
                     contestant.addLapTime(t);
                 }
@@ -124,10 +134,6 @@ public class ReadFile {
 			String finishTime = line[startTime_index+maxLaps].trim();
             if (!(finishTime.contains("?") || finishTime.isEmpty()))
                 contestant.addFinishTime(new Time(finishTime));
-
-            if(laps != contestant.getLapsCompleted()) {
-                System.err.println("laps != laps loaded");
-            }
 
 			ds.addContestantEntry(startNumber, contestant);
 		}

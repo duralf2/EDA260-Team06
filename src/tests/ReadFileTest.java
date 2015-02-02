@@ -28,12 +28,12 @@ public class ReadFileTest {
 
 	
 	@Test(expected=FileNotFoundException.class)
-	public void nonExistingFile() throws IOException{
+	public void nonExistingFile() throws FileNotFoundException, IOException {
 		try{
 			ReadFile.readFinishTime(new File("asd"),ds);
-		}catch (FileNotFoundException e) {
+		}catch (IOException e) {
             throw e;
-           }
+        }
 	}
 	
 	@Test

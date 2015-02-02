@@ -16,9 +16,9 @@ import register.model.Time;
 public class Register {
 	private DataStructure ds;
 	
-	public static final File DEFAULT_RESULT_FILE = new File("testfiles/utdata.txt");
-	public static final File DEFAULT_NAME_FILE   = new File("testfiles/namn.txt");
-
+	public static final File DEFAULT_RESULT_FILE = new File("utdata.txt");
+	public static final File DEFAULT_NAME_FILE   = new File("namn.txt");
+	
 	public Register(DataStructure times) {
 		this.ds = times;
 	}
@@ -68,6 +68,9 @@ public class Register {
 	//TODO: behandla headers i infilen till GUI
 	public void appendToFile(File file, String startNumber) {
 		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
 			PrintWriter pw = new PrintWriter(new BufferedWriter(
 					new java.io.FileWriter(file, true)));
 //			if (writeHeader(file))
@@ -94,8 +97,20 @@ public class Register {
 	public boolean isPreRegisteredTime() {
 		try {
 			List<String[]> data = ReadFile.readCSV(DEFAULT_RESULT_FILE);
-			for(String[] s: data) {
-				if(s[0].equals("x")) {
+			for(String[] line: data) {
+				if(line[0].equals("x")) {
+					data.remove(line);
+					PrintWriter pw = new PrintWriter(new BufferedWriter(
+							new java.io.FileWriter(DEFAULT_RESULT_FILE)));
+					for (String[] t: data) {
+						StringBuilder sb = new StringBuilder();
+						for (String u: t) {
+							sb.append(u).append(';');
+						}
+						sb.deleteCharAt(sb.length() - 1);
+						pw.println(sb.toString());
+					}
+					pw.close();
 					return true;
 				}
 			}
@@ -105,5 +120,10 @@ public class Register {
 		}
 		
 		return false;
+	}
+		
+	public void clear()
+	{
+		ds.getAllContestantEntries().clear();
 	}
 }

@@ -43,19 +43,18 @@ public class EntryList extends JTable {
 		Set<String> keys = entries.keySet();
 		String[] header = { "Startnummer", "Måltid" };
 		List<String[]> rowData = new ArrayList<String[]>();
-		int i = 0;
 		for (String key : keys) {
 			if (entries.get(key).finishTimeSize() > 0) {
+				String currentRow = entries.get(key).getFinishTimes()
+						.toString();
 				String[] row = new String[2];
 				row[0] = key;
-				row[1] = entries.get(key).getFinishTime().toString();
+				row[1] = currentRow.substring(1, currentRow.length() - 1);
 				rowData.add(row);
-				i++;
 			}
 		}
 		DefaultTableModel model = new DefaultTableModel(
 				rowData.toArray(new String[0][0]), header);
 		setModel(model);
-
 	}
 }

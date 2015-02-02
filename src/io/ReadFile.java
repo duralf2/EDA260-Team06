@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.List;
 
 import register.model.Contestant;
@@ -65,6 +66,7 @@ public class ReadFile {
 		}
 	}
 
+
 	public static void readFinishTime(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
@@ -84,23 +86,49 @@ public class ReadFile {
 			throws IOException {
 		List<String[]> data = readCSV(file);
 		// Remove column names
-		data.remove(0);
+		String[] columns = data.remove(0);
+        boolean hasLaps = columns[2].trim().equals("#Varv");
 
-		String startNumber, name, startTime, finishTime;
-		Contestant contestant;
+        int maxLaps = 0;
+        if(hasLaps) {
+            for(String[] line : data) {
+                int laps = Integer.parseInt(line[2].trim());
+                if(laps > maxLaps) maxLaps = laps;
+            }
+        }
+
 		for (String[] line : data) {
-			startNumber = line[0];
-			name = line[1].trim();
-			startTime = line[3].trim();
-			finishTime = line[4].trim();
-			contestant = new Contestant(name);
-			System.out.println(startTime + ";" + finishTime);
-			if (!startTime.equals("Start?")) {
-				contestant.addStartTime(new Time(startTime));
-			}
-			if (!finishTime.equals("Slut?")) {
-				contestant.addFinishTime(new Time(finishTime));
-			}
+            for(int i=0; i<line.length; i++) {
+                line[i] = line[i].trim();
+            }
+            Contestant contestant = new Contestant();
+			String startNumber = line[0];
+			contestant.setName(line[1].trim());
+
+            int totalTime_index = hasLaps ? 3 : 2;
+            int startTime_index = totalTime_index+maxLaps+1;
+
+			String startTime = line[startTime_index].trim();
+            if (!startTime.contains("?") && !startTime.isEmpty())
+                contestant.addStartTime(new Time(startTime));
+
+            int laps = hasLaps ? Integer.parseInt(line[2].trim()) : 1;
+            for(int i=1; i<maxLaps; i++) {
+                String ts = line[startTime_index+i].trim();
+                if(!ts.isEmpty()) {
+                    Time t = new Time(ts);
+                    contestant.addLapTime(t);
+                }
+            }
+
+			String finishTime = line[startTime_index+maxLaps].trim();
+            if (!(finishTime.contains("?") || finishTime.isEmpty()))
+                contestant.addFinishTime(new Time(finishTime));
+
+            if(laps != contestant.getLapsCompleted()) {
+                System.err.println("laps != laps loaded");
+            }
+
 			ds.addContestantEntry(startNumber, contestant);
 		}
 	}

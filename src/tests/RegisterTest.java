@@ -94,4 +94,12 @@ public class RegisterTest {
 		csvParser.close();
 		file.delete();
 	}
+	
+	@Test
+	public void testClear()
+	{
+		register.getDataStructure().addContestantEntry("1", new Contestant("Karl"));
+		register.clear();
+		assertEquals(0, register.getDataStructure().getAllContestantEntries().size());
+	}
 }

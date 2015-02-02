@@ -107,13 +107,16 @@ public class RegistrationGUI extends JFrame {
 				//TODO: exception handling
 			}
 		} else if (startNumber.equals("x")) {
-			register.appendToFile(Register.DEFAULT_RESULT_FILE, startNumber);
-			try {
-				register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
-				entryTable.update();
-			} catch (IOException ioe) {
-				//TODO: exception handling
-			}
+			//if (!register.isPreRegisteredTime()) {
+				System.out.println("no x");
+				register.appendToFile(Register.DEFAULT_RESULT_FILE, startNumber);
+				try {
+					register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
+					entryTable.update();
+				} catch (IOException ioe) {
+					//TODO: exception handling
+				}
+			//}
 		}
 		startNumberField.setText("");
 	}

@@ -87,27 +87,10 @@ public class Time implements Comparable {
     @Override
     public int compareTo(Object o) {
         Time t2 = (Time)o;
-        if(hours > t2.hours) {
-            // t1 is greater than t2
-            return 1;
-        } else if (hours < t2.hours) {
-            // t1 is lesser than t2
-            return -1;
-        } else {
-            if(minutes > t2.minutes) {
-                return 1;
-            } else if (minutes < t2.minutes) {
-                return -1;
-            } else {
-                if(seconds > t2.seconds) {
-                    return 1;
-                } else if (seconds < t2.seconds) {
-                    return -1;
-                } else {
-                    // They are identical
-                    return 0;
-                }
-            }
-        }
+        return totalSeconds() - t2.totalSeconds();
+    }
+    
+    private int totalSeconds(){
+    	return hours * 3600 + minutes * 60 + seconds;
     }
 }

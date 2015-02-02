@@ -54,7 +54,20 @@ public class EntryList extends JTable {
 			}
 		}
 		
-		DefaultTableModel model = new DefaultTableModel(rowData.toArray(new String[0][0]), header);
+		DefaultTableModel model = new NonEditableTableModel(rowData.toArray(new String[0][0]), header);
 		setModel(model);
+	}
+	
+	
+	private class NonEditableTableModel extends DefaultTableModel
+	{
+		public NonEditableTableModel(Object[][] data, Object[] header) {
+			super (data, header);
+		}
+		
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
 	}
 }

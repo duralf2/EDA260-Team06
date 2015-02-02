@@ -35,27 +35,27 @@ public class TimeTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetTotalTimeNegativeTime() {
+	public void testGetTotalTimeNegativeTime() throws IllegalArgumentException {
 		Time.getTotalTime(t1, t3);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidConstructorParameters() {
+	public void testInvalidConstructorParameters() throws IllegalArgumentException {
 		new Time("isdjf");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testWrongNumbers() {
+	public void testWrongNumbers() throws IllegalArgumentException {
 		new Time("11.64.77");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testWrongHours() {
+	public void testWrongHours() throws IllegalArgumentException {
 		new Time("100.55.34");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testWrongFormat() {
+	public void testWrongFormat() throws IllegalArgumentException {
 		new Time("2.3.49");
 	}
 
@@ -79,6 +79,10 @@ public class TimeTest {
 
         t1 = new Time("12.12.05");
         t2 = new Time("13.02.02");
-        assertTrue(t1.compareTo(t2) == -1);
+        assertTrue(t1.compareTo(t2) < 0);
+        
+        t2 = new Time("12.12.05");
+        t1 = new Time("13.02.02");
+        assertTrue(t1.compareTo(t2) > 0);
     }
 }

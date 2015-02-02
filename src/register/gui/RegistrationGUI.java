@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-
 import java.io.IOException;
 
 import javax.swing.JButton;

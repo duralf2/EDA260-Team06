@@ -70,4 +70,19 @@ public class TimeTest {
 		String st = "12.01.12";
 		assertFalse(new Time(st).equals(null));
 	}
+
+    @Test
+    public void testCompare() {
+        Time t1 = new Time("12.01.01");
+        Time t2 = new Time("12.01.01");
+        assertTrue(t1.compareTo(t2) == 0);
+
+        t1 = new Time("12.12.05");
+        t2 = new Time("13.02.02");
+        assertTrue(t1.compareTo(t2) < 0);
+        
+        t2 = new Time("12.12.05");
+        t1 = new Time("13.02.02");
+        assertTrue(t1.compareTo(t2) > 0);
+    }
 }

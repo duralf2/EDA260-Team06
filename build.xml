@@ -10,9 +10,11 @@
 	<target name="clean" description="Destroys all previously generated files and dirs.">
 		<delete dir="build" />
 		<delete dir="testreports" />
+        <delete dir="bin" />
 	</target>
 
 	<target name="compile">
+        <mkdir dir="bin" />
 		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath"/>
 	</target>
 

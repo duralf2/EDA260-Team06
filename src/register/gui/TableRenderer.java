@@ -10,25 +10,28 @@ import register.model.Contestant;
 import register.model.DataStructure;
 
 public class TableRenderer extends DefaultTableCellRenderer {
-	
+
 	private DataStructure data;
-	
+
 	public TableRenderer(DataStructure data) {
 		this.data = data;
 	}
-	
+
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
-		Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus,
-				row, column);
-		
-		Contestant contestant = data.getContestant((String)value);
-		if (column == 0 && (contestant == null || contestant.getName().equals("")))
+		Component component = super.getTableCellRendererComponent(table, value,
+				isSelected, hasFocus, row, column);
+
+		Contestant contestant = data.getContestant((String) value);
+		if (((String) value).equals("x"))
+			component.setBackground(new Color(20,230,230));
+		else if (column == 0
+				&& (contestant == null || contestant.getName().equals("")))
 			component.setBackground(Color.PINK);
 		else
 			component.setBackground(table.getBackground());
-		
+
 		return component;
 	}
 }

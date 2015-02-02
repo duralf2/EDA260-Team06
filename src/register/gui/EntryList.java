@@ -15,9 +15,9 @@ import register.model.Contestant;
 import register.model.DataStructure;
 
 public class EntryList extends JTable {
-	
+
 	private DataStructure ds;
-	
+
 	public EntryList(int fontSize, register.logic.Register register) {
 		super(1, 2);
 		this.ds = register.getDataStructure();
@@ -27,26 +27,25 @@ public class EntryList extends JTable {
 		setRowHeight(fontSize);
 		setOpaque(true);
 		setToolTipText("Old registrations.");
-		
+
 		try {
 			register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
 			register.readNames(Register.DEFAULT_NAME_FILE);
 		} catch (IOException e) {
-			//TODO: exception handling
+			// TODO: exception handling
 		}
 		update();
 	}
-	
+
 	// TODO:
-	public void update(){
+	public void update() {
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		Set<String> keys = entries.keySet();
-		String[] header = {"Startnummer", "Måltid"};
+		String[] header = { "Startnummer", "Måltid" };
 		List<String[]> rowData = new ArrayList<String[]>();
 		int i = 0;
 		for (String key : keys) {
-			if (entries.get(key).finishTimeSize() > 0)
-			{
+			if (entries.get(key).finishTimeSize() > 0) {
 				String[] row = new String[2];
 				row[0] = key;
 				row[1] = entries.get(key).getFinishTime().toString();
@@ -54,8 +53,9 @@ public class EntryList extends JTable {
 				i++;
 			}
 		}
-		DefaultTableModel model = new DefaultTableModel(rowData.toArray(new String[0][0]), header);
+		DefaultTableModel model = new DefaultTableModel(
+				rowData.toArray(new String[0][0]), header);
 		setModel(model);
-		
+
 	}
 }

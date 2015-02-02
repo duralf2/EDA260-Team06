@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import register.model.DataStructure;
 import register.model.Time;
@@ -88,5 +89,21 @@ public class Register {
 	 */
 	public DataStructure getDataStructure() {
 		return ds;
+	}
+	
+	public boolean isPreRegisteredTime() {
+		try {
+			List<String[]> data = ReadFile.readCSV(DEFAULT_RESULT_FILE);
+			for(String[] s: data) {
+				if(s[0].equals("x")) {
+					return true;
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 }

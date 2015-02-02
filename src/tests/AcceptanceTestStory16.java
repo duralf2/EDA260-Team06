@@ -33,7 +33,7 @@ public class AcceptanceTestStory16 {
 
 	@After
 	public void tearDown() {
-		// outfile.delete();
+		 outfile.delete();
 	}
 
 	@Test
@@ -52,6 +52,7 @@ public class AcceptanceTestStory16 {
 		
 		assertTrue(true);
 //		assertEquals(acceptenceResult, printedResult);
+		// TODO Fix acceptance test 16 when story 9 is done
 	}
 
 	private String readFileAsString(File file) throws IOException {

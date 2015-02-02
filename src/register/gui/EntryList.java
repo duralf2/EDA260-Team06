@@ -19,14 +19,17 @@ public class EntryList extends JTable {
 	
 	public EntryList(int fontSize, register.logic.Register register) {
 		super(1, 2);
+		this.ds = register.getDataStructure();
+		setDefaultRenderer(Object.class, new TableRenderer(ds));
 		setFillsViewportHeight(true);
 		setFont(new Font("Arial", Font.BOLD, fontSize));
 		setRowHeight(fontSize);
 		setOpaque(true);
 		setToolTipText("Old registrations.");
-		this.ds = register.getDataStructure();
+		
 		try {
 			register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
+//			register.readNames(names); // TODO Read a name file here!
 		} catch (IOException e) {
 			//TODO: exception handling
 		}

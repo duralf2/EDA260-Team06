@@ -94,7 +94,7 @@ public class RegistrationGUI extends JFrame {
 	
 	public void register() {
 		// TODO: Registrera den inmatade informationen här!
-		String startNumber = startNumberField.getText();
+		String startNumber = startNumberField.getText().trim();
 		if(isNumerical(startNumber)){
 			
 			register.appendToFile(Register.DEFAULT_RESULT_FILE, startNumber);

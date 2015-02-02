@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
-
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -96,6 +95,7 @@ public class RegistrationGUI extends JFrame {
 			
 			register.appendToFile(Register.DEFAULT_RESULT_FILE, startNumber);
 			try {
+				register.clear();
 				register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
 				entryTable.update();
 

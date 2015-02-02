@@ -3,6 +3,7 @@
 .gradle
 bin/
 tmp/
+out/
 docs/api/
 *.zip
 *.tmp

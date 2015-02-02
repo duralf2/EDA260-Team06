@@ -1,24 +1,42 @@
 
 package register.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
-import java.util.ArrayList;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
 
 public class RegistrationGUI extends JFrame
-{
+{	
+	private static final long serialVersionUID = -307826388596514302L;
+
 	private String registerText;
 
-	
-	public static void main(String[] args)
-	{
-		RegistrationGUI screen = new RegistrationGUI("Registration window");
-	}
+	private JTextField nameField;
+
+	private JTextField startTimeField;
+
+	private JTextField finishTimeField;
+
+	private JTextField startNumberField;
+
 	
 	public RegistrationGUI(String registrationString)
 	{
@@ -26,7 +44,40 @@ public class RegistrationGUI extends JFrame
 		addGUIComponents();
 	}
 	
-	public JPanel addButtonAndFields()
+	private void addGUIComponents()
+	{
+		Container c = (Container)getContentPane();
+		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
+		
+		
+		c.setBackground(new Color(243,243,243));
+		JPanel leftPanel = new JPanel();
+		JPanel rightPanel = new JPanel();
+		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
+		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
+		c.add(leftPanel);
+		c.add(new JSeparator(JSeparator.VERTICAL),BorderLayout.LINE_START);
+		c.add(rightPanel);
+		
+		JScrollPane entryList = new JScrollPane();
+		rightPanel.add(entryList);
+		entryList.setOpaque(true);
+		entryList.setPreferredSize(new Dimension(800, 10));
+		entryList.getViewport().setBackground(new Color(173, 193, 214));
+		entryList.setBorder(new TitledBorder("REGISTRATIONS"));
+		entryList.setToolTipText("Old registrations.");
+		entryList.setFont(new Font("MyriadPro", Font.PLAIN, fontSize()/5));
+		
+		leftPanel.add(addButtonAndFields());
+		
+		pack();
+		
+		setExtendedState(MAXIMIZED_BOTH);
+		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+
+	private JPanel addButtonAndFields()
 	{
 		int fontSize = fontSize();
 		
@@ -41,14 +92,14 @@ public class RegistrationGUI extends JFrame
 		
 		JLabel startNumberLabel = new JLabel("Start number:");
 		startNumberLabel.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
-		JTextField startNumberField = new JTextField(registerText);
+		startNumberField = new JTextField(registerText);
 		startNumberField.setToolTipText("Input start number.");
 		startNumberField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		startNumberField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
 		
 		JLabel nameLabel = new JLabel("Contestant name:");
 		nameLabel.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
-		final JTextField nameField = new JTextField(registerText);
+		nameField = new JTextField(registerText);
 		nameField.setToolTipText("Input contestant name.");
 		nameField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		nameField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
@@ -56,14 +107,14 @@ public class RegistrationGUI extends JFrame
 		
 		JLabel startTimeLabel = new JLabel("Start time:");
 		startTimeLabel.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
-		final JTextField startTimeField = new JTextField(registerText);
+		startTimeField = new JTextField(registerText);
 		startTimeField.setToolTipText("Input start time.");
 		startTimeField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		startTimeField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
 		
 		JLabel finishTimeLabel = new JLabel("Finish time:");
 		finishTimeLabel.setFont(new Font("MyriadPro", Font.BOLD, fontSize));
-		final JTextField finishTimeField = new JTextField(registerText);
+		finishTimeField = new JTextField(registerText);
 		finishTimeField.setToolTipText("Input finish number.");
 		finishTimeField.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		finishTimeField.setFont(new Font("MyriadPro", Font.PLAIN, fontSize));
@@ -101,19 +152,15 @@ public class RegistrationGUI extends JFrame
 		finishTimeField.addActionListener(new ActionListener() {
 			   @Override
 			    public void actionPerformed(ActionEvent e) {
-				   registerButton.requestFocusInWindow(); 
+				   register();
 			    }
 			});
 	
 		registerButton.addActionListener(new ActionListener(){
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				startTimeField.setText("OK");
-				
+				register();
 			}
-			
-			
 		});
 		
 		panelTop.add(startNumberLabel);
@@ -130,42 +177,7 @@ public class RegistrationGUI extends JFrame
 		return panel;
 	}
 	
-	public void addGUIComponents()
-	{
-		
-		Container c = (Container)getContentPane();
-		c.setLayout(new BoxLayout(c, BoxLayout.X_AXIS));
-		
-		
-		c.setBackground(new Color(243,243,243));
-		JPanel leftPanel = new JPanel();
-		JPanel rightPanel = new JPanel();
-		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
-		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
-		c.add(leftPanel);
-		c.add(new JSeparator(JSeparator.VERTICAL),BorderLayout.LINE_START);
-		c.add(rightPanel);
-		
-		JScrollPane entryList = new JScrollPane();
-		rightPanel.add(entryList);
-		entryList.setOpaque(true);
-		entryList.setPreferredSize(new Dimension(800, 1000));
-		entryList.getViewport().setBackground(new Color(173, 193, 214));
-		entryList.setBorder(new TitledBorder("REGISTRATIONS"));
-		entryList.setToolTipText("Old registrations.");
-		entryList.setFont(new Font("MyriadPro", Font.PLAIN, fontSize()/5));
-		
-		leftPanel.add(addButtonAndFields());
-		
-		pack();
-		System.out.println(	getGraphicsConfiguration());
-		System.out.println(c.getWidth());
-		getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
-		this.setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
-	
-	public int fontSize(){
+	private int fontSize() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
 		int taskBarSize = scnMax.bottom;
@@ -173,5 +185,20 @@ public class RegistrationGUI extends JFrame
 		return fontSize;
 	}
 	
-	private static final long serialVersionUID = -307826388596514302L;
+
+	private void register() {
+		
+		// TODO RegistrationGUI; Registrera den inmatade informationen här!
+		
+		startNumberField.setText("");
+		nameField.setText("");
+		startTimeField.setText("");
+		finishTimeField.setText("");
+	}
+
+	
+	public static void main(String[] args)
+	{
+		RegistrationGUI screen = new RegistrationGUI("Registration window");
+	}
 }

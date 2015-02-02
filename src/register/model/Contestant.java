@@ -17,18 +17,8 @@ public class Contestant {
 		finishTime = new LinkedList<Time>();
 	}
 
-	// TODO Remove - Replaced by addStartTime?
-	public void setStartTime(Time time) {
-		startTime.add(0, time);
-	}
-
 	public void addStartTime(Time time) {
 		startTime.add(time);
-	}
-
-	// TODO Remove - Replaced by addFinishTime?
-	public void setFinishTime(Time time) {
-		finishTime.add(0, time);
 	}
 
 	public void addFinishTime(Time time) {

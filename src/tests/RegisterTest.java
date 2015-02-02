@@ -52,10 +52,10 @@ public class RegisterTest {
 	}
 
 	@Test
-	public void testReadGoalTimes() throws IOException {
+	public void testReadFinishTimes() throws IOException {
 		File goal = new File(
 				"testfiles/acceptanstest/acceptanstest3/maltider.txt");
-		register.readGoalTimes(goal);
+		register.readFinishTimes(goal);
 		for (String startNumber : entries.keySet()) {
 			int index = Integer.parseInt(startNumber) - 1;
 			assertEquals(finishTimes[index], entries.get(startNumber).getFinishTime());
@@ -66,8 +66,8 @@ public class RegisterTest {
 	public void testWriteResultNoSort() throws IOException {
 		for (int i = 0; i < startTimes.length; i++) {
 			Contestant c = new Contestant("TestContestant " + 1);
-			c.setStartTime(startTimes[i]);
-			c.setFinishTime(finishTimes[i]);
+			c.addStartTime(startTimes[i]);
+			c.addFinishTime(finishTimes[i]);
 			ds.addContestantEntry(Integer.toString((i + 1)), c);
 		}
 		File file = new File("testNoSort.txt");

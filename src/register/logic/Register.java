@@ -1,6 +1,6 @@
 package register.logic;
 
-import io.IOHandler;
+import io.FileWriter;
 import io.ReadFile;
 
 import java.io.File;
@@ -28,10 +28,10 @@ public class Register {
 
 	public void readGoalTimes() throws IOException {
 		File goalTimes = new File("maltider.txt");
-		readGoalTimes(goalTimes);
+		readFinishTimes(goalTimes);
 	}
 
-	public void readGoalTimes(File goalTimes) throws IOException {
+	public void readFinishTimes(File goalTimes) throws IOException {
 		ReadFile.readFinishTime(goalTimes, ds);
 	}
 
@@ -43,7 +43,7 @@ public class Register {
 	public void writeResult(File result) {
 		try {
 			PrintWriter pw = new PrintWriter(result);
-			IOHandler.writeResult(pw, ds);
+			FileWriter.writeResult(pw, ds);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

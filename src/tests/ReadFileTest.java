@@ -44,7 +44,7 @@ public class ReadFileTest {
 	}
 	
 	@Test
-	public void readEndFile() throws IOException {
+	public void readFinishFile() throws IOException {
 		ReadFile.readFinishTime(new File("testfiles/acceptanstest/acceptanstest3/maltider.txt"), ds);
 		Contestant contestant = ds.getContestant("1");
 		assertEquals("13.23.34",contestant.getFinishTime().toString());

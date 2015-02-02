@@ -31,8 +31,8 @@ public class ContestantTest {
 
 	@Test
 	public void testSetTime() {
-		contestant.setStartTime(startTime);
-		contestant.setFinishTime(finishTime);
+		contestant.addStartTime(startTime);
+		contestant.addFinishTime(finishTime);
 		assertEquals(contestant.getStartTime(), startTime);
 		assertEquals(contestant.getFinishTime(), finishTime);
 	}
@@ -46,8 +46,8 @@ public class ContestantTest {
 	
 	@Test
 	public void testTotalTime() {
-		contestant.setStartTime(startTime);
-		contestant.setFinishTime(finishTime);
+		contestant.addStartTime(startTime);
+		contestant.addFinishTime(finishTime);
 		assertEquals("00.00.02", contestant.getTotalTime());
 	}
 

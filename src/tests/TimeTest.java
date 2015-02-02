@@ -10,11 +10,13 @@ import register.model.Time;
 public class TimeTest {
 	private Time t1;
 	private Time t2;
+	private Time t3;
 
 	@Before
 	public void setUp() throws Exception {
 		t1 = new Time("10.15.34");
 		t2 = new Time("12.14.39");
+		t3 = new Time("09.12.31");
 	}
 
 	@Test
@@ -31,6 +33,12 @@ public class TimeTest {
 	public void testGetTotalTime() {
 		assertEquals("01.59.05", Time.getTotalTime(t1, t2));
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testGetTotalTimeNegativeTime(){
+		Time.getTotalTime(t1, t3);
+	}
+	
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testInvalidConstructorParameters() {

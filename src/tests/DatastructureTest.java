@@ -15,16 +15,16 @@ import register.model.Time;
 
 public class DatastructureTest {
 
-	private DataStructure data;
+	private DataStructure ds;
 
 	@Before
 	public void setUp() throws Exception {
-		data = new DataStructure();
+		ds = new DataStructure();
 	}
 
 	@After
 	public void tearDown() {
-		data = null;
+		ds = null;
 	}
 
 	@Test
@@ -32,11 +32,11 @@ public class DatastructureTest {
 		Contestant contestant1 = new Contestant("Name1");
 		Contestant contestant2 = new Contestant("Name2");
 		Contestant contestant3 = new Contestant("Name3");
-		data.addContestantEntry("1", contestant1);
-		data.addContestantEntry("2", contestant2);
-		data.addContestantEntry("3", contestant3);
+		ds.addContestantEntry("1", contestant1);
+		ds.addContestantEntry("2", contestant2);
+		ds.addContestantEntry("3", contestant3);
 
-		Map<String, Contestant> entries = data.getAllContestantEntries();
+		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		assertTrue(entries.get("1").equals(contestant1));
 		assertTrue(entries.get("2").equals(contestant2));
 		assertTrue(entries.get("3").equals(contestant3));
@@ -46,31 +46,31 @@ public class DatastructureTest {
 	@Test
 	public void testAddContestantEntry() {
 		Contestant contestant = new Contestant("Karl");
-		data.addContestantEntry("1", contestant);
-		assertEquals(contestant, data.getContestant("1"));
+		ds.addContestantEntry("1", contestant);
+		assertEquals(contestant, ds.getContestant("1"));
 	}
 
 	@Test
 	public void testContestantColumnNames() {
 		String[] columns = new String[] {"c1", "c2", "c3"};
-		data.setContestantColumnNames(columns);
-		assertTrue(columns.equals(data.getContestantColumnNames()));
+		ds.setContestantColumnNames(columns);
+		assertTrue(columns.equals(ds.getContestantColumnNames()));
 	}
 
 	@Test
 	public void testEquals() {
 		DataStructure ds2 = new DataStructure();
 		Contestant contestant = new Contestant("Testname");
-		contestant.setStartTime(new Time("12.00.00"));
+		contestant.addStartTime(new Time("12.00.00"));
 		ds2.addContestantEntry("1", contestant);
-		data.addContestantEntry("1", contestant);
+		ds.addContestantEntry("1", contestant);
 
-		assertTrue(data.equals(ds2));
+		assertTrue(ds.equals(ds2));
 	}
 
 	@Test
 	public void testEqualsNotDatastructure() {
-		assertFalse(data.equals(new Scanner(System.in)));
+		assertFalse(ds.equals(new Scanner(System.in)));
 	}
 
 }

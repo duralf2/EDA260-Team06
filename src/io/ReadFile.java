@@ -41,11 +41,11 @@ public class ReadFile {
 	}
 
 	private static void readContestantColumns(DataStructure ds,
-			String[] contestantColums) {
-		for (int i = 0; i < contestantColums.length; i++) {
-			contestantColums[i] = contestantColums[i].trim();
+			String[] contestantColumns) {
+		for (int i = 0; i < contestantColumns.length; i++) {
+			contestantColumns[i] = contestantColumns[i].trim();
 		}
-		ds.setContestantColumnNames(contestantColums);
+		ds.setContestantColumnNames(contestantColumns);
 	}
 
 	public static void readStartTime(File file, DataStructure ds)
@@ -58,7 +58,7 @@ public class ReadFile {
 			startNr = line[0];
 			time = line[1].trim();
 			contestant = getContestant(startNr, ds);
-			contestant.setStartTime(new Time(time));
+			contestant.addStartTime(new Time(time));
 		}
 	}
 
@@ -73,7 +73,7 @@ public class ReadFile {
 			startNr = line[0];
 			time = line[1].trim();
 			contestant = getContestant(startNr, ds);
-			contestant.setFinishTime(new Time(time));
+			contestant.addFinishTime(new Time(time));
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class ReadFile {
 		// Remove column names
 		data.remove(0);
 
-		String startNumber, name, totalTime, startTime, finishTime;
+		String startNumber, name, startTime, finishTime;
 		Contestant contestant;
 		for (String[] line : data) {
 			startNumber = line[0];
@@ -93,10 +93,10 @@ public class ReadFile {
 			contestant = new Contestant(name);
 			System.out.println(startTime + ";" + finishTime);
 			if (!startTime.equals("Start?")) {
-				contestant.setStartTime(new Time(startTime));
+				contestant.addStartTime(new Time(startTime));
 			}
 			if (!finishTime.equals("Slut?")) {
-				contestant.setFinishTime(new Time(finishTime));
+				contestant.addFinishTime(new Time(finishTime));
 			}
 			ds.addContestantEntry(startNumber, contestant);
 		}

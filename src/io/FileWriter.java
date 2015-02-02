@@ -176,42 +176,4 @@ public class FileWriter {
 		}
 		return impossible;
 	}
-
-	public static void writeStartTimes(PrintWriter pw, DataStructure ds) {
-		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		Contestant contestant;
-		StringBuilder sb = new StringBuilder();
-		for (String s : entries.keySet()) {
-			sb.append(s + ";");
-			contestant = entries.get(s);
-			if(contestant.startTimeSize() == 0)
-				sb.append("Start?" + ";");
-			else{
-			sb.append(contestant.getStartTime());
-			checkMultipleTimesStart(contestant,sb);
-			}
-			sb.append("\n");
-		}
-		pw.write(sb.toString());
-		pw.close();
-	}
-
-	public static void writeFinishTimes(PrintWriter pw, DataStructure ds) {
-		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		StringBuilder sb = new StringBuilder();
-		Contestant contestant;
-		for (String s : entries.keySet()) {
-			sb.append(s + ";");
-			contestant = entries.get(s);
-			if(contestant.startTimeSize() == 0)
-				sb.append("Start?" + ";");
-			else{
-			sb.append(contestant.getFinishTime());
-			checkMultipleTimesStart(contestant,sb);
-			}
-			sb.append("\n");
-		}
-		pw.write(sb.toString());
-		pw.close();
-	}
 }

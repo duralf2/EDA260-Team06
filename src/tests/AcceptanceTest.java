@@ -46,7 +46,7 @@ public class AcceptanceTest extends TestCase {
 
 	@After
 	public void tearDown() {
-		//outfile.delete();
+		outfile.delete();
 	}
 
 	@Test

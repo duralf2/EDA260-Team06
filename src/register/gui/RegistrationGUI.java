@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
@@ -92,10 +93,16 @@ public class RegistrationGUI extends JFrame {
 		// TODO: Registrera den inmatade informationen här!
 		String startNumber = startNumberField.getText();
 		if(isNumerical(startNumber)){
+			
 			register.appendToFile(Register.DEFAULT_RESULT_FILE, startNumber);
 			try {
 				register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
 				entryTable.update();
+
+				if (register.getDataStructure().getContestant(startNumber).getName().equals(""))
+				{
+					JOptionPane.showMessageDialog(this, "The start number doesn't exist: "+startNumber, "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			} catch (IOException ioe) {
 				//TODO: exception handling
 			}

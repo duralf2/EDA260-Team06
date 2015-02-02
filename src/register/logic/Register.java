@@ -39,6 +39,7 @@ public class Register {
 			ReadFile.readNames(names, ds);
 		}
 	}
+
 	
 	public Time preRegisterTime() {
 		return ds.preRegisterTime();
@@ -48,7 +49,6 @@ public class Register {
 		return ds.removePreRegisteredTime();
 	}
 
-	
 
 	public void writeResult() {
 		File result = new File("resultat.txt");

@@ -16,6 +16,7 @@ public class Register {
 	private DataStructure ds;
 	
 	public static final File DEFAULT_RESULT_FILE = new File("testfiles/utdata.txt");
+	public static final File DEFAULT_NAME_FILE   = new File("testfiles/namn.txt");
 
 	public Register(DataStructure times) {
 		this.ds = times;

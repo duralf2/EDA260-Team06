@@ -45,8 +45,6 @@ public class EntryList extends JTable {
 		List<String[]> rowData = new ArrayList<String[]>();
 		int i = 0;
 		for (String key : keys) {
-			System.out.println("k: " + key);
-			System.out.println(entries.get(key).finishTimeSize());
 			if (entries.get(key).finishTimeSize() > 0)
 			{
 				String[] row = new String[2];

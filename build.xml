@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Enduro.makejar" default="main" basedir=".">  <!--Starts script at main-->
+<project name="Enduro.makejar" default="main" basedir=".">
+	<!--Starts script at main-->
+	
+	<path id="classpath">
+		<fileset dir="lib/" includes="**/*.jar" />
+	</path>
+
 
 	<target name="clean" description="Destroys all previously generated files and dirs.">
 		<delete dir="build" />
@@ -7,19 +13,22 @@
 	</target>
 
 	<target name="compile">
-		<javac srcdir="src" destdir="bin" includeAntRuntime="true" />
+		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath"/>
 	</target>
 
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
 		<jar destfile="build/jar/programme.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="sorter.SorterMain" /> <!--Sets the main class of the program -->
+				<attribute name="Main-Class" value="sorter.SorterMain" />
+				<!--Sets the main class of the program -->
 			</manifest>
+			<zipgroupfileset dir="lib/" includes="**/*.jar" />
 		</jar>
 	</target>
 
-	<target name="main" depends="clean,jar,test" />  <!--Runs clean, jar and test in order-->
+	<target name="main" depends="clean,jar,test" />
+	<!--Runs clean, jar and test in order-->
 
 	<target name="testreports">
 
@@ -41,12 +50,13 @@
 				</fileset>
 			</batchtest>
 		</junit>
-		
-		<junitreport todir="testreports"> <!--Merge test results into one file (TestSuites.xml)-->
-	            <fileset dir="testreports">
-	                    <include name="TEST-*.xml" />
-	            </fileset>
-	    </junitreport>
+
+		<junitreport todir="testreports">
+			<!--Merge test results into one file (TestSuites.xml)-->
+			<fileset dir="testreports">
+				<include name="TEST-*.xml" />
+			</fileset>
+		</junitreport>
 
 	</target>
 

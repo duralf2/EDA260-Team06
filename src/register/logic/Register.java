@@ -15,9 +15,9 @@ import register.model.Time;
 public class Register {
 	private DataStructure ds;
 	
-	public static final File DEFAULT_RESULT_FILE = new File("testfiles/utdata.txt");
-	public static final File DEFAULT_NAME_FILE   = new File("testfiles/namn.txt");
-
+	public static final File DEFAULT_RESULT_FILE = new File("utdata.txt");
+	public static final File DEFAULT_NAME_FILE   = new File("namn.txt");
+	
 	public Register(DataStructure times) {
 		this.ds = times;
 	}
@@ -67,6 +67,9 @@ public class Register {
 	//TODO: behandla headers i infilen till GUI
 	public void appendToFile(File file, String startNumber) {
 		try {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
 			PrintWriter pw = new PrintWriter(new BufferedWriter(
 					new java.io.FileWriter(file, true)));
 //			if (writeHeader(file))
@@ -88,5 +91,10 @@ public class Register {
 	 */
 	public DataStructure getDataStructure() {
 		return ds;
+	}
+	
+	public void clear()
+	{
+		ds.getAllContestantEntries().clear();
 	}
 }

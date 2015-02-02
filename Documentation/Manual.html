@@ -8,19 +8,22 @@
 <body>
 	
 <h1>Installation</h1>
-
 <ol>
-<li> Öppna terminalfönstret på datorn och navigera dig till mappen "programme.jar". </li>
+<li> Öppna terminalfönstret på datorn och navigera dig till mappen "programme.jar" </li>
 <li> Starta programmet genom att köra "java -jar programme.jar" </li>
 <li> Grattis! Programmet ska nu fungera och det är bara att börja registrera tider </li>
 </ol>
 
 <h1>Förberedelser</h1>
+<p> Programmet har som helhet inte behov av att tilldelas särskilt mycket externt information från användaren.
+Det som en användare framför allt kan använda programmet till är att manuellt mata in startnummer till deltagare i registreringsfönstret.
+I användargränssnittet är det möjligt att skriva in startnummer för deltagare i en given tävling. Varje startnummer kommer att kollas mot en deltagarlista som måste finnas givet i programmet.
+Deltagarlistan är en textfil med startnumemr och namn på de tävlande. För tillfället är vår deltagarlista en fix textfil med påhittade deltagare.
 
-
+</p>
 
 <h2>Hur du startar programmet</h2>
-<p>Dubbelklicka på "Filnamn" för att starta programmet.</p>
+<p>Dubbelklicka på programme.jar för att starta programmet.</p>
 
 
 <h1>Beskrivning av programmet</h1>
@@ -47,7 +50,13 @@ Det finns ett användargränssnitt tillgängligt där det är möjligt att som t
 <li> Måltid: Tid för målgång för tävlande </li>
 </ul>
 
-<p>Ifall tider för start eller mål saknas skrivs "start?" respektive "slut?" ut istället. Om något av dessa saknas skrivs "--.--.--" ut istället för en total tid för loppet. Om den totala tiden för loppet understiger 15 minuter skrivs istället "Omöjlig totaltid?" ut. Om fler än en starttid för en tävlande har registrerats, skrivs "Flera starttider?" ut sist i fältet följt av de övriga starttiderna. Motsvarande gäller för flera måltider. </p>
+<p>Ifall tider för start eller mål saknas skrivs "start?" respektive "slut?" ut istället.
+Om något av dessa saknas skrivs "--.--.--" ut istället för en total tid för loppet.
+Om den totala tiden för loppet understiger 15 minuter skrivs istället "Omöjlig totaltid?" ut.
+Om fler än en starttid för en tävlande har registrerats, skrivs "Flera starttider?" ut sist i fältet följt av de övriga starttiderna. Motsvarande gäller för flera måltider.
+I det fall då ett registrerat startnummer inte kan matchas med en deltagare från den givna deltagarlistan, markeras registreringen med rött i registreringsloggen i användarfönstret.
+Ett felmeddelande ges även för varje okänt registrerat startnummer.
+</p>
 
 
 <h2>Registreringsfönster</h2>
@@ -63,7 +72,7 @@ Framför fältet för inmatning av ett startnummer står "Start number:".
 
 Loggen för tidigare registreringar är placerad under fältet för startnummer och registreringsknappen, samt en titel "Registrations".
 
-I fältet finns två tabeller, en för startnummer och en för tidpunkt vid registrering. De två tabellerna har varsin titel: "Startnummer" samt "Tid".</p> 
+I fältet finns två tabeller, en för startnummer och en för tidpunkt vid registrering. De två tabellerna har varsin titel: "Start number" samt "Time".</p> 
 
 <h1>Användarmanual</h1>
 

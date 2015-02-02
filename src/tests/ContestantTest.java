@@ -85,4 +85,14 @@ public class ContestantTest {
 		assertEquals(startTime, finish.get(0));
 		assertEquals(t, finish.get(1));
 	}
+
+    @Test
+    public void testGetlapTimes() {
+        Time t = new Time("00.00.02");
+        contestant.addLapTime(startTime);
+        contestant.addLapTime(t);
+        LinkedList<Time> lap = contestant.getLapTimes();
+        assertEquals(startTime, lap.get(0));
+        assertEquals(t, lap.get(1));
+    }
 }

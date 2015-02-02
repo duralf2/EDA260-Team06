@@ -35,7 +35,7 @@ public class DataStructure {
 	
 	public void preRegisterTime() {
 		//TODO: change when time registration is implemented. (system time dependent, notify gui)
-		preRegisteredTime = new Time("00.00.00");
+		preRegisteredTime = new Time(Time.getCurrentTime());
 	}
 	
 	public Time removePreRegisteredTime() {

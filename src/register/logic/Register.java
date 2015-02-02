@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import register.model.DataStructure;
 import register.model.Time;
@@ -18,6 +16,7 @@ public class Register {
 	private DataStructure ds;
 	
 	public static final File DEFAULT_RESULT_FILE = new File("testfiles/utdata.txt");
+	public static final File DEFAULT_NAME_FILE   = new File("testfiles/namn.txt");
 
 	public Register(DataStructure times) {
 		this.ds = times;
@@ -34,6 +33,14 @@ public class Register {
 			ReadFile.readFinishTime(goalTimes, ds);
 		}
 	}
+	
+	public void readNames(File names) throws IOException {
+		if (names.isFile()) {
+			ReadFile.readNames(names, ds);
+		}
+	}
+
+	
 
 	public void writeResult() {
 		File result = new File("resultat.txt");

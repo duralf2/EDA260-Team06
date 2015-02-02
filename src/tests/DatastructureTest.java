@@ -74,16 +74,13 @@ public class DatastructureTest {
 	}
 	
 	@Test
-	public void testGetPreRegisteredTime() {
-		// TODO Update when preRegisterTime is implemented
-		ds.preRegisterTime();
-		
-	}
-	
-	@Test
 	public void testRemovePreRegisteredTime() {
 		ds.preRegisterTime();
-		assertEquals(new Time("00.00.00"), ds.removePreRegisteredTime());
+		Time diff = Time.getTotalTime(ds.removePreRegisteredTime(), new Time(Time.getCurrentTime()));
+		char digit = diff.toString().charAt(diff.toString().length() - 1);
+		if (digit != '0' && digit != '1') {
+			fail();
+		}
 		assertNull(ds.removePreRegisteredTime());
 	}
 

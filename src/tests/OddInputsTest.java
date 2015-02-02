@@ -43,14 +43,14 @@ public class OddInputsTest {
 		f.delete();
 	}
 
-	/*@Test
-	public void testNoStartTime(){
+	@Test
+	public void testNoStartTime() throws FileNotFoundException{
 		Contestant contestant = new Contestant("Göran");
 		contestant.addFinishTime(new Time("13.23.34"));
 		ds.addContestantEntry("1", contestant);
 		FileWriter.writeResult(pw, ds);
 		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1; Göran; --.--.--; Start?; 13.23.34", sc.next());
+		assertEquals("1; Göran; --.--.--; Start?; 13.23.34", sc.nextLine());
 	}
 	
 	@Test
@@ -60,8 +60,8 @@ public class OddInputsTest {
 		ds.addContestantEntry("1", contestant);
 		FileWriter.writeResult(pw, ds);
 		assertEquals("StartNr; Namn; TotalTid; Starttid; Måltid", sc.nextLine());
-		assertEquals("1; Göran; --.--.--; 13.23.34; Slut?", sc.next());
-	}*/
+		assertEquals("1; Göran; --.--.--; 13.23.34; Slut?", sc.nextLine());
+	}
 	
 	@Test
 	public void testTooFast(){

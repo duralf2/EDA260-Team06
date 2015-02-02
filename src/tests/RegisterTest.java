@@ -99,7 +99,7 @@ public class RegisterTest {
 	public void testClear()
 	{
 		register.getDataStructure().addContestantEntry("1", new Contestant("Karl"));
-		register.clear();
+		register.getDataStructure().clearContestantEntries();
 		assertEquals(0, register.getDataStructure().getAllContestantEntries().size());
 	}
 }

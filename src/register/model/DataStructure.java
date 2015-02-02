@@ -62,4 +62,9 @@ public class DataStructure {
         }
         return maxLaps;
     }
+
+	public void clearContestantEntries() {
+		contestantEntries.clear();
+		contestantColumnNames = null;
+	}
 }

@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 
+
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -19,6 +22,7 @@ import register.logic.Register;
 public class RegistrationGUI extends JFrame {
 
 	private StartNumberField startNumberField;
+	private EntryList entryTable;
 	private Register register;
 	
 	public RegistrationGUI(String title, Register register) {
@@ -38,7 +42,9 @@ public class RegistrationGUI extends JFrame {
 		startNumberField = new StartNumberField(this, fontSize);
 		JButton registerButton = new RegisterButton(this, fontSize);
 		
-		JScrollPane entryList = new JScrollPane(new EntryList(fontSize));
+		entryTable = new EntryList(fontSize, register);
+		
+		JScrollPane entryList = new JScrollPane(entryTable);
 		TitledBorder titledBorder = new TitledBorder("Registrations");
 		titledBorder.setTitleFont(entryList.getFont().deriveFont(Font.BOLD, fontSize/2));
 		entryList.setBorder(titledBorder);
@@ -86,14 +92,16 @@ public class RegistrationGUI extends JFrame {
 		// TODO: Registrera den inmatade informationen här!
 		String startNumber = startNumberField.getText();
 		if(isNumerical(startNumber)){
-			register.appendToFile(new java.io.File("testfiles/utdata.txt"), startNumber);
+			register.appendToFile(Register.DEFAULT_RESULT_FILE, startNumber);
+			try {
+				register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
+				entryTable.update();
+			} catch (IOException ioe) {
+				//TODO: exception handling
+			}
 		}
 		startNumberField.setText("");
 	}
-
-//	public static void main(String[] args) {
-//		new RegistrationGUI("Registration window");
-//	}
 
 	private boolean isNumerical(String startNumber){
 		return startNumber.matches("[0-9]+");

@@ -133,7 +133,6 @@ public class FileWriter {
 		for (String startNumber : entries.keySet()) {
 			contestant = entries.get(startNumber);
 			printTimes(contestant.getFinishTimes(), sb, startNumber);
-			sb.append("\n");
 		}
 		Time preRegistered = ds.removePreRegisteredTime();
 		if (preRegistered != null) {

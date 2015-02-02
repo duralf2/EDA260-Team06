@@ -97,26 +97,5 @@ public class OddInputsTest {
 		assertEquals("1; Göran; 01.07.00; 13.23.34; 14.30.34; Flera måltider? 14.31.34", sc.nextLine());
 	}
 	
-	@Test
-	public void testAcceptansResultat() throws IOException{
-		File result = new File("result.txt");
-		FileOutputStream fos = new FileOutputStream(result);
-
-		PrintWriter pw2 = new PrintWriter(fos);
-		File maltider = new File("testfiles/acceptanstest/acceptanstest6/maltider.txt");
-		File namn = new File("testfiles/acceptanstest/acceptanstest6/namnfil.txt");
-		File starttider = new File("testfiles/acceptanstest/acceptanstest6/starttider.txt");
-			ReadFile.readNames(namn, ds);
-			ReadFile.readStartTime(starttider, ds);
-			ReadFile.readFinishTime(maltider, ds);
-			FileWriter.writeResult(pw2, ds);		
-			Scanner sc2 = new Scanner(result);
-			Scanner sc3 = new Scanner(new File("testfiles/acceptanstest/acceptanstest6/resultat.txt"));
-			while(sc2.hasNext()) {
-				assertEquals(sc3.nextLine(), sc2.nextLine());
-			}
-	}
-	
-	
 }
 	

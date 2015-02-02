@@ -61,7 +61,7 @@ public class OddInputsTest {
 	}
 	
 	@Test
-	public void testToFast(){
+	public void testTooFast(){
 		Contestant contestant = new Contestant("Göran");
 		contestant.addStartTime(new Time("13.23.34"));
 		contestant.addFinishTime(new Time("13.30.34"));

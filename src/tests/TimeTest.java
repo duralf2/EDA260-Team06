@@ -79,6 +79,10 @@ public class TimeTest {
 
         t1 = new Time("12.12.05");
         t2 = new Time("13.02.02");
-        assertTrue(t1.compareTo(t2) == -1);
+        assertTrue(t1.compareTo(t2) < 0);
+        
+        t2 = new Time("12.12.05");
+        t1 = new Time("13.02.02");
+        assertTrue(t1.compareTo(t2) > 0);
     }
 }

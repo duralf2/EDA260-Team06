@@ -83,5 +83,13 @@ public class DatastructureTest {
 		}
 		assertNull(ds.removePreRegisteredTime());
 	}
+	
+	@Test
+	public void testClearContestantEntries(){
+		ds.addContestantEntry("1", new Contestant("Karl"));
+		ds.clearContestantEntries();
+		assertEquals(0, ds.getAllContestantEntries().size());
+		assertTrue(null == ds.getContestantColumnNames());
+	}
 
 }

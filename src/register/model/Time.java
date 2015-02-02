@@ -1,10 +1,11 @@
 package register.model;
 
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 
-public class Time{
+public class Time implements Comparable {
 	private int hours;
 	private int minutes;
 	private int seconds;
@@ -66,7 +67,7 @@ public class Time{
 		return time < 10 ? "0" + time : Integer.toString(time);
 	}
 
-	public boolean equals(Object obj) {
+    public boolean equals(Object obj) {
 		if (obj instanceof Time) {
 			Time t = (Time) obj;
 			return t.hours == hours && t.minutes == minutes
@@ -82,4 +83,16 @@ public class Time{
 	public static String getCurrentTime() {
 		return new SimpleDateFormat("HH.mm.ss").format(new Date().getTime());
 	}
+
+    @Override
+    public int compareTo(Object o) {
+        Time t2 = (Time)o;
+//        if(laps - laps 2 == 0){
+        return totalSeconds() - t2.totalSeconds();
+//        }
+    }
+    
+    private int totalSeconds(){
+    	return hours * 3600 + minutes * 60 + seconds;
+    }
 }

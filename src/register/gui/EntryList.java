@@ -41,7 +41,7 @@ public class EntryList extends JTable {
 	public void update() {
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		Set<String> keys = entries.keySet();
-		String[] header = {"Start number", "Time"};
+		String[] header = { "Start number", "Time" };
 		List<String[]> rowData = new ArrayList<String[]>();
 		for (String key : keys) {
 			if (entries.get(key).finishTimeSize() > 0) {
@@ -53,8 +53,20 @@ public class EntryList extends JTable {
 				rowData.add(row);
 			}
 		}
-		DefaultTableModel model = new DefaultTableModel(
+
+		DefaultTableModel model = new NonEditableTableModel(
 				rowData.toArray(new String[0][0]), header);
 		setModel(model);
+	}
+
+	private class NonEditableTableModel extends DefaultTableModel {
+		public NonEditableTableModel(Object[][] data, Object[] header) {
+			super(data, header);
+		}
+
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
 	}
 }

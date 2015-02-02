@@ -9,7 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map.Entry;
 
+import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
 
@@ -76,10 +78,17 @@ public class Register {
 	private boolean writeHeader(File file) {
 		return file.length() <= 2 || !file.exists();
 	}
+	
+	public void performMassStart(File targetFile)
+	{
+		Time startTime = new Time(Time.getCurrentTime());
+		for (Entry<String, Contestant> c : ds.getAllContestantEntries().entrySet())
+		{
+			c.getValue().addStartTime(startTime);
+			appendToFile(targetFile, c.getKey());
+		}
+	}
 
-	/*
-	 * Används i test
-	 */
 	public DataStructure getDataStructure() {
 		return ds;
 	}

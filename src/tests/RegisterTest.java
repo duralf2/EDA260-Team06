@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -96,10 +96,18 @@ public class RegisterTest {
 	}
 	
 	@Test
-	public void testClear()
+	public void testPerformMassStart()
 	{
-		register.getDataStructure().addContestantEntry("1", new Contestant("Karl"));
-		register.getDataStructure().clearContestantEntries();
-		assertEquals(0, register.getDataStructure().getAllContestantEntries().size());
+		ds.addContestantEntry("1", new Contestant("Karl"));
+		ds.addContestantEntry("2", new Contestant("Bertil"));
+		
+		File file = new File("testMassStart.txt");
+		register.performMassStart(file);
+		file.delete();
+		
+		Time karlTime = ds.getContestant("1").getStartTime();
+		Time bertilTime = ds.getContestant("2").getStartTime();
+		assertNotNull(karlTime);
+		assertEquals(karlTime, bertilTime);
 	}
 }

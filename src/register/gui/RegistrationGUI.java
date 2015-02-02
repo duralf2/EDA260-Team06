@@ -6,10 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-
 import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -23,6 +20,7 @@ import register.logic.Register;
 import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
+
 
 public class RegistrationGUI extends JFrame {
 
@@ -110,6 +108,16 @@ public class RegistrationGUI extends JFrame {
 						.addFinishTime(new Time(Time.getCurrentTime()));
 				ds.addContestantEntry(startNumber, invalidContestant);
 			}
+		}
+		else if (startNumber.equals("*"))
+		{
+			register.performMassStart(Register.DEFAULT_RESULT_FILE);
+			try {
+				refreshEntryList();
+			} catch (IOException e) {
+				//TODO: exception handling
+				e.printStackTrace();
+			}
 		} else if (startNumber.equals("x")) {
 			Contestant unknown = new Contestant();
 			unknown.addFinishTime(new Time(Time.getCurrentTime()));
@@ -143,6 +151,13 @@ public class RegistrationGUI extends JFrame {
 
 	private boolean isNumerical(String startNumber) {
 		return startNumber.matches("[1-9][0-9]*");
+	}
+	
+	private void refreshEntryList() throws IOException {
+		register.getDataStructure().clearContestantEntries(); // TODO RegGui; Add the new time directly to the datastructure instead of clearing it and reading it all from a file
+		register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
+		register.readNames(Register.DEFAULT_NAME_FILE);
+		entryTable.update();
 	}
 
 }

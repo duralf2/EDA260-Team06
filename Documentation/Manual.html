@@ -6,25 +6,25 @@
 </head>
 
 <body>
-	
-<h1>Installation</h1>
-<ol>
-<li> Öppna terminalfönstret på datorn och navigera dig till mappen "programme.jar" </li>
-<li> Starta programmet genom att köra "java -jar programme.jar" </li>
-<li> Grattis! Programmet ska nu fungera och det är bara att börja registrera tider </li>
-</ol>
+
 
 <h1>Förberedelser</h1>
-<p> Programmet har som helhet inte behov av att tilldelas särskilt mycket externt information från användaren.
+<p> Programmet har som helhet inte behov av att tilldelas särskilt mycket extern information från användaren.
 Det som en användare framför allt kan använda programmet till är att manuellt mata in startnummer till deltagare i registreringsfönstret.
 I användargränssnittet är det möjligt att skriva in startnummer för deltagare i en given tävling. Varje startnummer kommer att kollas mot en deltagarlista som måste finnas givet i programmet.
-Deltagarlistan är en textfil med startnumemr och namn på de tävlande. För tillfället är vår deltagarlista en fix textfil med påhittade deltagare.
+Deltagarlistan är en textfil med startnummer och namn på de tävlande. För tillfället listas inte namn i GUI-fönstret.
 
 </p>
 
 <h2>Hur du startar programmet</h2>
-<p>Dubbelklicka på programme.jar för att starta programmet.</p>
+<p>Dubbelklicka på program.jar för att starta programmet.
 
+<ol>
+<li> Öppna terminalfönstret på datorn och navigera dig till mappen "program.jar". </li>
+<li> Starta programmet genom att köra "java -jar program.jar" </li>
+<li> Grattis! Programmet ska nu fungera och det är bara att börja registrera tider </li>
+</ol>
+</p>
 
 <h1>Beskrivning av programmet</h1>
 
@@ -32,7 +32,7 @@ Deltagarlistan är en textfil med startnumemr och namn på de tävlande. För ti
 
 Programmet har funktioner för att registrera tävlingsdeltagare, samt tider vid start och målgång.
 
-Det finns ett användargränssnitt tillgängligt där det är möjligt att som tävlingsfunktionärer registrera start- och måltider.
+Det finns ett användargränssnitt tillgängligt där det är möjligt för tävlingsfunktionärer att registrera start- och måltider.
 
 </p>
 
@@ -40,14 +40,14 @@ Det finns ett användargränssnitt tillgängligt där det är möjligt att som t
 
 <h2>Format</h2>
 
-<p> Funktionerna för utskrift har följande format: StartNr; Namn; TotalTid; Starttid; Måltid. </p>
+<p> Funktionerna för utskrift har följande format: StartNr; Namn; TotalTid; Starttider; Måltider. </p>
 
 <ul>
 <li> Startnr: Individuellt startnummer </li>
 <li> Namn: Namn på tävlande </li>
 <li> TotalTid: Den totala tiden för ett lopp enligt </li>
-<li> StartTid: Starttiden för den tävlande </li>
-<li> Måltid: Tid för målgång för tävlande </li>
+<li> StartTider: Starttiden för den tävlande </li>
+<li> Måltider: Tid för målgång för tävlande </li>
 </ul>
 
 <p>Ifall tider för start eller mål saknas skrivs "start?" respektive "slut?" ut istället.
@@ -66,7 +66,7 @@ Fönstret har ett fält för manuell inmatning av startnummer, en knapp för att
 
 Användarfönstret har en rubrik "Registration GUI".
 
-Knappen för registrering har en grön färg och på den står "Register".
+Knappen för registrering är grön och på den står "Register".
 
 Framför fältet för inmatning av ett startnummer står "Start number:".
 

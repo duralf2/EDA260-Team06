@@ -72,5 +72,19 @@ public class DatastructureTest {
 	public void testEqualsNotDatastructure() {
 		assertFalse(ds.equals(new Scanner(System.in)));
 	}
+	
+	@Test
+	public void testGetPreRegisteredTime() {
+		// TODO Update when preRegisterTime is implemented
+		ds.preRegisterTime();
+		
+	}
+	
+	@Test
+	public void testRemovePreRegisteredTime() {
+		ds.preRegisterTime();
+		assertEquals(new Time("00.00.00"), ds.removePreRegisteredTime());
+		assertNull(ds.removePreRegisteredTime());
+	}
 
 }

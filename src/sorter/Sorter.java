@@ -4,7 +4,6 @@ import io.ReadFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -12,6 +11,10 @@ import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
 
+/**
+ * This class is responsible for loading the data collected during the contests
+ *  and compile it into sorted result files.
+ */
 public class Sorter {
 	DataStructure ds;
 
@@ -19,6 +22,12 @@ public class Sorter {
 		this.ds = ds;
 	}
 
+	/**
+	 * Reads and sorts the collected data. After the data is sorted it is printed
+	 *  to a results file.  
+	 * @param files All the files containing finish times
+	 * @throws IOException If any of the files doesn't exist or couldn't be closed
+	 */
 	public void sortTime(File[] files) throws IOException {
 		TreeMap<Time, Contestant> results = new TreeMap<Time, Contestant>();
 		

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
 
 public class RegisterButton extends JButton implements ActionListener{
 	private RegistrationGUI gui;
@@ -27,6 +26,4 @@ public class RegisterButton extends JButton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		gui.register();
 	}
-	
-	
 }

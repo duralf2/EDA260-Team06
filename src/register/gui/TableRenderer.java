@@ -9,6 +9,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import register.model.Contestant;
 import register.model.DataStructure;
 
+/**
+ * This class is a custom table renderer used to make the contents of the gui
+ *  table more informative. Invalid registrations (missing contestants) are
+ *  rendered with a red background and temporary registrations (the field is
+ *  set to 'x') are rendered in cyan.
+ */
 public class TableRenderer extends DefaultTableCellRenderer {
 
 	private DataStructure data;

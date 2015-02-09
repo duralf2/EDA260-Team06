@@ -38,7 +38,7 @@ public class AcceptanceTestStory9 {
 	}
 
 	@Test
-	public void test() throws IOException, FileNotFoundException {
+	public void testStory9() throws IOException, FileNotFoundException {
 		DataStructure ds = new DataStructure();
 		ReadFile.readNames(new File(namesFilepath), ds);
 		ReadFile.readStartTime(new File(startTimesFilepath), ds);

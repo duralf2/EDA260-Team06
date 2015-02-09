@@ -4,52 +4,40 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Database {
-	private Map<String, StandardContestant> contestantEntries;
-	private String[] contestantColumnNames;
+	private Map<String, AbstractContestant> contestantEntries;
 
 	public Database() {
-		contestantEntries = new TreeMap<String, StandardContestant>();
+		contestantEntries = new TreeMap<String, AbstractContestant>();
 	}
 
-	public void addContestantEntry(String startNumber, StandardContestant contestant) {
+	public void addContestantEntry(String startNumber,
+			AbstractContestant contestant) {
 		contestantEntries.put(startNumber, contestant);
 	}
 
-	public void setContestantColumnNames(String[] columns) {
-		contestantColumnNames = columns;
-	}
-
-	public StandardContestant getContestant(String startNumber) {
+	public AbstractContestant getContestant(String startNumber) {
 		return contestantEntries.get(startNumber);
 	}
 
-	public Map<String, StandardContestant> getAllContestantEntries() {
+	public Map<String, AbstractContestant> getAllContestantEntries() {
 		return contestantEntries;
 	}
-	
-	public String[] getContestantColumnNames()
-	{
-		return contestantColumnNames;
-	}
-	
-	public StandardContestant removeContestant(String startNumber) {
+
+	public AbstractContestant removeContestant(String startNumber) {
 		return contestantEntries.remove(startNumber);
 	}
-	
 
 	public boolean equals(Object obj) {
-		if (obj instanceof Database)
-		{
+		if (obj instanceof Database) {
 			Database ds = (Database) obj;
-			return ds.getAllContestantEntries().equals(getAllContestantEntries());
+			return ds.getAllContestantEntries().equals(
+					getAllContestantEntries());
 		}
 		return false;
 	}
 
 
-
 	public void clearContestantEntries() {
 		contestantEntries.clear();
-		contestantColumnNames = null;
 	}
 }

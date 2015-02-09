@@ -6,5 +6,4 @@ public interface CompetitionType {
 	
 	void printColumnNames(Database db, PrintWriter pw, StringBuilder sb);
 	
-
 }

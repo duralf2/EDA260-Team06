@@ -1,20 +1,24 @@
 package register.model;
 
-public abstract class StandardContestant implements Comparable<StandardContestant> {
-	protected Time startTime, finishTime;
+public abstract class AbstractContestant implements Comparable<AbstractContestant> {
+	protected Time startTime, finishTime; //TODO: Hantera finishTime då denna är null!
 	protected RacerInfo racerInfo;
 	
-	public StandardContestant() {
+	public AbstractContestant() {
 		racerInfo = new RacerInfo();
 	}
 	
-	public StandardContestant( RacerInfo racerInfo) {
+	public AbstractContestant( RacerInfo racerInfo) {
 		this.racerInfo = racerInfo;
 	}
 	
-	public abstract void addStartTime(Time time);
-	
-	public abstract void addFinishTime(Time time);
+	public void addStartTime(Time time) {
+		startTime = time;
+	}
+
+	public void addFinishTime(Time time) {
+		finishTime = time;
+	}
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

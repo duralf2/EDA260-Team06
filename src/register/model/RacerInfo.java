@@ -20,6 +20,7 @@ public class RacerInfo {
 		return value;
 	}
 	
+	//TODO What order should the information be printed? Header needed,
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for( String racerInfo : information.keySet()) {

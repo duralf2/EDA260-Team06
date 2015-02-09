@@ -1,6 +1,6 @@
 package register.model;
 
-public class MarathonContestant extends StandardContestant {
+public class MarathonContestant extends AbstractContestant {
 
 	public MarathonContestant() {
 		super();
@@ -16,7 +16,7 @@ public class MarathonContestant extends StandardContestant {
 	 Returns 1 if opposite.
 	 Return 0 if equal.
 	 * */
-	public int compareTo(StandardContestant o) {
+	public int compareTo(AbstractContestant o) {
 		if( o instanceof MarathonContestant) {
 			int diff = getTotalTime().compareTo(o.getTotalTime());
 			if(diff > 0)
@@ -29,14 +29,6 @@ public class MarathonContestant extends StandardContestant {
 		throw new IllegalArgumentException("Wrong type of object sent to compareTo()");
 	}
 
-	public void addStartTime(Time time) {
-		super.startTime = time;
-	}
-
-	@Override
-	public void addFinishTime(Time time) {
-		super.finishTime = time;
-	}
 	
 	@Override
 	public Time getTotalTime() {

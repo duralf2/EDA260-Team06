@@ -1,6 +1,6 @@
 package register.model;
 
-public class StageContestant extends StandardContestant {
+public class StageContestant extends AbstractContestant {
 	
 	public StageContestant() {
 		super();
@@ -12,22 +12,9 @@ public class StageContestant extends StandardContestant {
 
 
 	@Override
-	public int compareTo(StandardContestant arg0) {
+	public int compareTo(AbstractContestant arg0) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-
-	@Override
-	public void addStartTime(Time time) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addFinishTime(Time time) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

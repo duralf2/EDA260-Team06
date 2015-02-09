@@ -7,6 +7,10 @@ public abstract class StandardContestant implements Comparable<StandardContestan
 	public StandardContestant() {
 	}
 	
+	public StandardContestant( RacerInfo racerInfo) {
+		this.racerInfo = racerInfo;
+	}
+	
 	public abstract void addStartTime(Time time);
 	
 	public abstract void addFinishTime(Time time);

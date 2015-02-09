@@ -83,5 +83,6 @@ public class AcceptanceTestStory6 extends TestCase {
 		while (sc2.hasNext()) {
 			assertEquals(sc3.nextLine(), sc2.nextLine());
 		}
+		result.delete();
 	}
 }

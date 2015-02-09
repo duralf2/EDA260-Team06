@@ -17,6 +17,6 @@ public abstract class StandardContestant implements Comparable<StandardContestan
 	
 	public abstract String toString();
 	
-	public abstract void getTotalTime();
+	public abstract Time getTotalTime();
 	
 }

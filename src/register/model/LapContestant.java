@@ -27,7 +27,8 @@ public class LapContestant extends StandardContestant{
 	}
 
 	@Override
-	public void getTotalTime() {
+	public Time getTotalTime() {
+		return finishTime;
 		// TODO Auto-generated method stub
 		
 	}

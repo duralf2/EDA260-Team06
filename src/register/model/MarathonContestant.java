@@ -33,9 +33,8 @@ public class MarathonContestant extends StandardContestant {
 	}
 
 	@Override
-	public void getTotalTime() {
-		// TODO Auto-generated method stub
-
+	public Time getTotalTime() {
+		return Time.getTotalTime(super.startTime, super.finishTime);
 	}
 
 

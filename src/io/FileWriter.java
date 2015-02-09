@@ -81,12 +81,12 @@ public class FileWriter {
         sb.append("TotalTid;");
         for(int i=1; i <=maxLaps; i++)
             sb.append("Varv" + i + ";");
-        sb.append("Starttid;");
+        sb.append("Start;");
 
         for(int i = 1; i <= maxLaps-1; i++)
             sb.append("Varvning" + i + ";");
 
-        sb.append("Måltid\n");
+        sb.append("Mål\n");
         Contestant contestant;
         for (String startNumber : entries.keySet()) {
             contestant = entries.get(startNumber);
@@ -110,7 +110,7 @@ public class FileWriter {
             for(String time : contestant.getLapDurations())
                 sb.append(time + ";");
             for(int i=contestant.getLapDurations().size(); i < maxLaps; i++)
-                sb.append(" ;");
+                sb.append(";");
 
 			if (contestant.startTimeSize() == 0)
 				sb.append("Start?;");
@@ -124,7 +124,7 @@ public class FileWriter {
                 sb.append(" ;");
 
             if (contestant.finishTimeSize() == 0) {
-                sb.append("Slut?");
+//                sb.append("Slut?");
             } else {
                 if (isImpossibleTime(contestant)) {
                     sb.append(contestant.getFinishTime() + ";" + "Omöjlig totaltid?");
@@ -136,11 +136,10 @@ public class FileWriter {
             sb.append("\n");
         }
 
-        pw.write(sb.toString());
+        pw.write(sb.toString().replaceAll(";", "; ").trim());
         pw.close();
     }
 
-	// TODO - implement task 6.3 6.4
 	private static void checkMultipleTimes(Contestant contestant,
 			StringBuilder sb) {
 		checkMultipleTimesStart(contestant, sb);

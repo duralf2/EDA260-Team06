@@ -19,27 +19,16 @@ import org.junit.Test;
 import register.model.DataStructure;
 import register.model.Time;
 
-public class AcceptanceTest extends TestCase {
-	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/namnfil.txt";
-	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/starttider.txt";
-	private String finishTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/maltider.txt";
-	private String resultFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/resultat.txt";
+public class AcceptanceTestStory6 extends TestCase {
+	private String namesFilepath = "testfiles/acceptanstest/acceptanstest6/namnfil.txt";
+	private String startTimesFilepath = "testfiles/acceptanstest/acceptanstest6/starttider.txt";
+	private String finishTimesFilepath = "testfiles/acceptanstest/acceptanstest6/maltider.txt";
+	private String resultFilepath = "testfiles/acceptanstest/acceptanstest6/resultat.txt";
 	private File outfile;
 	DataStructure ds;
 	@Before
 	public void setUp() throws IOException {
 		ds = new DataStructure();
-		
-		File maltider = new File(
-				"testfiles/acceptanstest/acceptanstest6/maltider.txt");
-		File namn = new File(
-				"testfiles/acceptanstest/acceptanstest6/namnfil.txt");
-		File starttider = new File(
-				"testfiles/acceptanstest/acceptanstest6/starttider.txt");
-		
-		ReadFile.readNames(namn, ds);
-		ReadFile.readStartTime(starttider, ds);
-		ReadFile.readFinishTime(maltider, ds);
 		
 		outfile = new File("out.txt");
 	}
@@ -57,7 +46,7 @@ public class AcceptanceTest extends TestCase {
 		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("13.00.00"));
 
 		PrintWriter pw = new PrintWriter(outfile);
-		FileWriter.writeLapResult(pw, ds);
+		FileWriter.writeResult(pw, ds);
 
 		DataStructure dsOut = new DataStructure();
 		ReadFile.readResult(outfile, dsOut);

@@ -65,9 +65,8 @@ public class FileWriter {
 
 	/**
 	 * Prints the specified database to the specified stream. The data will be
-	 *  written in a format that is compatible with the excel file format. If
-	 *  there are several laps in the database additional columns are added to 
-	 *  display the lap results.
+	 *  written in a format that is compatible with the excel file format. This
+	 *  method is to be used for lap races.
 	 * @param pw The <code>PrintWriter</code> to where the data will be written
 	 * @param ds The database containing the data to write
 	 */
@@ -78,9 +77,7 @@ public class FileWriter {
 
 
         sb.append("StartNr;Namn;");
-        if(maxLaps > 1) {
-            sb.append("#Varv;");
-        }
+        sb.append("#Varv;");
         sb.append("TotalTid;");
         for(int i=1; i <=maxLaps; i++)
             sb.append("Varv" + i + ";");
@@ -96,10 +93,7 @@ public class FileWriter {
             sb.append(startNumber + ";");
             sb.append(contestant.getName() + ";");
         
-
-			if (maxLaps > 1) {
-				sb.append(contestant.getLapsCompleted()).append(";");
-			}
+            sb.append(contestant.getLapsCompleted()).append(";");
             LinkedList<Time> finishTimes = contestant.getFinishTimes();
             LinkedList<Time> lapTimes = contestant.getLapTimes();
             if(finishTimes.size() > 0) {

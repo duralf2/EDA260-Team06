@@ -47,15 +47,17 @@ public class Sorter {
 		ReadFile.readStartTime(files[0], ds);
 		ReadFile.readFinishTime(files[1], ds);
 
-		Map<String, Contestant> contestants = ds.getAllContestantEntries();
-		for (String startNumber : contestants.keySet()) {
-			Contestant con = contestants.get(startNumber);
-			results.put(new Time(con.getTotalTime()), con);
-		}
+//		Map<String, Contestant> contestants = ds.getAllContestantEntries();
+//		for (String startNumber : contestants.keySet()) {
+//			Contestant con = contestants.get(startNumber);
+//			results.put(new Time(con.getTotalTime()), con);
+//		}
 		// TODO: change this file to be a parameter for the function
-		File resultFile = new File("data/results.txt");
+		if (!new File("data").isDirectory())
+			new File("data").mkdir();//create the data directory if not exists
+//		File resultFile = new File("data/results.txt");
 		FileWriter.writeResult(new PrintWriter(new File("data/result.txt")), ds);
-		//writeToFile(results, resultFile, nameFile);
+//		writeToFile(results, resultFile, nameFile);
 	}
 
 	// private method for writing to file

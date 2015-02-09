@@ -1,19 +1,22 @@
 package register.model;
 
 public class LapContestant extends StandardContestant{
+	
+	public LapContestant() {
+		super();
+	}
+
+	public LapContestant(RacerInfo racerInfo) {
+		super(racerInfo);
+	}
+
 
 	@Override
 	public int compareTo(StandardContestant o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public void addStartTime(Time time) {
 		// TODO Auto-generated method stub
@@ -34,7 +37,7 @@ public class LapContestant extends StandardContestant{
 	}
 
 	@Override
-	protected String personalToString() {
+	protected String specifiedToString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

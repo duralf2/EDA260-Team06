@@ -19,11 +19,11 @@ public abstract class StandardContestant implements Comparable<StandardContestan
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(racerInfo.toString());
-		sb.append(personalToString());
+		sb.append(specifiedToString());
 		return sb.toString();
 	}
 	
-	protected abstract String personalToString(); 
+	protected abstract String specifiedToString(); 
 	
 	public abstract Time getTotalTime();
 	

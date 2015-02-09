@@ -26,7 +26,7 @@ public class TestMarathonContestant {
 	}
 	
 	@Test
-	public void testTime(){
+	public void testTotalTime(){
 		racer.addStartTime(new Time("12.00.01"));
 		racer.addFinishTime(new Time("12.01.15"));
 		assertEquals("00.01.14", racer.getTotalTime().toString());
@@ -34,7 +34,10 @@ public class TestMarathonContestant {
 	
 	@Test
 	public void testToString(){
-		
+		racer.addStartTime(new Time("12.00.01"));
+		racer.addFinishTime(new Time("12.01.15"));
+		String match = "Hannah;00.01.14;12.00.01;12.01.15";
+		assertEquals(match, racer.toString());
 	}
 
 }

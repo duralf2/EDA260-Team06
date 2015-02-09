@@ -25,19 +25,14 @@ public class MarathonContestant extends StandardContestant {
 	public void addFinishTime(Time time) {
 		super.finishTime = time;
 	}
-
-	@Override
-	public String toString() {
-		return null;
-	}
-
+	
 	@Override
 	public Time getTotalTime() {
 		return Time.getTotalTime(super.startTime, super.finishTime);
 	}
 
 	@Override
-	protected String personalToString() {
+	protected String specifiedToString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getTotalTime().toString());
 		sb.append(";");

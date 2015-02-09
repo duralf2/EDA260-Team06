@@ -43,8 +43,8 @@ public class ResultTest {
 	private void generateFiles(File[] files) {
 		try {
 			PrintWriter pw = new PrintWriter(files[0]);
-			pw.write("1; 12.00.01\n");
 			pw.write("2; 12.05.50\n");
+			pw.write("1; 12.00.01\n");
 			pw.write("3; 12.15.33\n");
 			pw.write("4; 12.25.37\n");
 			pw.write("5; 13.37.37\n");
@@ -71,11 +71,11 @@ public class ResultTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		assertTrue("02.15.00".equals(results.get(0)[1]));
-		assertTrue("03.24.15".equals(results.get(1)[1]));
-		assertTrue("02.19.54".equals(results.get(2)[1]));
-		assertTrue("02.52.22".equals(results.get(3)[1]));
-		assertTrue("01.26.02".equals(results.get(4)[1]));
+		assertEquals("01.24.02", results.get(0)[1].trim());
+		assertEquals("02.15.00", results.get(1)[1].trim());
+		assertEquals("02.19.54", results.get(2)[1].trim());
+		assertEquals("02.32.22", results.get(3)[1].trim());
+		assertEquals("03.24.45", results.get(4)[1].trim());
 	}
 
 }

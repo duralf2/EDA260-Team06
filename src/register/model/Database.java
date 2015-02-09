@@ -36,15 +36,6 @@ public class Database {
 		return false;
 	}
 
-	public int getMaxLaps() {
-		int maxLaps = 0;
-		for (AbstractContestant c : contestantEntries.values()) {
-			// if(c.getLapsCompleted() > maxLaps)
-			// maxLaps = c.getLapsCompleted();
-			// TODO Database
-		}
-		return maxLaps;
-	}
 
 	public void clearContestantEntries() {
 		contestantEntries.clear();

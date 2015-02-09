@@ -1,17 +1,23 @@
 package register.model;
 
-public class StageContestant extends ContestantType {
+public class StageContestant extends StandardContestant {
 
 	@Override
-	public int compareTo(ContestantType arg0) {
+	public int compareTo(StandardContestant arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public String contestantString() {
+	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addStartTime(Time time) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

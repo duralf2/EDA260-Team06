@@ -4,14 +4,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Database {
-	private Map<String, StandardContestant> contestantEntries;
+	private Map<String, AbstractContestant> contestantEntries;
 	private String[] contestantColumnNames;
 
 	public Database() {
-		contestantEntries = new TreeMap<String, StandardContestant>();
+		contestantEntries = new TreeMap<String, AbstractContestant>();
 	}
 
-	public void addContestantEntry(String startNumber, StandardContestant contestant) {
+	public void addContestantEntry(String startNumber, AbstractContestant contestant) {
 		contestantEntries.put(startNumber, contestant);
 	}
 
@@ -19,11 +19,11 @@ public class Database {
 		contestantColumnNames = columns;
 	}
 
-	public StandardContestant getContestant(String startNumber) {
+	public AbstractContestant getContestant(String startNumber) {
 		return contestantEntries.get(startNumber);
 	}
 
-	public Map<String, StandardContestant> getAllContestantEntries() {
+	public Map<String, AbstractContestant> getAllContestantEntries() {
 		return contestantEntries;
 	}
 	
@@ -32,7 +32,7 @@ public class Database {
 		return contestantColumnNames;
 	}
 	
-	public StandardContestant removeContestant(String startNumber) {
+	public AbstractContestant removeContestant(String startNumber) {
 		return contestantEntries.remove(startNumber);
 	}
 	
@@ -48,7 +48,7 @@ public class Database {
 
     public int getMaxLaps() {
         int maxLaps = 0;
-        for(StandardContestant c : contestantEntries.values()) {
+        for(AbstractContestant c : contestantEntries.values()) {
 //            if(c.getLapsCompleted() > maxLaps)
 //                maxLaps = c.getLapsCompleted();
         	// TODO Database

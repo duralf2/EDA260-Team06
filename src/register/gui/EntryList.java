@@ -28,6 +28,7 @@ public class EntryList extends JTable {
 		setDefaultRenderer(Object.class, new TableRenderer(ds));
 		setFillsViewportHeight(true);
 		setFont(getFont().deriveFont(Font.BOLD, fontSize));
+		getTableHeader().setFont(getFont().deriveFont(Font.BOLD, fontSize/2));
 		setRowHeight(fontSize);
 		setOpaque(true);
 		setToolTipText("Existing registrations");

@@ -23,24 +23,23 @@ public class ContestantFactory {
 			throws IOException {
 		List<String[]> fileRows = ReadFile.readCSV(new File(properties
 				.getProperty(RaceProperties.KEY_NAME_FILE_PATH)));
-
-		readContestantColumns(ds, fileRows.get(0));
+		
+		String[] columns = trimContestantColumnNames(fileRows.get(0));
 
 		for (int i = 1; i < fileRows.size(); i++) {
 			String[] line = fileRows.get(i);
 
 			String startNumber = line[0].trim();
-			StandardContestant contestant = createContestant(ds.getContestantColumnNames(), line);
+			StandardContestant contestant = createContestant(columns, line);
 			ds.addContestantEntry(startNumber, contestant);
 		}
 	}
 
-	private void readContestantColumns(Database ds,
-			String[] contestantColumns) {
+	private String[] trimContestantColumnNames(String[] contestantColumns) {
 		for (int i = 0; i < contestantColumns.length; i++) {
 			contestantColumns[i] = contestantColumns[i].trim();
 		}
-		ds.setContestantColumnNames(contestantColumns);
+		return contestantColumns;
 	}
 
 	// TODO krashar om information saknas (line.lenght < columnNames.lenght)

@@ -40,4 +40,5 @@ public class MarathonContestant extends StandardContestant {
 
 	}
 
+
 }

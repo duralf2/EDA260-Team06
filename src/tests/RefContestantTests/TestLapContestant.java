@@ -30,7 +30,11 @@ public class TestLapContestant {
 		lapContestant.addLapTime(new Time("00.06.00"));
 		
 		assertEquals("Lars;1;3;00.10.01;00.02.00;00.04.00;00.00.00;00.02.00;00.06.00;00.10.01", lapContestant.toString());
-		
 	}
+	
+	@Test
+	public void testCompareTo() {
+	}
+	
 
 }

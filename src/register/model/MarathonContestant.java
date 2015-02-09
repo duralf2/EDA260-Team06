@@ -11,20 +11,12 @@ public class MarathonContestant extends AbstractContestant {
 	}
 
 	@Override
-	/*Method compares this object's total time with the specified object.
-	 Returns -1 if the compared object has a smaller total time than this object.
-	 Returns 1 if opposite.
-	 Return 0 if equal.
+	/*Method compares this object's total time with the specified object if specified is of the instance MarathonContestant.
+	 Returns a positive int if this object has a longer time than the specified object, return 0 if equal, and otherwise a negative integer,
 	 * */
 	public int compareTo(AbstractContestant o) {
 		if( o instanceof MarathonContestant) {
-			int diff = getTotalTime().compareTo(o.getTotalTime());
-			if(diff > 0)
-				return -1;
-			else if(diff < 0)
-				return 1;
-			else
-				return 0;
+			return getTotalTime().compareTo(o.getTotalTime());
 		}
 		throw new IllegalArgumentException("Wrong type of object sent to compareTo()");
 	}

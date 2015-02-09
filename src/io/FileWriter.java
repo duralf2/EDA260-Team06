@@ -27,13 +27,9 @@ public class FileWriter {
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n"); // TODO
-																		// how
-																		// to
-																		// handle
-																		// setContestantColumnNames()
-																		// in
-																		// Datastrucure?
+		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
+		
+		// TODO how to handle setContestantColumnNames() in Datastrucure?
 		Contestant contestant;
 		for (String startNumber : entries.keySet()) {
 			contestant = entries.get(startNumber);

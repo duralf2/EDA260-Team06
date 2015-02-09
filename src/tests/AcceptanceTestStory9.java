@@ -42,7 +42,7 @@ public class AcceptanceTestStory9 {
 		DataStructure ds = new DataStructure();
 		ReadFile.readNames(new File(namesFilepath), ds);
 		ReadFile.readStartTime(new File(startTimesFilepath), ds);
-		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("13.00.00"));
+		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("01.00.00"));
 
 		PrintWriter pw = new PrintWriter(outfile);
 		FileWriter.writeLapResult(pw, ds);
@@ -61,7 +61,7 @@ public class AcceptanceTestStory9 {
 		String fileContents = "";
 		String currentLine = reader.readLine();
 		while (currentLine != null) {
-			fileContents += currentLine.replace("\\s+", "");
+			fileContents += currentLine.replace("\\s+", "") + "\n";
 			currentLine = reader.readLine();
 		}
 

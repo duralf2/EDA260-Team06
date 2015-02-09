@@ -17,8 +17,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.DataStructure;
+import register.model.Time;
 
-public class AcceptanceTestStory16 {
+public class AcceptanceTestStory16NoClasses {
 
 	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16NoClasses/namnfil.txt";
 	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16NoClasses/starttider.txt";
@@ -37,12 +38,11 @@ public class AcceptanceTestStory16 {
 	}
 
 	@Test
-	public void testMergeTimes() throws IOException, FileNotFoundException {
-		// Acceptance test 16
+	public void testStory16() throws IOException, FileNotFoundException {
 		DataStructure ds = new DataStructure();
 		ReadFile.readNames(new File(namesFilepath), ds);
 		ReadFile.readStartTime(new File(startTimesFilepath), ds);
-		ReadFile.readFinishTime(new File(finishTimesFilepath), ds);
+		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("01.00.00"));
 
 		PrintWriter pw = new PrintWriter(outfile);
 		FileWriter.writeLapResult(pw, ds);
@@ -50,9 +50,7 @@ public class AcceptanceTestStory16 {
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));
 		
-		assertTrue(true);
-//		assertEquals(acceptenceResult, printedResult);
-		// TODO Fix acceptance test 16 when story 9 is done
+		assertEquals(acceptenceResult, printedResult);
 	}
 
 	private String readFileAsString(File file) throws IOException {
@@ -63,7 +61,7 @@ public class AcceptanceTestStory16 {
 		String fileContents = "";
 		String currentLine = reader.readLine();
 		while (currentLine != null) {
-			fileContents += currentLine.replace("\\s+", "");
+			fileContents += currentLine.replace("\\s+", "") + "\n";
 			currentLine = reader.readLine();
 		}
 

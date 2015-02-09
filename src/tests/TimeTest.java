@@ -85,4 +85,15 @@ public class TimeTest {
         t1 = new Time("13.02.02");
         assertTrue(t1.compareTo(t2) > 0);
     }
+    
+    @Test
+    public void testAddTimes(){
+    	Time start = new Time("12.01.01");
+        Time finish = new Time("13.02.02");
+        assertEquals(finish, start.add(new Time("01.01.01")));
+        finish = new Time("15.07.00");
+        assertEquals(finish, start.add(new Time("03.05.59")));
+        finish = new Time("00.07.00");
+        assertEquals(finish, start.add(new Time("12.05.59")));
+    }
 }

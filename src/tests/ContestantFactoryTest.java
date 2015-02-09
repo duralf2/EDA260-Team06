@@ -1,6 +1,7 @@
 package tests;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import static org.junit.Assert.*;
@@ -30,15 +31,19 @@ public class ContestantFactoryTest {
 		properties.put(RaceProperties.KEY_RACE_TYPE,
 				RaceProperties.VALUE_RACE_MARATHON);
 		properties.put(RaceProperties.KEY_NAME_FILE_PATH,
-				"testfiles/factoryTestNames.txt");
+				"testfiles/FactoryTestNames.txt");
 	}
 
 	@Test
 	public void testCreateRegisteredContestants() throws IOException {
-		assertTrue(true);
+		factory.createRegisteredContestants(dataStructure);
 		
-//		factory.createRegisteredContestants(dataStructure);
-		// TODO
+		for (Entry<String, AbstractContestant> entry : dataStructure.getAllContestantEntries().entrySet())
+		{
+			assertEquals(MarathonContestant.class, entry.getValue().getClass());
+		}
+
+		// TODO Test för att se om contestants headers är correcta 
 	}
 
 	@Test

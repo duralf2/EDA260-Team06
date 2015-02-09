@@ -54,13 +54,6 @@ public class DatabaseTest {
 	}
 
 	@Test
-	public void testContestantColumnNames() {
-		String[] columns = new String[] {"c1", "c2", "c3"};
-		ds.setContestantColumnNames(columns);
-		assertTrue(columns.equals(ds.getContestantColumnNames()));
-	}
-
-	@Test
 	public void testEquals() {
 		Database ds2 = new Database();
 		AbstractContestant contestant = new MarathonContestant();
@@ -81,7 +74,6 @@ public class DatabaseTest {
 		ds.addContestantEntry("1", new MarathonContestant());
 		ds.clearContestantEntries();
 		assertEquals(0, ds.getAllContestantEntries().size());
-		assertTrue(null == ds.getContestantColumnNames());
 	}
 
 }

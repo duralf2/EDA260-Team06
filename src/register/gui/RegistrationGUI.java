@@ -143,7 +143,7 @@ public class RegistrationGUI extends JFrame {
 			Contestant x = ds.removeContestant("x");
 			if (x == null) {
 				JOptionPane.showMessageDialog(null,
-						"No pregesistered time set.");
+						"No preregistered time set.");
 			} else {
 				if (c != null) {
 					c.addFinishTime(x.getFinishTime());

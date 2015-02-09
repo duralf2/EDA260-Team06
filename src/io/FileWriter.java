@@ -8,18 +8,21 @@ import register.model.DataStructure;
 import register.model.Time;
 
 /**
- * This class is responsible for writing data to files. The methods of this class
- *  formats the data accordingly before printing it to the <code>PrintWriter</code>
- *  that is passed along with the data.
+ * This class is responsible for writing data to files. The methods of this
+ * class formats the data accordingly before printing it to the
+ * <code>PrintWriter</code> that is passed along with the data.
  */
 public class FileWriter {
 
 	/**
 	 * Prints the specified database to the specified stream. The data will be
-	 *  written in a format that is compatible with the excel file format. This
-	 *  method is to be used for simple races (marathon races).
-	 * @param pw The <code>PrintWriter</code> to where the data will be written
-	 * @param ds The database containing the data to write
+	 * written in a format that is compatible with the excel file format. This
+	 * method is to be used for simple races (marathon races).
+	 * 
+	 * @param pw
+	 *            The <code>PrintWriter</code> to where the data will be written
+	 * @param ds
+	 *            The database containing the data to write
 	 */
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
@@ -65,80 +68,109 @@ public class FileWriter {
 
 	/**
 	 * Prints the specified database to the specified stream. The data will be
-	 *  written in a format that is compatible with the excel file format. This
-	 *  method is to be used for lap races.
-	 * @param pw The <code>PrintWriter</code> to where the data will be written
-	 * @param ds The database containing the data to write
+	 * written in a format that is compatible with the excel file format. This
+	 * method is to be used for lap races.
+	 * 
+	 * @param pw
+	 *            The <code>PrintWriter</code> to where the data will be written
+	 * @param ds
+	 *            The database containing the data to write
 	 */
 	public static void writeLapResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		int maxLaps = ds.getMaxLaps();
 
+		makeColumnNames(sb, maxLaps);
 
-        sb.append("StartNr;Namn;");
-        sb.append("#Varv;");
-        sb.append("TotalTid;");
-        for(int i=1; i <=maxLaps; i++)
-            sb.append("Varv" + i + ";");
-        sb.append("Starttid;");
+		List<String> incorrectRegistrations = new ArrayList<String>();
+		for (String startNumber : entries.keySet()) {
+			Contestant contestant = entries.get(startNumber);
 
-        for(int i = 1; i <= maxLaps-1; i++)
-            sb.append("Varvning" + i + ";");
+			if (contestant.getName().equals(""))
+				incorrectRegistrations.add(startNumber);
+			else {
+				writeContestant(sb, contestant, startNumber, maxLaps);
+			}
+		}
 
-        sb.append("Måltid\n");
-        Contestant contestant;
-        for (String startNumber : entries.keySet()) {
-            contestant = entries.get(startNumber);
-            sb.append(startNumber + ";");
-            sb.append(contestant.getName() + ";");
-        
-            sb.append(contestant.getLapsCompleted()).append(";");
-            LinkedList<Time> finishTimes = contestant.getFinishTimes();
-            LinkedList<Time> lapTimes = contestant.getLapTimes();
-            if(finishTimes.size() > 0) {
-                sb.append(Time.getTotalTime(contestant.getStartTime(), contestant.getFinishTime()));
-            } else {
-                if(lapTimes.size() != 0) {
-                    sb.append(Time.getTotalTime(contestant.getStartTime(), lapTimes.getLast()));
-                } else {
-                    sb.append("--.--.--");
-                }
-            }
-            sb.append(";");
+		if (!incorrectRegistrations.isEmpty()) {
+			sb.append("Icke existerande startnummer\n");
+			makeColumnNames(sb, maxLaps);
+			for (String startNumber : incorrectRegistrations) {
+				writeContestant(sb, ds.getContestant(startNumber),
+						startNumber, maxLaps);
+			}
+		}
 
-            for(String time : contestant.getLapDurations())
-                sb.append(time + ";");
-            for(int i=contestant.getLapDurations().size(); i < maxLaps; i++)
-                sb.append(" ;");
+		pw.write(sb.toString());
+		pw.close();
+	}
 
-			if (contestant.startTimeSize() == 0)
-				sb.append("Start?;");
-			else
-				sb.append(contestant.getStartTime() + ";");
+	private static void makeColumnNames(StringBuilder sb, int maxLaps) {
+		sb.append("StartNr;Namn;");
+		sb.append("#Varv;");
+		sb.append("TotalTid;");
+		for (int i = 1; i <= maxLaps; i++)
+			sb.append("Varv" + i + ";");
+		sb.append("Starttid;");
 
+		for (int i = 1; i <= maxLaps - 1; i++)
+			sb.append("Varvning" + i + ";");
 
-            for(Time time : lapTimes)
-                sb.append(time.toString() + ";");
-            for(int i= lapTimes.size(); i < maxLaps-1; i++)
-                sb.append(" ;");
+		sb.append("Måltid\n");
+	}
 
-            if (contestant.finishTimeSize() == 0) {
-                sb.append("Slut?");
-            } else {
-                if (isImpossibleTime(contestant)) {
-                    sb.append(contestant.getFinishTime() + ";" + "Omöjlig totaltid?");
-                } else {
-                    sb.append(contestant.getFinishTime());
-                }
-            }
-            checkMultipleTimes(contestant, sb);
-            sb.append("\n");
-        }
+	private static void writeContestant(StringBuilder sb,
+			Contestant contestant, String startNumber, int maxLaps) {
+		sb.append(startNumber + ";");
+		sb.append(contestant.getName() + ";");
 
-        pw.write(sb.toString());
-        pw.close();
-    }
+		sb.append(contestant.getLapsCompleted()).append(";");
+		LinkedList<Time> finishTimes = contestant.getFinishTimes();
+		LinkedList<Time> lapTimes = contestant.getLapTimes();
+		if (finishTimes.size() > 0) {
+			sb.append(Time.getTotalTime(contestant.getStartTime(),
+					contestant.getFinishTime()));
+		} else {
+			if (lapTimes.size() != 0) {
+				sb.append(Time.getTotalTime(contestant.getStartTime(),
+						lapTimes.getLast()));
+			} else {
+				sb.append("--.--.--");
+			}
+		}
+		sb.append(";");
+
+		for (String time : contestant.getLapDurations())
+			sb.append(time + ";");
+		for (int i = contestant.getLapDurations().size(); i < maxLaps; i++)
+			sb.append(" ;");
+
+		if (contestant.startTimeSize() == 0)
+			sb.append("Start?;");
+		else
+			sb.append(contestant.getStartTime() + ";");
+
+		for (Time time : lapTimes)
+			sb.append(time.toString() + ";");
+		for (int i = lapTimes.size(); i < maxLaps - 1; i++)
+			sb.append(" ;");
+
+		if (contestant.finishTimeSize() == 0) {
+			sb.append("Slut?");
+		} else {
+			if (isImpossibleTime(contestant)) {
+				sb.append(contestant.getFinishTime() + ";"
+						+ "Omöjlig totaltid?");
+			} else {
+				sb.append(contestant.getFinishTime());
+			}
+		}
+		checkMultipleTimes(contestant, sb);
+		sb.append("\n");
+
+	}
 
 	// TODO - implement task 6.3 6.4
 	private static void checkMultipleTimes(Contestant contestant,

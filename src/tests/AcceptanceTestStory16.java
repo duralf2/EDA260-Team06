@@ -45,7 +45,7 @@ public class AcceptanceTestStory16 {
 		ReadFile.readFinishTime(new File(finishTimesFilepath), ds);
 
 		PrintWriter pw = new PrintWriter(outfile);
-		FileWriter.writeResult(pw, ds);
+		FileWriter.writeLapResult(pw, ds);
 
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));

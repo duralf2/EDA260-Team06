@@ -36,7 +36,7 @@ public class TableRenderer extends DefaultTableCellRenderer {
 			component.setBackground(Color.PINK);
 		else
 			component.setBackground(table.getBackground());
-
+		component.setForeground(Color.BLACK);
 		return component;
 	}
 

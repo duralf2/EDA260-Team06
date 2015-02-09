@@ -19,6 +19,7 @@ public class RegisterButton extends JButton implements ActionListener{
 		setForeground(Color.WHITE);
 		setBackground(new Color(63, 181, 50));
 		setBorder(new BevelBorder(BevelBorder.RAISED));
+		setOpaque(true);
 	}
 
 	@Override

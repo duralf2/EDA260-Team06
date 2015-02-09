@@ -5,6 +5,7 @@ public abstract class StandardContestant implements Comparable<StandardContestan
 	protected RacerInfo racerInfo;
 	
 	public StandardContestant() {
+		racerInfo = new RacerInfo();
 	}
 	
 	public StandardContestant( RacerInfo racerInfo) {

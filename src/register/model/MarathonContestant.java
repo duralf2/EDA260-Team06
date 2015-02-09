@@ -18,14 +18,12 @@ public class MarathonContestant extends StandardContestant {
 
 	@Override
 	public void addStartTime(Time time) {
-		// TODO Auto-generated method stub
-
+		super.startTime = time;
 	}
 
 	@Override
 	public void addFinishTime(Time time) {
-		// TODO Auto-generated method stub
-
+		super.finishTime = time;
 	}
 
 	@Override

@@ -21,6 +21,11 @@ public class RacerInfo {
 	}
 	
 	public String toString() {
-		return name + ";";
+		StringBuilder sb = new StringBuilder();
+		for( String racerInfo : information.keySet()) {
+			sb.append(information.get(racerInfo));
+			sb.append(";");
+		}
+		return sb.toString();
 	}
 }

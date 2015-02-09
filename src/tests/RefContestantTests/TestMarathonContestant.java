@@ -14,13 +14,15 @@ public class TestMarathonContestant {
 	
 	@Before
 	public void setUp() {
-		racerInfo = new RacerInfo("Hannah");
+		racerInfo = new RacerInfo();
+		racerInfo.put("Name","Hannah");
 		racer = new MarathonContestant(racerInfo);
 	}
 	
 	@After
 	public void tearDown(){
-		
+		racerInfo = null;
+		racer = null;
 	}
 	
 	@Test

@@ -125,7 +125,7 @@ public class ReadFile {
      *  set as the finish time, the rest of the times will be set as lap times.
      * @param file The file to load the finish times from
 	 * @param ds The database to put the finish times into
-	 * @param racetime The time limit for the race, determines whether a specific
+	 * @param racetime The lenght of the race, determines whether a specific
 	 *  time will be interpreted as a finish time or a lap time
 	 * @throws IOException If the file doesn't exist or couldn't be closed
      */
@@ -140,7 +140,11 @@ public class ReadFile {
 			startNr = line[0];
 			Time time = new Time(line[1].trim());
 			contestant = getContestant(startNr, ds);
-            if(time.compareTo(racetime) <= 0) {
+			Time startTime = new Time("00.00.00");
+			if(!contestant.getStartTimes().isEmpty()){
+				startTime = contestant.getStartTime();
+			}
+            if(time.compareTo(racetime.add(startTime)) <= 0) {
                 // If time is less than racetime, it is a lap
                 contestant.addLapTime(time);
             } else {

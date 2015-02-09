@@ -85,13 +85,13 @@ public class FileWriter {
 
 		List<String> incorrectRegistrations = new ArrayList<String>();
 		for (String startNumber : entries.keySet()) {
-			Contestant contestant = entries.get(startNumber);
+			 Contestant contestant = entries.get(startNumber);
 
-			if (contestant.getName().equals(""))
-				incorrectRegistrations.add(startNumber);
-			else {
-				writeContestant(sb, contestant, startNumber, maxLaps);
-			}
+			 if (contestant.getName().equals(""))
+				 incorrectRegistrations.add(startNumber);
+			 else {
+				 writeContestant(sb, contestant, startNumber, maxLaps);
+			 }
 		}
 
 		if (!incorrectRegistrations.isEmpty()) {
@@ -103,7 +103,7 @@ public class FileWriter {
 			}
 		}
 
-		pw.write(sb.toString());
+		pw.write(sb.toString().replaceAll(";", "; ").trim());
 		pw.close();
 	}
 
@@ -113,12 +113,12 @@ public class FileWriter {
 		sb.append("TotalTid;");
 		for (int i = 1; i <= maxLaps; i++)
 			sb.append("Varv" + i + ";");
-		sb.append("Starttid;");
-
+		sb.append("Start;");
+		
 		for (int i = 1; i <= maxLaps - 1; i++)
 			sb.append("Varvning" + i + ";");
 
-		sb.append("Måltid\n");
+		sb.append("Mål\n");
 	}
 
 	private static void writeContestant(StringBuilder sb,
@@ -145,7 +145,7 @@ public class FileWriter {
 		for (String time : contestant.getLapDurations())
 			sb.append(time + ";");
 		for (int i = contestant.getLapDurations().size(); i < maxLaps; i++)
-			sb.append(" ;");
+			sb.append(";");
 
 		if (contestant.startTimeSize() == 0)
 			sb.append("Start?;");
@@ -155,10 +155,10 @@ public class FileWriter {
 		for (Time time : lapTimes)
 			sb.append(time.toString() + ";");
 		for (int i = lapTimes.size(); i < maxLaps - 1; i++)
-			sb.append(" ;");
+			sb.append(";");
 
 		if (contestant.finishTimeSize() == 0) {
-			sb.append("Slut?");
+//			sb.append("Slut?");
 		} else {
 			if (isImpossibleTime(contestant)) {
 				sb.append(contestant.getFinishTime() + ";"
@@ -172,7 +172,6 @@ public class FileWriter {
 
 	}
 
-	// TODO - implement task 6.3 6.4
 	private static void checkMultipleTimes(Contestant contestant,
 			StringBuilder sb) {
 		checkMultipleTimesStart(contestant, sb);

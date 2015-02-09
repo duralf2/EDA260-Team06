@@ -4,6 +4,7 @@ import io.ReadFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -34,14 +35,13 @@ public class Sorter {
 		ds.clearContestantEntries();
 		
 		ReadFile.readNames(new File("testfiles/namn.txt"), ds);
-		for (File file : files) {
-			ReadFile.readFinishTime(file, ds);
-		}
+		ReadFile.readStartTime(files[0], ds);
+		ReadFile.readFinishTime(files[1], ds);
 		
 		Map<String,Contestant> contestants = ds.getAllContestantEntries();
 		for(String startNumber : contestants.keySet()){
 			Contestant con = contestants.get(startNumber);
-			results.put(con.getFinishTime(), con);
+			results.put(new Time(con.getTotalTime()), con);
 		}
 		
 		int i = 1;
@@ -49,8 +49,25 @@ public class Sorter {
 			System.out.println(i + ") " + t.toString() + " : " + results.get(t).getName());
 			i++;
 		}
-		
-		
+		//TODO: change this file to be a parameter for the function
+		File resultFile = new File("testfiles/results.txt");
+		writeToFile(results, resultFile);
+	}
+	
+	//private method for writing to file
+	private void writeToFile(TreeMap<Time, Contestant> result, File resultFile) {
+		try {
+			if(! resultFile.exists()){
+				resultFile.createNewFile();
+			}
+			PrintWriter pw = new PrintWriter(resultFile);
+			for (Time t: result.keySet()) {
+				pw.write(result.get(t).getName() + "; " + t.toString() + "\n");
+			}
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 		
 		//TODO Skriv ut det i fönstret, eller i fil. 
@@ -58,6 +75,4 @@ public class Sorter {
 		// 2) LADDA IN FILER
 		// 3) LÄGG IN I TREE MAP
 		// 4) SKRIV UT TREE MAP
-		
-
 }

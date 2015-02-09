@@ -29,14 +29,6 @@ public class MarathonContestant extends AbstractContestant {
 		throw new IllegalArgumentException("Wrong type of object sent to compareTo()");
 	}
 
-	public void addStartTime(Time time) {
-		super.startTime = time;
-	}
-
-	@Override
-	public void addFinishTime(Time time) {
-		super.finishTime = time;
-	}
 	
 	@Override
 	public Time getTotalTime() {

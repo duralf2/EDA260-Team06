@@ -17,19 +17,6 @@ public class StageContestant extends AbstractContestant {
 		return 0;
 	}
 
-
-	@Override
-	public void addStartTime(Time time) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addFinishTime(Time time) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public Time getTotalTime() {
 		return finishTime;

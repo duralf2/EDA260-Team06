@@ -19,19 +19,19 @@ public class ContestantFactory {
 		this.properties = properties;
 	}
 
-	public void createRegisteredContestants(Database ds)
+	public void createRegisteredContestants(Database db)
 			throws IOException {
 		List<String[]> fileRows = ReadFile.readCSV(new File(properties
 				.getProperty(RaceProperties.KEY_NAME_FILE_PATH)));
 
-		readContestantColumns(ds, fileRows.get(0));
+		readContestantColumns(db, fileRows.get(0));
 
 		for (int i = 1; i < fileRows.size(); i++) {
 			String[] line = fileRows.get(i);
 
 			String startNumber = line[0].trim();
-			AbstractContestant contestant = createContestant(ds.getContestantColumnNames(), line);
-			ds.addContestantEntry(startNumber, contestant);
+			AbstractContestant contestant = createContestant(db.getContestantColumnNames(), line);
+			db.addContestantEntry(startNumber, contestant);
 		}
 	}
 

@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.DataStructure;
+import register.model.Time;
 
 public class AcceptanceTest extends TestCase {
 	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/namnfil.txt";
@@ -54,7 +55,7 @@ public class AcceptanceTest extends TestCase {
 		DataStructure ds = new DataStructure();
 		ReadFile.readNames(new File(namesFilepath), ds);
 		ReadFile.readStartTime(new File(startTimesFilepath), ds);
-		ReadFile.readFinishTime(new File(finishTimesFilepath), ds);
+		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("13.00.00"));
 
 		PrintWriter pw = new PrintWriter(outfile);
 		FileWriter.writeLapResult(pw, ds);
@@ -65,8 +66,7 @@ public class AcceptanceTest extends TestCase {
 		DataStructure dsCorrect = new DataStructure();
 		ReadFile.readResult(new File(resultFilepath), dsCorrect);
 
-        // TODO: FIX
-		//assertTrue(dsOut.equals(dsCorrect));
+		assertTrue(dsOut.equals(dsCorrect));
 	}
 
 	@Test

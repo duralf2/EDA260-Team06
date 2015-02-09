@@ -5,19 +5,7 @@ import java.io.PrintWriter;
 public class LapRace implements CompetitionType {
 
 	@Override
-	public void result(DataStructure ds, PrintWriter pw) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void columnNames(StringBuilder sb) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void writeStandardContestant() {
+	public void printResult(DataStructure ds, PrintWriter pw, StringBuilder sb) {
 		// TODO Auto-generated method stub
 		
 	}

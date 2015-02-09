@@ -5,10 +5,13 @@ public abstract class StandardContestant implements Comparable<StandardContestan
 	private RacerInfo racerInfo;
 	
 	public StandardContestant() {
-		
 	}
 	
 	public abstract void addStartTime(Time time);
 	
 	public abstract String toString();
+	
+	public abstract void addFinishTime(Time time);
+	
+	
 }

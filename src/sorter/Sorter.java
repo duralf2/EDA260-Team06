@@ -60,6 +60,8 @@ public class Sorter {
 	private void writeToFile(TreeMap<Time, Contestant> result, File resultFile,
 			File nameFile) {
 		try {
+			if (!new File("data").isDirectory())
+				new File("data").mkdir();//create the data directory if not exists
 			resultFile.createNewFile();
 			PrintWriter pw = new PrintWriter(resultFile);
 			int i = 1;

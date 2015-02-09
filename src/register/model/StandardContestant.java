@@ -1,8 +1,8 @@
 package register.model;
 
 public abstract class StandardContestant implements Comparable<StandardContestant> {
-	private Time startTime, finishTime;
-	private RacerInfo racerInfo;
+	protected Time startTime, finishTime;
+	protected RacerInfo racerInfo;
 	
 	public StandardContestant() {
 	}

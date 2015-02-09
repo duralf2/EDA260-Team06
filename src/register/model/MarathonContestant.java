@@ -2,6 +2,14 @@ package register.model;
 
 public class MarathonContestant extends StandardContestant {
 
+	public MarathonContestant() {
+		super();
+	}
+
+	public MarathonContestant(RacerInfo racerInfo) {
+		super(racerInfo);
+	}
+
 	@Override
 	public int compareTo(StandardContestant o) {
 		// TODO Auto-generated method stub
@@ -11,13 +19,13 @@ public class MarathonContestant extends StandardContestant {
 	@Override
 	public void addStartTime(Time time) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addFinishTime(Time time) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -29,7 +37,7 @@ public class MarathonContestant extends StandardContestant {
 	@Override
 	public void getTotalTime() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

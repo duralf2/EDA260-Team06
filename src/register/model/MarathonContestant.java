@@ -28,13 +28,23 @@ public class MarathonContestant extends StandardContestant {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Time getTotalTime() {
 		return Time.getTotalTime(super.startTime, super.finishTime);
+	}
+
+	@Override
+	protected String personalToString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getTotalTime().toString());
+		sb.append(";");
+		sb.append(super.startTime.toString());
+		sb.append(";");
+		sb.append(super.finishTime.toString());
+		return sb.toString();
 	}
 
 

@@ -16,7 +16,14 @@ public abstract class StandardContestant implements Comparable<StandardContestan
 	
 	public abstract void addFinishTime(Time time);
 	
-	public abstract String toString();
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(racerInfo.toString());
+		sb.append(personalToString());
+		return sb.toString();
+	}
+	
+	protected abstract String personalToString(); 
 	
 	public abstract Time getTotalTime();
 	

@@ -33,4 +33,10 @@ public class StageContestant extends StandardContestant {
 		
 	}
 
+	@Override
+	protected String personalToString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

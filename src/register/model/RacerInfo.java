@@ -9,4 +9,8 @@ public class RacerInfo {
 	public RacerInfo(String name) {
 		this.name = name;
 	}
+	
+	public String toString() {
+		return name + ";";
+	}
 }

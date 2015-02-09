@@ -29,5 +29,10 @@ public class TestMarathonContestant {
 		racer.addFinishTime(new Time("12.01.15"));
 		assertEquals("00.01.14", racer.getTotalTime().toString());
 	}
+	
+	@Test
+	public void testToString(){
+		
+	}
 
 }

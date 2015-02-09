@@ -30,14 +30,21 @@ public class TableRenderer extends DefaultTableCellRenderer {
 				isSelected, hasFocus, row, column);
 
 		Contestant contestant = data.getContestant((String) value);
-		if (((String) value).equals("x"))
+		if (isTemporaryRegistration(value))
 			component.setBackground(new Color(20,230,230));
-		else if (column == 0
-				&& (contestant == null || contestant.getName().equals("")))
+		else if (column == 0 && !doesContestantExist(contestant))
 			component.setBackground(Color.PINK);
 		else
 			component.setBackground(table.getBackground());
 
 		return component;
+	}
+
+	private boolean doesContestantExist(Contestant contestant) {
+		return contestant != null && !contestant.getName().equals("");
+	}
+
+	private boolean isTemporaryRegistration(Object value) {
+		return ((String) value).equals("x");
 	}
 }

@@ -66,16 +66,17 @@ public class ResultTest {
 	public void testResult() {
 		List<String[]> results = new ArrayList<String[]>();
 		try {
-			sort.sortTime(files);
-			results = ReadFile.readCSV(new File("testfiles/results.txt"));
+			sort.sortTime(files, null);
+			results = ReadFile.readCSV(new File("data/results.txt"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		assertEquals("01.24.02", results.get(0)[1].trim());
-		assertEquals("02.15.00", results.get(1)[1].trim());
-		assertEquals("02.19.54", results.get(2)[1].trim());
-		assertEquals("02.32.22", results.get(3)[1].trim());
-		assertEquals("03.24.45", results.get(4)[1].trim());
+		//start at 1 to ignore header
+		assertEquals("01.24.02", results.get(1)[3].trim());
+		assertEquals("02.15.00", results.get(2)[3].trim());
+		assertEquals("02.19.54", results.get(3)[3].trim());
+		assertEquals("02.32.22", results.get(4)[3].trim());
+		assertEquals("03.24.45", results.get(5)[3].trim());
 	}
 
 }

@@ -27,6 +27,13 @@
 			</manifest>
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />
 		</jar>
+		<jar destfile="build/jar/resultGenerator.jar" basedir="bin">
+					<manifest>
+						<attribute name="Main-Class" value="sorter.ResultMain" />
+						<!--Sets the main class of the program -->
+					</manifest>
+					<zipgroupfileset dir="lib/" includes="**/*.jar" />
+				</jar>
 	</target>
 
 	<target name="main" depends="clean,jar,test" />

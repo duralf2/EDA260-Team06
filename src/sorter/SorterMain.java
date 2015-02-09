@@ -9,7 +9,7 @@ import register.model.DataStructure;
 /**
  * This class is the entry point of the program, currently it only starts the gui.
  */
-public class SorterMain { // TODO SorterMain should start the sorter and not the gui?
+public class SorterMain { // TODO SorterMain should start the sorter and not the gui? Or maybe be called GUIMain?
 
 	public static void main(String[] args) throws IOException {
 		new RegistrationGUI("Registration GUI", new Register(new DataStructure()));

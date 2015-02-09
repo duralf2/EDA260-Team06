@@ -12,9 +12,10 @@ public class StartNumberField extends JTextField implements ActionListener {
 	private RegistrationGUI gui;
 
 	public StartNumberField(RegistrationGUI gui, int fontSize) {
+		super (5);
 		this.gui = gui;
 		addActionListener(this);
-		setToolTipText("Input start number.");
+		setToolTipText("Input start number");
 		setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
 		setFont(getFont().deriveFont(Font.PLAIN, fontSize));
 	}

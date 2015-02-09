@@ -118,7 +118,7 @@ public class RegistrationGUI extends JFrame {
 		}
 
 		register.writeFinishTimes();
-		entryTable.update();
+		entryTable.updateTableContents();
 
 		startNumberField.setText("");
 	}
@@ -201,7 +201,7 @@ public class RegistrationGUI extends JFrame {
 																// file
 		register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
 		register.readNames(Register.DEFAULT_NAME_FILE);
-		entryTable.update();
+		entryTable.updateTableContents();
 	}
 
 }

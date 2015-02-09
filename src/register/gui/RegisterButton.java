@@ -15,7 +15,6 @@ public class RegisterButton extends JButton implements ActionListener{
 		super ("Register");
 		this.gui = gui;
 		addActionListener(this);
-		setToolTipText("Register entry.");
 		setFont(getFont().deriveFont(Font.BOLD, fontSize));
 		setForeground(Color.WHITE);
 		setBackground(new Color(63, 181, 50));

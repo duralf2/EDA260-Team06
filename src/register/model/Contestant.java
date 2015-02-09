@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Contestant {
 	private String name;
+    private String className = "";
 	private LinkedList<Time> startTime;
 	private LinkedList<Time> finishTime;
     private LinkedList<Time> lapTimes;
@@ -99,4 +100,12 @@ public class Contestant {
 		}
 		return false;
 	}
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 }

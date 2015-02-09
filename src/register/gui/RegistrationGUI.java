@@ -185,7 +185,7 @@ public class RegistrationGUI extends JFrame {
 		}
 	}
 
-	private boolean isNumerical(String startNumber) {
+	private static boolean isNumerical(String startNumber) {
 		return startNumber.matches("[1-9][0-9]*");
 	}
 

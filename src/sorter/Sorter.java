@@ -6,10 +6,7 @@ import io.ReadFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import register.model.Contestant;
 import register.model.DataStructure;
@@ -50,15 +47,25 @@ public class Sorter {
             // Create the data directory if it doesn't exist
 			new File("data").mkdir();
 
-        // TODO: Replace with writeToFile
-		FileWriter.writeResult(new PrintWriter(new File("data/result.txt")), ds);
 
-        /*
 		ArrayList<Contestant> result = sortContestants(ds);
 		File resultFile = new File("data/results.txt");
 		writeToFile(result, resultFile, nameFile);
-		*/
 	}
+
+    private Map<String, ArrayList<Contestant>> groupByClass(DataStructure ds) {
+        HashMap<String, ArrayList<Contestant>> m = new HashMap<String, ArrayList<Contestant>>();
+
+        for(Contestant c : ds.getAllContestantEntries().values()) {
+            if (!m.containsKey(c.getClassName())) {
+                m.put(c.getClassName(), new ArrayList<Contestant>());
+            }
+
+            m.get(c.getClassName()).add(c);
+        }
+
+        return m;
+    }
 
     private ArrayList<Contestant> sortContestants(DataStructure ds) {
         Map<String, Contestant> contestants = ds.getAllContestantEntries();

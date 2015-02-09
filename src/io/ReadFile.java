@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import register.model.Contestant;
@@ -64,16 +66,26 @@ public class ReadFile {
 		readContestantColumns(ds, data.get(0));
 		data.remove(0);
 
-		String startNumber, name;
+		String startNumberOrClassName, name, className = "";
 		Contestant contestant;
+
 		for (String[] line : data) {
-			startNumber = line[0];
-			name = line[1].trim();
-			contestant = getContestant(startNumber, ds);
-			contestant.setName(name);
-			ds.addContestantEntry(startNumber, contestant);
+			startNumberOrClassName = line[0];
+            if (isStartNumber(startNumberOrClassName)) {
+                name = line[1].trim();
+                contestant = getContestant(startNumberOrClassName, ds);
+                contestant.setName(name);
+                contestant.setClassName(className);
+                ds.addContestantEntry(startNumberOrClassName, contestant);
+            } else {
+                className = startNumberOrClassName;
+            }
 		}
 	}
+
+    private static boolean isStartNumber(String startNumber) {
+        return startNumber.matches("[1-9][0-9]*") || startNumber.equals("x");
+    }
 
 	private static void readContestantColumns(DataStructure ds,
 			String[] contestantColumns) {

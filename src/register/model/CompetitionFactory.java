@@ -1,13 +1,14 @@
 package register.model;
 
+import java.io.IOException;
 import java.util.Properties;
 
 public class CompetitionFactory {
 	private Properties prop;
 	CompetitionType ct;
 	
-	public CompetitionFactory() {
-		// TODO Auto-generated constructor stub
+	public CompetitionFactory() throws IOException {
+		this (new RaceProperties());
 	}
 	
 	public CompetitionFactory(Properties prop){

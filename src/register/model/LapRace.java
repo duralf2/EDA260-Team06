@@ -1,10 +1,9 @@
 package register.model;
 
 import java.io.PrintWriter;
-import java.util.Map;
 
 public class LapRace implements CompetitionType {
-	private int nbrOfLaps;
+	private int nbrOfLaps = 0;
 	@Override
 	public void printColumnNames(Database db, PrintWriter pw, StringBuilder sb) {
 		sb.append("StartNr;Namn;");
@@ -23,17 +22,17 @@ public class LapRace implements CompetitionType {
 	}
 	
     private int getMaxLaps(Database db) {
-        int maxLaps = 0;
-       for(db.getAllContestantEntries().values()
-        
-        
-//        for(StandardContestant c : contestantEntries.values()) {
-//            if(c.getLapsCompleted() > maxLaps)
-//                maxLaps = c.getLapsCompleted();
-//       
-//        }
-//        nbrOfLaps = maxLaps;
+       for(AbstractContestant c:db.getAllContestantEntries().values()){
+    	   if(((LapContestant)c).getLapsCompleted()>nbrOfLaps){
+    		   nbrOfLaps = ((LapContestant)c).getLapsCompleted();
+    	   }
+       }
         return nbrOfLaps;
+    }
+    
+    //TODO NbrOfLaps = 0 om man aldrig callat printColumnNames(med getMaxLaps då ja)
+    public int getMaxLaps(){
+    	return nbrOfLaps;
     }
 
 }

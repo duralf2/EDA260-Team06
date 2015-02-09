@@ -22,6 +22,9 @@ import register.model.DataStructure;
 import register.model.Time;
 
 
+/**
+ * This class represents the program frame and is the core of the gui.
+ */
 public class RegistrationGUI extends JFrame {
 
 	private StartNumberField startNumberField;
@@ -94,8 +97,13 @@ public class RegistrationGUI extends JFrame {
 		return fontSize;
 	}
 
+	/**
+	 * Reads the contents of the text field and tries to make a registration if
+	 *  the input is valid. This method handles normal registration, mass start
+	 *  registrations and temporary registrations.
+	 */
 	public void register() {
-		// TODO: Registrera den inmatade informationen här!
+		// TODO: Model-View-Control plz? Also change the name, this method doesn't only handle registrations anymore
 		String startNumber = startNumberField.getText();
 		DataStructure ds = register.getDataStructure();
 		if (isNumerical(startNumber)) {

@@ -7,8 +7,23 @@ import register.model.Contestant;
 import register.model.DataStructure;
 import register.model.Time;
 
+/**
+ * This class is responsible for writing data to files. The methods of this class
+ *  formats the data accordingly before printing it to the <code>PrintWriter</code>
+ *  that is passed along with the data.
+ */
 public class FileWriter {
 
+	/**
+	 * Prints the specified database to the specified stream. The data will be
+	 *  written in a format that is compatible with the excel file format.
+	 * @param pw The <code>PrintWriter</code> to where the data will be written
+	 * @param ds The database containing the data to write
+	 * @deprecated This method doesn't support laps,
+	 *  {@link #writeLapResult(PrintWriter, DataStructure)} does everything this
+	 *  method does but also has support for laps!
+	 */
+	@Deprecated // TODO Deprecated; writeLapResult() does the exact same thing, but has support for laps, this one is unnecessary
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
@@ -51,6 +66,14 @@ public class FileWriter {
 		pw.close();
 	}
 
+	/**
+	 * Prints the specified database to the specified stream. The data will be
+	 *  written in a format that is compatible with the excel file format. If
+	 *  there are several laps in the database additional columns are added to 
+	 *  display the lap results.
+	 * @param pw The <code>PrintWriter</code> to where the data will be written
+	 * @param ds The database containing the data to write
+	 */
 	public static void writeLapResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();

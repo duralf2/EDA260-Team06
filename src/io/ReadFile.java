@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Arrays;
 import java.util.List;
 
 import register.model.Contestant;
@@ -14,15 +13,44 @@ import register.model.Time;
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
+/**
+ * This class is responsible for reading files formatted in the excel file format
+ *  and store their contents into a database.
+ */
 public class ReadFile {
 
+	/**
+	 * Reads all the contents of the specified file and splits them into a list
+	 *  of string arrays. Each element in the list represents a line in the
+	 *  file, and each element in the string arrays represents a piece of text,
+	 *  separated by semicolons.
+	 * </br>
+	 * </br>
+	 * <b>Note:</b> Any whitespace following/preceding semicolons are left
+	 *  untouched by this method! Therefore it might be necessary to trim the
+	 *  elements of the string array after using this method.
+	 * @param file The file to read
+	 * @return The contents of the file, formatted as specified above
+	 * @throws IOException If the file doesn't exist or couldn't be closed
+	 */
 	public static List<String[]> readCSV(File file) throws IOException {
 		Reader reader = new FileReader(file);
 		CSVReader<String[]> csvParser = CSVReaderBuilder
 				.newDefaultReader(reader);
-		return csvParser.readAll();
+		List<String[]> result = csvParser.readAll();
+		reader.close();
+		return result;
 	}
 
+	/**
+	 * Reads the contents of the specified file and interprets it as a name file.
+	 *  All the names that are loaded are put into the specified database,
+	 *  creating new <code>Contestants</code> if there are none with the
+	 *  correct starting numbers. 
+	 * @param file The file to load the names from
+	 * @param ds The database to put the names into
+	 * @throws IOException If the file doesn't exist or couldn't be closed
+	 */
 	public static void readNames(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
@@ -36,9 +64,7 @@ public class ReadFile {
 		for (String[] line : data) {
 			startNumber = line[0];
 			name = line[1].trim();
-			contestant = ds.getContestant(startNumber);
-			if (contestant == null)
-				contestant = new Contestant();
+			contestant = getContestant(startNumber, ds);
 			contestant.setName(name);
 			ds.addContestantEntry(startNumber, contestant);
 		}
@@ -52,6 +78,15 @@ public class ReadFile {
 		ds.setContestantColumnNames(contestantColumns);
 	}
 
+	/**
+	 * Reads the specified file and interprets it as a list of start times. The
+     *  results are put into the specified database, creating new
+     *  <code>Contestants</code> if there are none with the correct starting
+     *  numbers.
+     * @param file The file to load the start times from
+	 * @param ds The database to put the start times into
+	 * @throws IOException If the file doesn't exist or couldn't be closed
+	 */
 	public static void readStartTime(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
@@ -66,11 +101,34 @@ public class ReadFile {
 		}
 	}
 
+	/**
+     * Reads the specified file and interprets it as a list of finish times. The
+     *  results are put into the specified database, creating new
+     *  <code>Contestants</code> if there are none with the correct starting
+     *  numbers. All the times loaded will be set as finish times, creating no
+     *  lap times.
+     * @param file The file to load the finish times from
+	 * @param ds The database to put the finish times into
+	 * @throws IOException If the file doesn't exist or couldn't be closed
+     */
     public static void readFinishTime(File file, DataStructure ds)
             throws IOException {
         readFinishTime(file, ds, new Time("00.00.00"));
     }
 
+    /**
+     * Reads the specified file and interprets it as a list of finish times. The
+     *  results are put into the specified database, creating new
+     *  <code>Contestants</code> if there are none with the correct starting
+     *  numbers. Since finish times are registered once for every lap, only the
+     *  finish time recorded after the time limit of the race ran out will be
+     *  set as the finish time, the rest of the times will be set as lap times.
+     * @param file The file to load the finish times from
+	 * @param ds The database to put the finish times into
+	 * @param racetime The time limit for the race, determines whether a specific
+	 *  time will be interpreted as a finish time or a lap time
+	 * @throws IOException If the file doesn't exist or couldn't be closed
+     */
 	public static void readFinishTime(File file, DataStructure ds, Time racetime)
 			throws IOException {
 		List<String[]> data = readCSV(file);
@@ -92,6 +150,17 @@ public class ReadFile {
 		}
 	}
 	
+	/**
+	 * Reads the specified file and interprets it as a result file. The loaded
+	 *  data is put into the specified database. 
+	 * @param file The file containing the results
+	 * @param ds The database to put the data into
+	 * @throws IOException If the file doesn't exist or couldn't be closed
+	 * @deprecated This method is getting harder and harder to maintain, and
+	 *  it doesn't satisfy the acceptance tests of the customer. A better way to
+	 *  perform acceptance tests is required
+	 */
+	@Deprecated // TODO Deprecated; See the reason in the javadoc
 	public static void readResult(File file, DataStructure ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
@@ -142,9 +211,7 @@ public class ReadFile {
 	private static Contestant getContestant(String startNr, DataStructure ds) {
 		Contestant contestant = ds.getContestant(startNr);
 		if (contestant == null) {
-			// TODO: Is there a better way? I don't know... Perhaps throw an
-			// exception?
-			contestant = new Contestant("");
+			contestant = new Contestant();
 			ds.addContestantEntry(startNr, contestant);
 		}
 		return contestant;

@@ -1,51 +1,45 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Teknisk Dokumentation</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	</head>
-	
-	<body>
-		<h1>Teknisk Dokumentation</h1>
-		<p>
-			Detta är otroligt viktig text.
-		</p>
-		
-		<h2>Underrubrik</h2>
-		<p>
-			Detta är otroligt mycket viktigare text.
-		</p>
-		
-		<h3>Djup underrubrik</h3>
-		<p>
-			Blah blah text blah blah.
-		</p>
-		
-		<script type="application/javascript">
-			var oldHtml = "<h1 style='font-size: 250px; text-align: center;'>NOPE.avi</h1>";
-			var body = document.getElementsByTagName("body")[0];
-			console.log(body);
-			
-			String.prototype.replaceAt = function(index, character) {
-    			return this.substr(0, index) + character + this.substr(index+character.length);
-			}
-			
-			setInterval(function() {
-				var tmp = oldHtml;
-				oldHtml = body.innerHTML;
-				body.innerHtml = obfuscate(tmp, true);
-			}, 2000);
-			
-			var obfuscate = function(s, to) {
-				var offset = to ? 1 : -1;
-				for(var i=0; i<s.length; i++) {
-					var c = String.fromCharCode(s.charCodeAt(i)+offset);
-					s = s.replaceAt(i, c);
-				};
-				return s;
-			}
-		</script>	
-		
-	</body>
+<head>
+    <title>Teknisk Dokumentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <h1>Teknisk Dokumentation</h1>
+    <p>
+        Här finner ni dokumentation om systemets uppbyggnad.
+        Projektet finner ni på <a href="https://github.com/duralf2/EDA260-Team06/">GitHub</a>.
+        Status av senaste build kan ni hitta på <a href="https://travis-ci.org/duralf2/EDA260-Team06/">Travis</a>.
+    </p>
+    <img src="https://travis-ci.org/duralf2/EDA260-Team06.svg?branch=master">
+
+
+    <hr>
+
+    <h2>Arkitektur</h2>
+    <p>
+        Programmet har vid skrivande stund en något konstig arkitektur med
+        aningen förvirrande namn. Detta bör fixas vid nästa refaktoriseringstillfälle.
+    </p>
+
+    <hr>
+
+    <h2>Utvecklingsverktyg</h2>
+    <p>
+        De flesta automatiserade processer använder sig av ANT. Här dokumenterar vi några av de mest använda.
+    </p>
+
+    <h3>Generera javadocs</h3>
+    <p>
+        Kör <code>ant javadoc</code>, öppna
+        <code><a href="javadocs/index.html">Dokumentation/javadocs/index.html</a></code>.
+    </p>
+
+    <h3>Bygga jar-fil</h3>
+    <p>
+        Kör <code>ant jar</code>, GUI-programmet lägger sig då i <code>build/jar/program.jar</code>.
+    </p>
+</body>
 </html>
-		

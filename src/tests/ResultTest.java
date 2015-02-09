@@ -72,11 +72,11 @@ public class ResultTest {
 			e.printStackTrace();
 		}
 		//start at 1 to ignore header
-		assertEquals("01.24.02", results.get(1)[3].trim());
-		assertEquals("02.15.00", results.get(2)[3].trim());
-		assertEquals("02.19.54", results.get(3)[3].trim());
-		assertEquals("02.32.22", results.get(4)[3].trim());
-		assertEquals("03.24.45", results.get(5)[3].trim());
+		assertEquals(" 01.24.02 13.37.37 15.01.39", results.get(1)[3] + results.get(1)[4] + results.get(1)[5]);
+		assertEquals(" 02.15.00 12.00.01 14.15.01", results.get(2)[3] + results.get(2)[4] + results.get(2)[5]);
+		assertEquals(" 02.19.54 12.15.33 14.35.27", results.get(3)[3] + results.get(3)[4] + results.get(3)[5]);
+		assertEquals(" 02.32.22 12.25.37 14.57.59", results.get(4)[3] + results.get(4)[4] + results.get(4)[5]);
+		assertEquals(" 03.24.45 12.05.50 15.30.35", results.get(5)[3] + results.get(5)[4] + results.get(5)[5]);
 	}
 
 }

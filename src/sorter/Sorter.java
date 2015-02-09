@@ -68,7 +68,7 @@ public class Sorter {
 				startNumbers = ReadFile.readCSV(nameFile);
 			else
 				startNumbers = ReadFile.readCSV(new File("testfiles/namn.txt"));
-			pw.write("Placering; StartNr; Namn; Totaltid\n");
+			pw.write("Placering; StartNr; Namn; Totaltid; Starttid; Måltid\n");
 			for (Time t : result.keySet()) {
 				String s = "";
 				for (String[] s1 : startNumbers) {
@@ -76,7 +76,8 @@ public class Sorter {
 						s = s1[0];
 				}
 				pw.write(i + "; " + s + "; " + result.get(t).getName() + "; "
-						+ t.toString() + "\n");
+						+ t.toString() + "; " + result.get(t).getStartTime()
+						+ "; " + result.get(t).getFinishTime() + "\n");
 				i++;
 			}
 			pw.close();

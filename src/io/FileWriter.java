@@ -155,7 +155,7 @@ public class FileWriter {
 		for (Time time : lapTimes)
 			sb.append(time.toString() + ";");
 		for (int i = lapTimes.size(); i < maxLaps - 1; i++)
-			sb.append(" ;");
+			sb.append(";");
 
 		if (contestant.finishTimeSize() == 0) {
 //			sb.append("Slut?");

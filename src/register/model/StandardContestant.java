@@ -9,9 +9,10 @@ public abstract class StandardContestant implements Comparable<StandardContestan
 	
 	public abstract void addStartTime(Time time);
 	
-	public abstract String toString();
-	
 	public abstract void addFinishTime(Time time);
 	
+	public abstract String toString();
+	
+	public abstract void getTotalTime();
 	
 }

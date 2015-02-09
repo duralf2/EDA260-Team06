@@ -26,4 +26,10 @@ public class LapContestant extends StandardContestant{
 		
 	}
 
+	@Override
+	public void getTotalTime() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

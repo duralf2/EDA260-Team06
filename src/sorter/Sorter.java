@@ -1,5 +1,6 @@
 package sorter;
 
+import io.FileWriter;
 import io.ReadFile;
 
 import java.io.File;
@@ -53,13 +54,16 @@ public class Sorter {
 		}
 		// TODO: change this file to be a parameter for the function
 		File resultFile = new File("data/results.txt");
-		writeToFile(results, resultFile, nameFile);
+		FileWriter.writeResult(new PrintWriter(new File("data/result.txt")), ds);
+		//writeToFile(results, resultFile, nameFile);
 	}
 
 	// private method for writing to file
 	private void writeToFile(TreeMap<Time, Contestant> result, File resultFile,
 			File nameFile) {
 		try {
+			if (!new File("data").isDirectory())
+				new File("data").mkdir();//create the data directory if not exists
 			resultFile.createNewFile();
 			PrintWriter pw = new PrintWriter(resultFile);
 			int i = 1;

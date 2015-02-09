@@ -39,7 +39,7 @@
 					<zipgroupfileset dir="lib/" includes="**/*.jar" />
 				</jar>
 	</target>
-
+	
 	<target name="main" depends="clean,jar,test" />
 	<!--Runs clean, jar and test in order-->
 

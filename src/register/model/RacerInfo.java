@@ -1,13 +1,23 @@
 package register.model;
 
+import java.util.HashMap;
+
 public class RacerInfo {
-	private String name;
-	
+	private HashMap<String, String> information;
+
 	public RacerInfo() {
-		name = "";
+		information = new HashMap<String, String>();
 	}
-	public RacerInfo(String name) {
-		this.name = name;
+
+	public void put(String key, String value) {
+		information.put(key, value);
+	}
+
+	public String get(String key) {
+		String value = information.get(key);
+		if (value == null)
+			value = "";
+		return value;
 	}
 	
 	public String toString() {

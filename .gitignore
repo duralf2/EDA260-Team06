@@ -16,7 +16,7 @@ docs/api/
 *.out
 Crystal
 build
-Data
+data
 *.xml
 
 local.properties

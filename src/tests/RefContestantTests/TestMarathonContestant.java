@@ -52,7 +52,7 @@ public class TestMarathonContestant {
 		racerAwesome.addStartTime(new Time("12.00.01"));
 		racerAwesome.addFinishTime(new Time("12.01.15"));
 		
-		assertEquals(-1, racer.compareTo(racerAwesome) );
+		assertTrue(racer.compareTo(racerAwesome) > 0 );
 	}
 
 }

@@ -20,4 +20,10 @@ public class MarathonContestant extends StandardContestant {
 		
 	}
 
+	@Override
+	public void addFinishTime(Time time) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

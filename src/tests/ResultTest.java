@@ -63,14 +63,11 @@ public class ResultTest {
 	}
 
 	@Test
-	public void testResult() {
+	public void testResult() throws IOException {
 		List<String[]> results = new ArrayList<String[]>();
-		try {
 			sort.sortTime(files, null);
 			results = ReadFile.readCSV(new File("data/results.txt"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 		//start at 1 to ignore header
 		assertEquals(" 01.24.02 13.37.37 15.01.39", results.get(1)[3] + results.get(1)[4] + results.get(1)[5]);
 		assertEquals(" 02.15.00 12.00.01 14.15.01", results.get(2)[3] + results.get(2)[4] + results.get(2)[5]);

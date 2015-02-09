@@ -38,7 +38,7 @@ public class ContestantFactoryTest {
 	public void testCreateRegisteredContestants() throws IOException {
 		factory.createRegisteredContestants(dataStructure);
 		
-		for (Entry<String, StandardContestant> entry : dataStructure.getAllContestantEntries().entrySet())
+		for (Entry<String, AbstractContestant> entry : dataStructure.getAllContestantEntries().entrySet())
 		{
 			assertEquals(MarathonContestant.class, entry.getValue().getClass());
 		}

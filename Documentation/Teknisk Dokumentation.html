@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Teknisk Dokumentation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	</head>
+	
+	<body>
+		<h1>Teknisk Dokumentation</h1>
+		<p>
+			Detta är otroligt viktig text.
+		</p>
+		
+		<h2>Underrubrik</h2>
+		<p>
+			Detta är otroligt mycket viktigare text.
+		</p>
+		
+		<h3>Djup underrubrik</h3>
+		<p>
+			Blah blah text blah blah.
+		</p>
+		
+		<script type="application/javascript">
+			var oldHtml = "<h1 style='font-size: 250px; text-align: center;'>NOPE.avi</h1>";
+			var body = document.getElementsByTagName("body")[0];
+			console.log(body);
+			
+			String.prototype.replaceAt = function(index, character) {
+    			return this.substr(0, index) + character + this.substr(index+character.length);
+			}
+			
+			setInterval(function() {
+				var tmp = oldHtml;
+				oldHtml = body.innerHTML;
+				body.innerHtml = obfuscate(tmp, true);
+			}, 2000);
+			
+			var obfuscate = function(s, to) {
+				var offset = to ? 1 : -1;
+				for(var i=0; i<s.length; i++) {
+					var c = String.fromCharCode(s.charCodeAt(i)+offset);
+					s = s.replaceAt(i, c);
+				};
+				return s;
+			}
+		</script>	
+		
+	</body>
+</html>
+		

@@ -35,14 +35,13 @@ public class Sorter {
 		ds.clearContestantEntries();
 		
 		ReadFile.readNames(new File("testfiles/namn.txt"), ds);
-		for (File file : files) {
-			ReadFile.readFinishTime(file, ds);
-		}
+		ReadFile.readStartTime(files[0], ds);
+		ReadFile.readFinishTime(files[1], ds);
 		
 		Map<String,Contestant> contestants = ds.getAllContestantEntries();
 		for(String startNumber : contestants.keySet()){
 			Contestant con = contestants.get(startNumber);
-			results.put(con.getFinishTime(), con);
+			results.put(new Time(con.getTotalTime()), con);
 		}
 		
 		int i = 1;

@@ -118,7 +118,7 @@ public class RegistrationGUI extends JFrame {
 		}
 
 		register.writeFinishTimes();
-		entryTable.update();
+		entryTable.updateTableContents();
 
 		startNumberField.setText("");
 	}
@@ -178,7 +178,7 @@ public class RegistrationGUI extends JFrame {
 		register.performMassStart(Register.DEFAULT_RESULT_FILE);
 		try {
 			register.refreshEntryList();
-			this.entryTable.update();
+			this.entryTable.updateTableContents();
 		} catch (IOException e) {
 			// TODO: exception handling
 			e.printStackTrace();

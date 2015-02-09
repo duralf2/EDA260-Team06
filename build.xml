@@ -18,6 +18,10 @@
 		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath"/>
 	</target>
 
+    <target name="javadoc">
+        <javadoc sourcepath="src" destdir="Documentation/javadocs"></javadoc>
+    </target>
+
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
 		<jar destfile="build/jar/program.jar" basedir="bin">

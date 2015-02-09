@@ -5,6 +5,7 @@ bin/
 tmp/
 out/
 docs/api/
+Documentation/javadocs/
 *.zip
 *.tmp
 *.bak

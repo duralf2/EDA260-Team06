@@ -6,6 +6,7 @@ import io.ReadFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -37,53 +38,73 @@ public class Sorter {
 	 *             If any of the files doesn't exist or couldn't be closed
 	 */
 	public void sortTime(File[] files, File nameFile) throws IOException {
-		TreeMap<Time, Contestant> results = new TreeMap<Time, Contestant>();
-
 		ds.clearContestantEntries();
-		if (nameFile == null)
-			ReadFile.readNames(new File("testfiles/namn.txt"), ds);
-		else
-			ReadFile.readNames(nameFile, ds);
-		ReadFile.readStartTime(files[0], ds);
-		ReadFile.readFinishTime(files[1], ds);
 
-//		Map<String, Contestant> contestants = ds.getAllContestantEntries();
-//		for (String startNumber : contestants.keySet()) {
-//			Contestant con = contestants.get(startNumber);
-//			results.put(new Time(con.getTotalTime()), con);
-//		}
+        ReadFile.readStartTime(files[0], ds);
+        for(int i=1; i < files.length; i++) {
+            ReadFile.readFinishTime(files[i], ds);
+        }
+
 		// TODO: change this file to be a parameter for the function
 		if (!new File("data").isDirectory())
-			new File("data").mkdir();//create the data directory if not exists
-//		File resultFile = new File("data/results.txt");
+            // Create the data directory if it doesn't exist
+			new File("data").mkdir();
+
+        // TODO: Replace with writeToFile
 		FileWriter.writeResult(new PrintWriter(new File("data/result.txt")), ds);
-//		writeToFile(results, resultFile, nameFile);
+
+        /*
+		ArrayList<Contestant> result = sortContestants(ds);
+		File resultFile = new File("data/results.txt");
+		writeToFile(result, resultFile, nameFile);
+		*/
 	}
 
+    private ArrayList<Contestant> sortContestants(DataStructure ds) {
+        Map<String, Contestant> contestants = ds.getAllContestantEntries();
+
+        ArrayList<ArrayList<Contestant>> al = new ArrayList<ArrayList<Contestant>>();
+        for(int i=0; i <= ds.getMaxLaps(); i++) {
+            al.add(new ArrayList<Contestant>());
+        }
+
+        for(Contestant c : contestants.values()) {
+            al.get(c.getLapsCompleted()).add(c);
+        }
+        ArrayList<Contestant> result = new ArrayList<Contestant>();
+        for(ArrayList<Contestant> a : al) {
+            result.addAll(a);
+        }
+
+        return result;
+    }
+
 	// private method for writing to file
-	private void writeToFile(TreeMap<Time, Contestant> result, File resultFile,
+	private void writeToFile(ArrayList<Contestant> result, File resultFile,
 			File nameFile) {
 		try {
 			if (!new File("data").isDirectory())
 				new File("data").mkdir();//create the data directory if not exists
 			resultFile.createNewFile();
+
 			PrintWriter pw = new PrintWriter(resultFile);
 			int i = 1;
-			List<String[]> startNumbers;
-			if (nameFile != null)
-				startNumbers = ReadFile.readCSV(nameFile);
-			else
-				startNumbers = ReadFile.readCSV(new File("testfiles/namn.txt"));
+			List<String[]> startNumbers = ReadFile.readCSV(nameFile);
+            for(String[] s : startNumbers) {
+                System.out.println(s[0]);
+            }
+
 			pw.write("Placering; StartNr; Namn; Totaltid; Starttid; Måltid\n");
-			for (Time t : result.keySet()) {
+			for (Contestant c : result) {
 				String s = "";
 				for (String[] s1 : startNumbers) {
-					if (s1[1].trim().equalsIgnoreCase(result.get(t).getName()))
+					if (s1[1].trim().equalsIgnoreCase(c.getName()))
 						s = s1[0];
 				}
-				pw.write(i + "; " + s + "; " + result.get(t).getName() + "; "
-						+ t.toString() + "; " + result.get(t).getStartTime()
-						+ "; " + result.get(t).getFinishTime() + "\n");
+				String out = i + ";" + s + ";" + c.getName() + ";"
+						+ c.getTotalTime() + ";" + c.getStartTime()
+						+ ";" + c.getFinishTime() + "\n";
+                pw.write(out.replace(";", "; "));
 				i++;
 			}
 			pw.close();
@@ -91,10 +112,4 @@ public class Sorter {
 			e.printStackTrace();
 		}
 	}
-
-	// TODO Skriv ut det i fönstret, eller i fil.
-	// 1) clear ds
-	// 2) LADDA IN FILER
-	// 3) LÄGG IN I TREE MAP
-	// 4) SKRIV UT TREE MAP
 }

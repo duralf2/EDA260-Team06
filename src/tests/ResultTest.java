@@ -48,6 +48,7 @@ public class ResultTest {
 			pw.write("3; 12.15.33\n");
 			pw.write("4; 12.25.37\n");
 			pw.write("5; 13.37.37\n");
+			pw.write("5; 13.56.55\n");
 			pw.close();
 			pw = new PrintWriter(files[1]);
 			pw.write("1; 14.15.01\n");

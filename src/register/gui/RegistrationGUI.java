@@ -27,7 +27,7 @@ import register.model.Time;
 public class RegistrationGUI extends JFrame {
 
 	private StartNumberField startNumberField;
-	private EntryList entryTable;
+	public EntryList entryTable;
 	private Register register;
 
 	public RegistrationGUI(String title, Register register) {
@@ -177,7 +177,8 @@ public class RegistrationGUI extends JFrame {
 	private void registerMassStart() {
 		register.performMassStart(Register.DEFAULT_RESULT_FILE);
 		try {
-			refreshEntryList();
+			register.refreshEntryList();
+			this.entryTable.updateTableContents();
 		} catch (IOException e) {
 			// TODO: exception handling
 			e.printStackTrace();
@@ -186,22 +187,6 @@ public class RegistrationGUI extends JFrame {
 
 	private boolean isNumerical(String startNumber) {
 		return startNumber.matches("[1-9][0-9]*");
-	}
-
-	private void refreshEntryList() throws IOException {
-		register.getDataStructure().clearContestantEntries(); // TODO RegGui;
-																// Add the new
-																// time directly
-																// to the
-																// datastructure
-																// instead of
-																// clearing it
-																// and reading
-																// it all from a
-																// file
-		register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
-		register.readNames(Register.DEFAULT_NAME_FILE);
-		entryTable.updateTableContents();
 	}
 
 }

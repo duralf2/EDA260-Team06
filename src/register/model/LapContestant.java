@@ -1,6 +1,6 @@
 package register.model;
 
-public class LapContestant extends StandardContestant{
+public class LapContestant extends AbstractContestant{
 	
 	public LapContestant() {
 		super();
@@ -12,7 +12,7 @@ public class LapContestant extends StandardContestant{
 
 
 	@Override
-	public int compareTo(StandardContestant o) {
+	public int compareTo(AbstractContestant o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

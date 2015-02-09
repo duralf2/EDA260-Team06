@@ -13,7 +13,7 @@ import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
 import register.model.RaceProperties;
-import register.model.StandardContestant;
+import register.model.AbstractContestant;
 
 public class ContestantFactoryTest {
 
@@ -43,7 +43,7 @@ public class ContestantFactoryTest {
 
 	@Test
 	public void testCreateContestant() {
-		StandardContestant contestant = factory.createContestant(new String[] {"StartNo", "Namn"}, new String[] { "1", "Bertil" });
+		AbstractContestant contestant = factory.createContestant(new String[] {"StartNo", "Namn"}, new String[] { "1", "Bertil" });
 		assertEquals(MarathonContestant.class, contestant.getClass());
 
 		properties.put(RaceProperties.KEY_RACE_TYPE,

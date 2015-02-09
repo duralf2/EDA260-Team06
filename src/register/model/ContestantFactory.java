@@ -30,7 +30,7 @@ public class ContestantFactory {
 			String[] line = fileRows.get(i);
 
 			String startNumber = line[0].trim();
-			StandardContestant contestant = createContestant(ds.getContestantColumnNames(), line);
+			AbstractContestant contestant = createContestant(ds.getContestantColumnNames(), line);
 			ds.addContestantEntry(startNumber, contestant);
 		}
 	}
@@ -44,11 +44,11 @@ public class ContestantFactory {
 	}
 
 	// TODO krashar om information saknas (line.lenght < columnNames.lenght)
-	public StandardContestant createContestant(String[] columnNames, String[] line) {
+	public AbstractContestant createContestant(String[] columnNames, String[] line) {
 
 		RacerInfo info = createRacerInfo(columnNames, line);
 
-		StandardContestant contestant = null;
+		AbstractContestant contestant = null;
 		if (properties.getProperty(RaceProperties.KEY_RACE_TYPE).equals(RaceProperties.VALUE_RACE_MARATHON)) {
 			contestant = new MarathonContestant(info); 
 		}

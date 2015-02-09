@@ -18,8 +18,8 @@ import register.model.Time;
 public class Register {
 	private DataStructure ds;
 	
-	public static final File DEFAULT_RESULT_FILE = new File("utdata.txt");
-	public static final File DEFAULT_NAME_FILE   = new File("namn.txt");
+	public static final File DEFAULT_RESULT_FILE = new File("data/utdata.txt");
+	public static final File DEFAULT_NAME_FILE   = new File("data/namn.txt");
 	
 	public Register(DataStructure times) {
 		this.ds = times;

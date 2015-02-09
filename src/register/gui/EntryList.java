@@ -14,6 +14,10 @@ import register.logic.Register;
 import register.model.Contestant;
 import register.model.DataStructure;
 
+/**
+ * This class represents the table of the gui, it uses a custom renderer to mark
+ *  invalid registrations and temporary registrations.
+ */
 public class EntryList extends JTable {
 
 	private DataStructure ds;
@@ -23,7 +27,7 @@ public class EntryList extends JTable {
 		this.ds = register.getDataStructure();
 		setDefaultRenderer(Object.class, new TableRenderer(ds));
 		setFillsViewportHeight(true);
-		setFont(new Font("Arial", Font.BOLD, fontSize));
+		setFont(getFont().deriveFont(Font.BOLD, fontSize));
 		setRowHeight(fontSize);
 		setOpaque(true);
 		setToolTipText("Old registrations.");
@@ -37,8 +41,15 @@ public class EntryList extends JTable {
 		update();
 	}
 
-	// TODO:
-	public void update() {
+	
+	/**
+	 * Updates the contents of this entry list by reloading all the data from the
+	 *  data structure.
+	 * <br>
+	 * <br>
+	 * <b>Note:</b> This operation is slow if the database is big
+	 */
+	public void update() { // TODO: A better name?
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		Set<String> keys = entries.keySet();
 		String[] header = { "Start number", "Time" };
@@ -59,6 +70,9 @@ public class EntryList extends JTable {
 		setModel(model);
 	}
 
+	/**
+	 * A custom table model to stop the table from being editable.
+	 */
 	private class NonEditableTableModel extends DefaultTableModel {
 		public NonEditableTableModel(Object[][] data, Object[] header) {
 			super(data, header);

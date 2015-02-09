@@ -1,6 +1,5 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
 import io.FileWriter;
 import io.ReadFile;
 

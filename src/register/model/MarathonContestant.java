@@ -9,13 +9,25 @@ public class MarathonContestant extends StandardContestant {
 	}
 
 	@Override
+	public void addStartTime(Time time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addFinishTime(Time time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void addStartTime(Time time) {
+	public void getTotalTime() {
 		// TODO Auto-generated method stub
 		
 	}

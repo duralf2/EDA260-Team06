@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 
 public interface CompetitionType {
 	
-	void printResult(DataStructure ds, PrintWriter pw, StringBuilder sb);
+	void printColumnNames(Database db, PrintWriter pw, StringBuilder sb);
 	
 
 }

@@ -19,15 +19,13 @@ public class LapContestant extends AbstractContestant {
 		lapTimes.add(time);
 	}
 
-	/*Method compares this object's total time with the specified object if specified is of the instance LapContestant.
-	 Returns a positive int if this object has a longer time than the specified object, return 0 if equal, and otherwise a negative integer,
-	 * */
+	// TODO - comment
 	@Override
 	public int compareTo(AbstractContestant o) {
 		if (o instanceof LapContestant) {
 			LapContestant lapContestant = (LapContestant) o;
 			if (getLapsCompleted() == lapContestant.getLapsCompleted()) {
-				return getTotalTime().compareTo(lapContestant.getTotalTime());
+				return lapContestant.getTotalTime().compareTo(getTotalTime());
 			}
 			return getLapsCompleted() - lapContestant.getLapsCompleted();
 		}

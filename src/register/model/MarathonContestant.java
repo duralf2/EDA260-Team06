@@ -11,9 +11,7 @@ public class MarathonContestant extends AbstractContestant {
 	}
 
 	@Override
-	/*Method compares this object's total time with the specified object if specified is of the instance MarathonContestant.
-	 Returns a positive int if this object has a longer time than the specified object, return 0 if equal, and otherwise a negative integer,
-	 * */
+	// TODO - comment
 	public int compareTo(AbstractContestant o) {
 		if( o instanceof MarathonContestant) {
 			return getTotalTime().compareTo(o.getTotalTime());

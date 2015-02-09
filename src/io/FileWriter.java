@@ -16,14 +16,11 @@ public class FileWriter {
 
 	/**
 	 * Prints the specified database to the specified stream. The data will be
-	 *  written in a format that is compatible with the excel file format.
+	 *  written in a format that is compatible with the excel file format. This
+	 *  method is to be used for simple races (marathon races).
 	 * @param pw The <code>PrintWriter</code> to where the data will be written
 	 * @param ds The database containing the data to write
-	 * @deprecated This method doesn't support laps,
-	 *  {@link #writeLapResult(PrintWriter, DataStructure)} does everything this
-	 *  method does but also has support for laps!
 	 */
-	@Deprecated // TODO Deprecated; writeLapResult() does the exact same thing, but has support for laps, this one is unnecessary
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();

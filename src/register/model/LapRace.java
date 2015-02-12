@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 public class LapRace implements CompetitionType {
 
 	@Override
-	public String printColumnNames(Database db, PrintWriter pw) {
+	public void printColumnNames(Database db, PrintWriter pw) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("StartNr;Namn;");
 		//TODO RacerInfo?
@@ -20,7 +20,7 @@ public class LapRace implements CompetitionType {
 			sb.append("Varvning" + i + ";");
 
 		sb.append("Mål\n");
-		return sb.toString();
+		pw.write(sb.toString());
 	}
 
 	private int getMaxLaps(Database db) {

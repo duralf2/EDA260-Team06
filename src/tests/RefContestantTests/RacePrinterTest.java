@@ -1,4 +1,4 @@
-package tests;
+package tests.RefContestantTests;
 
 import static org.junit.Assert.assertEquals;
 import io.RacePrinter;

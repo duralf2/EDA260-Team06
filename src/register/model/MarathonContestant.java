@@ -2,10 +2,6 @@ package register.model;
 
 public class MarathonContestant extends AbstractContestant {
 
-	public MarathonContestant() {
-		super();
-	}
-
 	public MarathonContestant(RacerInfo racerInfo) {
 		super(racerInfo);
 	}
@@ -26,7 +22,7 @@ public class MarathonContestant extends AbstractContestant {
 	}
 
 	@Override
-	protected String specifiedToString() {
+	protected String specifiedToString(CompetitionType competitionType) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getTotalTime().toString());
 		sb.append(";");

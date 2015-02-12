@@ -3,10 +3,12 @@ package register.model;
 import java.util.HashMap;
 
 public class RacerInfo {
+	private final String[] nameHeader;
 	private HashMap<String, String> information;
 
-	public RacerInfo() {
+	public RacerInfo(String[] nameHeader) {
 		information = new HashMap<String, String>();
+		this.nameHeader = nameHeader;
 	}
 
 	public void put(String key, String value) {
@@ -23,8 +25,10 @@ public class RacerInfo {
 	//TODO What order should the information be printed? Header needed,
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for( String racerInfo : information.keySet()) {
-			sb.append(information.get(racerInfo));
+		for(String racerInfo : nameHeader) {
+			String currentField = information.get(racerInfo);
+			if (currentField != null)
+				sb.append(currentField);
 			sb.append(";");
 		}
 		return sb.toString();

@@ -1,4 +1,4 @@
-package tests;
+package tests.RefContestantTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -32,9 +32,9 @@ public class DatabaseTest {
 
 	@Test
 	public void testGetAllContestantEntries() {
-		AbstractContestant contestant1 = new MarathonContestant();
-		AbstractContestant contestant2 = new MarathonContestant();
-		AbstractContestant contestant3 = new MarathonContestant();
+		AbstractContestant contestant1 = new MarathonContestant(null);
+		AbstractContestant contestant2 = new MarathonContestant(null);
+		AbstractContestant contestant3 = new MarathonContestant(null);
 		ds.addContestantEntry("1", contestant1);
 		ds.addContestantEntry("2", contestant2);
 		ds.addContestantEntry("3", contestant3);
@@ -48,7 +48,7 @@ public class DatabaseTest {
 
 	@Test
 	public void testAddContestantEntry() {
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(null);
 		ds.addContestantEntry("1", contestant);
 		assertEquals(contestant, ds.getContestant("1"));
 	}
@@ -56,7 +56,7 @@ public class DatabaseTest {
 	@Test
 	public void testEquals() {
 		Database ds2 = new Database();
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(null);
 		contestant.addStartTime(new Time("12.00.00"));
 		ds2.addContestantEntry("1", contestant);
 		ds.addContestantEntry("1", contestant);
@@ -71,7 +71,7 @@ public class DatabaseTest {
 	
 	@Test
 	public void testClearContestantEntries(){
-		ds.addContestantEntry("1", new MarathonContestant());
+		ds.addContestantEntry("1", new MarathonContestant(null));
 		ds.clearContestantEntries();
 		assertEquals(0, ds.getAllContestantEntries().size());
 	}

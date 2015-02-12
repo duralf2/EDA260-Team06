@@ -1,14 +1,11 @@
 package register.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class LapContestant extends AbstractContestant {
 	private LinkedList<Time> lapTimes;
-
-	public LapContestant() {
-		super();
-		lapTimes = new LinkedList<Time>();
-	}
 
 	public LapContestant(RacerInfo racerInfo) {
 		super(racerInfo);
@@ -34,37 +31,59 @@ public class LapContestant extends AbstractContestant {
 
 	@Override
 	public Time getTotalTime() {
-		return Time.getTotalTime(super.startTime, super.finishTime);
+		Time startTime = this.startTime;
+		if (startTime == null) {
+			startTime = new Time("00.00.00");
+		}
+		Time finishTime = this.finishTime;
+		if (finishTime == null) {
+			finishTime = new Time("00.00.00");
+		}
+		return Time.getTotalTime(startTime, finishTime);
 	}
 
 	public int getLapsCompleted() {
-		return lapTimes.size() + 1;
+		if (finishTime != null)
+			return lapTimes.size() + 1;
+		else
+			return lapTimes.size();
 	}
 
 	@Override
-	protected String specifiedToString() {
+	protected String specifiedToString(CompetitionType competitionType) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getLapsCompleted());
 		sb.append(";");
 		sb.append(getTotalTime().toString());
 		sb.append(";");
+		
+		List<Time> allLapTimes = new ArrayList<Time>(lapTimes);
+		if (finishTime != null)
+		{
+			allLapTimes.add(finishTime);
+		}
 
 		Time previousTime = super.startTime;
-		for (Time lapTime : lapTimes) {
-			sb.append(Time.getTotalTime(previousTime, lapTime).toString());
+		int maxLaps = ((LapRace) competitionType).getMaxLaps();
+		for (int i = 0;i < maxLaps; i++) {
+			if (allLapTimes.size() > i) {
+				sb.append(Time.getTotalTime(previousTime, allLapTimes.get(i)).toString());
+				previousTime = allLapTimes.get(i);
+			}
 			sb.append(";");
-			previousTime = lapTime;
 		}
-
-		sb.append(super.startTime);
+		if (startTime != null)
+			sb.append(startTime);
 		sb.append(";");
-
-		for (Time lapTime2 : lapTimes) {
-			sb.append(lapTime2.toString());
+		
+		for (int i = 0; i < maxLaps - 1;i++) {
+			if (lapTimes.size() > i)
+				sb.append(lapTimes.get(i));
 			sb.append(";");
 		}
 
-		sb.append(super.finishTime);
+		if (finishTime != null)
+			sb.append(finishTime);
 
 		return sb.toString();
 

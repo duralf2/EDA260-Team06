@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import register.model.MarathonContestant;
+import register.model.MarathonRace;
 import register.model.RacerInfo;
 import register.model.Time;
 
@@ -14,7 +15,7 @@ public class TestMarathonContestant {
 	
 	@Before
 	public void setUp() {
-		racerInfo = new RacerInfo();
+		racerInfo = new RacerInfo(new String[]{"Name"});
 		racerInfo.put("Name","Hannah");
 		racer = new MarathonContestant(racerInfo);
 	}
@@ -37,21 +38,16 @@ public class TestMarathonContestant {
 		racer.addStartTime(new Time("12.00.01"));
 		racer.addFinishTime(new Time("12.01.15"));
 		String match = "Hannah;00.01.14;12.00.01;12.01.15";
-		assertEquals(match, racer.toString());
+		assertEquals(match, racer.toString(new MarathonRace()));
 	}
 	
 	@Test
 	public void testCompareTo(){
-		RacerInfo racerInfo2 = new RacerInfo();
-		racerInfo2.put("Name", "Kevin");
-		MarathonContestant racerAwesome = new MarathonContestant(racerInfo2);
-		
+		MarathonContestant racerAwesome = new MarathonContestant(racerInfo);
 		racer.addStartTime(new Time("12.00.01"));
 		racer.addFinishTime(new Time("12.02.15"));
-		
 		racerAwesome.addStartTime(new Time("12.00.01"));
 		racerAwesome.addFinishTime(new Time("12.01.15"));
-		
 		assertTrue(racer.compareTo(racerAwesome) > 0 );
 	}
 

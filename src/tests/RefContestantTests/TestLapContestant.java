@@ -8,10 +8,11 @@ import register.model.*;
 
 public class TestLapContestant {
 	private LapContestant lapContestant;
+	private RacerInfo racerInfo;
 
 	@Before
 	public void setUp() {
-		RacerInfo racerInfo = new RacerInfo();
+		racerInfo = new RacerInfo(new String[]{"StartNbr;Name"});
 		racerInfo.put("StartNbr", "1");
 		racerInfo.put("Name", "Lars");
 		
@@ -34,8 +35,6 @@ public class TestLapContestant {
 	
 	@Test
 	public void testCompareToTotalTime() {
-		RacerInfo racerInfo = new RacerInfo();
-
 		racerInfo.put("StartNbr", "2");
 		racerInfo.put("Name", "Hampus");
 		
@@ -50,8 +49,6 @@ public class TestLapContestant {
 	
 	@Test
 	public void testCompareToNbrOfLaps() {
-		RacerInfo racerInfo = new RacerInfo();
-
 		racerInfo.put("StartNbr", "2");
 		racerInfo.put("Name", "Hampus");
 		

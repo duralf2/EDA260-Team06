@@ -32,11 +32,12 @@ public class ContestantFactoryTest {
 				RaceProperties.VALUE_RACE_MARATHON);
 		properties.put(RaceProperties.KEY_NAME_FILE_PATH,
 				"testfiles/FactoryTestNames.txt");
+		factory.createRegisteredContestants(dataStructure);
 	}
 
 	@Test
 	public void testCreateRegisteredContestants() throws IOException {
-		factory.createRegisteredContestants(dataStructure);
+		
 		
 		for (Entry<String, AbstractContestant> entry : dataStructure.getAllContestantEntries().entrySet())
 		{
@@ -48,12 +49,12 @@ public class ContestantFactoryTest {
 
 	@Test
 	public void testCreateContestant() {
-		AbstractContestant contestant = factory.createContestant(new String[] {"StartNo", "Namn"}, new String[] { "1", "Bertil" });
+		AbstractContestant contestant = factory.createContestant( new String[] { "1", "Bertil" });
 		assertEquals(MarathonContestant.class, contestant.getClass());
 
 		properties.put(RaceProperties.KEY_RACE_TYPE,
 				RaceProperties.VALUE_RACE_LAPS);
-		contestant = factory.createContestant(new String[] {"StartNo", "Namn"}, new String[] { "1", "Bertil" });
+		contestant = factory.createContestant(new String[] { "1", "Bertil" });
 		assertEquals(LapContestant.class, contestant.getClass());
 	}
 }

@@ -1,10 +1,6 @@
 package register.model;
 
 public class StageContestant extends AbstractContestant {
-	
-	public StageContestant() {
-		super();
-	}
 
 	public StageContestant(RacerInfo racerInfo) {
 		super(racerInfo);
@@ -25,7 +21,7 @@ public class StageContestant extends AbstractContestant {
 	}
 
 	@Override
-	protected String specifiedToString() {
+	protected String specifiedToString(CompetitionType competitionType) {
 		// TODO Auto-generated method stub
 		return null;
 	}

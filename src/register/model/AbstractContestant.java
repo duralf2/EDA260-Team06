@@ -4,10 +4,6 @@ public abstract class AbstractContestant implements Comparable<AbstractContestan
 	protected Time startTime, finishTime; //TODO: Hantera finishTime då denna är null!
 	protected RacerInfo racerInfo;
 	
-	public AbstractContestant() {
-		racerInfo = new RacerInfo();
-	}
-	
 	public AbstractContestant( RacerInfo racerInfo) {
 		this.racerInfo = racerInfo;
 	}
@@ -20,14 +16,14 @@ public abstract class AbstractContestant implements Comparable<AbstractContestan
 		finishTime = time;
 	}
 	
-	public String toString() {
+	public String toString(CompetitionType competitionType) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(racerInfo.toString());
-		sb.append(specifiedToString());
+		sb.append(specifiedToString(competitionType));
 		return sb.toString();
 	}
 	
-	protected abstract String specifiedToString(); 
+	protected abstract String specifiedToString(CompetitionType competitionType); 
 	
 	public abstract Time getTotalTime();
 	

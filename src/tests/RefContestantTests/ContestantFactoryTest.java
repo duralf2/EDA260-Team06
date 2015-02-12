@@ -15,6 +15,7 @@ import register.model.LapContestant;
 import register.model.MarathonContestant;
 import register.model.RaceProperties;
 import register.model.AbstractContestant;
+import register.model.RacerInfo;
 
 public class ContestantFactoryTest {
 
@@ -48,12 +49,15 @@ public class ContestantFactoryTest {
 
 	@Test
 	public void testCreateContestant() {
-		AbstractContestant contestant = factory.createContestant( new String[] { "1", "Bertil" });
+		RacerInfo info = factory.createRaceInfo();
+		info.put("StartNr", "1");
+		info.put("Namn", "Bertil");
+		AbstractContestant contestant = factory.createContestant();
 		assertEquals(MarathonContestant.class, contestant.getClass());
 
 		properties.put(RaceProperties.KEY_RACE_TYPE,
 				RaceProperties.VALUE_RACE_LAPS);
-		contestant = factory.createContestant(new String[] { "1", "Bertil" });
+		contestant = factory.createContestant(info);
 		assertEquals(LapContestant.class, contestant.getClass());
 	}
 }

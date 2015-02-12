@@ -10,10 +10,10 @@ public class Time implements Comparable<Time> {
 
 	public Time(String time) {
 		time = time.trim();
-		if (time.charAt(2) != '.' || time.charAt(5) != '.') {
-			throw new IllegalArgumentException(time);
+		
+		if(!time.matches("(([0-1][0-9])|(2[0-3])).[0-5][0-9].[0-5][0-9]")){
+			throw new IllegalArgumentException();
 		}
-
 		try {
 			hours = Integer.parseInt(time.substring(0, 2));
 			minutes = Integer.parseInt(time.substring(3, 5));
@@ -21,12 +21,8 @@ public class Time implements Comparable<Time> {
 		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}
-
-		if (minutes >= 60 || seconds >= 60 || hours < 0 || minutes < 0
-				|| seconds < 0) {
-			throw new IllegalArgumentException();
-		}
 	}
+
 
 	@Override
 	public String toString() {

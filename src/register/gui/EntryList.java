@@ -28,9 +28,10 @@ public class EntryList extends JTable {
 		setDefaultRenderer(Object.class, new TableRenderer(ds));
 		setFillsViewportHeight(true);
 		setFont(getFont().deriveFont(Font.BOLD, fontSize));
+		getTableHeader().setFont(getFont().deriveFont(Font.BOLD, fontSize/2));
 		setRowHeight(fontSize);
 		setOpaque(true);
-		setToolTipText("Old registrations.");
+		setToolTipText("Existing registrations");
 
 		try {
 			register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
@@ -38,7 +39,7 @@ public class EntryList extends JTable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		update();
+		updateTableContents();
 	}
 
 	
@@ -49,7 +50,7 @@ public class EntryList extends JTable {
 	 * <br>
 	 * <b>Note:</b> This operation is slow if the database is big
 	 */
-	public void update() { // TODO: A better name?
+	public void updateTableContents() {
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
 		Set<String> keys = entries.keySet();
 		String[] header = { "Start number", "Time" };

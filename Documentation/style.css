@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+}
+
+body {
+    max-width: 800px;
+    margin: 0 auto 0 auto;
+}
+
+code {
+    background-color: #DDD;
+    border-radius: 4px;
+    padding: 3px;
+}

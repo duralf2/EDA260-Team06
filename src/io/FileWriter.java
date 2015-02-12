@@ -27,13 +27,10 @@ public class FileWriter {
 	public static void writeResult(PrintWriter pw, DataStructure ds) {
 		StringBuilder sb = new StringBuilder();
 		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n"); // TODO
-																		// how
-																		// to
-																		// handle
-																		// setContestantColumnNames()
-																		// in
-																		// Datastrucure?
+		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
+
+		// TODO how to handle setContestantColumnNames() in Datastrucure?
+		
 		Contestant contestant;
 		for (String startNumber : entries.keySet()) {
 			contestant = entries.get(startNumber);
@@ -85,21 +82,21 @@ public class FileWriter {
 
 		List<String> incorrectRegistrations = new ArrayList<String>();
 		for (String startNumber : entries.keySet()) {
-			 Contestant contestant = entries.get(startNumber);
+			Contestant contestant = entries.get(startNumber);
 
-			 if (contestant.getName().equals(""))
-				 incorrectRegistrations.add(startNumber);
-			 else {
-				 writeContestant(sb, contestant, startNumber, maxLaps);
-			 }
+			if (contestant.getName().equals(""))
+				incorrectRegistrations.add(startNumber);
+			else {
+				writeContestant(sb, contestant, startNumber, maxLaps);
+			}
 		}
 
 		if (!incorrectRegistrations.isEmpty()) {
 			sb.append("Icke existerande startnummer\n");
 			makeColumnNames(sb, maxLaps);
 			for (String startNumber : incorrectRegistrations) {
-				writeContestant(sb, ds.getContestant(startNumber),
-						startNumber, maxLaps);
+				writeContestant(sb, ds.getContestant(startNumber), startNumber,
+						maxLaps);
 			}
 		}
 
@@ -114,7 +111,7 @@ public class FileWriter {
 		for (int i = 1; i <= maxLaps; i++)
 			sb.append("Varv" + i + ";");
 		sb.append("Start;");
-		
+
 		for (int i = 1; i <= maxLaps - 1; i++)
 			sb.append("Varvning" + i + ";");
 
@@ -158,7 +155,7 @@ public class FileWriter {
 			sb.append(";");
 
 		if (contestant.finishTimeSize() == 0) {
-//			sb.append("Slut?");
+			// sb.append("Slut?");
 		} else {
 			if (isImpossibleTime(contestant)) {
 				sb.append(contestant.getFinishTime() + ";"

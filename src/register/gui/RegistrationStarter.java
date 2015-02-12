@@ -11,7 +11,7 @@ import register.logic.TimeRegistrationHandler;
 import register.model.ContestantTimes;
 
 public class RegistrationStarter {
-	private static final String DEFAULT_REGISTRATION_PROPERTIES = "data/registration.properties";
+	private static final String DEFAULT_REGISTRATION_PROPERTIES = "RegistrationData/registration.properties";
 	private Properties defaultProperties;
 
 	public static void main(String[] args) {

@@ -14,11 +14,18 @@ public class RacePrinter {
 	
 	public void print(String data) throws IOException
 	{
-		File parentFile = target.getParentFile();
-		if (parentFile != null)
-			parentFile.mkdirs();
-		FileWriter out = new FileWriter(target);
-		out.write(data);
-		out.close();
+		if (data != null)
+		{
+			File parentFile = target.getParentFile();
+			if (parentFile != null)
+				parentFile.mkdirs();
+			FileWriter out = new FileWriter(target);
+			out.write(data);
+			out.close();
+		}
+		else
+		{
+			throw new IllegalArgumentException("Can't print null!");
+		}
 	}
 }

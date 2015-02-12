@@ -1,20 +1,20 @@
 package tests.RefContestantTests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.AbstractContestant;
 import register.model.ContestantFactory;
 import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
 import register.model.RaceProperties;
-import register.model.AbstractContestant;
 import register.model.RacerInfo;
 
 public class ContestantFactoryTest {

@@ -11,9 +11,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.AbstractContestant;
 import register.model.Database;
 import register.model.MarathonContestant;
-import register.model.AbstractContestant;
 import register.model.Time;
 
 public class DatabaseTest {
@@ -52,6 +52,14 @@ public class DatabaseTest {
 		AbstractContestant contestant = new MarathonContestant();
 		db.addContestantEntry("1", contestant);
 		assertEquals(contestant, db.getContestant("1"));
+	}
+
+	@Test
+	public void testRemoveContestantEntry() {
+		AbstractContestant contestant = new MarathonContestant();
+		db.addContestantEntry("1", contestant);
+		assertEquals(contestant, db.removeContestant("1"));
+		assertEquals(null, db.getContestant("1"));
 	}
 
 	@Test

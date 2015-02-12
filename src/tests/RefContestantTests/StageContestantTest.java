@@ -1,10 +1,12 @@
 package tests.RefContestantTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import register.model.*;
+import register.model.StageContestant;
 
 public class StageContestantTest {
 	private StageContestant stageContestant;

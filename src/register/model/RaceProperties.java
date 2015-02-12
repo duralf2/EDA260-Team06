@@ -11,7 +11,7 @@ public class RaceProperties extends Properties {
 	public static final String VALUE_RACE_MARATHON = "marathon";
 	public static final String VALUE_RACE_LAPS = "laps";
 
-	private static final File PROPERTIES_FILE = new File("data/config.ini"); 
+	private static final File DEFAULT_PROPERTIES_FILE = new File("data/config.ini"); 
 
 	public static final String KEY_RACE_TYPE = "raceType";	
 	public static final String KEY_GUI_OUTPUT_FILE_PATH = "guiOutputFilePath";
@@ -19,10 +19,13 @@ public class RaceProperties extends Properties {
 	public static final String KEY_NAME_FILE_PATH = "nameFilePath";
 	
 	public RaceProperties() throws IOException {
-		PROPERTIES_FILE.getParentFile().mkdirs();
-		if (PROPERTIES_FILE.exists())
+		this (DEFAULT_PROPERTIES_FILE);
+	}
+	public RaceProperties(File propertiesFile) throws IOException {
+		propertiesFile.getParentFile().mkdirs();
+		if (propertiesFile.exists())
 		{
-			FileInputStream in = new FileInputStream(PROPERTIES_FILE);
+			FileInputStream in = new FileInputStream(propertiesFile);
 			load(in);
 			in.close();
 		}
@@ -33,7 +36,7 @@ public class RaceProperties extends Properties {
 			put(KEY_GUI_OUTPUT_FILE_PATH, "data/utdata.txt");
 			put(KEY_RACE_TYPE, VALUE_RACE_MARATHON);
 			
-			FileOutputStream out = new FileOutputStream(PROPERTIES_FILE);
+			FileOutputStream out = new FileOutputStream(propertiesFile);
 			store(out, generateComment());
 			out.close();
 		}

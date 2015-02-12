@@ -20,7 +20,7 @@ public class RacePrinterTest {
 
 	@Before
 	public void setUp() {
-		outfile = new File("out.txt");
+		outfile = new File("testfiles/RacePrinterTest.txt");
 	}
 
 	@After
@@ -40,7 +40,7 @@ public class RacePrinterTest {
 		assertEquals(expected, printedResult);
 	}
 	
-	@Test(expected=NullPointerException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testNullData() throws IOException
 	{
 		new RacePrinter(outfile.getAbsolutePath()).print(null);

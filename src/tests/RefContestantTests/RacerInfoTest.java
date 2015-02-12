@@ -3,7 +3,7 @@ package tests.RefContestantTests;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.*;
+import org.junit.Test;
 
 import register.model.RacerInfo;
 

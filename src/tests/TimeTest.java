@@ -32,6 +32,7 @@ public class TimeTest {
 	@Test
 	public void testGetTotalTime() {
 		assertEquals("01.59.05", Time.getTotalTime(t1, t2).toString());
+		assertEquals("03.02.08", Time.getTotalTime(t3, t2).toString());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -61,8 +62,14 @@ public class TimeTest {
 
 	@Test
 	public void testEquals() {
-		String st = "12.01.12";
-		assertTrue(new Time(st).equals(new Time(st)));
+		Time t1 = new Time("12.01.12");
+		Time t2 = new Time("13.01.12");
+		Time t3 = new Time("12.02.12");
+		Time t4 = new Time("12.01.13");
+		assertTrue(t1.equals(t1));
+		assertFalse(t2.equals(t1));
+		assertFalse(t3.equals(t1));
+		assertFalse(t4.equals(t1));
 	}
 
 	@Test
@@ -95,5 +102,10 @@ public class TimeTest {
         assertEquals(finish, start.add(new Time("03.05.59")));
         finish = new Time("00.07.00");
         assertEquals(finish, start.add(new Time("12.05.59")));
+    }
+    
+    @Test
+    public void testApplyMultiplier(){
+        assertEquals("20.31.30", new Time("10.15.45").multiply(2).toString());
     }
 }

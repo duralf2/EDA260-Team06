@@ -1,14 +1,9 @@
 package register.model;
 
-import java.io.IOException;
 import java.util.Properties;
 
 public class CompetitionFactory {
 	private Properties prop;
-	
-	public CompetitionFactory() throws IOException {
-		this (new RaceProperties());
-	}
 	
 	public CompetitionFactory(Properties prop){
 		this.prop = prop;

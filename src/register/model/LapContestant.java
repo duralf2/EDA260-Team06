@@ -34,7 +34,7 @@ public class LapContestant extends AbstractContestant {
 
 	@Override
 	public Time getTotalTime() {
-		return Time.getTotalTime(super.startTime, super.finishTime);
+		return Time.getTotalTime(getStartTime(), getFinishTime());
 	}
 
 	public int getLapsCompleted() {
@@ -49,14 +49,14 @@ public class LapContestant extends AbstractContestant {
 		sb.append(getTotalTime().toString());
 		sb.append(";");
 
-		Time previousTime = super.startTime;
+		Time previousTime = getStartTime();
 		for (Time lapTime : lapTimes) {
 			sb.append(Time.getTotalTime(previousTime, lapTime).toString());
 			sb.append(";");
 			previousTime = lapTime;
 		}
 
-		sb.append(super.startTime);
+		sb.append(getStartTime());
 		sb.append(";");
 
 		for (Time lapTime2 : lapTimes) {
@@ -64,7 +64,7 @@ public class LapContestant extends AbstractContestant {
 			sb.append(";");
 		}
 
-		sb.append(super.finishTime);
+		sb.append(getFinishTime());
 
 		return sb.toString();
 

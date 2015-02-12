@@ -28,7 +28,6 @@ public class TestStageContestant {
 
 	@Test
 	public void testToString() {
-		
 	}
 	
 	

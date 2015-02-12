@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sorter.Sorter;
-import register.model.DataStructure;
+import register.model.Database;
 
 public class ResultTest {
 	private File[] files; // [0] = starttimes, [1] = finishtimes, [2] =
@@ -25,7 +25,7 @@ public class ResultTest {
 
 	@Before
 	public void setUp() {
-		sort = new Sorter(new DataStructure());
+		sort = new Sorter(new Database());
 		files = new File[] { new File("testfiles/startTimes.txt"),
 				new File("testfiles/finishTimes.txt") };
 		generateFiles(files);

@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
-import register.model.Contestant;
-import register.model.DataStructure;
+import register.model.AbstractContestant;
+import register.model.Database;
+import register.model.MarathonContestant;
 import register.model.Time;
 
 import com.googlecode.jcsv.reader.CSVReader;
@@ -48,34 +49,35 @@ public class ReadFile {
 	 *  creating new <code>Contestants</code> if there are none with the
 	 *  correct starting numbers. 
 	 * @param file The file to load the names from
-	 * @param ds The database to put the names into
+	 * @param db The database to put the names into
 	 * @throws IOException If the file doesn't exist or couldn't be closed
 	 */
-	public static void readNames(File file, DataStructure ds)
+	public static void readNames(File file, Database db)
 			throws IOException {
 		List<String[]> data = readCSV(file);
 
 		// Read and remove column names
-		readContestantColumns(ds, data.get(0));
+		readContestantColumns(db, data.get(0));
 		data.remove(0);
 
 		String startNumber, name;
-		Contestant contestant;
+		AbstractContestant contestant;
 		for (String[] line : data) {
 			startNumber = line[0];
 			name = line[1].trim();
-			contestant = getContestant(startNumber, ds);
-			contestant.setName(name);
-			ds.addContestantEntry(startNumber, contestant);
+			contestant = getContestant(startNumber, db);
+			contestant.putInformation("Namn", name);
+			db.addContestantEntry(startNumber, contestant);
 		}
 	}
 
-	private static void readContestantColumns(DataStructure ds,
+	private static void readContestantColumns(Database ds,
 			String[] contestantColumns) {
-		for (int i = 0; i < contestantColumns.length; i++) {
-			contestantColumns[i] = contestantColumns[i].trim();
-		}
-		ds.setContestantColumnNames(contestantColumns);
+//		for (int i = 0; i < contestantColumns.length; i++) {
+//			contestantColumns[i] = contestantColumns[i].trim();
+//		}
+//		ds.setContestantColumnNames(contestantColumns);
+		//TODO: CompetitionType controls columns
 	}
 
 	/**
@@ -87,12 +89,12 @@ public class ReadFile {
 	 * @param ds The database to put the start times into
 	 * @throws IOException If the file doesn't exist or couldn't be closed
 	 */
-	public static void readStartTime(File file, DataStructure ds)
+	public static void readStartTime(File file, Database ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
 
 		String startNr, time;
-		Contestant contestant;
+		AbstractContestant contestant;
 		for (String[] line : data) {
 			startNr = line[0];
 			time = line[1].trim();
@@ -111,7 +113,7 @@ public class ReadFile {
 	 * @param ds The database to put the finish times into
 	 * @throws IOException If the file doesn't exist or couldn't be closed
      */
-    public static void readFinishTime(File file, DataStructure ds)
+    public static void readFinishTime(File file, Database ds)
             throws IOException {
         readFinishTime(file, ds, new Time("00.00.00"));
     }
@@ -129,12 +131,12 @@ public class ReadFile {
 	 *  time will be interpreted as a finish time or a lap time
 	 * @throws IOException If the file doesn't exist or couldn't be closed
      */
-	public static void readFinishTime(File file, DataStructure ds, Time racetime)
+	public static void readFinishTime(File file, Database ds, Time racetime)
 			throws IOException {
 		List<String[]> data = readCSV(file);
 
 		String startNr;
-		Contestant contestant;
+		AbstractContestant contestant;
 		//TODO: loop below is almost identical to readStartTime()
 		for (String[] line : data) {
 			startNr = line[0];
@@ -165,7 +167,7 @@ public class ReadFile {
 	 *  perform acceptance tests is required
 	 */
 	@Deprecated // TODO Deprecated; See the reason in the javadoc
-	public static void readResult(File file, DataStructure ds)
+	public static void readResult(File file, Database ds)
 			throws IOException {
 		List<String[]> data = readCSV(file);
 		// Remove column names
@@ -184,9 +186,9 @@ public class ReadFile {
             for(int i=0; i<line.length; i++) {
                 line[i] = line[i].trim();
             }
-            Contestant contestant = new Contestant();
+            AbstractContestant contestant = new MarathonContestant();
 			String startNumber = line[0];
-			contestant.setName(line[1].trim());
+			contestant.putInformation("Namn", line[1].trim());
 
             int totalTime_index = hasLaps ? 3 : 2;
             int startTime_index = totalTime_index+maxLaps+1;
@@ -212,10 +214,10 @@ public class ReadFile {
 		}
 	}
 
-	private static Contestant getContestant(String startNr, DataStructure ds) {
-		Contestant contestant = ds.getContestant(startNr);
+	private static AbstractContestant getContestant(String startNr, Database ds) {
+		AbstractContestant contestant = ds.getContestant(startNr);
 		if (contestant == null) {
-			contestant = new Contestant();
+			contestant = new MarathonContestant();
 			ds.addContestantEntry(startNr, contestant);
 		}
 		return contestant;

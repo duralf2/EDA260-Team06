@@ -20,13 +20,13 @@ public class ContestantFactoryTest {
 
 	private Properties properties;
 	private ContestantFactory factory;
-	private Database dataStructure;
+	private Database database;
 
 	@Before
 	public void setUp() throws Exception {
 		properties = new Properties();
 		factory = new ContestantFactory(properties);
-		dataStructure = new Database();
+		database = new Database();
 
 		properties.put(RaceProperties.KEY_RACE_TYPE,
 				RaceProperties.VALUE_RACE_MARATHON);
@@ -36,9 +36,9 @@ public class ContestantFactoryTest {
 
 	@Test
 	public void testCreateRegisteredContestants() throws IOException {
-		factory.createRegisteredContestants(dataStructure);
+		factory.createRegisteredContestants(database);
 		
-		for (Entry<String, AbstractContestant> entry : dataStructure.getAllContestantEntries().entrySet())
+		for (Entry<String, AbstractContestant> entry : database.getAllContestantEntries().entrySet())
 		{
 			assertEquals(MarathonContestant.class, entry.getValue().getClass());
 		}

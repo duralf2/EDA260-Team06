@@ -13,7 +13,6 @@ import java.util.Map.Entry;
 
 import register.model.AbstractContestant;
 import register.model.Contestant;
-import register.model.DataStructure;
 import register.model.Database;
 import register.model.Time;
 
@@ -29,19 +28,19 @@ public class Register {
 
 	public void readStartTimes(File startTimes) throws IOException {
 		if (startTimes.isFile()) {
-			ReadFile.readStartTime(startTimes, db);
+			//ReadFile.readStartTime(startTimes, db);
 		}
 	}
 
 	public void readGoalTimes(File goalTimes) throws IOException {
 		if (goalTimes.isFile()) {
-			ReadFile.readFinishTime(goalTimes, db);
+			//ReadFile.readFinishTime(goalTimes, db);
 		}
 	}
 	
 	public void readNames(File names) throws IOException {
 		if (names.isFile()) {
-			ReadFile.readNames(names, db);
+			//ReadFile.readNames(names, db);
 		}
 	}
 

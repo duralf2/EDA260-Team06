@@ -30,6 +30,7 @@ public class DatabaseTest {
 		db = null;
 	}
 
+	//TODO: add test cases for other type of Contestants
 	@Test
 	public void testGetAllContestantEntries() {
 		AbstractContestant contestant1 = new MarathonContestant();

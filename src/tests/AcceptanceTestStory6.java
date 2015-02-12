@@ -15,8 +15,7 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import register.model.DataStructure;
+import register.model.Database;
 import register.model.Time;
 
 public class AcceptanceTestStory6 extends TestCase {
@@ -25,10 +24,10 @@ public class AcceptanceTestStory6 extends TestCase {
 	private String finishTimesFilepath = "testfiles/acceptanstest/acceptanstest6/maltider.txt";
 	private String resultFilepath = "testfiles/acceptanstest/acceptanstest6/resultat.txt";
 	private File outfile;
-	DataStructure ds;
+	Database db;
 	@Before
 	public void setUp() throws IOException {
-		ds = new DataStructure();
+		db = new Database();
 		
 		outfile = new File("out.txt");
 	}
@@ -40,32 +39,32 @@ public class AcceptanceTestStory6 extends TestCase {
 
 	@Test
 	public void testMergeTimes() throws IOException, FileNotFoundException {
-		DataStructure ds = new DataStructure();
-		ReadFile.readNames(new File(namesFilepath), ds);
-		ReadFile.readStartTime(new File(startTimesFilepath), ds);
-		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("13.00.00"));
+		Database db = new Database();
+		ReadFile.readNames(new File(namesFilepath), db);
+		ReadFile.readStartTime(new File(startTimesFilepath), db);
+		ReadFile.readFinishTime(new File(finishTimesFilepath), db, new Time("13.00.00"));
 
 		PrintWriter pw = new PrintWriter(outfile);
-		FileWriter.writeResult(pw, ds);
+		FileWriter.writeResult(pw, db);
 
-		DataStructure dsOut = new DataStructure();
-		ReadFile.readResult(outfile, dsOut);
+		Database dbOut = new Database();
+		ReadFile.readResult(outfile, dbOut);
 
-		DataStructure dsCorrect = new DataStructure();
+		Database dsCorrect = new Database();
 		ReadFile.readResult(new File(resultFilepath), dsCorrect);
 
-		assertTrue(dsOut.equals(dsCorrect));
+		assertTrue(dbOut.equals(dsCorrect));
 	}
 
 	@Test
 	public void testFileloading() throws IOException, FileNotFoundException {
-		DataStructure ds1 = new DataStructure();
-		ReadFile.readResult(new File(resultFilepath), ds1);
+		Database db1 = new Database();
+		ReadFile.readResult(new File(resultFilepath), db1);
 
-		DataStructure ds2 = new DataStructure();
-		ReadFile.readResult(new File(resultFilepath), ds2);
+		Database db2 = new Database();
+		ReadFile.readResult(new File(resultFilepath), db2);
 
-		assertTrue(ds1.equals(ds2));
+		assertTrue(db1.equals(db2));
 	}
 
 	@Test
@@ -75,7 +74,7 @@ public class AcceptanceTestStory6 extends TestCase {
 
 		PrintWriter pw2 = new PrintWriter(fos);
 
-		FileWriter.writeResult(pw2, ds);
+		FileWriter.writeResult(pw2, db);
 
 		Scanner sc2 = new Scanner(result);
 		Scanner sc3 = new Scanner(new File(

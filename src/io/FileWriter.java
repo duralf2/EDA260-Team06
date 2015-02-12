@@ -108,125 +108,126 @@ public class FileWriter {
 	}
 
 	private static void makeColumnNames(StringBuilder sb, int maxLaps) {
-		sb.append("StartNr;Namn;");
-		sb.append("#Varv;");
-		sb.append("TotalTid;");
-		for (int i = 1; i <= maxLaps; i++)
-			sb.append("Varv" + i + ";");
-		sb.append("Start;");
-		
-		for (int i = 1; i <= maxLaps - 1; i++)
-			sb.append("Varvning" + i + ";");
-
-		sb.append("Mål\n");
+//		sb.append("StartNr;Namn;");
+//		sb.append("#Varv;");
+//		sb.append("TotalTid;");
+//		for (int i = 1; i <= maxLaps; i++)
+//			sb.append("Varv" + i + ";");
+//		sb.append("Start;");
+//		
+//		for (int i = 1; i <= maxLaps - 1; i++)
+//			sb.append("Varvning" + i + ";");
+//
+//		sb.append("Mål\n");
 	}
 
 	private static void writeContestant(StringBuilder sb,
 			Contestant contestant, String startNumber, int maxLaps) {
-		sb.append(startNumber + ";");
-		sb.append(contestant.getName() + ";");
-
-		sb.append(contestant.getLapsCompleted()).append(";");
-		LinkedList<Time> finishTimes = contestant.getFinishTimes();
-		LinkedList<Time> lapTimes = contestant.getLapTimes();
-		if (finishTimes.size() > 0) {
-			sb.append(Time.getTotalTime(contestant.getStartTime(),
-					contestant.getFinishTime()));
-		} else {
-			if (lapTimes.size() != 0) {
-				sb.append(Time.getTotalTime(contestant.getStartTime(),
-						lapTimes.getLast()));
-			} else {
-				sb.append("--.--.--");
-			}
-		}
-		sb.append(";");
-
-		for (String time : contestant.getLapDurations())
-			sb.append(time + ";");
-		for (int i = contestant.getLapDurations().size(); i < maxLaps; i++)
-			sb.append(";");
-
-		if (contestant.startTimeSize() == 0)
-			sb.append("Start?;");
-		else
-			sb.append(contestant.getStartTime() + ";");
-
-		for (Time time : lapTimes)
-			sb.append(time.toString() + ";");
-		for (int i = lapTimes.size(); i < maxLaps - 1; i++)
-			sb.append(";");
-
-		if (contestant.finishTimeSize() == 0) {
-//			sb.append("Slut?");
-		} else {
-			if (isImpossibleTime(contestant)) {
-				sb.append(contestant.getFinishTime() + ";"
-						+ "Omöjlig totaltid?");
-			} else {
-				sb.append(contestant.getFinishTime());
-			}
-		}
-		checkMultipleTimes(contestant, sb);
-		sb.append("\n");
+//		sb.append(startNumber + ";");
+//		sb.append(contestant.getName() + ";");
+//
+//		sb.append(contestant.getLapsCompleted()).append(";");
+//		LinkedList<Time> finishTimes = contestant.getFinishTimes();
+//		LinkedList<Time> lapTimes = contestant.getLapTimes();
+//		if (finishTimes.size() > 0) {
+//			sb.append(Time.getTotalTime(contestant.getStartTime(),
+//					contestant.getFinishTime()));
+//		} else {
+//			if (lapTimes.size() != 0) {
+//				sb.append(Time.getTotalTime(contestant.getStartTime(),
+//						lapTimes.getLast()));
+//			} else {
+//				sb.append("--.--.--");
+//			}
+//		}
+//		sb.append(";");
+//
+//		for (String time : contestant.getLapDurations())
+//			sb.append(time + ";");
+//		for (int i = contestant.getLapDurations().size(); i < maxLaps; i++)
+//			sb.append(";");
+//
+//		if (contestant.startTimeSize() == 0)
+//			sb.append("Start?;");
+//		else
+//			sb.append(contestant.getStartTime() + ";");
+//
+//		for (Time time : lapTimes)
+//			sb.append(time.toString() + ";");
+//		for (int i = lapTimes.size(); i < maxLaps - 1; i++)
+//			sb.append(";");
+//
+//		if (contestant.finishTimeSize() == 0) {
+////			sb.append("Slut?");
+//		} else {
+//			if (isImpossibleTime(contestant)) {
+//				sb.append(contestant.getFinishTime() + ";"
+//						+ "Omöjlig totaltid?");
+//			} else {
+//				sb.append(contestant.getFinishTime());
+//			}
+//		}
+//		checkMultipleTimes(contestant, sb);
+//		sb.append("\n");
 
 	}
 
 	private static void checkMultipleTimes(Contestant contestant,
 			StringBuilder sb) {
-		checkMultipleTimesStart(contestant, sb);
-		checkMultipleTimesFinish(contestant, sb);
+//		checkMultipleTimesStart(contestant, sb);
+//		checkMultipleTimesFinish(contestant, sb);
 	}
 
 	private static void checkMultipleTimesFinish(Contestant contestant,
 			StringBuilder sb) {
-		if (contestant.finishTimeSize() > 1) {
-			sb.append("; " + "Flera måltider?");
-			LinkedList<Time> finishTimes = contestant.getFinishTimes();
-			Iterator<Time> iterator = finishTimes.iterator();
-			iterator.next();
-			while (iterator.hasNext()) {
-				sb.append(" " + iterator.next());
-			}
-		}
+//		if (contestant.finishTimeSize() > 1) {
+//			sb.append("; " + "Flera måltider?");
+//			LinkedList<Time> finishTimes = contestant.getFinishTimes();
+//			Iterator<Time> iterator = finishTimes.iterator();
+//			iterator.next();
+//			while (iterator.hasNext()) {
+//				sb.append(" " + iterator.next());
+//			}
+//		}
 	}
 
 	private static void checkMultipleTimesStart(Contestant contestant,
 			StringBuilder sb) {
-		if (contestant.startTimeSize() > 1) {
-			sb.append("; " + "Flera starttider?");
-			LinkedList<Time> startTimes = contestant.getStartTimes();
-			Iterator<Time> iterator = startTimes.iterator();
-			iterator.next();
-			while (iterator.hasNext()) {
-				sb.append(" " + iterator.next());
-			}
-		}
+//		if (contestant.startTimeSize() > 1) {
+//			sb.append("; " + "Flera starttider?");
+//			LinkedList<Time> startTimes = contestant.getStartTimes();
+//			Iterator<Time> iterator = startTimes.iterator();
+//			iterator.next();
+//			while (iterator.hasNext()) {
+//				sb.append(" " + iterator.next());
+//			}
+//		}
 	}
 
 	private static void writeTotalTime(Contestant contestant, StringBuilder sb) {
 		// Getting sizes of lists containing starttimes and finishtimes, if size
 		// = 0 time is missing
-		if (contestant.startTimeSize() == 0 || contestant.finishTimeSize() == 0) {
-			sb.append("--.--.--" + "; ");
-		} else {
-			sb.append(contestant.getTotalTime() + "; ");
-		}
+//		if (contestant.startTimeSize() == 0 || contestant.finishTimeSize() == 0) {
+//			sb.append("--.--.--" + "; ");
+//		} else {
+//			sb.append(contestant.getTotalTime() + "; ");
+//		}
 	}
 
 	private static boolean isImpossibleTime(Contestant contestant) {
-		boolean impossible;
-		try {
-			impossible = contestant.startTimeSize() != 0
-					&& Integer.parseInt(contestant.getTotalTime().substring(0,
-							2)) < 1
-					&& Integer.parseInt(contestant.getTotalTime().substring(3,
-							5)) <= 15;
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace(); // negative total time throws the exception.
-			return true;
-		}
-		return impossible;
+//		boolean impossible;
+//		try {
+//			impossible = contestant.startTimeSize() != 0
+//					&& Integer.parseInt(contestant.getTotalTime().substring(0,
+//							2)) < 1
+//					&& Integer.parseInt(contestant.getTotalTime().substring(3,
+//							5)) <= 15;
+//		} catch (IllegalArgumentException e) {
+//			e.printStackTrace(); // negative total time throws the exception.
+//			return true;
+//		}
+//		return impossible;
+		return true;
 	}
 
 	public static void writeFinishTimes(PrintWriter pw, Database ds) {
@@ -242,9 +243,9 @@ public class FileWriter {
 
 	private static void printTimes(LinkedList<Time> timeList, StringBuilder sb,
 			String startNumber) {
-		for (Time time : timeList) {
-			sb.append(startNumber.toString() + "; ");
-			sb.append(time.toString() + "\n");
-		}
+//		for (Time time : timeList) {
+//			sb.append(startNumber.toString() + "; ");
+//			sb.append(time.toString() + "\n");
+//		}
 	}
 }

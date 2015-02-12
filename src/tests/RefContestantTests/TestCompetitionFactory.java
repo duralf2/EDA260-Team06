@@ -13,7 +13,6 @@ import register.model.CompetitionType;
 import register.model.LapRace;
 import register.model.MarathonRace;
 import register.model.RaceProperties;
-//TODO: complete tests for CompetitionFactory and CompetitionsType:s (LapRace and MarathonRace)
 public class TestCompetitionFactory {
 	private CompetitionFactory cf;
 	private RaceProperties rp;

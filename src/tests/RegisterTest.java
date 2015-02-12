@@ -13,25 +13,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.logic.Register;
-import register.model.Contestant;
-import register.model.DataStructure;
+import register.model.AbstractContestant;
+import register.model.Database;
+import register.model.MarathonContestant;
 import register.model.Time;
 
 import com.googlecode.jcsv.reader.CSVReader;
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
 public class RegisterTest {
-	private DataStructure ds;
+	private Database db;
 	private Register register;
-	private Map<String, Contestant> entries;
+	private Map<String, AbstractContestant> entries;
 	private Time[] startTimes;
 	private Time[] finishTimes;
 
 	@Before
 	public void setUp() {
-		ds = new DataStructure();
-		register = new Register(ds);
-		entries = register.getDataStructure().getAllContestantEntries();
+		db = new Database();
+		register = new Register(db);
+		entries = register.getDatabase().getAllContestantEntries();
 		startTimes = new Time[] { new Time("12.00.00"), new Time("12.01.00"),
 				new Time("12.02.00"), new Time("12.03.00"),
 				new Time("12.04.00") };
@@ -65,10 +66,11 @@ public class RegisterTest {
 	@Test
 	public void testWriteResultNoSort() throws IOException {
 		for (int i = 0; i < startTimes.length; i++) {
-			Contestant c = new Contestant("TestContestant " + 1);
+			AbstractContestant c = new MarathonContestant();
+			c.putInformation("Namn", ("TestContestant " + 1));
 			c.addStartTime(startTimes[i]);
 			c.addFinishTime(finishTimes[i]);
-			ds.addContestantEntry(Integer.toString((i + 1)), c);
+			db.addContestantEntry(Integer.toString((i + 1)), c);
 		}
 		File file = new File("testNoSort.txt");
 		register.writeResult(file);
@@ -99,15 +101,21 @@ public class RegisterTest {
 	@Test
 	public void testPerformMassStart()
 	{
-		ds.addContestantEntry("1", new Contestant("Karl"));
-		ds.addContestantEntry("2", new Contestant("Bertil"));
+		AbstractContestant contestant = new MarathonContestant();
+		contestant.putInformation("StartNbr", "1");
+		contestant.putInformation("Namn", "Karl");
+		db.addContestantEntry("1", contestant);
+		AbstractContestant contestant2 = new MarathonContestant();
+		contestant2.putInformation("StartNbr", "2");
+		contestant2.putInformation("Namn", "Bertil");
+		db.addContestantEntry("2", contestant2);
 		
 		File file = new File("testMassStart.txt");
 		register.performMassStart(file);
 		file.delete();
 		
-		Time karlTime = ds.getContestant("1").getStartTime();
-		Time bertilTime = ds.getContestant("2").getStartTime();
+		Time karlTime = db.getContestant("1").getStartTime();
+		Time bertilTime = db.getContestant("2").getStartTime();
 		assertNotNull(karlTime);
 		assertEquals(karlTime, bertilTime);
 	}

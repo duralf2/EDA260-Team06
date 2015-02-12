@@ -13,14 +13,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.Contestant;
-import register.model.DataStructure;
+import register.model.AbstractContestant;
+import register.model.Database;
+import register.model.MarathonContestant;
 import register.model.Time;
 
 public class OutputTest {
 
 	private PrintWriter pw;
-	private DataStructure ds;
+	private Database db;
 	private File f;
 	private Scanner sc;
 	
@@ -30,12 +31,13 @@ public class OutputTest {
 		f = new File("output.txt");
 		FileOutputStream fos = new FileOutputStream(f);
 		pw = new PrintWriter(fos);
-		ds = new DataStructure();
+		db = new Database();
 
-		Contestant contestant = new Contestant("Göran-Victor Hansson");
+		AbstractContestant contestant = new MarathonContestant();
+		contestant.putInformation("Namn", "Göran-Victor Hansson");
 		contestant.addStartTime(new Time("12.00.00"));
 		contestant.addFinishTime(new Time("13.23.34"));
-		ds.addContestantEntry("1", contestant);
+		db.addContestantEntry("1", contestant);
 		sc = new Scanner(f);
 	}
 	
@@ -52,7 +54,7 @@ public class OutputTest {
 //		IOHandler.writeResult(pw, ds);
 //		assert(f.exists());
 //		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
-//		assertEquals("1;", sc.next());
+//		assertEquals("1;", sc.next()ran-Victor );
 //		assertEquals("--.--.--;",  sc.next());
 //		assertEquals("12.00.00;",  sc.next());
 //		assertEquals("13.23.34",  sc.next());
@@ -89,7 +91,7 @@ public class OutputTest {
 	
 	@Test
 	public void testWriteResults() {
-		FileWriter.writeResult(pw, ds);
+		FileWriter.writeResult(pw, db);
 		assertTrue(f.exists());
 		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
 		String[] line = sc.nextLine().split(";");

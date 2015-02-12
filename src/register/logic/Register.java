@@ -11,35 +11,36 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map.Entry;
 
+import register.model.AbstractContestant;
 import register.model.Contestant;
-import register.model.DataStructure;
+import register.model.Database;
 import register.model.Time;
 
 public class Register {
-	private DataStructure ds;
+	private Database db;
 	
 	public static final File DEFAULT_RESULT_FILE = new File("data/utdata.txt");
 	public static final File DEFAULT_NAME_FILE   = new File("data/namn.txt");
 	
-	public Register(DataStructure times) {
-		this.ds = times;
+	public Register(Database times) {
+		this.db = times;
 	}
 
 	public void readStartTimes(File startTimes) throws IOException {
 		if (startTimes.isFile()) {
-			ReadFile.readStartTime(startTimes, ds);
+			//ReadFile.readStartTime(startTimes, db);
 		}
 	}
 
 	public void readGoalTimes(File goalTimes) throws IOException {
 		if (goalTimes.isFile()) {
-			ReadFile.readFinishTime(goalTimes, ds);
+			//ReadFile.readFinishTime(goalTimes, db);
 		}
 	}
 	
 	public void readNames(File names) throws IOException {
 		if (names.isFile()) {
-			ReadFile.readNames(names, ds);
+			//ReadFile.readNames(names, db);
 		}
 	}
 
@@ -51,7 +52,7 @@ public class Register {
 	public void writeResult(File result) {
 		try {
 			PrintWriter pw = new PrintWriter(result);
-			FileWriter.writeResult(pw, ds);
+			FileWriter.writeResult(pw, db);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -82,21 +83,21 @@ public class Register {
 	public void performMassStart(File targetFile)
 	{
 		Time startTime = new Time(Time.getCurrentTime());
-		for (Entry<String, Contestant> c : ds.getAllContestantEntries().entrySet())
+		for (Entry<String, AbstractContestant> c : db.getAllContestantEntries().entrySet())
 		{
 			c.getValue().addStartTime(startTime);
 			appendToFile(targetFile, c.getKey());
 		}
 	}
 
-	public DataStructure getDataStructure() {
-		return ds;
+	public Database getDatabase() {
+		return db;
 	}
 	
 	public void writeFinishTimes() {
 		try {
 			PrintWriter pw = new PrintWriter(DEFAULT_RESULT_FILE);
-			FileWriter.writeFinishTimes(pw, ds);
+			FileWriter.writeFinishTimes(pw, db);
 			pw.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -135,6 +136,6 @@ public class Register {
 		
 	public void clear()
 	{
-		ds.getAllContestantEntries().clear();
+		db.getAllContestantEntries().clear();
 	}
 }

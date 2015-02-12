@@ -18,7 +18,7 @@ public class MarathonContestant extends AbstractContestant {
 	
 	@Override
 	public Time getTotalTime() {
-		return Time.getTotalTime(super.startTime, super.finishTime);
+		return Time.getTotalTime(getStartTime(), getFinishTime());
 	}
 
 	@Override
@@ -26,9 +26,9 @@ public class MarathonContestant extends AbstractContestant {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getTotalTime().toString());
 		sb.append(";");
-		sb.append(super.startTime.toString());
+		sb.append(getStartTime().toString());
 		sb.append(";");
-		sb.append(super.finishTime.toString());
+		sb.append(getFinishTime().toString());
 		return sb.toString();
 	}
 

@@ -16,7 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.DataStructure;
+import register.model.Database;
 import register.model.Time;
 
 public class AcceptanceTestStory9 {
@@ -39,13 +39,13 @@ public class AcceptanceTestStory9 {
 
 	@Test
 	public void testStory9() throws IOException, FileNotFoundException {
-		DataStructure ds = new DataStructure();
-		ReadFile.readNames(new File(namesFilepath), ds);
-		ReadFile.readStartTime(new File(startTimesFilepath), ds);
-		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("01.00.00"));
+		Database db = new Database();
+		ReadFile.readNames(new File(namesFilepath), db);
+		ReadFile.readStartTime(new File(startTimesFilepath), db);
+		ReadFile.readFinishTime(new File(finishTimesFilepath), db, new Time("01.00.00"));
 
 		PrintWriter pw = new PrintWriter(outfile);
-		FileWriter.writeLapResult(pw, ds);
+		FileWriter.writeLapResult(pw, db);
 
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));

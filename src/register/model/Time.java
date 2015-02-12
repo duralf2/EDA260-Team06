@@ -10,10 +10,10 @@ public class Time implements Comparable<Time> {
 
 	public Time(String time) {
 		time = time.trim();
-		if (time.charAt(2) != '.' || time.charAt(5) != '.') {
-			throw new IllegalArgumentException(time);
+		
+		if(!time.matches("(([0-1][0-9])|(2[0-3])).[0-5][0-9].[0-5][0-9]")){
+			throw new IllegalArgumentException();
 		}
-
 		try {
 			hours = Integer.parseInt(time.substring(0, 2));
 			minutes = Integer.parseInt(time.substring(3, 5));
@@ -21,12 +21,8 @@ public class Time implements Comparable<Time> {
 		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}
-
-		if (minutes >= 60 || seconds >= 60 || hours < 0 || minutes < 0
-				|| seconds < 0) {
-			throw new IllegalArgumentException();
-		}
 	}
+
 
 	@Override
 	public String toString() {
@@ -37,6 +33,25 @@ public class Time implements Comparable<Time> {
 		sb.append(".");
 		sb.append(format(seconds));
 		return sb.toString();
+	}
+
+	public Time multiply(int multiplier) {
+		int totalSeconds = this.totalSeconds() * multiplier;
+		return convertSecondsToTime(totalSeconds);
+		
+	}
+
+	private Time convertSecondsToTime(int totalSeconds) {
+		if (totalSeconds >= 3600 * 24) {
+			totalSeconds -= 3600 * 24;
+		}
+
+		int hours = totalSeconds / 3600;
+		int minutes = (totalSeconds % 3600) / 60;
+		int seconds = totalSeconds % 60;
+
+		return new Time(format(hours) + "." + format(minutes) + "."
+				+ format(seconds));
 	}
 
 	public static Time getTotalTime(Time startTime, Time finishTime)
@@ -95,15 +110,6 @@ public class Time implements Comparable<Time> {
 
 		int totalSeconds = mySeconds + timeSeconds;
 
-		if (totalSeconds >= 3600 * 24) {
-			totalSeconds -= 3600 * 24;
-		}
-
-		int hours = totalSeconds / 3600;
-		int minutes = (totalSeconds % 3600) / 60;
-		int seconds = totalSeconds % 60;
-
-		return new Time(format(hours) + "." + format(minutes) + "."
-				+ format(seconds));
+		return convertSecondsToTime(totalSeconds);
 	}
 }

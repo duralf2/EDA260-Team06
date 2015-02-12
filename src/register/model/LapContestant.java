@@ -6,6 +6,10 @@ import java.util.List;
 
 public class LapContestant extends AbstractContestant {
 	private LinkedList<Time> lapTimes;
+	
+	public LapContestant() {
+		lapTimes = new LinkedList<Time>();
+	}
 
 	public LapContestant(RacerInfo racerInfo) {
 		super(racerInfo);
@@ -31,19 +35,19 @@ public class LapContestant extends AbstractContestant {
 
 	@Override
 	public Time getTotalTime() {
-		Time startTime = this.startTime;
-		if (startTime == null) {
-			startTime = new Time("00.00.00");
+		Time startTime = new Time("00.00.00");
+		if (startTimeSize() > 0) {
+			startTime = getStartTime();
 		}
-		Time finishTime = this.finishTime;
-		if (finishTime == null) {
-			finishTime = new Time("00.00.00");
+		Time finishTime = new Time("00.00.00");
+		if (finishTimeSize() > 0) {
+			finishTime = getFinishTime();
 		}
 		return Time.getTotalTime(startTime, finishTime);
 	}
 
 	public int getLapsCompleted() {
-		if (finishTime != null)
+		if (!finishTime.isEmpty())
 			return lapTimes.size() + 1;
 		else
 			return lapTimes.size();
@@ -58,12 +62,12 @@ public class LapContestant extends AbstractContestant {
 		sb.append(";");
 		
 		List<Time> allLapTimes = new ArrayList<Time>(lapTimes);
-		if (finishTime != null)
-		{
-			allLapTimes.add(finishTime);
-		}
+		allLapTimes.addAll(finishTime);
 
-		Time previousTime = super.startTime;
+		
+		Time previousTime = new Time("00.00.00");
+		if (!startTime.isEmpty())
+			previousTime = getStartTime();
 		int maxLaps = ((LapRace) competitionType).getMaxLaps();
 		for (int i = 0;i < maxLaps; i++) {
 			if (allLapTimes.size() > i) {
@@ -72,8 +76,9 @@ public class LapContestant extends AbstractContestant {
 			}
 			sb.append(";");
 		}
-		if (startTime != null)
-			sb.append(startTime);
+
+		if (!startTime.isEmpty())
+			sb.append(getStartTime());
 		sb.append(";");
 		
 		for (int i = 0; i < maxLaps - 1;i++) {
@@ -82,8 +87,8 @@ public class LapContestant extends AbstractContestant {
 			sb.append(";");
 		}
 
-		if (finishTime != null)
-			sb.append(finishTime);
+		if (!finishTime.isEmpty())
+			sb.append(getFinishTime());
 
 		return sb.toString();
 

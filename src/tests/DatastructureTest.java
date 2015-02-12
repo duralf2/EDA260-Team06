@@ -80,5 +80,4 @@ public class DatastructureTest {
 		assertEquals(0, ds.getAllContestantEntries().size());
 		assertTrue(null == ds.getContestantColumnNames());
 	}
-
 }

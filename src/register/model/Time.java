@@ -39,6 +39,25 @@ public class Time implements Comparable<Time> {
 		return sb.toString();
 	}
 
+	public Time multiply(int multiplier) {
+		int totalSeconds = this.totalSeconds() * multiplier;
+		return convertSecondsToTime(totalSeconds);
+		
+	}
+
+	private Time convertSecondsToTime(int totalSeconds) {
+		if (totalSeconds >= 3600 * 24) {
+			totalSeconds -= 3600 * 24;
+		}
+
+		int hours = totalSeconds / 3600;
+		int minutes = (totalSeconds % 3600) / 60;
+		int seconds = totalSeconds % 60;
+
+		return new Time(format(hours) + "." + format(minutes) + "."
+				+ format(seconds));
+	}
+
 	public static Time getTotalTime(Time startTime, Time finishTime)
 			throws IllegalArgumentException {
 		int totalHours = finishTime.hours - startTime.hours;
@@ -95,15 +114,6 @@ public class Time implements Comparable<Time> {
 
 		int totalSeconds = mySeconds + timeSeconds;
 
-		if (totalSeconds >= 3600 * 24) {
-			totalSeconds -= 3600 * 24;
-		}
-
-		int hours = totalSeconds / 3600;
-		int minutes = (totalSeconds % 3600) / 60;
-		int seconds = totalSeconds % 60;
-
-		return new Time(format(hours) + "." + format(minutes) + "."
-				+ format(seconds));
+		return convertSecondsToTime(totalSeconds);
 	}
 }

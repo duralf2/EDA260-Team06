@@ -1,9 +1,9 @@
 package register.model;
 
-import java.io.PrintWriter;
+import java.io.File;
 
 public interface CompetitionType {
 	
-	public void printColumnNames(Database db, PrintWriter pw);
+	public void print(File file);
 	
 }

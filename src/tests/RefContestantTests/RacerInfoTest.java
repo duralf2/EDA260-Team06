@@ -13,7 +13,7 @@ public class RacerInfoTest {
 
 	@Before
 	public void setUp() throws Exception {
-		info = new RacerInfo();
+		info = new RacerInfo(new String[]{"startnr, namn"});
 	}
 
 	@Test

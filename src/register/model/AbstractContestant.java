@@ -12,7 +12,7 @@ public abstract class AbstractContestant implements
 	public AbstractContestant() {
 		startTime = new LinkedList<Time>();
 		finishTime = new LinkedList<Time>();
-		racerInfo = new RacerInfo();
+		racerInfo = new RacerInfo(new String[0]);
 	}
 
 	public AbstractContestant(RacerInfo racerInfo) {
@@ -36,6 +36,10 @@ public abstract class AbstractContestant implements
 	public Time getStartTime(){
 		return startTime.get(0);
 	}
+	
+	public int startTimeSize() {
+		return startTime.size();
+	}
 
 	public void addFinishTime(Time time) {
 		finishTime.add(time);
@@ -45,15 +49,17 @@ public abstract class AbstractContestant implements
 		return finishTime.get(0);
 	}
 
-	public String toString() {
+	public int finishTimeSize() {
+		return finishTime.size();
+	}
+	
+	public String toString(CompetitionType competitionType) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(racerInfo.toString()); //TODO: fixa i rätt ordning, just nu random
-		sb.append(specifiedToString()); 
+		sb.append(racerInfo.toString());
+		sb.append(specifiedToString(competitionType));
 		return sb.toString();
 	}
 
-	protected abstract String specifiedToString();
-
+	protected abstract String specifiedToString(CompetitionType competitionType);
 	public abstract Time getTotalTime();
-
 }

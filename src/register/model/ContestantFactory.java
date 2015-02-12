@@ -8,30 +8,22 @@ import java.util.List;
 import java.util.Properties;
 
 public class ContestantFactory {
-
+	private String[] nameHeader;
 	private Properties properties;
 
-	public ContestantFactory() throws IOException {
-		this (new RaceProperties());
-	}
-	
 	public ContestantFactory(Properties properties) throws IOException {
 		this.properties = properties;
 	}
 
-	public void createRegisteredContestants(Database db)
-			throws IOException {
+	public void createRegisteredContestants(Database db) throws IOException {
 		List<String[]> fileRows = ReadFile.readCSV(new File(properties
 				.getProperty(RaceProperties.KEY_NAME_FILE_PATH)));
+		nameHeader = trimContestantColumnNames(fileRows.get(0));
 		
-		String[] columns = trimContestantColumnNames(fileRows.get(0));
-
 		for (int i = 1; i < fileRows.size(); i++) {
 			String[] line = fileRows.get(i);
-
 			String startNumber = line[0].trim();
-
-			AbstractContestant contestant = createContestant(columns, line);
+			AbstractContestant contestant = createContestant( line);
 			db.addContestantEntry(startNumber, contestant);
 		}
 	}
@@ -44,33 +36,33 @@ public class ContestantFactory {
 	}
 
 	// TODO krashar om information saknas (line.lenght < columnNames.lenght)
-	public AbstractContestant createContestant(String[] columnNames, String[] line) {
-
-		RacerInfo info = createRacerInfo(columnNames, line);
-
+	public AbstractContestant createContestant(String[] line) {
+		RacerInfo info = createRacerInfo(line);
 		AbstractContestant contestant = null;
-		if (properties.getProperty(RaceProperties.KEY_RACE_TYPE).equals(RaceProperties.VALUE_RACE_MARATHON)) {
-			contestant = new MarathonContestant(info); 
-		}
-		else if (properties.getProperty(RaceProperties.KEY_RACE_TYPE).equals(RaceProperties.VALUE_RACE_LAPS)) {
-			contestant = new LapContestant(info); 
+		if (isMarathonRace()) {
+			contestant = new MarathonContestant(info);
+		} else if (isLapRace()) {
+			contestant = new LapContestant(info);
 		}
 
 		return contestant;
 	}
 
-	private RacerInfo createRacerInfo(String[] columnNames, String[] line) {
-		RacerInfo info = new RacerInfo();
-		for (int i = 0; i < line.length; i++) {
-			info.put(columnNames[i], line[i]);
-		}
-		return info;
+	private boolean isLapRace() {
+		return properties.getProperty(RaceProperties.KEY_RACE_TYPE).equals(
+				RaceProperties.VALUE_RACE_LAPS);
 	}
 
-	
-	
-	public static void main(String[] args) throws IOException {
-		new ContestantFactory()
-				.createRegisteredContestants(new Database());
+	private boolean isMarathonRace() {
+		return properties.getProperty(RaceProperties.KEY_RACE_TYPE).equals(
+				RaceProperties.VALUE_RACE_MARATHON);
+	}
+
+	private RacerInfo createRacerInfo(String[] line) {
+		RacerInfo info = new RacerInfo(nameHeader);
+		for (int i = 0; i < line.length; i++) {
+			info.put(nameHeader[i], line[i]);
+		}
+		return info;
 	}
 }

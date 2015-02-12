@@ -143,7 +143,7 @@ public class ReadFile {
 			Time time = new Time(line[1].trim());
 			contestant = getContestant(startNr, ds);
 			Time startTime = new Time("00.00.00");
-			if(!contestant.getStartTimes().isEmpty()){
+			if(contestant.startTimeSize() > 0){
 				startTime = contestant.getStartTime();
 			}
             if(time.compareTo(racetime.add(startTime)) <= 0) {
@@ -169,49 +169,49 @@ public class ReadFile {
 	@Deprecated // TODO Deprecated; See the reason in the javadoc
 	public static void readResult(File file, Database ds)
 			throws IOException {
-		List<String[]> data = readCSV(file);
-		// Remove column names
-		String[] columns = data.remove(0);
-        boolean hasLaps = columns[2].trim().equals("#Varv");
-
-        int maxLaps = 0;
-        if(hasLaps) {
-            for(String[] line : data) {
-                int laps = Integer.parseInt(line[2].trim());
-                if(laps > maxLaps) maxLaps = laps;
-            }
-        }
-
-		for (String[] line : data) {
-            for(int i=0; i<line.length; i++) {
-                line[i] = line[i].trim();
-            }
-            AbstractContestant contestant = new MarathonContestant();
-			String startNumber = line[0];
-			contestant.putInformation("Namn", line[1].trim());
-
-            int totalTime_index = hasLaps ? 3 : 2;
-            int startTime_index = totalTime_index+maxLaps+1;
-
-			String startTime = line[startTime_index].trim();
-            if (!startTime.contains("?") && !startTime.isEmpty())
-                contestant.addStartTime(new Time(startTime));
-
-            int laps = hasLaps ? Integer.parseInt(line[2].trim()) : 1;
-            for(int i=1; i <= maxLaps; i++) {
-                String ts = line[startTime_index+i].trim();
-                if(!ts.isEmpty() && !ts.contains("?")) {
-                    Time t = new Time(ts);
-                    contestant.addLapTime(t);
-                }
-            }
-
-			String finishTime = line[startTime_index+maxLaps].trim();
-            if (!(finishTime.contains("?") || finishTime.isEmpty()))
-                contestant.addFinishTime(new Time(finishTime));
-
-			ds.addContestantEntry(startNumber, contestant);
-		}
+//		List<String[]> data = readCSV(file);
+//		// Remove column names
+//		String[] columns = data.remove(0);
+//        boolean hasLaps = columns[2].trim().equals("#Varv");
+//
+//        int maxLaps = 0;
+//        if(hasLaps) {
+//            for(String[] line : data) {
+//                int laps = Integer.parseInt(line[2].trim());
+//                if(laps > maxLaps) maxLaps = laps;
+//            }
+//        }
+//
+//		for (String[] line : data) {
+//            for(int i=0; i<line.length; i++) {
+//                line[i] = line[i].trim();
+//            }
+//            AbstractContestant contestant = new MarathonContestant();
+//			String startNumber = line[0];
+//			contestant.putInformation("Namn", line[1].trim());
+//
+//            int totalTime_index = hasLaps ? 3 : 2;
+//            int startTime_index = totalTime_index+maxLaps+1;
+//
+//			String startTime = line[startTime_index].trim();
+//            if (!startTime.contains("?") && !startTime.isEmpty())
+//                contestant.addStartTime(new Time(startTime));
+//
+//            int laps = hasLaps ? Integer.parseInt(line[2].trim()) : 1;
+//            for(int i=1; i <= maxLaps; i++) {
+//                String ts = line[startTime_index+i].trim();
+//                if(!ts.isEmpty() && !ts.contains("?")) {
+//                    Time t = new Time(ts);
+//                    contestant.addLapTime(t);
+//                }
+//            }
+//
+//			String finishTime = line[startTime_index+maxLaps].trim();
+//            if (!(finishTime.contains("?") || finishTime.isEmpty()))
+//                contestant.addFinishTime(new Time(finishTime));
+//
+//			ds.addContestantEntry(startNumber, contestant);
+//		}
 	}
 
 	private static AbstractContestant getContestant(String startNr, Database ds) {

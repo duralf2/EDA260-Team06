@@ -1,16 +1,26 @@
 package register.model;
 
+import io.RacePrinter;
+
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 public class LapRace implements CompetitionType {
+	private Database db;
+	
+	public LapRace(Database db) {
+		this.db = db;
+	}
 
 	@Override
-	public void printColumnNames(Database db, PrintWriter pw) {
+	public void print(File file) {
 		StringBuilder sb = new StringBuilder();
+		
 		sb.append("StartNr;Namn;");
 		//TODO RacerInfo?
 		sb.append("#Varv;TotalTid;");
-		int maxLaps = getMaxLaps(db);
+		int maxLaps = getMaxLaps();
 
 		for (int i = 1; i <= maxLaps; i++)
 			sb.append("Varv" + i + ";");
@@ -20,10 +30,21 @@ public class LapRace implements CompetitionType {
 			sb.append("Varvning" + i + ";");
 
 		sb.append("Mål\n");
-		pw.write(sb.toString());
+		for (AbstractContestant c : db.getAllContestantEntries().values()) {
+			sb.append(c.toString(this) + "\n");
+		}
+		
+		
+		try {
+			new RacePrinter(file.getAbsolutePath()).print(sb.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
-	private int getMaxLaps(Database db) {
+	public int getMaxLaps() {
 		int maxLaps = 0;
 		for (AbstractContestant c : db.getAllContestantEntries().values()) {
 			if (((LapContestant) c).getLapsCompleted() > maxLaps) {

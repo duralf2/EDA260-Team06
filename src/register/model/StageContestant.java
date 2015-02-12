@@ -58,7 +58,7 @@ public class StageContestant extends AbstractContestant {
 	public void addStartTime(Time time, int multiplier){
 		if(stageTimes.containsKey(currentStageNbr))
 			throw new IllegalArgumentException("The contestant has to finish the current stage");
-		stageTimes.put(currentStageNbr, new StageTime(startTime, multiplier));
+//		stageTimes.put(currentStageNbr, new StageTime(startTime, multiplier));
 	}
 	
 	public void addFinishTime(Time time){
@@ -80,11 +80,11 @@ public class StageContestant extends AbstractContestant {
 //		for(StageTime stageTime : stageTimes){
 //			
 //		}
-		return null;
+		return new Time("00.00.00");
 	}
 
 	@Override
-	protected String specifiedToString() {
+	protected String specifiedToString(CompetitionType competitionType) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getTotalTime().toString());
 		sb.append(";");
@@ -93,5 +93,4 @@ public class StageContestant extends AbstractContestant {
 		sb.append(super.finishTime.toString());
 		return sb.toString();
 	}
-
 }

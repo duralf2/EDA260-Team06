@@ -6,7 +6,7 @@ import org.junit.*;
 
 import register.model.*;
 
-public class TestStageContestant {
+public class StageContestantTest {
 	private StageContestant stageContestant;
 
 	@Before

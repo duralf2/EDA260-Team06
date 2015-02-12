@@ -22,6 +22,7 @@ public class RacerInfo {
 		return value;
 	}
 	
+	// TODO Den här metoden returnerar bara data motsvarande den i headern, toString kanske är fel metod?
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for(String racerInfo : nameHeader) {

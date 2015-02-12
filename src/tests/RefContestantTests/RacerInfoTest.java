@@ -13,7 +13,7 @@ public class RacerInfoTest {
 
 	@Before
 	public void setUp() throws Exception {
-		info = new RacerInfo(new String[]{"startnr, namn"});
+		info = new RacerInfo(new String[]{"StartNr", "Namn", "Klubb"});
 	}
 
 	@Test
@@ -29,4 +29,17 @@ public class RacerInfoTest {
 		assertEquals("Honung", info.get("asdf"));
 	}
 
+	@Test
+	public void testPullNonExistingData() {
+		info.put("asdf", "Honung");
+		assertEquals("", info.get("qwerty"));
+	}
+	
+	@Test
+	public void testToString()
+	{
+		info.put("StartNr", "1");
+		info.put("Klubb", "Apa");
+		assertEquals("1;;Apa;", info.toString());
+	}
 }

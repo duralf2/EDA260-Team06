@@ -15,16 +15,15 @@ public class ContestantFactory {
 		this.properties = properties;
 	}
 
-	
 	public void createRegisteredContestants(Database db) throws IOException {
 		List<String[]> fileRows = ReadFile.readCSV(new File(properties
 				.getProperty(RaceProperties.KEY_NAME_FILE_PATH)));
 		nameHeader = trimContestantColumnNames(fileRows.get(0));
-		
+
 		for (int i = 1; i < fileRows.size(); i++) {
 			String[] line = fileRows.get(i);
 			String startNumber = line[0].trim();
-			AbstractContestant contestant = createContestant( line);
+			AbstractContestant contestant = createContestant(line);
 			db.addContestantEntry(startNumber, contestant);
 		}
 	}
@@ -46,6 +45,7 @@ public class ContestantFactory {
 	public AbstractContestant createContestant() {
 		return createContestant(createRaceInfo());
 	}
+
 	public AbstractContestant createContestant(RacerInfo info) {
 		AbstractContestant contestant = null;
 		if (isMarathonRace()) {
@@ -55,9 +55,8 @@ public class ContestantFactory {
 		}
 		return contestant;
 	}
-	
-	public RacerInfo createRaceInfo()
-	{
+
+	public RacerInfo createRaceInfo() {
 		return new RacerInfo(nameHeader);
 	}
 

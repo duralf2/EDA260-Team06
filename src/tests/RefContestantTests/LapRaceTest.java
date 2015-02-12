@@ -15,7 +15,7 @@ import register.model.LapRace;
 import register.model.RacerInfo;
 import register.model.Time;
 
-public class TestLapRace {
+public class LapRaceTest {
 	private LapRace lr;
 	private Database db;
 	private File f = new File("whatever");

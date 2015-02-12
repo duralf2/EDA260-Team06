@@ -9,7 +9,6 @@ public class MarathonContestant extends AbstractContestant {
 	}
 
 	@Override
-	// TODO - comment
 	public int compareTo(AbstractContestant o) {
 		if( o instanceof MarathonContestant) {
 			return getTotalTime().compareTo(o.getTotalTime());
@@ -33,6 +32,4 @@ public class MarathonContestant extends AbstractContestant {
 		sb.append(getFinishTime().toString());
 		return sb.toString();
 	}
-
-
 }

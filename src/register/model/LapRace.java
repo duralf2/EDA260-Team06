@@ -4,7 +4,6 @@ import io.RacePrinter;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class LapRace implements CompetitionType {
 	private Database db;
@@ -18,7 +17,7 @@ public class LapRace implements CompetitionType {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("StartNr;Namn;");
-		//TODO RacerInfo?
+		// TODO Använd headern i ContestantFactory för att få ut "StartNr;Namn;..." till raden ovan istället 
 		sb.append("#Varv;TotalTid;");
 		int maxLaps = getMaxLaps();
 
@@ -40,8 +39,6 @@ public class LapRace implements CompetitionType {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	public int getMaxLaps() {
@@ -53,11 +50,4 @@ public class LapRace implements CompetitionType {
 		}
 		return maxLaps;
 	}
-
-	// TODO NbrOfLaps = 0 om man aldrig callat printColumnNames(med getMaxLaps
-	// då ja)
-	// public int getMaxLaps() {
-	// return maxLaps;
-	// }
-
 }

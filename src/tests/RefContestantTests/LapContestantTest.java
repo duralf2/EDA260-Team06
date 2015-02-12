@@ -1,12 +1,20 @@
 package tests.RefContestantTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import register.model.*;
+import register.model.Database;
+import register.model.LapContestant;
+import register.model.LapRace;
+import register.model.MarathonContestant;
+import register.model.RacerInfo;
+import register.model.Time;
 
-public class TestLapContestant {
+public class LapContestantTest {
 	private LapContestant lapContestant;
 	private RacerInfo racerInfo;
 	private Database db;
@@ -37,6 +45,12 @@ public class TestLapContestant {
 	public void testToString() {
 		assertEquals("1;Lars;3;00.10.01;00.02.00;00.04.00;00.04.01;00.00.00;00.02.00;00.06.00;00.10.01", lapContestant.toString(new LapRace(db)));
 	}
+
+	@Test
+	public void testToStringMissingData() {
+		lapContestant = new LapContestant(racerInfo);
+		assertEquals("1;Lars;0;00.00.00;;;;;;;", lapContestant.toString(new LapRace(db)));
+	}
 	
 	@Test
 	public void testCompareToTotalTime() {
@@ -65,5 +79,8 @@ public class TestLapContestant {
 		assertTrue( lapContestant.compareTo(lapContestant2) > 0);
 	}
 	
-
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidObjectToCompareTo() {
+		lapContestant.compareTo(new MarathonContestant());
+	}
 }

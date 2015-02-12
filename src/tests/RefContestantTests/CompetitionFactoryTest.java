@@ -13,7 +13,7 @@ import register.model.CompetitionType;
 import register.model.LapRace;
 import register.model.MarathonRace;
 import register.model.RaceProperties;
-public class TestCompetitionFactory {
+public class CompetitionFactoryTest {
 	private CompetitionFactory cf;
 	private RaceProperties rp;
 	

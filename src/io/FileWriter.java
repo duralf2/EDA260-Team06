@@ -1,9 +1,8 @@
 package io;
 
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.LinkedList;
 
-import register.model.Contestant;
 import register.model.Database;
 import register.model.Time;
 

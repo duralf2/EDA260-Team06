@@ -1,4 +1,4 @@
-package tests;
+package tests.RefContestantTests;
 
 import java.io.IOException;
 import java.util.Map.Entry;

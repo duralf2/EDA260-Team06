@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import register.model.AbstractContestant;
-import register.model.Contestant;
 import register.model.Database;
 import register.model.Time;
 

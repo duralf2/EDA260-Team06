@@ -9,18 +9,23 @@ import register.model.*;
 public class TestLapContestant {
 	private LapContestant lapContestant;
 	private RacerInfo racerInfo;
+	private Database db;
 
 	@Before
 	public void setUp() {
-		racerInfo = new RacerInfo(new String[]{"StartNbr;Name"});
-		racerInfo.put("StartNbr", "1");
-		racerInfo.put("Name", "Lars");
+		db = new Database();
+		
+		racerInfo = new RacerInfo(new String[]{"StartNr","Namn"});
+		racerInfo.put("StartNr", "1");
+		racerInfo.put("Namn", "Lars");
 		
 		lapContestant = new LapContestant(racerInfo);
 		lapContestant.addStartTime(new Time("00.00.00"));
-		lapContestant.addFinishTime(new Time("00.10.01"));
 		lapContestant.addLapTime(new Time("00.02.00"));
 		lapContestant.addLapTime(new Time("00.06.00"));
+		lapContestant.addFinishTime(new Time("00.10.01"));
+		
+		db.addContestantEntry("1", lapContestant);
 	}
 
 	@After
@@ -30,7 +35,7 @@ public class TestLapContestant {
 
 	@Test
 	public void testToString() {
-		assertEquals("Lars;1;3;00.10.01;00.02.00;00.04.00;00.00.00;00.02.00;00.06.00;00.10.01", lapContestant.toString());
+		assertEquals("1;Lars;3;00.10.01;00.02.00;00.04.00;00.04.01;00.00.00;00.02.00;00.06.00;00.10.01", lapContestant.toString(new LapRace(db)));
 	}
 	
 	@Test

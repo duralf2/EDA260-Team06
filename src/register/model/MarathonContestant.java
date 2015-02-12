@@ -1,6 +1,8 @@
 package register.model;
 
 public class MarathonContestant extends AbstractContestant {
+	
+	public MarathonContestant() { }
 
 	public MarathonContestant(RacerInfo racerInfo) {
 		super(racerInfo);

@@ -61,7 +61,7 @@ public class ResultTest {
 		}
 
 	}
-
+	
 	@Test
 	public void testResult() throws IOException {
 		List<String[]> results = new ArrayList<String[]>();

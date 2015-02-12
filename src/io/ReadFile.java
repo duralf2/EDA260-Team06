@@ -155,64 +155,6 @@ public class ReadFile {
             }
 		}
 	}
-	
-	/**
-	 * Reads the specified file and interprets it as a result file. The loaded
-	 *  data is put into the specified database. 
-	 * @param file The file containing the results
-	 * @param ds The database to put the data into
-	 * @throws IOException If the file doesn't exist or couldn't be closed
-	 * @deprecated This method is getting harder and harder to maintain, and
-	 *  it doesn't satisfy the acceptance tests of the customer. A better way to
-	 *  perform acceptance tests is required
-	 */
-	@Deprecated // TODO Deprecated; See the reason in the javadoc
-	public static void readResult(File file, Database ds)
-			throws IOException {
-//		List<String[]> data = readCSV(file);
-//		// Remove column names
-//		String[] columns = data.remove(0);
-//        boolean hasLaps = columns[2].trim().equals("#Varv");
-//
-//        int maxLaps = 0;
-//        if(hasLaps) {
-//            for(String[] line : data) {
-//                int laps = Integer.parseInt(line[2].trim());
-//                if(laps > maxLaps) maxLaps = laps;
-//            }
-//        }
-//
-//		for (String[] line : data) {
-//            for(int i=0; i<line.length; i++) {
-//                line[i] = line[i].trim();
-//            }
-//            AbstractContestant contestant = new MarathonContestant();
-//			String startNumber = line[0];
-//			contestant.putInformation("Namn", line[1].trim());
-//
-//            int totalTime_index = hasLaps ? 3 : 2;
-//            int startTime_index = totalTime_index+maxLaps+1;
-//
-//			String startTime = line[startTime_index].trim();
-//            if (!startTime.contains("?") && !startTime.isEmpty())
-//                contestant.addStartTime(new Time(startTime));
-//
-//            int laps = hasLaps ? Integer.parseInt(line[2].trim()) : 1;
-//            for(int i=1; i <= maxLaps; i++) {
-//                String ts = line[startTime_index+i].trim();
-//                if(!ts.isEmpty() && !ts.contains("?")) {
-//                    Time t = new Time(ts);
-//                    contestant.addLapTime(t);
-//                }
-//            }
-//
-//			String finishTime = line[startTime_index+maxLaps].trim();
-//            if (!(finishTime.contains("?") || finishTime.isEmpty()))
-//                contestant.addFinishTime(new Time(finishTime));
-//
-//			ds.addContestantEntry(startNumber, contestant);
-//		}
-	}
 
 	private static AbstractContestant getContestant(String startNr, Database ds) {
 		AbstractContestant contestant = ds.getContestant(startNr);

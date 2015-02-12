@@ -1,12 +1,16 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
 import io.FileWriter;
 import io.ReadFile;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -15,6 +19,7 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import register.model.Database;
 import register.model.Time;
 
@@ -46,25 +51,11 @@ public class AcceptanceTestStory6 extends TestCase {
 
 		PrintWriter pw = new PrintWriter(outfile);
 		FileWriter.writeResult(pw, db);
+		
+		String printedResult = readFileAsString(outfile);
+		String acceptenceResult = readFileAsString(new File(resultFilepath));
 
-		Database dbOut = new Database();
-		ReadFile.readResult(outfile, dbOut);
-
-		Database dsCorrect = new Database();
-		ReadFile.readResult(new File(resultFilepath), dsCorrect);
-
-		assertTrue(dbOut.equals(dsCorrect));
-	}
-
-	@Test
-	public void testFileloading() throws IOException, FileNotFoundException {
-		Database db1 = new Database();
-		ReadFile.readResult(new File(resultFilepath), db1);
-
-		Database db2 = new Database();
-		ReadFile.readResult(new File(resultFilepath), db2);
-
-		assertTrue(db1.equals(db2));
+		assertEquals(acceptenceResult, printedResult);
 	}
 
 	@Test
@@ -83,5 +74,23 @@ public class AcceptanceTestStory6 extends TestCase {
 			assertEquals(sc3.nextLine(), sc2.nextLine());
 		}
 		result.delete();
+	}
+
+
+	private String readFileAsString(File file) throws IOException {
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				new FileInputStream(file)));
+
+		String fileContents = "";
+		String currentLine = reader.readLine();
+		while (currentLine != null) {
+			fileContents += currentLine.replace("\\s+", "") + "\n";
+			currentLine = reader.readLine();
+		}
+
+		reader.close();
+
+		return fileContents;
 	}
 }

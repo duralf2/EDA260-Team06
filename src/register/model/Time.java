@@ -10,14 +10,15 @@ public class Time implements Comparable<Time> {
 
 	public Time(String time) {
 		time = time.trim();
-		if (time.charAt(2) != '.' || time.charAt(5) != '.') {
+		if(!time.matches("^[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}$")) {
 			throw new IllegalArgumentException(time);
 		}
 
+		String[] hms = time.split("\\.");
 		try {
-			hours = Integer.parseInt(time.substring(0, 2));
-			minutes = Integer.parseInt(time.substring(3, 5));
-			seconds = Integer.parseInt(time.substring(6, 8));
+			hours = Integer.parseInt(hms[0]);
+			minutes = Integer.parseInt(hms[1]);
+			seconds = Integer.parseInt(hms[2]);
 		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}

@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
 import register.model.MarathonRace;
@@ -42,7 +43,7 @@ public class MarathonContestantTest {
 		marathonContestant.addStartTime(new Time("12.00.01"));
 		marathonContestant.addFinishTime(new Time("12.01.15"));
 		String match = "Hannah;00.01.14;12.00.01;12.01.15";
-		assertEquals(match, marathonContestant.toString(new MarathonRace()));
+		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
 	}
 	
 	@Test

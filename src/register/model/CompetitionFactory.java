@@ -12,7 +12,7 @@ public class CompetitionFactory {
 	public CompetitionType createCompetition(Database db){
 		CompetitionType ct = null;
 		if(prop.getProperty(RaceProperties.KEY_RACE_TYPE).equals(RaceProperties.VALUE_RACE_MARATHON)){
-			ct = new MarathonRace();
+			ct = new MarathonRace(db);
 		}else if(prop.getProperty(RaceProperties.KEY_RACE_TYPE).equals(RaceProperties.VALUE_RACE_LAPS)){
 			ct = new LapRace(db);
 		}

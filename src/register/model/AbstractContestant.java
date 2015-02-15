@@ -61,5 +61,17 @@ public abstract class AbstractContestant implements
 	}
 
 	protected abstract String specifiedToString(CompetitionType competitionType);
-	public abstract Time getTotalTime();
+	
+	public Time getTotalTime() // Default implementation
+	{
+		Time startTime = new Time("00.00.00");
+		if (startTimeSize() > 0) {
+			startTime = getStartTime();
+		}
+		Time finishTime = new Time("00.00.00");
+		if (finishTimeSize() > 0) {
+			finishTime = getFinishTime();
+		}
+		return Time.getTotalTime(startTime, finishTime);
+	}
 }

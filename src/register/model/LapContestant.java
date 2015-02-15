@@ -33,19 +33,6 @@ public class LapContestant extends AbstractContestant {
 		throw new IllegalArgumentException("Wrong object type to CompareTo()");
 	}
 
-	@Override
-	public Time getTotalTime() {
-		Time startTime = new Time("00.00.00");
-		if (startTimeSize() > 0) {
-			startTime = getStartTime();
-		}
-		Time finishTime = new Time("00.00.00");
-		if (finishTimeSize() > 0) {
-			finishTime = getFinishTime();
-		}
-		return Time.getTotalTime(startTime, finishTime);
-	}
-
 	public int getLapsCompleted() {
 		if (!finishTime.isEmpty())
 			return lapTimes.size() + 1;

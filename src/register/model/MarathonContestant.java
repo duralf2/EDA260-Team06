@@ -16,20 +16,16 @@ public class MarathonContestant extends AbstractContestant {
 		throw new IllegalArgumentException("Wrong type of object sent to compareTo()");
 	}
 
-	
-	@Override
-	public Time getTotalTime() {
-		return Time.getTotalTime(getStartTime(), getFinishTime());
-	}
-
 	@Override
 	protected String specifiedToString(CompetitionType competitionType) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getTotalTime().toString());
 		sb.append(";");
-		sb.append(getStartTime().toString());
+		if (!startTime.isEmpty())
+			sb.append(getStartTime().toString());
 		sb.append(";");
-		sb.append(getFinishTime().toString());
+		if (!finishTime.isEmpty())
+			sb.append(getFinishTime().toString());
 		return sb.toString();
 	}
 }

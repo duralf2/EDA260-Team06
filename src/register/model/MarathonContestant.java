@@ -1,5 +1,7 @@
 package register.model;
 
+import java.util.Iterator;
+
 public class MarathonContestant extends AbstractContestant {
 	
 	public MarathonContestant() { }
@@ -26,6 +28,40 @@ public class MarathonContestant extends AbstractContestant {
 		sb.append(";");
 		if (!finishTime.isEmpty())
 			sb.append(getFinishTime().toString());
+		appendErrorStringTo(sb);
 		return sb.toString();
+	}
+	
+	private void appendErrorStringTo(StringBuilder builder)
+	{
+		StringBuilder sb = new StringBuilder();
+		if (startTime.size() > 1)
+		{
+			sb.append("Flera starttider? ");
+			Iterator<Time> itr = startTime.iterator();
+			itr.next(); // Skip first
+			while (itr.hasNext()) {
+				sb.append(itr.next().toString() + " ");
+			}
+		}
+
+		if (finishTime.size() > 1)
+		{
+			sb.append("Flera måltider? ");
+			Iterator<Time> itr = finishTime.iterator();
+			itr.next(); // Skip first
+			while (itr.hasNext()) {
+				sb.append(itr.next().toString() + " ");
+			}
+		}
+		
+		if (getTotalTime().compareTo(new Time("00.15.00")) < 0)
+			sb.append("Omöjlig totaltid?");
+		
+		if (sb.length() > 0)
+		{
+			builder.append(";");
+			builder.append(sb.toString().trim());
+		}
 	}
 }

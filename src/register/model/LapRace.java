@@ -4,6 +4,8 @@ import io.RacePrinter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LapRace implements CompetitionType {
 	private Database db;
@@ -49,5 +51,11 @@ public class LapRace implements CompetitionType {
 			}
 		}
 		return maxLaps;
+	}
+
+
+	public List<AbstractContestant> sort() {
+		// TODO LapRace; Implement sort algorithm! Take a look at the algorithm in the Sorter class
+		return new ArrayList<AbstractContestant>();
 	}
 }

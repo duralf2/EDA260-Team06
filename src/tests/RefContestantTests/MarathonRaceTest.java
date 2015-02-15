@@ -66,7 +66,7 @@ public class MarathonRaceTest {
 			e.printStackTrace();
 		}
 		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider",scan.nextLine());
-		assertEquals("1;;00.00.00;;",scan.nextLine());
+		assertEquals("1;;00.00.00;;;Omöjlig totaltid?",scan.nextLine());
 		assertEquals("2;;02.00.00;10.00.00;12.00.00",scan.nextLine());
 		scan.close();
 	}

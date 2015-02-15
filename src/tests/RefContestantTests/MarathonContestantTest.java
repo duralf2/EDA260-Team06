@@ -41,8 +41,8 @@ public class MarathonContestantTest {
 	@Test
 	public void testToString(){
 		marathonContestant.addStartTime(new Time("12.00.01"));
-		marathonContestant.addFinishTime(new Time("12.01.15"));
-		String match = "Hannah;00.01.14;12.00.01;12.01.15";
+		marathonContestant.addFinishTime(new Time("12.21.15"));
+		String match = "Hannah;00.21.14;12.00.01;12.21.15";
 		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
 	}
 	
@@ -59,5 +59,36 @@ public class MarathonContestantTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidObjectToCompareTo() {
 		marathonContestant.compareTo(new LapContestant());
+	}
+	
+	@Test
+	public void testToStringSeveralStartTimes()
+	{
+		marathonContestant.addStartTime(new Time("12.00.00"));
+		marathonContestant.addStartTime(new Time("12.01.00"));
+		marathonContestant.addStartTime(new Time("12.02.00"));
+		marathonContestant.addFinishTime(new Time("12.20.00"));
+		String match = "Hannah;00.20.00;12.00.00;12.20.00;Flera starttider? 12.01.00 12.02.00";
+		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
+	}
+	
+	@Test
+	public void testToStringSeveralFinishTimes()
+	{
+		marathonContestant.addStartTime(new Time("12.00.00"));
+		marathonContestant.addFinishTime(new Time("12.20.00"));
+		marathonContestant.addFinishTime(new Time("12.21.00"));
+		marathonContestant.addFinishTime(new Time("12.22.00"));
+		String match = "Hannah;00.20.00;12.00.00;12.20.00;Flera måltider? 12.21.00 12.22.00";
+		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
+	}
+	
+	@Test
+	public void testToStringImpossibleTotalTime()
+	{
+		marathonContestant.addStartTime(new Time("12.00.00"));
+		marathonContestant.addFinishTime(new Time("12.01.00"));
+		String match = "Hannah;00.01.00;12.00.00;12.01.00;Omöjlig totaltid?";
+		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
 	}
 }

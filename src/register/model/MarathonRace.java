@@ -4,6 +4,8 @@ import io.RacePrinter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MarathonRace implements CompetitionType{
 	private Database db;
@@ -30,4 +32,8 @@ public class MarathonRace implements CompetitionType{
 		}
 	}
 
+	public List<AbstractContestant> sort() {
+		// TODO MarathonRace; Implement sort algorithm!
+		return new ArrayList<AbstractContestant>();
+	}
 }

@@ -18,6 +18,10 @@
 		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath"/>
 	</target>
 
+    <target name="javadoc">
+        <javadoc sourcepath="src" destdir="Documentation/javadocs"></javadoc>
+    </target>
+
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
 		<jar destfile="build/jar/program.jar" basedir="bin">
@@ -27,8 +31,15 @@
 			</manifest>
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />
 		</jar>
+		<jar destfile="build/jar/resultGenerator.jar" basedir="bin">
+					<manifest>
+						<attribute name="Main-Class" value="sorter.ResultMain" />
+						<!--Sets the main class of the program -->
+					</manifest>
+					<zipgroupfileset dir="lib/" includes="**/*.jar" />
+				</jar>
 	</target>
-
+	
 	<target name="main" depends="clean,jar,test" />
 	<!--Runs clean, jar and test in order-->
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teknisk Dokumentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <h1>Teknisk Dokumentation</h1>
+    <p>
+        Här finner ni dokumentation om systemets uppbyggnad.
+        Projektet finner ni på <a href="https://github.com/duralf2/EDA260-Team06/">GitHub</a>.
+        Status av senaste build kan ni hitta på <a href="https://travis-ci.org/duralf2/EDA260-Team06/">Travis</a>.
+    </p>
+    <img src="https://travis-ci.org/duralf2/EDA260-Team06.svg?branch=master">
+
+
+    <hr>
+
+    <h2>Arkitektur</h2>
+    <p>
+        Programmet har vid skrivande stund en något konstig arkitektur med
+        aningen förvirrande namn. Detta bör fixas vid nästa refaktoriseringstillfälle.
+    </p>
+
+    <hr>
+
+    <h2>Utvecklingsverktyg</h2>
+    <p>
+        De flesta automatiserade processer använder sig av ANT. Här dokumenterar vi några av de mest använda.
+    </p>
+
+    <h3>Generera javadocs</h3>
+    <p>
+        Kör <code>ant javadoc</code>, öppna
+        <code><a href="javadocs/index.html">Dokumentation/javadocs/index.html</a></code>.
+    </p>
+
+    <h3>Bygga jar-fil</h3>
+    <p>
+        Kör <code>ant jar</code>, GUI-programmet lägger sig då i <code>build/jar/program.jar</code>.
+    </p>
+</body>
+</html>

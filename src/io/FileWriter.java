@@ -1,8 +1,13 @@
 package io;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
+import register.model.AbstractContestant;
 import register.model.Database;
 import register.model.Time;
 
@@ -23,16 +28,13 @@ public class FileWriter {
 	 * @param db
 	 *            The database containing the data to write
 	 */
-	public static void writeResult(PrintWriter pw, Database db) {
+	public static void writeResult(PrintWriter pw, Database ds) {
 //		StringBuilder sb = new StringBuilder();
-//		Map<String, Contestant> entries = db.getAllContestantEntries();
-//		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n"); // TODO
-//																		// how
-//																		// to
-//																		// handle
-//																		// setContestantColumnNames()
-//																		// in
-//																		// Datastrucure?
+//		Map<String, Contestant> entries = ds.getAllContestantEntries();
+//		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
+//
+//		// TODO how to handle setContestantColumnNames() in Datastrucure?
+//		
 //		Contestant contestant;
 //		for (String startNumber : entries.keySet()) {
 //			contestant = entries.get(startNumber);
@@ -75,30 +77,30 @@ public class FileWriter {
 	 * @param db
 	 *            The database containing the data to write
 	 */
-	public static void writeLapResult(PrintWriter pw, Database db) {
+	public static void writeLapResult(PrintWriter pw, Database ds) {
 //		StringBuilder sb = new StringBuilder();
-//		Map<String, Contestant> entries = db.getAllContestantEntries();
-//		int maxLaps = db.getMaxLaps();
+//		Map<String, Contestant> entries = ds.getAllContestantEntries();
+//		int maxLaps = ds.getMaxLaps();
 //
 //		makeColumnNames(sb, maxLaps);
 //
 //		List<String> incorrectRegistrations = new ArrayList<String>();
 //		for (String startNumber : entries.keySet()) {
-//			 Contestant contestant = entries.get(startNumber);
+//			Contestant contestant = entries.get(startNumber);
 //
-//			 if (contestant.getName().equals(""))
-//				 incorrectRegistrations.add(startNumber);
-//			 else {
-//				 writeContestant(sb, contestant, startNumber, maxLaps);
-//			 }
+//			if (contestant.getName().equals(""))
+//				incorrectRegistrations.add(startNumber);
+//			else {
+//				writeContestant(sb, contestant, startNumber, maxLaps);
+//			}
 //		}
 //
 //		if (!incorrectRegistrations.isEmpty()) {
 //			sb.append("Icke existerande startnummer\n");
 //			makeColumnNames(sb, maxLaps);
 //			for (String startNumber : incorrectRegistrations) {
-//				writeContestant(sb, db.getContestant(startNumber),
-//						startNumber, maxLaps);
+//				writeContestant(sb, ds.getContestant(startNumber), startNumber,
+//						maxLaps);
 //			}
 //		}
 //
@@ -113,7 +115,7 @@ public class FileWriter {
 //		for (int i = 1; i <= maxLaps; i++)
 //			sb.append("Varv" + i + ";");
 //		sb.append("Start;");
-//		
+//
 //		for (int i = 1; i <= maxLaps - 1; i++)
 //			sb.append("Varvning" + i + ";");
 //
@@ -121,7 +123,7 @@ public class FileWriter {
 	}
 
 	private static void writeContestant(StringBuilder sb,
-			Contestant contestant, String startNumber, int maxLaps) {
+			AbstractContestant contestant, String startNumber, int maxLaps) {
 //		sb.append(startNumber + ";");
 //		sb.append(contestant.getName() + ";");
 //
@@ -157,7 +159,7 @@ public class FileWriter {
 //			sb.append(";");
 //
 //		if (contestant.finishTimeSize() == 0) {
-////			sb.append("Slut?");
+//			// sb.append("Slut?");
 //		} else {
 //			if (isImpossibleTime(contestant)) {
 //				sb.append(contestant.getFinishTime() + ";"
@@ -168,16 +170,15 @@ public class FileWriter {
 //		}
 //		checkMultipleTimes(contestant, sb);
 //		sb.append("\n");
-
 	}
 
-	private static void checkMultipleTimes(Contestant contestant,
+	private static void checkMultipleTimes(AbstractContestant contestant,
 			StringBuilder sb) {
 //		checkMultipleTimesStart(contestant, sb);
 //		checkMultipleTimesFinish(contestant, sb);
 	}
 
-	private static void checkMultipleTimesFinish(Contestant contestant,
+	private static void checkMultipleTimesFinish(AbstractContestant contestant,
 			StringBuilder sb) {
 //		if (contestant.finishTimeSize() > 1) {
 //			sb.append("; " + "Flera måltider?");
@@ -190,7 +191,7 @@ public class FileWriter {
 //		}
 	}
 
-	private static void checkMultipleTimesStart(Contestant contestant,
+	private static void checkMultipleTimesStart(AbstractContestant contestant,
 			StringBuilder sb) {
 //		if (contestant.startTimeSize() > 1) {
 //			sb.append("; " + "Flera starttider?");
@@ -203,7 +204,7 @@ public class FileWriter {
 //		}
 	}
 
-	private static void writeTotalTime(Contestant contestant, StringBuilder sb) {
+	private static void writeTotalTime(AbstractContestant contestant, StringBuilder sb) {
 		// Getting sizes of lists containing starttimes and finishtimes, if size
 		// = 0 time is missing
 //		if (contestant.startTimeSize() == 0 || contestant.finishTimeSize() == 0) {
@@ -213,7 +214,7 @@ public class FileWriter {
 //		}
 	}
 
-	private static boolean isImpossibleTime(Contestant contestant) {
+	private static boolean isImpossibleTime(AbstractContestant contestant) {
 //		boolean impossible;
 //		try {
 //			impossible = contestant.startTimeSize() != 0
@@ -246,5 +247,32 @@ public class FileWriter {
 //			sb.append(startNumber.toString() + "; ");
 //			sb.append(time.toString() + "\n");
 //		}
+	}
+	
+	/**
+	 * Prints start and finish time files based on the provided map containing
+	 * start numbers as keys and arraylists of times in string format (HH.mm.ss)
+	 * as values.
+	 * 
+	 * @param pw
+	 *            PrintWriter to use for writing the time file.
+	 * @param times
+	 *            <StartNumber, ArrayList<Times in string format>>
+	 */
+
+	public static void writeTimesToFile(PrintWriter pw,
+			Map<String, ArrayList<String>> times) {
+		StringBuilder sb = new StringBuilder();
+		Set<Entry<String, ArrayList<String>>> timeEntries = times.entrySet();
+		for (Entry<String, ArrayList<String>> e : timeEntries) {
+			String startNumber = e.getKey();
+			ArrayList<String> entryTimes = e.getValue();
+			for (String time : entryTimes) {
+				sb.append(startNumber + "; " + time + "\n");
+			}
+		}
+		if (sb.length() > 0)
+			sb.deleteCharAt(sb.length() - 1);
+		pw.print(sb.toString());
 	}
 }

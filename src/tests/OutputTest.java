@@ -46,48 +46,6 @@ public class OutputTest {
 	{
 		f.delete();
 	}
-
-//	TODO: Gör om när vi har en sortmetod!!
-//	@Test
-//	public void testWriteTwoResults() {
-//		ds.addEntry("2", new Time("13.37.00", "13.37.01"));
-//		IOHandler.writeResult(pw, ds);
-//		assert(f.exists());
-//		assertEquals("StartNr; TotalTid; Starttid; Måltid", sc.nextLine());
-//		assertEquals("1;", sc.next()ran-Victor );
-//		assertEquals("--.--.--;",  sc.next());
-//		assertEquals("12.00.00;",  sc.next());
-//		assertEquals("13.23.34",  sc.next());
-//		assertEquals("2;", sc.next());
-//		assertEquals("--.--.--;",  sc.next());
-//		assertEquals("13.37.00;",  sc.next());
-//		assertEquals("13.37.01",  sc.next());
-//	}
-	
-	
-	/*
-	 * Tests have been removed since the methods have been removed (not necessary) TODO
-	 * 
-	 * @Test
-	public void testWriteStartTimes() {
-		FileWriter.writeStartTimes(pw, ds);
-		String[] line = sc.nextLine().split(";");
-		assertTrue(f.exists());
-		assertEquals("1", line[0]);
-		assertEquals(" 12.00.00",  line[1]);
-	}
-
-	@Test
-	public void testWriteFinishTimes() {
-		FileWriter.writeFinishTimes(pw, ds);
-		String[] line = sc.nextLine().split(";");
-		assertTrue(f.exists());
-		assertEquals("1", line[0]);
-		assertEquals(" 13.23.34",  line[1]);
-	}
-	 */
-	
-	
 	
 	@Test
 	public void testWriteResults() {

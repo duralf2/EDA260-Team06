@@ -6,14 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
 
+import register.logic.TimeRegistrationHandler;
+
 public class RegisterButton extends JButton implements ActionListener{
-	private RegistrationGUI gui;
+	private TimeRegistrationHandler registrationHandler;
+	private StartNumberField startNumberField;
 	
-	public RegisterButton(RegistrationGUI gui, int fontSize) {
+	public RegisterButton(int fontSize, TimeRegistrationHandler registrationHandler, StartNumberField startNumberField) {
 		super ("Register");
-		this.gui = gui;
+		this.registrationHandler = registrationHandler;
+		this.startNumberField = startNumberField;
 		addActionListener(this);
 		setToolTipText("Register entry.");
 		setFont(getFont().deriveFont(Font.BOLD, fontSize));
@@ -24,6 +29,10 @@ public class RegisterButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		gui.register();
+		boolean isValid = registrationHandler.register(startNumberField.getText());
+		if(!isValid) {
+			JOptionPane.showMessageDialog(null, registrationHandler.getLastError());
+		}
+		startNumberField.setText("");
 	}
 }

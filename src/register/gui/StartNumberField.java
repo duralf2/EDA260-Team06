@@ -4,15 +4,17 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-public class StartNumberField extends JTextField implements ActionListener {
-	private RegistrationGUI gui;
+import register.logic.TimeRegistrationHandler;
 
-	public StartNumberField(RegistrationGUI gui, int fontSize) {
-		this.gui = gui;
+public class StartNumberField extends JTextField implements ActionListener {
+	private TimeRegistrationHandler registrationHandler;
+	public StartNumberField(int fontSize, TimeRegistrationHandler registrationHandler) {
+		this.registrationHandler = registrationHandler;
 		addActionListener(this);
 		setToolTipText("Input start number.");
 		setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
@@ -21,6 +23,10 @@ public class StartNumberField extends JTextField implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		gui.register();
+		boolean isValid = registrationHandler.register(getText());
+		if(!isValid) {
+			JOptionPane.showMessageDialog(null, registrationHandler.getLastError());
+		}
+		setText("");
 	}
 }

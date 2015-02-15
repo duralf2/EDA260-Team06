@@ -7,6 +7,8 @@ public abstract class AbstractContestant implements
 	protected LinkedList<Time> startTime, finishTime;
 	// TODO: Hantera finishTime då denna är null!
 	
+	private String className;
+	
 	protected RacerInfo racerInfo;
 
 	public AbstractContestant() {
@@ -73,5 +75,13 @@ public abstract class AbstractContestant implements
 			finishTime = getFinishTime();
 		}
 		return Time.getTotalTime(startTime, finishTime);
+	}
+
+	public void setClassName(String name) {
+		className = name;
+	}
+	
+	public String getClassName() {
+		return className;
 	}
 }

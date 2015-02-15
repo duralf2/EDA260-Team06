@@ -6,7 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -16,9 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
-import register.logic.Register;
-import register.model.Contestant;
-import register.model.DataStructure;
+import register.logic.TimeRegistrationHandler;
+import register.model.ContestantTimes;
 import register.model.Time;
 
 /**
@@ -28,12 +26,9 @@ public class RegistrationGUI extends JFrame {
 
 	private StartNumberField startNumberField;
 	private EntryList entryTable;
-	private Register register;
 
-	public RegistrationGUI(String title, Register register) {
+	public RegistrationGUI(String title, TimeRegistrationHandler registrationHandler) {
 		super(title);
-
-		this.register = register;
 
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
@@ -44,10 +39,9 @@ public class RegistrationGUI extends JFrame {
 		int fontSize = fontSize();
 
 		JLabel startNumberLabel = new StartNumberLabel(fontSize);
-		startNumberField = new StartNumberField(this, fontSize);
-		JButton registerButton = new RegisterButton(this, fontSize);
-
-		entryTable = new EntryList(fontSize, register);
+		startNumberField = new StartNumberField(fontSize, registrationHandler);
+		JButton registerButton = new RegisterButton(fontSize, registrationHandler, startNumberField);
+		entryTable = new EntryList(fontSize, registrationHandler);
 
 		JScrollPane entryList = new JScrollPane(entryTable);
 		TitledBorder titledBorder = new TitledBorder("Registrations");
@@ -94,114 +88,6 @@ public class RegistrationGUI extends JFrame {
 		int taskBarSize = screenInsets.bottom;
 		int fontSize = (screenSize.height - taskBarSize - getHeight()) / 20;
 		return fontSize;
-	}
-
-	/**
-	 * Reads the contents of the text field and tries to make a registration if
-	 * the input is valid. This method handles normal registration, mass start
-	 * registrations and temporary registrations.
-	 */
-	public void register() {
-		// TODO: Model-View-Control plz? Also change the name, this method
-		// doesn't only handle registrations anymore
-		String startNumber = startNumberField.getText();
-		DataStructure ds = register.getDataStructure();
-		if (isNumerical(startNumber)) {
-			registerContestantTime(startNumber, ds);
-		} else if (startNumber.equals("*")) {
-			registerMassStart();
-		} else if (isPreRegistration(startNumber)) {
-			preRegister(startNumber, ds);
-		} else {
-			JOptionPane.showMessageDialog(null,
-					"Invalid startnumber, must be a number or x.");
-		}
-
-		register.writeFinishTimes();
-		entryTable.update();
-
-		startNumberField.setText("");
-	}
-
-	private void preRegister(String input, DataStructure ds) {
-		if (input.equals("x")) {
-			Contestant unknown = new Contestant();
-			unknown.addFinishTime(new Time(Time.getCurrentTime()));
-			ds.addContestantEntry("x", unknown);
-		} else if (input.equals("dx")) {
-			ds.removeContestant("x");
-		} else if (input.startsWith("x=")) {
-			assignStartNumberToPreRegistration(input, ds);
-		}
-	}
-
-	private void assignStartNumberToPreRegistration(String input,
-			DataStructure ds) {
-		String number = input.substring(2);
-		if (isNumerical(number)) {
-			Contestant c = ds.getContestant(number);
-			Contestant x = ds.removeContestant("x");
-			if (x == null) {
-				JOptionPane.showMessageDialog(null,
-						"No preregistered time set.");
-			} else {
-				if (c != null) {
-					c.addFinishTime(x.getFinishTime());
-				} else {
-					Contestant invalidContestant = new Contestant();
-					invalidContestant.addFinishTime(x.getFinishTime());
-					ds.addContestantEntry(number, invalidContestant);
-				}
-			}
-		} else {
-			JOptionPane.showMessageDialog(null,
-					"Invalid startnumber, must be a number.");
-		}
-	}
-
-	private boolean isPreRegistration(String input) {
-		return input.startsWith("x") || input.equals("dx");
-	}
-
-	private void registerContestantTime(String startNumber, DataStructure ds) {
-		Contestant c = ds.getContestant(startNumber);
-		if (c != null) {
-			c.addFinishTime(new Time(Time.getCurrentTime()));
-		} else {
-			Contestant invalidContestant = new Contestant();
-			invalidContestant.addFinishTime(new Time(Time.getCurrentTime()));
-			ds.addContestantEntry(startNumber, invalidContestant);
-		} 
-	}
-
-	private void registerMassStart() {
-		register.performMassStart(Register.DEFAULT_RESULT_FILE);
-		try {
-			refreshEntryList();
-		} catch (IOException e) {
-			// TODO: exception handling
-			e.printStackTrace();
-		}
-	}
-
-	private boolean isNumerical(String startNumber) {
-		return startNumber.matches("[1-9][0-9]*");
-	}
-
-	private void refreshEntryList() throws IOException {
-		register.getDataStructure().clearContestantEntries(); // TODO RegGui;
-																// Add the new
-																// time directly
-																// to the
-																// datastructure
-																// instead of
-																// clearing it
-																// and reading
-																// it all from a
-																// file
-		register.readGoalTimes(Register.DEFAULT_RESULT_FILE);
-		register.readNames(Register.DEFAULT_NAME_FILE);
-		entryTable.update();
 	}
 
 }

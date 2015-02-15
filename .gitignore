@@ -5,6 +5,7 @@ bin/
 tmp/
 out/
 docs/api/
+Documentation/javadocs/
 *.zip
 *.tmp
 *.bak
@@ -17,7 +18,9 @@ docs/api/
 Crystal
 build
 data
+data/*
 *.xml
+RegistrationData/times.txt
 
 local.properties
 .settings/

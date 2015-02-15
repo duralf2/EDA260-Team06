@@ -23,6 +23,13 @@ public class AdditionalContestantTests {
 		contestant.putInformation("Namn", "Bertil");
 		assertEquals("Bertil", contestant.getInformation("Namn"));
 	}
+	
+	@Test
+	public void testContestantClassStorage()
+	{
+		contestant.setClassName("Pensionärer");
+		assertEquals("Pensionärer", contestant.getClassName());
+	}
 
 	
 	private static class MockContestant extends AbstractContestant

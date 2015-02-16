@@ -22,18 +22,24 @@ import register.model.Time;
 public class MarathonContestantTest {
 	private ContestantProperties racerInfo;
 	private MarathonContestant marathonContestant;
-	
+	private Configuration config;
+
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
+		File file = new File("testfiles/config/marathonContestant.ini");
+		config = new Configuration(file);
+		AbstractContestant.setConfiguration(config);
+		
 		racerInfo = new ContestantProperties(new String[]{"Name"});
 		racerInfo.put("Name","Hannah");
 		marathonContestant = new MarathonContestant(racerInfo);
 	}
 	
 	@After
-	public void tearDown(){
+	public void tearDown() throws IOException{
 		racerInfo = null;
 		marathonContestant = null;
+		AbstractContestant.setConfiguration(new Configuration());
 	}
 	
 	@Test
@@ -91,19 +97,11 @@ public class MarathonContestantTest {
 	@Test
 	public void testToStringImpossibleTotalTime() throws IOException
 	{
-		Configuration oldConfig = AbstractContestant.getConfiguration();
-		
-		File file = new File("test.ini");
-		Configuration config = new Configuration(file);
 		config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
-		AbstractContestant.setConfiguration(config);
 		
 		marathonContestant.addStartTime(new Time("12.00.00"));
 		marathonContestant.addFinishTime(new Time("12.01.00"));
 		String match = "Hannah;00.01.00;12.00.00;12.01.00;Omöjlig totaltid?";
 		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
-		
-		AbstractContestant.setConfiguration(oldConfig);
-		file.delete();
 	}
 }

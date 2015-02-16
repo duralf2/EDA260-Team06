@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import register.model.ContestantProperties;
 
-public class RacerInfoTest {
+public class ContestantPropertiesTest {
 	
 	private ContestantProperties info;
 

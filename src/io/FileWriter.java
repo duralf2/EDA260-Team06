@@ -40,14 +40,15 @@ public class FileWriter {
 		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
 		CompetitionType competition = competitionFactory.createCompetition(db);
 		//Write header to file
-		competition.print(target);
+		
+		sb.append(competition.generateHeader());
 	
 		for(AbstractContestant contestant : contestants){
-			sb.append(contestant.toString(competition));
-			sb.append("\n");
+			//sb.append(contestant.toString(competition));
+			//sb.append("\n");
 		}
 		
-		printString(sb.toString());
+		//printString(sb.toString());
 	}
 	
 	/**

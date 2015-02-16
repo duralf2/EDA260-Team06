@@ -20,7 +20,8 @@ public class MarathonCompetition implements CompetitionType{
 		sb.append("StartNr;Namn;");
 		// TODO Använd headern i ContestantFactory för att få ut "StartNr;Namn;..." till raden ovan istället
 		
-		sb.append("TotalTid;Starttider;Måltider\n");
+		sb.append(generateHeader());
+		
 		for (AbstractContestant c : db.getAllContestantEntries().values()) {
 			sb.append(c.toString(this) + "\n");
 		}
@@ -35,5 +36,10 @@ public class MarathonCompetition implements CompetitionType{
 	public List<AbstractContestant> sort() {
 		// TODO MarathonRace; Implement sort algorithm!
 		return new ArrayList<AbstractContestant>();
+	}
+
+	@Override
+	public String generateHeader() {
+		return "TotalTid;Starttider;Måltider\n";
 	}
 }

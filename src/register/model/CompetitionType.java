@@ -20,4 +20,5 @@ public interface CompetitionType {
 	 * @return A sorted list, containing all contestants
 	 */
 	public List<AbstractContestant> sort();
+	public String generateHeader();
 }

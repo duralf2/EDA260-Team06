@@ -18,6 +18,23 @@ public class LapCompetition implements CompetitionType {
 	public void print(File file) {
 		StringBuilder sb = new StringBuilder();
 		
+		sb.append(generateHeader());
+		
+		for (AbstractContestant c : db.getAllContestantEntries().values()) {
+			sb.append(c.toString(this) + "\n");
+		}
+		
+		try {
+			new FileWriter(file.getAbsolutePath()).printString(sb.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public String generateHeader() {
+		
+		StringBuilder sb = new StringBuilder();
 		sb.append("StartNr;Namn;");
 		// TODO Använd headern i ContestantFactory för att få ut "StartNr;Namn;..." till raden ovan istället 
 		sb.append("#Varv;TotalTid;");
@@ -31,16 +48,8 @@ public class LapCompetition implements CompetitionType {
 			sb.append("Varvning" + i + ";");
 
 		sb.append("Mål\n");
-		for (AbstractContestant c : db.getAllContestantEntries().values()) {
-			sb.append(c.toString(this) + "\n");
-		}
 		
-		
-		try {
-			new FileWriter(file.getAbsolutePath()).printString(sb.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return sb.toString();
 	}
 
 	public int getMaxLaps() {

@@ -66,7 +66,7 @@ public class ResultTest {
 	@Test
 	public void testResult() throws IOException {
 		List<String[]> results = new ArrayList<String[]>();
-			sort.sort(files, null);
+			//sort.sort(files, null);
 			results = CSVReader.read(new File("data/result.txt"));
 
 		//start at 1 to ignore header

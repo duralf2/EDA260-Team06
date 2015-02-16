@@ -18,6 +18,14 @@ public class Configuration extends Properties {
 	public static final String KEY_RESULT_FILE_PATH = "resultFilePath";
 	public static final String KEY_NAME_FILE_PATH = "nameFilePath";
 	public static final String KEY_MINIMUM_RACE_DURATION = "minimumRaceDuration";
+	public static final String KEY_MINIMUM_STAGE_DURATION = "minimumStageDuration";
+	public static final String KEY_MAXIMUM_LAP_DURATION = "maximumLapDuration";
+	public static final String KEY_MAXIMUM_RACE_DURATION = "maximumRaceDuration";
+	public static final String KEY_STAGE_AMOUNT = "stageAmount";
+	public static final String KEY_STAGE_NAMES = "stageNames"; //stageNames=etapp1,etapp2,etapp3
+	public static final String KEY_SPECIAL_STAGE_NAMES = "specialStageNames"; //specialStageNames=etapp1*2
+	public static final String KEY_RESULT_FORMAT="resultFormat"; //CSV or HTML
+	public static final String KEY_RESULT_SORTED="resultSorted"; //true or false
 	
 	public Configuration() throws IOException {
 		this (DEFAULT_PROPERTIES_FILE);
@@ -40,6 +48,7 @@ public class Configuration extends Properties {
 			put(KEY_GUI_OUTPUT_FILE_PATH, "data/utdata.txt");
 			put(KEY_RACE_TYPE, VALUE_RACE_MARATHON);
 			put(KEY_MINIMUM_RACE_DURATION, "00.15.00");
+			put(KEY_MAXIMUM_RACE_DURATION, "23.59.59");
 			
 			FileOutputStream out = new FileOutputStream(propertiesFile);
 			store(out, generateComment());

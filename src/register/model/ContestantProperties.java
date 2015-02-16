@@ -2,11 +2,11 @@ package register.model;
 
 import java.util.HashMap;
 
-public class RacerInfo {
+public class ContestantProperties {
 	private final String[] nameHeader;
 	private HashMap<String, String> information;
 
-	public RacerInfo(String[] nameHeader) {
+	public ContestantProperties(String[] nameHeader) {
 		information = new HashMap<String, String>();
 		this.nameHeader = nameHeader;
 	}

@@ -9,15 +9,15 @@ public abstract class AbstractContestant implements
 	
 	private String className;
 	
-	protected RacerInfo racerInfo;
+	protected ContestantProperties racerInfo;
 
 	public AbstractContestant() {
 		startTime = new LinkedList<Time>();
 		finishTime = new LinkedList<Time>();
-		racerInfo = new RacerInfo(new String[0]);
+		racerInfo = new ContestantProperties(new String[0]);
 	}
 
-	public AbstractContestant(RacerInfo racerInfo) {
+	public AbstractContestant(ContestantProperties racerInfo) {
 		startTime = new LinkedList<Time>();
 		finishTime = new LinkedList<Time>();
 		this.racerInfo = racerInfo;

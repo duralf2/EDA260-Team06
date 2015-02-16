@@ -14,8 +14,8 @@ import register.model.ContestantFactory;
 import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
-import register.model.RaceProperties;
-import register.model.RacerInfo;
+import register.model.Configuration;
+import register.model.ContestantProperties;
 
 public class ContestantFactoryTest {
 
@@ -29,9 +29,9 @@ public class ContestantFactoryTest {
 		factory = new ContestantFactory(properties);
 		database = new Database();
 
-		properties.put(RaceProperties.KEY_RACE_TYPE,
-				RaceProperties.VALUE_RACE_MARATHON);
-		properties.put(RaceProperties.KEY_NAME_FILE_PATH,
+		properties.put(Configuration.KEY_RACE_TYPE,
+				Configuration.VALUE_RACE_MARATHON);
+		properties.put(Configuration.KEY_NAME_FILE_PATH,
 				"testfiles/FactoryTestNames.txt");
 		factory.createRegisteredContestants(database);
 	}
@@ -49,14 +49,14 @@ public class ContestantFactoryTest {
 
 	@Test
 	public void testCreateContestant() {
-		RacerInfo info = factory.createRaceInfo();
+		ContestantProperties info = factory.createRaceInfo();
 		info.put("StartNr", "1");
 		info.put("Namn", "Bertil");
 		AbstractContestant contestant = factory.createContestant();
 		assertEquals(MarathonContestant.class, contestant.getClass());
 
-		properties.put(RaceProperties.KEY_RACE_TYPE,
-				RaceProperties.VALUE_RACE_LAPS);
+		properties.put(Configuration.KEY_RACE_TYPE,
+				Configuration.VALUE_RACE_LAPS);
 		contestant = factory.createContestant(info);
 		assertEquals(LapContestant.class, contestant.getClass());
 	}

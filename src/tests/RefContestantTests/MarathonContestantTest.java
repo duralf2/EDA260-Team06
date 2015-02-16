@@ -11,16 +11,16 @@ import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
 import register.model.MarathonCompetition;
-import register.model.RacerInfo;
+import register.model.ContestantProperties;
 import register.model.Time;
 
 public class MarathonContestantTest {
-	private RacerInfo racerInfo;
+	private ContestantProperties racerInfo;
 	private MarathonContestant marathonContestant;
 	
 	@Before
 	public void setUp() {
-		racerInfo = new RacerInfo(new String[]{"Name"});
+		racerInfo = new ContestantProperties(new String[]{"Name"});
 		racerInfo.put("Name","Hannah");
 		marathonContestant = new MarathonContestant(racerInfo);
 	}

@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.RacerInfo;
+import register.model.ContestantProperties;
 
 public class RacerInfoTest {
 	
-	private RacerInfo info;
+	private ContestantProperties info;
 
 	@Before
 	public void setUp() throws Exception {
-		info = new RacerInfo(new String[]{"StartNr", "Namn", "Klubb"});
+		info = new ContestantProperties(new String[]{"StartNr", "Namn", "Klubb"});
 	}
 
 	@Test

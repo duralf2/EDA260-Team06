@@ -11,7 +11,7 @@ public class LapContestant extends AbstractContestant {
 		lapTimes = new LinkedList<Time>();
 	}
 
-	public LapContestant(RacerInfo racerInfo) {
+	public LapContestant(ContestantProperties racerInfo) {
 		super(racerInfo);
 		lapTimes = new LinkedList<Time>();
 	}

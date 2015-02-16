@@ -12,15 +12,15 @@ import register.model.CompetitionFactory;
 import register.model.CompetitionType;
 import register.model.LapCompetition;
 import register.model.MarathonCompetition;
-import register.model.RaceProperties;
+import register.model.Configuration;
 public class CompetitionFactoryTest {
 	private CompetitionFactory cf;
-	private RaceProperties rp;
+	private Configuration rp;
 	
 	@Before
 	public void setUp(){
 		try{
-			rp = new RaceProperties();
+			rp = new Configuration();
 			cf = new CompetitionFactory(rp);
 		}catch(IOException e){
 			fail("Could not read data/config.ini");
@@ -34,14 +34,14 @@ public class CompetitionFactoryTest {
 	
 	@Test
 	public void testLapRace() {
-			rp.setProperty(RaceProperties.KEY_RACE_TYPE, RaceProperties.VALUE_RACE_LAPS);
+			rp.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
 			CompetitionType ct = cf.createCompetition(null);
 			assertTrue(ct instanceof LapCompetition);
 	}
 	
 	@Test
 	public void testMarathonRace() {
-		rp.setProperty(RaceProperties.KEY_RACE_TYPE, RaceProperties.VALUE_RACE_MARATHON);
+		rp.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_MARATHON);
 		CompetitionType ct = cf.createCompetition(null);
 		assertTrue(ct instanceof MarathonCompetition);
 	}

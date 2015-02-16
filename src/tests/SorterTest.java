@@ -26,7 +26,7 @@ public class SorterTest {
     }
     
     @Test
-    public void testOrderNoClasses() throws IOException {
+    public void testOrder() throws IOException {
         // TODO: Do actual tests, don't only check that it doesn't crash
         File[] files = new File[] {
                 new File("testfiles/acceptanstest/Iteration2/acceptanstest18/starttider.txt"),
@@ -34,6 +34,6 @@ public class SorterTest {
                 new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider2.txt")
         };
         
-        sorter.sortTime(files, new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfilNoClasses.txt"));
+        sorter.sortTime(files, new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfil.txt"));
     }
 }

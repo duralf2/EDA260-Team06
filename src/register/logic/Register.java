@@ -12,7 +12,8 @@ import java.util.Map.Entry;
 import register.model.AbstractContestant;
 import register.model.Database;
 import register.model.Time;
-
+//Används endast i test
+@Deprecated
 public class Register {
 	private Database db;
 	

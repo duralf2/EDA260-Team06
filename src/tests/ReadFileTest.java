@@ -21,7 +21,7 @@ public class ReadFileTest {
 		ds = new DataStructure();
 	}
 	
-	@Test(expected=StringIndexOutOfBoundsException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void wrongStructure() throws IOException {
 		ReadFile.readFinishTime(new File("testfiles/emptyFileTest"),ds);
 	}

@@ -7,10 +7,11 @@
 
 
 ## Documentation
-Nothing here yet
+For user manual, see Documentation/manual.html
 
 ### Design
-Nothing here yet
+For technical documentation, see Documentation/Teknisk Dokumentation.html
+Instructions for javadoc generation is included in the technical documentation.
 
 ## Group members
 Add yourself to this list.
@@ -18,3 +19,5 @@ Add yourself to this list.
  - Hannah Lindblad
  - Niklas Jönsson
  - Erik Bjäreholt (@ErikBjare)
+ - Gustaf Oxenstierna
+ - Tom Hansson

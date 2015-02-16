@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 public class MarathonContestant extends AbstractContestant {
 	
-	public MarathonContestant() { }
 
 	public MarathonContestant(ContestantProperties racerInfo) {
 		super(racerInfo);

@@ -77,4 +77,8 @@ public class ContestantFactory {
 		}
 		return info;
 	}
+
+	public void setContestantColumnNames(String[] contestantColumns) {
+		nameHeader = contestantColumns;
+	}
 }

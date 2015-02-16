@@ -1,15 +1,12 @@
 package register.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class LapContestant extends AbstractContestant {
 	private LinkedList<Time> lapTimes;
-	
-	public LapContestant() {
-		lapTimes = new LinkedList<Time>();
-	}
 
 	public LapContestant(ContestantProperties racerInfo) {
 		super(racerInfo);
@@ -47,18 +44,18 @@ public class LapContestant extends AbstractContestant {
 		sb.append(";");
 		sb.append(getTotalTime().toString());
 		sb.append(";");
-		
+
 		List<Time> allLapTimes = new ArrayList<Time>(lapTimes);
 		allLapTimes.addAll(finishTime);
 
-		
 		Time previousTime = new Time("00.00.00");
 		if (!startTime.isEmpty())
 			previousTime = getStartTime();
 		int maxLaps = ((LapCompetition) competitionType).getMaxLaps();
-		for (int i = 0;i < maxLaps; i++) {
+		for (int i = 0; i < maxLaps; i++) {
 			if (allLapTimes.size() > i) {
-				sb.append(Time.getTotalTime(previousTime, allLapTimes.get(i)).toString());
+				sb.append(Time.getTotalTime(previousTime, allLapTimes.get(i))
+						.toString());
 				previousTime = allLapTimes.get(i);
 			}
 			sb.append(";");
@@ -67,8 +64,8 @@ public class LapContestant extends AbstractContestant {
 		if (!startTime.isEmpty())
 			sb.append(getStartTime());
 		sb.append(";");
-		
-		for (int i = 0; i < maxLaps - 1;i++) {
+
+		for (int i = 0; i < maxLaps - 1; i++) {
 			if (lapTimes.size() > i)
 				sb.append(lapTimes.get(i));
 			sb.append(";");
@@ -81,4 +78,33 @@ public class LapContestant extends AbstractContestant {
 
 	}
 
+	@Override
+	public void addFinishTime(Time time) {
+		Time raceTime = getRaceTime();
+		Time startTime = new Time("00.00.00");
+		if (startTimeSize() > 0) {
+			startTime = getStartTime();
+		}
+		
+		if (time.compareTo(raceTime.add(startTime)) <= 0) {
+			// If time is less than racetime, it is a lap
+			addLapTime(time);
+		} else {
+			// If time is more than racetime, it is a finish time
+			super.addFinishTime(time);
+		}
+	}
+
+	private Time getRaceTime() {
+		try {
+			Configuration c = new Configuration();
+			String data = c.getProperty(Configuration.KEY_LAPRACE_DURATION,
+					"00.00.00");
+			Time time = new Time(data);
+			return time;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return new Time("00.00.00");
+	}
 }

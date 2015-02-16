@@ -1,6 +1,6 @@
 package register.model;
 
-import io.RacePrinter;
+import io.FileWriter;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class LapCompetition implements CompetitionType {
 		
 		
 		try {
-			new RacePrinter(file.getAbsolutePath()).print(sb.toString());
+			new FileWriter(file.getAbsolutePath()).printString(sb.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

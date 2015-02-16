@@ -10,13 +10,14 @@ public class Configuration extends Properties {
 
 	public static final String VALUE_RACE_MARATHON = "marathon";
 	public static final String VALUE_RACE_LAPS = "laps";
-
+	
 	private static final File DEFAULT_PROPERTIES_FILE = new File("data/config.ini"); 
 
 	public static final String KEY_RACE_TYPE = "raceType";	
 	public static final String KEY_GUI_OUTPUT_FILE_PATH = "guiOutputFilePath";
 	public static final String KEY_RESULT_FILE_PATH = "resultFilePath";
 	public static final String KEY_NAME_FILE_PATH = "nameFilePath";
+	public static final String KEY_LAPRACE_DURATION = "lapraceDuration";
 	
 	public Configuration() throws IOException {
 		this (DEFAULT_PROPERTIES_FILE);
@@ -35,6 +36,7 @@ public class Configuration extends Properties {
 			put(KEY_RESULT_FILE_PATH, "data/result.txt");
 			put(KEY_GUI_OUTPUT_FILE_PATH, "data/utdata.txt");
 			put(KEY_RACE_TYPE, VALUE_RACE_MARATHON);
+			put(KEY_LAPRACE_DURATION, "00.00.00");
 			
 			FileOutputStream out = new FileOutputStream(propertiesFile);
 			store(out, generateComment());

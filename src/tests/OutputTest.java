@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.AbstractContestant;
+import register.model.ContestantProperties;
 import register.model.Database;
 import register.model.MarathonContestant;
 import register.model.Time;
@@ -33,7 +34,7 @@ public class OutputTest {
 		pw = new PrintWriter(fos);
 		db = new Database();
 
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(new ContestantProperties(new String[]{}));
 		contestant.putInformation("Namn", "Göran-Victor Hansson");
 		contestant.addStartTime(new Time("12.00.00"));
 		contestant.addFinishTime(new Time("13.23.34"));

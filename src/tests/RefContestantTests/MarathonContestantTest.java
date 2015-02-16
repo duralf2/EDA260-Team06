@@ -58,7 +58,7 @@ public class MarathonContestantTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidObjectToCompareTo() {
-		marathonContestant.compareTo(new LapContestant());
+		marathonContestant.compareTo(new LapContestant(new ContestantProperties(new String[]{})));
 	}
 	
 	@Test

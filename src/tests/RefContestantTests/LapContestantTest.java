@@ -81,6 +81,6 @@ public class LapContestantTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidObjectToCompareTo() {
-		lapContestant.compareTo(new MarathonContestant());
+		lapContestant.compareTo(new MarathonContestant(racerInfo));
 	}
 }

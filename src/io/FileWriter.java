@@ -5,18 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.SortedSet;
 
 import register.model.AbstractContestant;
 import register.model.CompetitionFactory;
 import register.model.CompetitionType;
 import register.model.Configuration;
 import register.model.Database;
-import register.model.Time;
 
 /**
  * This class is responsible for writing data to files. The methods of this
@@ -25,8 +22,6 @@ import register.model.Time;
  */
 public class FileWriter {
 	private File target;
-	private Configuration config;
-	
 	
 	public FileWriter(String targetPath) {
 		this.target = new File(targetPath);
@@ -53,8 +48,10 @@ public class FileWriter {
 		printString(sb.toString());
 	}
 	
-	public static void writeResultImproved(PrintWriter pw, Database db){
-		
+	public void writeResultImproved(Configuration config, Database db) throws IOException{
+		CompetitionFactory competitionFactory = new CompetitionFactory(config);
+		CompetitionType competition = competitionFactory.createCompetition(db);
+		printString(competition.print());
 	}
 	
 	

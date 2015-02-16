@@ -20,7 +20,7 @@ public class LapContestant extends AbstractContestant {
 		Collections.sort(lapTimes);
 	}
 
-	// TODO - comment
+	// TODO - javadoc
 	@Override
 	public int compareTo(AbstractContestant o) {
 		if (o instanceof LapContestant) {

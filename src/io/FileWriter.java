@@ -2,6 +2,7 @@ package io;
 
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.Map.Entry;
 
 import register.model.Contestant;
 import register.model.DataStructure;
@@ -243,5 +244,32 @@ public class FileWriter {
 			sb.append(startNumber.toString() + "; ");
 			sb.append(time.toString() + "\n");
 		}
+	}
+	
+	/**
+	 * Prints start and finish time files based on the provided map containing
+	 * start numbers as keys and arraylists of times in string format (HH.mm.ss)
+	 * as values.
+	 * 
+	 * @param pw
+	 *            PrintWriter to use for writing the time file.
+	 * @param times
+	 *            <StartNumber, ArrayList<Times in string format>>
+	 */
+
+	public static void writeTimesToFile(PrintWriter pw,
+			Map<String, ArrayList<String>> times) {
+		StringBuilder sb = new StringBuilder();
+		Set<Entry<String, ArrayList<String>>> timeEntries = times.entrySet();
+		for (Entry<String, ArrayList<String>> e : timeEntries) {
+			String startNumber = e.getKey();
+			ArrayList<String> entryTimes = e.getValue();
+			for (String time : entryTimes) {
+				sb.append(startNumber + "; " + time + "\n");
+			}
+		}
+		if (sb.length() > 0)
+			sb.deleteCharAt(sb.length() - 1);
+		pw.print(sb.toString());
 	}
 }

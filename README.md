@@ -7,7 +7,7 @@
 
 
 ## Documentation
-Nothing here yet
+You can find the documentation in `./Documentation/index.html`.
 
 ### Design
 Nothing here yet

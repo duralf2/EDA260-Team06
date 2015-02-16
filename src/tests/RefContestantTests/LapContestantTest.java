@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.After;
@@ -13,21 +12,26 @@ import org.junit.Test;
 
 import register.model.AbstractContestant;
 import register.model.Configuration;
-import register.model.Database;
-import register.model.LapContestant;
-import register.model.LapCompetition;
-import register.model.MarathonContestant;
 import register.model.ContestantProperties;
+import register.model.Database;
+import register.model.LapCompetition;
+import register.model.LapContestant;
+import register.model.MarathonContestant;
 import register.model.Time;
 
 public class LapContestantTest {
 	private LapContestant lapContestant;
 	private ContestantProperties racerInfo;
 	private Database db;
+	private Configuration config;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 		db = new Database();
+		
+		File file = new File("testfiles/config/lapContestant.ini");
+		config = new Configuration(file);
+		AbstractContestant.setConfiguration(config);
 
 		racerInfo = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		racerInfo.put("StartNr", "1");
@@ -37,22 +41,31 @@ public class LapContestantTest {
 		lapContestant.addStartTime(new Time("00.00.00"));
 		lapContestant.addLapTime(new Time("00.02.00"));
 		lapContestant.addLapTime(new Time("00.06.00"));
-		lapContestant.addFinishTime(new Time("00.10.01"));
+		lapContestant.addFinishTime(new Time("01.00.01"));
 
 		db.addContestantEntry("1", lapContestant);
 	}
 
 	@After
-	public void tearDown() {
+	public void tearDown() throws IOException {
 		lapContestant = null;
+		AbstractContestant.setConfiguration(new Configuration());
 	}
 
 	@Test
 	public void testToString() {
 		assertEquals(
-				"1;Lars;3;00.10.01;00.02.00;00.04.00;00.04.01;00.00.00;00.02.00;00.06.00;00.10.01",
+				"1;Lars;3;01.00.01;00.02.00;00.04.00;00.54.01;00.00.00;00.02.00;00.06.00;01.00.01",
 				lapContestant.toString(new LapCompetition(db)));
 	}
+//	"StartNr;Namn;#Varv;TotalTid;Varv1;Varv2;Start;Varvning1;Mål",
+	
+//	lapContestant.addStartTime(new Time("00.00.00"));
+//	lapContestant.addLapTime(new Time("00.02.00"));
+//	lapContestant.addLapTime(new Time("00.06.00"));
+//	lapContestant.addFinishTime(new Time("00.10.01"));
+//
+//	db.addContestantEntry("1", lapContestant);
 
 	@Test
 	public void testToStringMissingData() {
@@ -95,26 +108,14 @@ public class LapContestantTest {
 
 	@Test
 	public void testAddFinishTime() {
-		try {
-			Configuration oldConfig = AbstractContestant.getConfiguration();
-			
-			File file = new File("test.ini");
-			Configuration config = new Configuration(file);
-			config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
-			LapContestant lapContestant2 = new LapContestant(racerInfo);
-			AbstractContestant.setConfiguration(config);
+		config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
+		
+		LapContestant lapContestant2 = new LapContestant(racerInfo);
+		lapContestant2.addStartTime(new Time("00.00.00"));
+		lapContestant2.addFinishTime(new Time("00.08.01"));
+		lapContestant2.addFinishTime(new Time("13.04.00"));
 
-			lapContestant2.addStartTime(new Time("00.00.00"));
-			lapContestant2.addFinishTime(new Time("00.08.01"));
-			lapContestant2.addFinishTime(new Time("13.04.00"));
-
-			assertEquals(2, lapContestant2.getLapsCompleted());
-			assertEquals(new Time("13.04.00"), lapContestant2.getFinishTime());
-			AbstractContestant.setConfiguration(oldConfig);
-			file.delete();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		assertEquals(2, lapContestant2.getLapsCompleted());
+		assertEquals(new Time("13.04.00"), lapContestant2.getFinishTime());
 	}
 }

@@ -7,13 +7,12 @@ import io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.AbstractContestant;
 import register.model.Configuration;
 import register.model.ContestantFactory;
 import register.model.Database;
@@ -26,31 +25,33 @@ public class AcceptanceTestStory6 extends AbstractAcceptanceTest {
 	
 	private File outfile;
 	private FileReader reader;
+	private FileWriter fw;
+	private Configuration config;
 	
 	@Before
 	public void setUp() throws IOException {
 		outfile = new File("out.txt");
-		
-		Properties properties = new Properties();
-		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_MARATHON);
-		reader = new FileReader(new ContestantFactory(properties));
+		fw = new FileWriter(outfile);
+
+		config = new Configuration(new File("testfiles/config/marathonContestant.ini"));
+		reader = new FileReader(new ContestantFactory(config));
+		AbstractContestant.setConfiguration(config);
 	}
 
 	@After
-	public void tearDown() {
+	public void tearDown() throws IOException {
 		outfile.delete();
+		AbstractContestant.setConfiguration(new Configuration());
 	}
 
 	@Test
-	public void testMergeTimes() throws IOException, FileNotFoundException {
+	public void testStory6() throws IOException, FileNotFoundException {
 		Database db = new Database();
-		
 		reader.readNames(new File(namesFilepath), db);
 		reader.readStartTime(new File(startTimesFilepath), db);
 		reader.readFinishTime(new File(finishTimesFilepath), db);
 		
-		FileWriter.writeResult(new PrintWriter(outfile), db);
-		
+		fw.writeResults(config, db);
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));
 

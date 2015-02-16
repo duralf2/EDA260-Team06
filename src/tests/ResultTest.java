@@ -1,6 +1,7 @@
 package tests;
 
 import static org.junit.Assert.*;
+import io.CSVReader;
 import io.ReadFile;
 
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,12 +20,12 @@ import register.model.Database;
 //TODO this test is wtf
 
 public class ResultTest {
-	private File[] files; // [0] = starttimes, [1] = finishtimes, [2] =
-							// resultFile
+	// [0] = starttimes, [1] = finishtimes, [2] = resultFile
+	private File[] files;
 	private Sorter sort;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 		sort = new Sorter(new Database());
 		files = new File[] { new File("testfiles/startTimes.txt"),
 				new File("testfiles/finishTimes.txt") };
@@ -65,7 +67,7 @@ public class ResultTest {
 	public void testResult() throws IOException {
 		List<String[]> results = new ArrayList<String[]>();
 			sort.sort(files, null);
-			results = ReadFile.readCSV(new File("data/result.txt"));
+			results = CSVReader.read(new File("data/result.txt"));
 
 		//start at 1 to ignore header
 		assertEquals(" 02.15.00 12.00.01 14.15.01", results.get(1)[2] + results.get(1)[3] + results.get(1)[4]);

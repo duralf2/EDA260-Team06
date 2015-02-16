@@ -1,7 +1,7 @@
 package tests;
 
 import io.FileWriter;
-import io.ReadFile;
+import io.FileReader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,8 +29,7 @@ public class AcceptanceTestStory6 extends TestCase {
 	private String resultFilepath = "testfiles/acceptanstest/acceptanstest6/resultat.txt";
 	
 	private File outfile;
-	private ReadFile reader;
-	private Database db;
+	private FileReader reader;
 	
 	@Before
 	public void setUp() throws IOException {
@@ -38,9 +37,7 @@ public class AcceptanceTestStory6 extends TestCase {
 		
 		Properties properties = new Properties();
 		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_MARATHON);
-		reader = new ReadFile(new ContestantFactory(properties));
-		
-		db = new Database();
+		reader = new FileReader(new ContestantFactory(properties));
 	}
 
 	@After
@@ -50,6 +47,8 @@ public class AcceptanceTestStory6 extends TestCase {
 
 	@Test
 	public void testMergeTimes() throws IOException, FileNotFoundException {
+		Database db = new Database();
+		
 		reader.readNames(new File(namesFilepath), db);
 		reader.readStartTime(new File(startTimesFilepath), db);
 		reader.readFinishTime(new File(finishTimesFilepath), db);

@@ -1,7 +1,7 @@
 package tests.RefContestantTests;
 
 import static org.junit.Assert.assertEquals;
-import io.ReadFile;
+import io.FileReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class ContestantFactoryTest {
 				Configuration.VALUE_RACE_MARATHON);
 		properties.put(Configuration.KEY_NAME_FILE_PATH,
 				"testfiles/FactoryTestNames.txt");
-		ReadFile rf = new ReadFile(factory);
+		FileReader rf = new FileReader(factory);
 		rf.readNames(new File((String) properties.get(Configuration.KEY_NAME_FILE_PATH)), database);
 //		factory.createRegisteredContestants(database);
 	}

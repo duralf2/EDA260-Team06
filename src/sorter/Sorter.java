@@ -1,7 +1,7 @@
 package sorter;
 
 import io.FileWriter;
-import io.ReadFile;
+import io.FileReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class Sorter {
 		ContestantFactory factory = new ContestantFactory(conf);
 		factory.createRegisteredContestants(db);
 		
-		ReadFile read = new ReadFile(factory);
+		FileReader read = new FileReader(factory);
 
 		read.readStartTime(startTime, db);
 		for (int i = 1; i < finishTimes.length; i++) {

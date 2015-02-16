@@ -21,10 +21,12 @@ import register.model.Time;
 public class Sorter {
 	private Database db;
 	private Configuration conf;
+	private FileWriter fileWriter;
 
 	public Sorter(Database db) throws IOException {
 		this.db = db;
 		conf = new Configuration();
+		fileWriter = new FileWriter(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 	}
 
 	/**
@@ -61,8 +63,7 @@ public class Sorter {
 		Map<String,AbstractContestant> contestants = db.getAllContestantEntries();
         SortedSet<AbstractContestant> sortedContestants = new TreeSet<AbstractContestant>(contestants.values());
         
-        File resultFile = new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
-        
+        fileWriter.writeSortedResult(sortedContestants, conf, db);
 		
 		/*
 		 * 

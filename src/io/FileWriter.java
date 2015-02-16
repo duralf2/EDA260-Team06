@@ -1,6 +1,7 @@
 package io;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ import java.util.Set;
 import java.util.SortedSet;
 
 import register.model.AbstractContestant;
+import register.model.CompetitionFactory;
+import register.model.CompetitionType;
+import register.model.Configuration;
 import register.model.Database;
 import register.model.Time;
 
@@ -30,9 +34,22 @@ public class FileWriter {
 		this.target = new File(targetPath);
 	}
 	
-	public static void writeSortedResult(SortedSet<AbstractContestant> contestants, File results) {
+	public void writeSortedResult(SortedSet<AbstractContestant> contestants, Configuration conf, Database db) throws FileNotFoundException {
 		StringBuilder sb = new StringBuilder();
-		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
+		
+		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
+		CompetitionType competition = competitionFactory.createCompetition(db);
+		//Write header to file
+		competition.print(target);
+	
+		for(AbstractContestant contestant : contestants){
+			sb.append(contestant.toString(competition));
+		}
+		
+		PrintWriter pw = new PrintWriter(target);
+		pw.write(sb.toString());
+		pw.close();
+	
 	}
 	
 	/**

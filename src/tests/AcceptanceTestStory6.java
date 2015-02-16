@@ -50,9 +50,6 @@ public class AcceptanceTestStory6 extends AbstractAcceptanceTest {
 		reader.readNames(new File(namesFilepath), db);
 		reader.readStartTime(new File(startTimesFilepath), db);
 		reader.readFinishTime(new File(finishTimesFilepath), db);
-
-		PrintWriter pw = new PrintWriter(outfile);
-		fw.printString();
 		
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));

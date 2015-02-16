@@ -102,4 +102,10 @@ public abstract class AbstractContestant implements
 	public String getClassName() {
 		return className;
 	}
+	
+	@Override
+	public int compareTo(AbstractContestant o) {
+		return 0;
+	}
+
 }

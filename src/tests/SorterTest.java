@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 
 import org.junit.*;
 
+import register.model.AbstractContestant;
 import register.model.Configuration;
 import register.model.Database;
 import sorter.Sorter;
@@ -27,20 +28,27 @@ public class SorterTest {
 		conf = new Configuration();
 		
 		startTime = new File("testfiles/acceptanstest/Iteration2/acceptanstest10/starttider.txt");
-		nameFile = "testfiles/acceptanstest/Iteration2/acceptanstest10/namnfil.txt";
+		nameFile = "testfiles/acceptanstest/Iteration2/acceptanstest10/namnfil.txt";	
 	}
 	
 	@Test
 	public void testSortLapRace() throws IOException  {
 		conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
+		conf.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "01.00.00");
+		
+		Configuration c = AbstractContestant.getConfiguration();
+		
+		AbstractContestant.setConfiguration(conf);
 		
 		sorter = new Sorter(new Database(), conf);
-		sorter.sort(nameFile, startTime, finishTimes);
+		sorter.sortLapTimes(nameFile, startTime, finishTimes);
 		
 		String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest10/resultat.txt"));
 		String s2 = readFileAsString(new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
 		
 		assertEquals(s1,s2);
+		
+		AbstractContestant.setConfiguration(c);
 		
 	}
 	

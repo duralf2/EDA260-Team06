@@ -1,5 +1,6 @@
 package register.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +9,8 @@ import java.util.List;
 
 public class LapContestant extends AbstractContestant {
 	private LinkedList<Time> lapTimes;
-
+	private static Configuration config;
+	
 	public LapContestant(ContestantProperties racerInfo) {
 		super(racerInfo);
 		lapTimes = new LinkedList<Time>();
@@ -99,8 +101,15 @@ public class LapContestant extends AbstractContestant {
 
 	private Time getRaceTime() {
 		try {
+<<<<<<< HEAD
+			if(config==null){
+				config = new Configuration();
+			}
+			String data = config.getProperty(Configuration.KEY_LAPRACE_DURATION,
+=======
 			Configuration c = new Configuration();
 			String data = c.getProperty(Configuration.KEY_MINIMUM_RACE_DURATION,
+>>>>>>> branch 'RefactorBranch' of git@github.com:duralf2/EDA260-Team06.git
 					"00.00.00");
 			Time time = new Time(data);
 			return time;
@@ -108,5 +117,17 @@ public class LapContestant extends AbstractContestant {
 			e.printStackTrace();
 		}
 		return new Time("00.00.00");
+	}
+	
+	public void setConfiguration(File file){
+		try {
+			config = new Configuration(file);
+			System.out.println(config.getProperty(Configuration.KEY_LAPRACE_DURATION));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public Configuration getConfiguration(){
+		return config;
 	}
 }

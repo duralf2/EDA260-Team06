@@ -41,13 +41,6 @@ public class ContestantFactoryTest {
 //		factory.createRegisteredContestants(database);
 	}
 
-	@Test
-	public void testCreateRegisteredContestants() throws IOException {
-		for (Entry<String, AbstractContestant> entry : database.getAllContestantEntries().entrySet())
-		{
-			assertEquals(MarathonContestant.class, entry.getValue().getClass());
-		}
-	}
 	
 	@Test
 	public void testReadNames(){

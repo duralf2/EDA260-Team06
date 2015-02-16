@@ -23,7 +23,10 @@ public class Configuration extends Properties {
 		this (DEFAULT_PROPERTIES_FILE);
 	}
 	public Configuration(File propertiesFile) throws IOException {
-		propertiesFile.getParentFile().mkdirs();
+		File parentFile = propertiesFile.getParentFile();
+		if(parentFile!=null){
+			propertiesFile.getParentFile().mkdirs();
+		}
 		if (propertiesFile.exists())
 		{
 			FileInputStream in = new FileInputStream(propertiesFile);

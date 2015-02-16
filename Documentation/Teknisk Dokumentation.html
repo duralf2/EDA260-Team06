@@ -26,9 +26,8 @@
     <h3> sorter </h3>
     <p>
     	Resultatprogrammet läser en fil med starttider, en fil med sluttider, en fil med namn samt startnummer för samtliga deltagare. Från dessa genereras en fil med
-    	resultat, för närvarande utan sortering (detta skall åtgärdas vid senare tillfälle).
+    	resultat.
     	
-    	GUI läser in från namnfiler och en fil med sparade tider. Filen med sparade tider uppdateras var gång registrering sker. 
     </p>
     <h3> register.logic </h3>
     <p>
@@ -68,8 +67,14 @@
     <h3> io </h3>
     <p>
     	<!--<b>TODO:</b> refraktorisering pågår här-->
+    	 ReadFile- och FileWriter-klassen hanterar inläsning respektive utskrift av information. För att läsa CSV används biblioteket <a href="https://code.google.com/p/jcsv/">jcsv</a>.
     </p>
     
+    <h3>test</h3>
+    <p>
+    	För närvarande uppdelat i två paket (test och test.RefContestantTest) men målet är dessa skall slås ihop i paketet test. I paketet finns enhetstester för koden.
+    	Vi använder ramverket JUnit för att skriva tester.
+    </p>
 
     <hr>
 

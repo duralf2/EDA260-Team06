@@ -1,8 +1,11 @@
 package tests.RefContestantTests;
 
 import static org.junit.Assert.assertEquals;
+import io.ReadFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Properties;
 
@@ -10,12 +13,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.AbstractContestant;
+import register.model.Configuration;
 import register.model.ContestantFactory;
+import register.model.ContestantProperties;
 import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
-import register.model.Configuration;
-import register.model.ContestantProperties;
 
 public class ContestantFactoryTest {
 
@@ -33,18 +36,30 @@ public class ContestantFactoryTest {
 				Configuration.VALUE_RACE_MARATHON);
 		properties.put(Configuration.KEY_NAME_FILE_PATH,
 				"testfiles/FactoryTestNames.txt");
-		factory.createRegisteredContestants(database);
+		ReadFile rf = new ReadFile(factory);
+		rf.readNames(new File((String) properties.get(Configuration.KEY_NAME_FILE_PATH)), database);
+//		factory.createRegisteredContestants(database);
 	}
 
 	@Test
 	public void testCreateRegisteredContestants() throws IOException {
-		
 		for (Entry<String, AbstractContestant> entry : database.getAllContestantEntries().entrySet())
 		{
 			assertEquals(MarathonContestant.class, entry.getValue().getClass());
 		}
-
-		// TODO Test för att se om contestants headers är correcta 
+	}
+	
+	@Test
+	public void testReadNames(){
+			ArrayList<String> contestants = new ArrayList<String>();
+		for(Entry<String, AbstractContestant> entry : database.getAllContestantEntries().entrySet()){
+			contestants.add(entry.getValue().getInformation("Namn"));
+		}
+		assertEquals("Anders Asson", contestants.get(0));
+		assertEquals("Bengt Bsson", contestants.get(1));
+		assertEquals("Chris Csson", contestants.get(2));
+		assertEquals("David Dsson", contestants.get(3));
+		assertEquals("Erik Esson", contestants.get(4));
 	}
 
 	@Test

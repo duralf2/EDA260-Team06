@@ -1,6 +1,7 @@
 package io;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -8,8 +9,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedSet;
 
 import register.model.AbstractContestant;
+import register.model.CompetitionFactory;
+import register.model.CompetitionType;
+import register.model.Configuration;
 import register.model.Database;
 import register.model.Time;
 
@@ -28,6 +33,22 @@ public class FileWriter {
 	public FileWriter(String targetPath) {
 		this.target = new File(targetPath);
 	}
+	
+	public void writeSortedResult(SortedSet<AbstractContestant> contestants, Configuration conf, Database db) throws FileNotFoundException, IOException {
+		StringBuilder sb = new StringBuilder();
+		
+		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
+		CompetitionType competition = competitionFactory.createCompetition(db);
+		//Write header to file
+		competition.print(target);
+	
+		for(AbstractContestant contestant : contestants){
+			sb.append(contestant.toString(competition));
+		}
+		
+		printString(sb.toString());
+	}
+	
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This
@@ -77,7 +98,7 @@ public class FileWriter {
 //		pw.close();
 	}
 
-	//TODO: Remove
+	//TODO: Remove when writeResult implemented
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This
@@ -119,20 +140,6 @@ public class FileWriter {
 //		pw.close();
 	}
 
-	//TODO: Remove if fixed
-	private static void makeColumnNames(StringBuilder sb, int maxLaps) {
-//		sb.append("StartNr;Namn;");
-//		sb.append("#Varv;");
-//		sb.append("TotalTid;");
-//		for (int i = 1; i <= maxLaps; i++)
-//			sb.append("Varv" + i + ";");
-//		sb.append("Start;");
-//
-//		for (int i = 1; i <= maxLaps - 1; i++)
-//			sb.append("Varvning" + i + ";");
-//
-//		sb.append("Mål\n");
-	}
 
 	//TODO: Remove when implemented toString for contestants
 	private static void writeContestant(StringBuilder sb,
@@ -290,6 +297,12 @@ public class FileWriter {
 		pw.print(sb.toString());
 	}
 	
+	/**
+	 * Prints a string to a specified location(for example a file)
+	 * @param data
+	 * 				String to be printed
+	 * @throws IOException
+	 */
 	public void printString(String data) throws IOException
 	{
 		if (data != null)

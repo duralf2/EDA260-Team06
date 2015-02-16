@@ -1,22 +1,14 @@
 package io;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import register.model.AbstractContestant;
 import register.model.ContestantFactory;
-import register.model.ContestantTimes;
 import register.model.Database;
-import register.model.MarathonContestant;
 import register.model.Time;
 
-import com.googlecode.jcsv.reader.CSVReader;
-import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
 /**
  * This class is responsible for reading files formatted in the excel file
@@ -27,30 +19,6 @@ public class ReadFile {
 
 	public ReadFile(ContestantFactory cf) {
 		this.cf = cf;
-	}
-
-	/**
-	 * Reads all the contents of the specified file and splits them into a list
-	 * of string arrays. Each element in the list represents a line in the file,
-	 * and each element in the string arrays represents a piece of text,
-	 * separated by semicolons. </br> </br> <b>Note:</b> Any whitespace
-	 * following/preceding semicolons are left untouched by this method!
-	 * Therefore it might be necessary to trim the elements of the string array
-	 * after using this method.
-	 * 
-	 * @param file
-	 *            The file to read
-	 * @return The contents of the file, formatted as specified above
-	 * @throws IOException
-	 *             If the file doesn't exist or couldn't be closed
-	 */
-	public static List<String[]> readCSV(File file) throws IOException {
-		Reader reader = new FileReader(file);
-		CSVReader<String[]> csvParser = CSVReaderBuilder
-				.newDefaultReader(reader);
-		List<String[]> result = csvParser.readAll();
-		reader.close();
-		return result;
 	}
 
 	/**
@@ -67,7 +35,7 @@ public class ReadFile {
 	 *             If the file doesn't exist or couldn't be closed
 	 */
 	public void readNames(File file, Database db) throws IOException {
-		List<String[]> data = readCSV(file);
+		List<String[]> data = CSVReader.read(file);
 
 		readContestantColumns(data.get(0));
 		data.remove(0);
@@ -136,7 +104,7 @@ public class ReadFile {
 	}
 	
 	private void readTime(File file, Database db, boolean isFinishTime) throws IOException {
-		List<String[]> data = readCSV(file);
+		List<String[]> data = CSVReader.read(file);
 
 		for (String[] line : data) {
 			String startNr = line[0];
@@ -162,51 +130,5 @@ public class ReadFile {
 			db.addContestantEntry(startNr, contestant);
 		}
 		return contestant;
-	}
-	
-
-	/**
-	 * Returns an list with start numbers in the specified name file.
-	 * 
-	 * @param nameFile
-	 *            File to read.
-	 * @return list with start numbers.
-	 */
-	public static ArrayList<String> readStartNumbers(File nameFile) {
-		ArrayList<String> startNumbers = new ArrayList<String>();
-		try {
-			List<String[]> names = readCSV(nameFile);
-			if (names.size() > 0) {
-				Iterator<String[]> iterator = names.iterator();
-				for (iterator.next(); iterator.hasNext();) {
-					startNumbers.add(iterator.next()[0]);
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return startNumbers;
-	}
-
-	/**
-	 * Reads contestant times from the specified file and loads the data into
-	 * the provided ContestantTimes instance.
-	 * 
-	 * @param timeFile
-	 *            File to read.
-	 * @param times
-	 *            ContestantTimes instance to hold the data.
-	 */
-	public static void readTimesFromFile(File timeFile, ContestantTimes times) {
-		try {
-			List<String[]> nameFile = readCSV(timeFile);
-			for (String[] lines : nameFile) {
-				String startNumber = lines[0];
-				String time = lines[1].trim();
-				times.addTime(startNumber, time);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

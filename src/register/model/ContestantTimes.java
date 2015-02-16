@@ -1,8 +1,9 @@
 package register.model;
 
+import io.FileWriter;
+import io.ReadFileGUI;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
@@ -83,7 +84,7 @@ public class ContestantTimes extends Observable {
 	}
 
 	private void readContestantsFromFile() {
-		registeredContestants = io.ReadFile.readStartNumbers(nameFile);
+		registeredContestants = ReadFileGUI.readStartNumbers(nameFile);
 		for (String startNumber : registeredContestants) {
 			times.put(startNumber, new ArrayList<String>());
 		}
@@ -92,14 +93,14 @@ public class ContestantTimes extends Observable {
 	}
 
 	public void readTimesFromFile() {
-		io.ReadFile.readTimesFromFile(timeFile, this);
+		ReadFileGUI.readTimesFromFile(timeFile, this);
 		setChanged();
 		notifyObservers();
 	}
 
 	public void writeTimesToFile() {
 		try (PrintWriter pw = new PrintWriter(timeFile);) {
-			io.FileWriter.writeTimesToFile(pw, times);
+			FileWriter.writeTimesToFile(pw, times);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

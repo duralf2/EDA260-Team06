@@ -26,7 +26,7 @@ public class MarathonCompetition implements CompetitionType{
 			sb.append(c.toString(this) + "\n");
 		}
 		
-		return sb.toString();
+		return sb.toString().replaceAll(";", "; ").trim();
 	}
 
 	public List<AbstractContestant> sort() {

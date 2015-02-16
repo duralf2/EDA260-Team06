@@ -60,8 +60,8 @@ public class OddInputsTest {
 		fileWriter.writeResults(conf, db);
 
 		sc = new Scanner(f);
-		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider", sc.nextLine());
-		assertEquals("1;Göran;--.--.--;Start?;13.23.34", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; --.--.--; Start?; 13.23.34", sc.nextLine());
 	}
 
 	@Test
@@ -72,8 +72,8 @@ public class OddInputsTest {
 		fileWriter.writeResults(conf, db);
 
 		sc = new Scanner(f);
-		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider", sc.nextLine());
-		assertEquals("1;Göran;--.--.--;13.23.34;Slut?", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; --.--.--; 13.23.34; Slut?", sc.nextLine());
 	}
 
 	@Test
@@ -85,8 +85,8 @@ public class OddInputsTest {
 		fileWriter.writeResults(conf, db);
 
 		sc = new Scanner(f);
-		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider", sc.nextLine());
-		assertEquals("1;Göran;00.07.00;13.23.34;13.30.34;Omöjlig totaltid?",
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
+		assertEquals("1; Göran; 00.07.00; 13.23.34; 13.30.34; Omöjlig totaltid?",
 				sc.nextLine());
 	}
 
@@ -100,9 +100,9 @@ public class OddInputsTest {
 		fileWriter.writeResults(conf, db);
 
 		sc = new Scanner(f);
-		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
 		assertEquals(
-				"1;Göran;01.07.00;13.23.34;14.30.34;Flera starttider? 13.24.35",
+				"1; Göran; 01.07.00; 13.23.34; 14.30.34; Flera starttider? 13.24.35",
 				sc.nextLine());
 	}
 
@@ -116,10 +116,10 @@ public class OddInputsTest {
 		fileWriter.writeResults(conf, db);
 
 		sc = new Scanner(f);
-		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider", sc.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
 		
 		assertEquals(
-				"1;Göran;01.07.00;13.23.34;14.30.34;Flera måltider? 14.31.34",
+				"1; Göran; 01.07.00; 13.23.34; 14.30.34; Flera måltider? 14.31.34",
 				sc.nextLine());
 	}
 

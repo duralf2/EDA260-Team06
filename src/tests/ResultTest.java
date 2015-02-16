@@ -68,12 +68,17 @@ public class ResultTest {
         sort.sortTime(files, new File("testfiles/namn.txt"));
         results = ReadFile.readCSV(new File("data/results.txt"));
 
-		//start at 1 to ignore header
-		assertEquals(" 02.15.00 12.00.01 14.15.01", results.get(1)[3] + results.get(1)[4] + results.get(1)[5]);
-		assertEquals(" 03.24.45 12.05.50 15.30.35", results.get(2)[3] + results.get(2)[4] + results.get(2)[5]);
-		assertEquals(" 02.19.54 12.15.33 14.35.27", results.get(3)[3] + results.get(3)[4] + results.get(3)[5]);
-		assertEquals(" 02.32.22 12.25.37 14.57.59", results.get(4)[3] + results.get(4)[4] + results.get(4)[5]);
-		assertEquals(" 01.24.02 13.37.37 15.01.39", results.get(5)[3] + results.get(5)[4] + results.get(5)[5]);
+        ArrayList<String> al = new ArrayList<>();
+        //start at 1 to ignore header
+        for(int i=1; i<results.size(); i++) {
+            al.add(results.get(i)[3] + results.get(i)[4] + results.get(i)[5]);
+        }
+        
+        assertTrue(al.contains(" 02.15.00 12.00.01 14.15.01"));
+        assertTrue(al.contains(" 03.24.45 12.05.50 15.30.35"));
+        assertTrue(al.contains(" 02.19.54 12.15.33 14.35.27"));
+        assertTrue(al.contains(" 02.32.22 12.25.37 14.57.59"));
+        assertTrue(al.contains(" 01.24.02 13.37.37 15.01.39"));
 	}
 	//TODO: add null entry test cases
 }

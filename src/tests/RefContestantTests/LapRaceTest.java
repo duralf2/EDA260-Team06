@@ -12,19 +12,19 @@ import org.junit.Test;
 
 import register.model.Database;
 import register.model.LapContestant;
-import register.model.LapRace;
+import register.model.LapCompetition;
 import register.model.RacerInfo;
 import register.model.Time;
 
 public class LapRaceTest {
-	private LapRace race;
+	private LapCompetition race;
 	private Database db;
 	private File outfile = new File("testfiles/LapRaceTestResult.txt");
 
 	@Before
 	public void setUp() {
 		db = new Database();
-		race = new LapRace(db);
+		race = new LapCompetition(db);
 	}
 
 	@After

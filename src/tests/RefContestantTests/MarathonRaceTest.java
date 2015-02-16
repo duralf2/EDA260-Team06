@@ -12,19 +12,19 @@ import org.junit.Test;
 
 import register.model.Database;
 import register.model.MarathonContestant;
-import register.model.MarathonRace;
+import register.model.MarathonCompetition;
 import register.model.RacerInfo;
 import register.model.Time;
 
 public class MarathonRaceTest {
-	private MarathonRace race;
+	private MarathonCompetition race;
 	private Database db;
 	private File outfile = new File("testfiles/MarathonRaceTestResult.txt");
 	
 	@Before
 	public void setUp(){
 		db = new Database();
-		race = new MarathonRace(db);
+		race = new MarathonCompetition(db);
 	}
 	
 	@After

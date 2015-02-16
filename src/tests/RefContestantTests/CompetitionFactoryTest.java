@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import register.model.CompetitionFactory;
 import register.model.CompetitionType;
-import register.model.LapRace;
-import register.model.MarathonRace;
+import register.model.LapCompetition;
+import register.model.MarathonCompetition;
 import register.model.RaceProperties;
 public class CompetitionFactoryTest {
 	private CompetitionFactory cf;
@@ -36,13 +36,13 @@ public class CompetitionFactoryTest {
 	public void testLapRace() {
 			rp.setProperty(RaceProperties.KEY_RACE_TYPE, RaceProperties.VALUE_RACE_LAPS);
 			CompetitionType ct = cf.createCompetition(null);
-			assertTrue(ct instanceof LapRace);
+			assertTrue(ct instanceof LapCompetition);
 	}
 	
 	@Test
 	public void testMarathonRace() {
 		rp.setProperty(RaceProperties.KEY_RACE_TYPE, RaceProperties.VALUE_RACE_MARATHON);
 		CompetitionType ct = cf.createCompetition(null);
-		assertTrue(ct instanceof MarathonRace);
+		assertTrue(ct instanceof MarathonCompetition);
 	}
 }

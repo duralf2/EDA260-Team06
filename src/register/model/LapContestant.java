@@ -55,7 +55,7 @@ public class LapContestant extends AbstractContestant {
 		Time previousTime = new Time("00.00.00");
 		if (!startTime.isEmpty())
 			previousTime = getStartTime();
-		int maxLaps = ((LapRace) competitionType).getMaxLaps();
+		int maxLaps = ((LapCompetition) competitionType).getMaxLaps();
 		for (int i = 0;i < maxLaps; i++) {
 			if (allLapTimes.size() > i) {
 				sb.append(Time.getTotalTime(previousTime, allLapTimes.get(i)).toString());

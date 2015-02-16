@@ -13,6 +13,7 @@ import java.util.Observer;
 import java.util.Set;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -21,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 import register.logic.TimeRegistrationHandler;
 import register.model.ContestantTimes;
+import register.model.PreRegistrationDialog;
 
 /**
  * This class represents the table of the gui, it uses a custom renderer to mark
@@ -29,11 +31,9 @@ import register.model.ContestantTimes;
 public class EntryList extends JTable implements Observer {
 
 	private TimeRegistrationHandler registrationHandler;
-	private StartNumberField sf;
 
 	public EntryList(int fontSize, TimeRegistrationHandler registrationHandler) {
 		super(1, 2);
-		this.sf = sf;
 		this.registrationHandler = registrationHandler;
 		registrationHandler.observContestantTimes(this);
 		setDefaultRenderer(Object.class, new TableRenderer(registrationHandler));
@@ -108,16 +108,18 @@ public class EntryList extends JTable implements Observer {
 				String startNumber = (String) getValueAt(selectedRow, 0);
 				clearSelection();
 				if (startNumber.equals("Pre-registered time")) {
-					String startNumberInput = JOptionPane
-							.showInputDialog(null, "Enter start number:", "Pre-Registration", JOptionPane.QUESTION_MESSAGE);
-
-					if (startNumberInput != null) {
+					PreRegistrationDialog t = new PreRegistrationDialog();
+					System.out.println(t.getOption());
+					if (t.getOption()==PreRegistrationDialog.REGISTER_OPTION){
+						String startNumberInput = t.getStartNumber();
 						boolean isValid = registrationHandler.register("x="
 								+ startNumberInput);
 						if (!isValid) {
 							JOptionPane.showMessageDialog(null,
-									registrationHandler.getLastError());
+								registrationHandler.getLastError());
 						}
+					}else if (t.getOption()==PreRegistrationDialog.REMOVE_OPTION){
+						registrationHandler.register("dx");
 					}
 				}
 			}

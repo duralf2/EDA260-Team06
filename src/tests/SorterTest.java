@@ -1,12 +1,15 @@
 package tests;
 
 import static org.junit.Assert.*;
+import io.CSVReader;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.*;
 
@@ -51,6 +54,7 @@ public class SorterTest {
 		AbstractContestant.setConfiguration(c);
 		
 	}
+	
 	
 	private String readFileAsString(File file) throws IOException {
 

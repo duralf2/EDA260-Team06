@@ -92,6 +92,7 @@ public abstract class AbstractContestant implements
 		if (finishTimeSize() > 0) {
 			finishTime = getFinishTime();
 		}
+		
 		return Time.getTotalTime(startTime, finishTime);
 	}
 

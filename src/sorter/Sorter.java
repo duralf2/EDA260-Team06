@@ -47,6 +47,8 @@ public class Sorter {
 		}
 		fileWriter.writeSortedResult(list, conf, db);
 	}
+	
+	
 
 	public void setUp(String nameFile, File startTime, File[] finishTimes)
 			throws IOException {

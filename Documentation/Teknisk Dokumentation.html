@@ -70,8 +70,7 @@
     <h3>register.model</h3>
     <p>
     	<code>Configuration</code> ansvarar för de olika konfigurationsparametrarna i config.ini. Javas standardklass <code>java.util.Properties</code> används för att hantera parametrarna.
-    	Configfilen måste finnas i en undermapp i programmappen som heter data. Om denna ej existerar så kommer den skapas av programmet men man kan inte läsa en configfil
-    	som finns sparad på annat ställe.
+    	Configfilen måste finnas i en undermapp i programmappen som heter data. Om denna ej existerar så kommer den skapas av programmet.
     </p>
     <p>
     	Paketet innehåller många klasser för att representera olika typer av deltagare och lopp. En klass för att representera tid ingår också. 
@@ -143,12 +142,16 @@
         
     </p>
      
-		<p>startnummer; tid</p>
-		<p>
-            Varje person som registrerar tider genererar en egen tidsfil. 
-            Dessa sorteras sedan ihop av sorteringsprogrammet. Utifrån sorteringsprogrammets filer genereras sedan ett resultat.
-        </p>
+	<p>startnummer; tid</p>
+	<p>
+        Varje person som registrerar tider genererar en egen tidsfil. 
+        Dessa sorteras sedan ihop av sorteringsprogrammet. Utifrån sorteringsprogrammets filer genereras sedan ett resultat.
+    </p>
+	<p>
+		Att generera ett resultat utförs via terminalen. Detta görs genom att läsa in en namnfil och flera tidsfiler. En jämförelse görs mellan tidsfilerna och en resultatfil genereras.
+		Denna fil innehåller diverse information om start och sluttider, varvtider, totaltider osv. 
 	
+	</p>	
 	<p>
 		Sorteringsprogrammet kräver en datorkunnig person och körs utifrån resultatfilerna från registreringsprogrammet. Då sorteringsprogrammet endast
 		behandlar tider beror resultatet man får på vilka filer man matar in. Sorteringsprogrammet kan användas för att generera olika sorters resultat tex:

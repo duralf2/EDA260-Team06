@@ -54,7 +54,8 @@ public class MarathonContestant extends AbstractContestant {
 			}
 		}
 		
-		if (getTotalTime().compareTo(new Time("00.15.00")) < 0)
+		String time = getConfiguration().getProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "00.15.00");
+		if (getTotalTime().compareTo(new Time(time)) < 0)
 			sb.append("Omöjlig totaltid?");
 		
 		if (sb.length() > 0)

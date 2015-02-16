@@ -3,10 +3,15 @@ package tests.RefContestantTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.AbstractContestant;
+import register.model.Configuration;
 import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
@@ -84,11 +89,21 @@ public class MarathonContestantTest {
 	}
 	
 	@Test
-	public void testToStringImpossibleTotalTime()
+	public void testToStringImpossibleTotalTime() throws IOException
 	{
+		Configuration oldConfig = AbstractContestant.getConfiguration();
+		
+		File file = new File("test.ini");
+		Configuration config = new Configuration(file);
+		config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
+		AbstractContestant.setConfiguration(config);
+		
 		marathonContestant.addStartTime(new Time("12.00.00"));
 		marathonContestant.addFinishTime(new Time("12.01.00"));
 		String match = "Hannah;00.01.00;12.00.00;12.01.00;Omöjlig totaltid?";
 		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
+		
+		AbstractContestant.setConfiguration(oldConfig);
+		file.delete();
 	}
 }

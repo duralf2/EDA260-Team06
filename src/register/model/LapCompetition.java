@@ -15,7 +15,7 @@ public class LapCompetition implements CompetitionType {
 	}
 
 	@Override
-	public void print(File file) {
+	public String print() {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("StartNr;Namn;");
@@ -35,13 +35,9 @@ public class LapCompetition implements CompetitionType {
 			sb.append(c.toString(this) + "\n");
 		}
 		
-		
-		try {
-			new FileWriter(file.getAbsolutePath()).printString(sb.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return sb.toString();
 	}
+	
 
 	public int getMaxLaps() {
 		int maxLaps = 0;

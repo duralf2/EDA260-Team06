@@ -11,7 +11,7 @@ public interface CompetitionType {
 	 *  format, including the header.
 	 * @param file The file to print to
 	 */
-	public void print(File file);
+	public String print();
 	
 	/**
 	 * Sorts the contents of the database associated with this competition type

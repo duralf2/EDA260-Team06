@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import register.logic.Register;
 import register.model.AbstractContestant;
+import register.model.ContestantProperties;
 import register.model.Database;
 import register.model.MarathonContestant;
 import register.model.Time;
@@ -27,10 +28,12 @@ public class RegisterTest {
 	private Map<String, AbstractContestant> entries;
 	private Time[] startTimes;
 	private Time[] finishTimes;
-
+	private ContestantProperties prop;
+	
 	@Before
 	public void setUp() {
 		db = new Database();
+		prop = new ContestantProperties(new String[]{});
 		register = new Register(db);
 		entries = register.getDatabase().getAllContestantEntries();
 		startTimes = new Time[] { new Time("12.00.00"), new Time("12.01.00"),
@@ -66,7 +69,7 @@ public class RegisterTest {
 	@Test
 	public void testWriteResultNoSort() throws IOException {
 		for (int i = 0; i < startTimes.length; i++) {
-			AbstractContestant c = new MarathonContestant();
+			AbstractContestant c = new MarathonContestant(prop);
 			c.putInformation("Namn", ("TestContestant " + 1));
 			c.addStartTime(startTimes[i]);
 			c.addFinishTime(finishTimes[i]);
@@ -101,11 +104,11 @@ public class RegisterTest {
 	@Test
 	public void testPerformMassStart()
 	{
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(prop);
 		contestant.putInformation("StartNbr", "1");
 		contestant.putInformation("Namn", "Karl");
 		db.addContestantEntry("1", contestant);
-		AbstractContestant contestant2 = new MarathonContestant();
+		AbstractContestant contestant2 = new MarathonContestant(prop);
 		contestant2.putInformation("StartNbr", "2");
 		contestant2.putInformation("Namn", "Bertil");
 		db.addContestantEntry("2", contestant2);

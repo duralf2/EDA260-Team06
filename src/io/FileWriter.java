@@ -41,13 +41,8 @@ public class FileWriter {
 		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
 		CompetitionType competition = competitionFactory.createCompetition(db);
 		//Write header to file
-<<<<<<< HEAD
 		
 		sb.append(competition.generateHeader());
-=======
-		printString(competition.print());
->>>>>>> branch 'RefactorBranch' of https://github.com/duralf2/EDA260-Team06.git
-	
 		for(AbstractContestant contestant : contestants){
 			//sb.append(contestant.toString(competition));
 			//sb.append("\n");

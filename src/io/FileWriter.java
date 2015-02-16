@@ -77,6 +77,7 @@ public class FileWriter {
 //		pw.close();
 	}
 
+	//TODO: Remove
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This
@@ -118,6 +119,7 @@ public class FileWriter {
 //		pw.close();
 	}
 
+	//TODO: Remove if fixed
 	private static void makeColumnNames(StringBuilder sb, int maxLaps) {
 //		sb.append("StartNr;Namn;");
 //		sb.append("#Varv;");
@@ -132,6 +134,7 @@ public class FileWriter {
 //		sb.append("Mål\n");
 	}
 
+	//TODO: Remove when implemented toString for contestants
 	private static void writeContestant(StringBuilder sb,
 			AbstractContestant contestant, String startNumber, int maxLaps) {
 //		sb.append(startNumber + ";");
@@ -214,6 +217,7 @@ public class FileWriter {
 //		}
 	}
 
+	//TODO: Remove since this will be taken care of in the individual classes
 	private static void writeTotalTime(AbstractContestant contestant, StringBuilder sb) {
 		// Getting sizes of lists containing starttimes and finishtimes, if size
 		// = 0 time is missing
@@ -286,7 +290,7 @@ public class FileWriter {
 		pw.print(sb.toString());
 	}
 	
-	public void print(String data) throws IOException
+	public void printString(String data) throws IOException
 	{
 		if (data != null)
 		{

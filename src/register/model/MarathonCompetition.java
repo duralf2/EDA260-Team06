@@ -26,7 +26,7 @@ public class MarathonCompetition implements CompetitionType{
 		}
 		
 		try {
-			new FileWriter(file.getAbsolutePath()).print(sb.toString());
+			new FileWriter(file.getAbsolutePath()).printString(sb.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

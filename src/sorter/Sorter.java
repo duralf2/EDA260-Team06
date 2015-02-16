@@ -94,9 +94,6 @@ public class Sorter {
         for(int i=al.size()-1; i>=0; i--) {
             List<Contestant> a = al.get(i);
             a = sortContestantsByTotal(a);
-            if(a.size() != 0) {
-                System.out.println(a.get(0).getLapsCompleted());
-            };
             result.addAll(a);
         }
 

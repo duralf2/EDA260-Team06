@@ -2,7 +2,7 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import io.FileWriter;
-import io.ReadFile;
+import io.FileReader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,7 +29,7 @@ public class AcceptanceTestStory16NoClasses {
 	private String resultFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16NoClasses/resultat.txt";
 	private File outfile;
 	
-	private ReadFile reader;
+	private FileReader reader;
 
 	@Before
 	public void setUp() throws IOException {
@@ -38,7 +38,7 @@ public class AcceptanceTestStory16NoClasses {
 		Properties properties = new Properties();
 		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
 		properties.put(Configuration.KEY_LAPRACE_DURATION, "01.00.00");
-		reader = new ReadFile(new ContestantFactory(properties));
+		reader = new FileReader(new ContestantFactory(properties));
 	}
 
 	@After

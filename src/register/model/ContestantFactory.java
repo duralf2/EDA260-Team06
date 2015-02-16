@@ -1,6 +1,6 @@
 package register.model;
 
-import io.ReadFile;
+import io.FileReader;
 
 import java.io.File;
 import java.io.IOException;

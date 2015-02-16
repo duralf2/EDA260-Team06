@@ -9,7 +9,6 @@ import java.util.List;
 
 public class LapContestant extends AbstractContestant {
 	private LinkedList<Time> lapTimes;
-	private static Configuration config;
 	
 	public LapContestant(ContestantProperties racerInfo) {
 		super(racerInfo);
@@ -100,28 +99,8 @@ public class LapContestant extends AbstractContestant {
 	}
 
 	private Time getRaceTime() {
-		try {
-			if(config==null){
-				config = new Configuration();
-			}
-			String data = config.getProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "00.00.00");
-			Time time = new Time(data);
-			return time;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new Time("00.00.00");
-	}
-	
-	public void setConfiguration(File file){
-		try {
-			config = new Configuration(file);
-			System.out.println(config.getProperty(Configuration.KEY_MINIMUM_RACE_DURATION));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	public Configuration getConfiguration(){
-		return config;
+		String data = getConfiguration().getProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "00.00.00");
+		Time time = new Time(data);
+		return time;
 	}
 }

@@ -42,7 +42,7 @@ public class Database {
 	}
 	
 	public String printResults(){
-		return 
+		return contestantEntries.toString();
 	}
 	
 	

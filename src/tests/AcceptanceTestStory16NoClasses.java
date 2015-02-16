@@ -1,15 +1,12 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import io.FileReader;
 import io.FileWriter;
-import io.ReadFile;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Properties;
 
@@ -21,7 +18,7 @@ import register.model.Configuration;
 import register.model.ContestantFactory;
 import register.model.Database;
 
-public class AcceptanceTestStory16NoClasses {
+public class AcceptanceTestStory16NoClasses extends AbstractAcceptanceTest {
 
 	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16NoClasses/namnfil.txt";
 	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16NoClasses/starttider.txt";
@@ -29,7 +26,7 @@ public class AcceptanceTestStory16NoClasses {
 	private String resultFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16NoClasses/resultat.txt";
 	private File outfile;
 	
-	private ReadFile reader;
+	private FileReader reader;
 
 	@Before
 	public void setUp() throws IOException {
@@ -38,7 +35,7 @@ public class AcceptanceTestStory16NoClasses {
 		Properties properties = new Properties();
 		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
 		properties.put(Configuration.KEY_LAPRACE_DURATION, "01.00.00");
-		reader = new ReadFile(new ContestantFactory(properties));
+		reader = new FileReader(new ContestantFactory(properties));
 	}
 
 	@After
@@ -62,22 +59,4 @@ public class AcceptanceTestStory16NoClasses {
 		
 		assertEquals(acceptenceResult, printedResult);
 	}
-
-	private String readFileAsString(File file) throws IOException {
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file)));
-
-		String fileContents = "";
-		String currentLine = reader.readLine();
-		while (currentLine != null) {
-			fileContents += currentLine.replace("\\s+", "") + "\n";
-			currentLine = reader.readLine();
-		}
-
-		reader.close();
-
-		return fileContents;
-	}
-
 }

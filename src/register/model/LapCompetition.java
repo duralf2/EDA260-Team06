@@ -26,9 +26,11 @@ public class LapCompetition implements CompetitionType {
 			sb.append(c.toString(this) + "\n");
 			}
 		}
-		sb.append("Icke existerande startnummer\n");
-		sb.append(generateHeader());
-		sb.append(faultySB);
+		if(faultySB.length() > 0){
+			sb.append("Icke existerande startnummer\n");
+			sb.append(generateHeader());
+			sb.append(faultySB);
+		}
 		return sb.toString().replaceAll(";", "; ").trim();
 	}
 

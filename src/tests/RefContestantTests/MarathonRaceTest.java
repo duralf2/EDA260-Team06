@@ -1,6 +1,7 @@
 package tests.RefContestantTests;
 
 import static org.junit.Assert.*;
+import io.FileWriter;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,11 +21,13 @@ public class MarathonRaceTest {
 	private MarathonCompetition race;
 	private Database db;
 	private File outfile = new File("testfiles/MarathonRaceTestResult.txt");
+	private FileWriter fw;
 	
 	@Before
 	public void setUp(){
 		db = new Database();
 		race = new MarathonCompetition(db);
+		fw = new FileWriter(outfile);
 	}
 	
 	@After
@@ -33,8 +36,8 @@ public class MarathonRaceTest {
 	}
 	
 	@Test
-	public void testPrintColumnNames() {
-		race.print(outfile);
+	public void testPrintColumnNames() throws IOException {
+		fw.printString(race.print());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -46,7 +49,7 @@ public class MarathonRaceTest {
 	}
 	
 	@Test
-	public void testPrintResults() {
+	public void testPrintResults() throws IOException {
 		
 		ContestantProperties ri = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		ri.put("StartNr", "1");
@@ -58,7 +61,7 @@ public class MarathonRaceTest {
 		contestant.addFinishTime(new Time("12.00.00"));
 		db.addContestantEntry("2", contestant);
 		
-		race.print(outfile);
+		fw.printString(race.print());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);

@@ -27,8 +27,6 @@ public class Sorter {
 	public Sorter(Database db) throws IOException {
 		this.db = db;
 		conf = new Configuration();
-		fileWriter = new FileWriter(
-				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 	}
 
 	public Sorter(Database db, Configuration conf) throws IOException {
@@ -88,11 +86,15 @@ public class Sorter {
 		
 		setUp(nameFile, startTime, finishTimes);
 
+
+		LinkedList<AbstractContestant> sortedContestants = new LinkedList<>();
 		for (AbstractContestant c : contestants.values()) {
-
+			sortedContestants.add(c);
 		}
+		Collections.sort(sortedContestants);
 
-		// fileWriter.writeSortedResult(sortedContestants, conf, db);
+		
+		fileWriter.writeResultList(sortedContestants, conf, db);
 
 		/*
 		 * 

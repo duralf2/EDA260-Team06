@@ -26,7 +26,7 @@ public class LapContestant extends AbstractContestant {
 		if (o instanceof LapContestant) {
 			LapContestant lapContestant = (LapContestant) o;
 			if (getLapsCompleted() == lapContestant.getLapsCompleted()) {
-				return lapContestant.getTotalTime().compareTo(getTotalTime());
+				return getTotalTime().compareTo(lapContestant.getTotalTime());
 			}
 			return getLapsCompleted() - lapContestant.getLapsCompleted();
 		}
@@ -39,6 +39,7 @@ public class LapContestant extends AbstractContestant {
 		else
 			return lapTimes.size();
 	}
+	
 
 	@Override
 	protected String specifiedToString(CompetitionType competitionType) {
@@ -121,4 +122,5 @@ public class LapContestant extends AbstractContestant {
 		Time time = new Time(data);
 		return time;
 	}
+
 }

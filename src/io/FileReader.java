@@ -37,7 +37,8 @@ public class FileReader {
 	public void readNames(File file, Database db) throws IOException {
 		List<String[]> data = CSVReader.read(file);
 
-		readContestantColumns(data.get(0));
+		String[] contestantColumns = data.get(0);
+		readContestantColumns(contestantColumns);
 		data.remove(0);
 
 		String startNumberOrClassName, name, className = "";
@@ -45,9 +46,12 @@ public class FileReader {
 		for (String[] line : data) {
 			startNumberOrClassName = line[0];
 			if (isStartNumber(startNumberOrClassName)) {
-				name = line[1].trim();
+
 				contestant = getContestant(startNumberOrClassName, db);
-				contestant.putInformation("Namn", name);
+				for (int i = 0; i < line.length; i++) {
+					contestant.putInformation(contestantColumns[i], line[i].trim());
+				}
+				
 				contestant.setClassName(className);
 				db.addContestantEntry(startNumberOrClassName, contestant);
 			} else {

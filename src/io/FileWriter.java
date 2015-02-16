@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -22,40 +23,41 @@ import register.model.Database;
  */
 public class FileWriter {
 	private File target;
-	
+
 	public FileWriter(String targetPath) {
 		this.target = new File(targetPath);
-		
+
 	}
-	
-	public FileWriter(File file){
+
+	public FileWriter(File file) {
 		target = file;
 	}
-	
-	public void writeSortedResult(ArrayList<AbstractContestant> contestants, Configuration conf, Database db) throws FileNotFoundException, IOException {
+
+	public void writeSortedResult(ArrayList<AbstractContestant> contestants,
+			Configuration conf, Database db) throws FileNotFoundException,
+			IOException {
 		StringBuilder sb = new StringBuilder();
-		
+
 		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
 		CompetitionType competition = competitionFactory.createCompetition(db);
-		//Write header to file
-		
+		// Write header to file
+
 		sb.append(competition.generateHeader());
-		for(AbstractContestant contestant : contestants){
+		for (AbstractContestant contestant : contestants) {
 			sb.append(contestant.toString(competition));
 			sb.append("\n");
 		}
-		
+
 		printString(sb.toString());
 	}
-	
-	public void writeResults(Configuration config, Database db) throws IOException{
+
+	public void writeResults(Configuration config, Database db)
+			throws IOException {
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
 		CompetitionType competition = competitionFactory.createCompetition(db);
 		printString(competition.print());
 	}
-	
-	
-	
+
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This
@@ -67,45 +69,45 @@ public class FileWriter {
 	 *            The database containing the data to write
 	 */
 	public static void writeResult(PrintWriter pw, Database ds) {
-//		StringBuilder sb = new StringBuilder();
-//		Map<String, Contestant> entries = ds.getAllContestantEntries();
-//		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
-//
-//		// TODO how to handle setContestantColumnNames() in Datastrucure?
-//		
-//		Contestant contestant;
-//		for (String startNumber : entries.keySet()) {
-//			contestant = entries.get(startNumber);
-//			sb.append(startNumber + "; ");
-//			sb.append(contestant.getName() + "; ");
-//
-//			writeTotalTime(contestant, sb);
-//
-//			if (contestant.startTimeSize() == 0) {
-//				sb.append("Start?" + "; ");
-//			} else {
-//				sb.append(contestant.getStartTime() + "; ");
-//			}
-//			if (contestant.finishTimeSize() == 0) {
-//				sb.append("Slut?");
-//			} else {
-//				if (isImpossibleTime(contestant)) {
-//					sb.append(contestant.getFinishTime() + "; "
-//							+ "Omöjlig totaltid?");
-//				} else {
-//					sb.append(contestant.getFinishTime());
-//				}
-//			}
-//			checkMultipleTimes(contestant, sb);
-//			sb.append("\n");
-//
-//		}
-//
-//		pw.write(sb.toString());
-//		pw.close();
+		// StringBuilder sb = new StringBuilder();
+		// Map<String, Contestant> entries = ds.getAllContestantEntries();
+		// sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
+		//
+		// // TODO how to handle setContestantColumnNames() in Datastrucure?
+		//
+		// Contestant contestant;
+		// for (String startNumber : entries.keySet()) {
+		// contestant = entries.get(startNumber);
+		// sb.append(startNumber + "; ");
+		// sb.append(contestant.getName() + "; ");
+		//
+		// writeTotalTime(contestant, sb);
+		//
+		// if (contestant.startTimeSize() == 0) {
+		// sb.append("Start?" + "; ");
+		// } else {
+		// sb.append(contestant.getStartTime() + "; ");
+		// }
+		// if (contestant.finishTimeSize() == 0) {
+		// sb.append("Slut?");
+		// } else {
+		// if (isImpossibleTime(contestant)) {
+		// sb.append(contestant.getFinishTime() + "; "
+		// + "Omöjlig totaltid?");
+		// } else {
+		// sb.append(contestant.getFinishTime());
+		// }
+		// }
+		// checkMultipleTimes(contestant, sb);
+		// sb.append("\n");
+		//
+		// }
+		//
+		// pw.write(sb.toString());
+		// pw.close();
 	}
 
-	//TODO: Remove when writeResult implemented
+	// TODO: Remove when writeResult implemented
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This
@@ -117,48 +119,47 @@ public class FileWriter {
 	 *            The database containing the data to write
 	 */
 	public static void writeLapResult(PrintWriter pw, Database ds) {
-//		StringBuilder sb = new StringBuilder();
-//		Map<String, Contestant> entries = ds.getAllContestantEntries();
-//		int maxLaps = ds.getMaxLaps();
-//
-//		makeColumnNames(sb, maxLaps);
-//
-//		List<String> incorrectRegistrations = new ArrayList<String>();
-//		for (String startNumber : entries.keySet()) {
-//			Contestant contestant = entries.get(startNumber);
-//
-//			if (contestant.getName().equals(""))
-//				incorrectRegistrations.add(startNumber);
-//			else {
-//				writeContestant(sb, contestant, startNumber, maxLaps);
-//			}
-//		}
-//
-//		if (!incorrectRegistrations.isEmpty()) {
-//			sb.append("Icke existerande startnummer\n");
-//			makeColumnNames(sb, maxLaps);
-//			for (String startNumber : incorrectRegistrations) {
-//				writeContestant(sb, ds.getContestant(startNumber), startNumber,
-//						maxLaps);
-//			}
-//		}
-//
-//		pw.write(sb.toString().replaceAll(";", "; ").trim());
-//		pw.close();
+		// StringBuilder sb = new StringBuilder();
+		// Map<String, Contestant> entries = ds.getAllContestantEntries();
+		// int maxLaps = ds.getMaxLaps();
+		//
+		// makeColumnNames(sb, maxLaps);
+		//
+		// List<String> incorrectRegistrations = new ArrayList<String>();
+		// for (String startNumber : entries.keySet()) {
+		// Contestant contestant = entries.get(startNumber);
+		//
+		// if (contestant.getName().equals(""))
+		// incorrectRegistrations.add(startNumber);
+		// else {
+		// writeContestant(sb, contestant, startNumber, maxLaps);
+		// }
+		// }
+		//
+		// if (!incorrectRegistrations.isEmpty()) {
+		// sb.append("Icke existerande startnummer\n");
+		// makeColumnNames(sb, maxLaps);
+		// for (String startNumber : incorrectRegistrations) {
+		// writeContestant(sb, ds.getContestant(startNumber), startNumber,
+		// maxLaps);
+		// }
+		// }
+		//
+		// pw.write(sb.toString().replaceAll(";", "; ").trim());
+		// pw.close();
 	}
-
 
 	public static void writeFinishTimes(PrintWriter pw, Database ds) {
-//		Map<String, Contestant> entries = ds.getAllContestantEntries();
-//		StringBuilder sb = new StringBuilder();
-//		Contestant contestant;
-//		for (String startNumber : entries.keySet()) {
-//			contestant = entries.get(startNumber);
-//			printTimes(contestant.getFinishTimes(), sb, startNumber);
-//		}
-//		pw.append(sb.toString());
+		// Map<String, Contestant> entries = ds.getAllContestantEntries();
+		// StringBuilder sb = new StringBuilder();
+		// Contestant contestant;
+		// for (String startNumber : entries.keySet()) {
+		// contestant = entries.get(startNumber);
+		// printTimes(contestant.getFinishTimes(), sb, startNumber);
+		// }
+		// pw.append(sb.toString());
 	}
-	
+
 	/**
 	 * Prints start and finish time files based on the provided map containing
 	 * start numbers as keys and arraylists of times in string format (HH.mm.ss)
@@ -185,29 +186,53 @@ public class FileWriter {
 			sb.deleteCharAt(sb.length() - 1);
 		pw.print(sb.toString());
 	}
-	
+
 	/**
 	 * Prints a string to a specified location(for example a file)
+	 * 
 	 * @param data
-	 * 				String to be printed
+	 *            String to be printed
 	 * @throws IOException
 	 */
-	public void printString(String data) throws IOException
-	{
-			
-		if (data != null)
-		{
+	public void printString(String data) throws IOException {
+
+		if (data != null) {
 			File parentFile = target.getParentFile();
 			if (parentFile != null)
 				parentFile.mkdirs();
 			java.io.FileWriter out = new java.io.FileWriter(target);
 			out.write(data);
 			out.close();
-		}
-		else
-		{
+		} else {
 			throw new IllegalArgumentException("Can't print null!");
 		}
 	}
-}
 
+	public void writeResultList(
+			LinkedList<AbstractContestant> sortedContestants,
+			Configuration conf, Database db) throws IOException {
+		
+		CompetitionType competitionType = new CompetitionFactory(conf)
+				.createCompetition(db);
+
+		StringBuilder sb = new StringBuilder();
+		String incompleted = "";
+		
+		sb.append("Plac; " + competitionType.generateHeader());
+		int place = 1;
+		for (int i = 0; i < sortedContestants.size(); i++) {
+			AbstractContestant contestant = sortedContestants.get(i);
+			if (contestant.completedRace()) {
+				sb.append(place + "; " + contestant.toString(competitionType) + "\n");
+				place++;
+			} else {
+				incompleted += "; " + contestant.toString(competitionType) + "\n";
+			}
+		}
+		
+		sb.append(incompleted);
+		
+		printString(sb.toString());
+
+	}
+}

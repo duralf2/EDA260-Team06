@@ -93,4 +93,6 @@ public class StageContestant extends AbstractContestant {
 		sb.append(super.finishTime.toString());
 		return sb.toString();
 	}
+
+
 }

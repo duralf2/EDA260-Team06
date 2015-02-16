@@ -108,5 +108,9 @@ public abstract class AbstractContestant implements
 	public int compareTo(AbstractContestant o) {
 		return 0;
 	}
+	
+	public boolean completedRace() {
+		 return !startTime.isEmpty() && !finishTime.isEmpty();
+	}
 
 }

@@ -33,6 +33,10 @@
         Ett fönster för registrering ska nu synas på skärmen. 
     </p>
 
+	<p> För att programmet ska fungera behövs en namnfil. Namnfilen måste innehålla dels en titelrad med "StartNr; Namn".
+		Därefter listas alla tävlande, en person per rad, med startnumret följt av ett semikolon, följt av för- och efternanm.
+		Denna fil ska ligga i en mapp som ska heta data.
+	</p>
 
     <h3>Registrering av ett startnummer</h3>
 
@@ -82,18 +86,18 @@
      <h3>Hur du kör programmet</h3>
 
      <p> Öppna terminalfönstret och navigera till programmappen. 
-         Generera en resultatfil genom att skriva "java -jar resultGenerator.jar &ltnamnfil&gt &ltstarttid&gt &ltsluttid&gt".
+         Generera en resultatfil genom att skriva "java -jar resultGenerator.jar &ltnamnfil&gt &ltstarttidsfil&gt &ltsluttidsfil&gt".
          Programmet har nu genererat en fil med resultaten.</p>
 
      <h3>Filformat</h3>
 
-     <p> Filer kan korrigeras manuellt. De behöver då ha följande format. </p>
+     <p> Filer kan korrigeras manuellt, de ligger i mappen data. De behöver då ha följande format: </p>
 
 
      <ul>
          <li>
              <h4>Namnfil</h4>
-             <p>En namnfil inleds med en rad som innehåller "StartNo; Namn". Därefter skrivs startnumret följt av ett semikolon, följt av för- och efternanm, radvis per person. </p>
+             <p>En namnfil inleds med en rad som innehåller "StartNr; Namn". Därefter skrivs startnumret följt av ett semikolon, följt av för- och efternanm, radvis per person. </p>
          </li>
          <li>
              <h4>Tidsfil</h4>

@@ -15,32 +15,6 @@ public class ContestantFactory {
 		this.properties = properties;
 	}
 
-	public void createRegisteredContestants(Database db) throws IOException {
-		List<String[]> fileRows = ReadFile.readCSV(new File(properties
-				.getProperty(Configuration.KEY_NAME_FILE_PATH)));
-		nameHeader = trimContestantColumnNames(fileRows.get(0));
-
-		for (int i = 1; i < fileRows.size(); i++) {
-			String[] line = fileRows.get(i);
-			String startNumber = line[0].trim();
-			AbstractContestant contestant = createContestant(line);
-			db.addContestantEntry(startNumber, contestant);
-		}
-	}
-
-	private String[] trimContestantColumnNames(String[] contestantColumns) {
-		for (int i = 0; i < contestantColumns.length; i++) {
-			contestantColumns[i] = contestantColumns[i].trim();
-		}
-		return contestantColumns;
-	}
-
-	private AbstractContestant createContestant(String[] line) {
-		ContestantProperties info = createRacerInfo(line);
-		AbstractContestant contestant = createContestant(info);
-
-		return contestant;
-	}
 
 	public AbstractContestant createContestant() {
 		return createContestant(createRaceInfo());

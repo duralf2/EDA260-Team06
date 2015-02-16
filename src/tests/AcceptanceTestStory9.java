@@ -40,8 +40,9 @@ public class AcceptanceTestStory9 extends AbstractAcceptanceTest {
 	}
 
 	@After
-	public void tearDown() {
-		 outfile.delete();
+	public void tearDown() throws IOException {
+		outfile.delete();
+		AbstractContestant.setConfiguration(new Configuration());
 	}
 
 	@Test

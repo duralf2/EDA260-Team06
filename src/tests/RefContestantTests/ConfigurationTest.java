@@ -22,7 +22,7 @@ public class ConfigurationTest {
 
 	@Before
 	public void setUp() throws IOException {
-		outfile = new File("testfiles/RacePropertiesTestConfig.txt");
+		outfile = new File("testfiles/config/RacePropertiesTestConfig.txt");
 		properties = new Configuration(outfile); // This also creates the default config file
 	}
 
@@ -56,6 +56,7 @@ public class ConfigurationTest {
 		if (line.equals("resultFilePath=data/result.txt")) return;
 		if (line.equals("nameFilePath=data/namn.txt")) return;
 		if (line.equals("minimumRaceDuration=00.15.00")) return;
+		if (line.equals("maximumRaceDuration=23.59.59")) return;
 
 		fail("Invalid/Unknown config line: " + line);
 	}
@@ -73,5 +74,16 @@ public class ConfigurationTest {
 		properties = new Configuration(outfile);
 		
 		assertEquals("TestData", properties.get("TestEntry"));
+	}
+	
+	@Test
+	public void testMultipleStages() {
+		properties.setProperty(Configuration.KEY_STAGE_NAMES, "etapp1,etapp2,etapp3");
+		String[] stages = properties.getProperty(Configuration.KEY_STAGE_NAMES).split(",");
+		int i = 1;
+		for (String s : stages) {
+			assertEquals(s, "etapp"+i);
+			i++;
+		}
 	}
 }

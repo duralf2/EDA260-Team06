@@ -33,9 +33,10 @@ public class SorterTest {
 	@Test
 	public void testSortLapRace() throws IOException  {
 		conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
+		conf.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "01.00.00");
 		
 		sorter = new Sorter(new Database(), conf);
-		sorter.sort(nameFile, startTime, finishTimes);
+		sorter.sortLapTimes(nameFile, startTime, finishTimes);
 		
 		String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest10/resultat.txt"));
 		String s2 = readFileAsString(new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));

@@ -22,40 +22,39 @@ public class Sorter {
 	private Database db;
 	private Configuration conf;
 	private FileWriter fileWriter;
+	private Map<String, AbstractContestant> contestants;
 
 	public Sorter(Database db) throws IOException {
 		this.db = db;
 		conf = new Configuration();
-		fileWriter = new FileWriter(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
+		fileWriter = new FileWriter(
+				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 	}
 
 	public Sorter(Database db, Configuration conf) throws IOException {
 		this.db = db;
 		this.conf = conf;
-		fileWriter = new FileWriter(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
+		fileWriter = new FileWriter(
+				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 	}
-	
-	/**
-	 * Reads and sorts the collected data. After the data is sorted it is
-	 * printed to a results file.
-	 * 
-	 * @param files
-	 *            All the files containing finish times
-	 * @param nameFile
-	 *            TODO
-	 * @throws IOException
-	 *             If any of the files doesn't exist or couldn't be closed
-	 */
-	public void sort(String nameFile, File startTime, File[] finishTimes)
-			throws IOException {		
-		// TODO: change this file to be a parameter for the function ?
+
+	public void sortLapTimes(String nameFile, File startTime, File[] finishTimes) throws IOException {
+		setUp(nameFile, startTime, finishTimes);
+		
+		ArrayList<AbstractContestant> list = new ArrayList<AbstractContestant>();
+		for( AbstractContestant c : contestants.values()) {
+			list.add(c);
+		}
+		fileWriter.writeSortedResult(list, conf, db);
+	}
+
+	public void setUp(String nameFile, File startTime, File[] finishTimes)
+			throws IOException {
 		if (!new File("data").isDirectory())
 			// Create the data directory if it doesn't exist
 			new File("data").mkdir();
 		
 		db.clearContestantEntries();
-
-
 
 		ContestantFactory factory = new ContestantFactory(conf);
 		
@@ -68,16 +67,35 @@ public class Sorter {
 			read.readFinishTime(finishTimes[i], db);
 		}
 
+		 contestants = db.getAllContestantEntries();
+	}
 
-		Map<String,AbstractContestant> contestants = db.getAllContestantEntries();
-        SortedSet<AbstractContestant> sortedContestants = new TreeSet<AbstractContestant>(contestants.values());
-        
-        fileWriter.writeSortedResult(sortedContestants, conf, db);
+	/**
+	 * Reads and sorts the collected data. After the data is sorted it is
+	 * printed to a results file.
+	 * 
+	 * @param files
+	 *            All the files containing finish times
+	 * @param nameFile
+	 *            TODO
+	 * @throws IOException
+	 *             If any of the files doesn't exist or couldn't be closed
+	 */
+	public void sort(String nameFile, File startTime, File[] finishTimes)
+			throws IOException {
 		
+		setUp(nameFile, startTime, finishTimes);
+
+		for (AbstractContestant c : contestants.values()) {
+
+		}
+
+		// fileWriter.writeSortedResult(sortedContestants, conf, db);
+
 		/*
 		 * 
-		 * ArrayList<AbstractContestant> result = sortContestants(db); 
-		 * File resultFile = new File("data/results.txt"); writeToFile(result,
+		 * ArrayList<AbstractContestant> result = sortContestants(db); File
+		 * resultFile = new File("data/results.txt"); writeToFile(result,
 		 * resultFile, nameFile); }
 		 * 
 		 * private Map<String, ArrayList<AbstractContestant>>

@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class RaceProperties extends Properties {
+public class Configuration extends Properties {
 
 	public static final String VALUE_RACE_MARATHON = "marathon";
 	public static final String VALUE_RACE_LAPS = "laps";
@@ -18,10 +18,10 @@ public class RaceProperties extends Properties {
 	public static final String KEY_RESULT_FILE_PATH = "resultFilePath";
 	public static final String KEY_NAME_FILE_PATH = "nameFilePath";
 	
-	public RaceProperties() throws IOException {
+	public Configuration() throws IOException {
 		this (DEFAULT_PROPERTIES_FILE);
 	}
-	public RaceProperties(File propertiesFile) throws IOException {
+	public Configuration(File propertiesFile) throws IOException {
 		propertiesFile.getParentFile().mkdirs();
 		if (propertiesFile.exists())
 		{

@@ -12,7 +12,7 @@ public class StageContestant extends AbstractContestant {
 		currentStageNbr = 1;
 	}
 
-	public StageContestant(RacerInfo racerInfo) {
+	public StageContestant(ContestantProperties racerInfo) {
 		super(racerInfo);
 		stageTimes = new HashMap<Integer, StageTime>();
 		currentStageNbr = 1;

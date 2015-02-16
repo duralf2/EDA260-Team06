@@ -11,19 +11,19 @@ import register.model.Database;
 import register.model.LapContestant;
 import register.model.LapCompetition;
 import register.model.MarathonContestant;
-import register.model.RacerInfo;
+import register.model.ContestantProperties;
 import register.model.Time;
 
 public class LapContestantTest {
 	private LapContestant lapContestant;
-	private RacerInfo racerInfo;
+	private ContestantProperties racerInfo;
 	private Database db;
 
 	@Before
 	public void setUp() {
 		db = new Database();
 		
-		racerInfo = new RacerInfo(new String[]{"StartNr","Namn"});
+		racerInfo = new ContestantProperties(new String[]{"StartNr","Namn"});
 		racerInfo.put("StartNr", "1");
 		racerInfo.put("Namn", "Lars");
 		

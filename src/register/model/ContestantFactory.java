@@ -17,7 +17,7 @@ public class ContestantFactory {
 
 	public void createRegisteredContestants(Database db) throws IOException {
 		List<String[]> fileRows = ReadFile.readCSV(new File(properties
-				.getProperty(RaceProperties.KEY_NAME_FILE_PATH)));
+				.getProperty(Configuration.KEY_NAME_FILE_PATH)));
 		nameHeader = trimContestantColumnNames(fileRows.get(0));
 
 		for (int i = 1; i < fileRows.size(); i++) {
@@ -36,7 +36,7 @@ public class ContestantFactory {
 	}
 
 	private AbstractContestant createContestant(String[] line) {
-		RacerInfo info = createRacerInfo(line);
+		ContestantProperties info = createRacerInfo(line);
 		AbstractContestant contestant = createContestant(info);
 
 		return contestant;
@@ -46,7 +46,7 @@ public class ContestantFactory {
 		return createContestant(createRaceInfo());
 	}
 
-	public AbstractContestant createContestant(RacerInfo info) {
+	public AbstractContestant createContestant(ContestantProperties info) {
 		AbstractContestant contestant = null;
 		if (isMarathonRace()) {
 			contestant = new MarathonContestant(info);
@@ -56,22 +56,22 @@ public class ContestantFactory {
 		return contestant;
 	}
 
-	public RacerInfo createRaceInfo() {
-		return new RacerInfo(nameHeader);
+	public ContestantProperties createRaceInfo() {
+		return new ContestantProperties(nameHeader);
 	}
 
 	private boolean isLapRace() {
-		return properties.getProperty(RaceProperties.KEY_RACE_TYPE).equals(
-				RaceProperties.VALUE_RACE_LAPS);
+		return properties.getProperty(Configuration.KEY_RACE_TYPE).equals(
+				Configuration.VALUE_RACE_LAPS);
 	}
 
 	private boolean isMarathonRace() {
-		return properties.getProperty(RaceProperties.KEY_RACE_TYPE).equals(
-				RaceProperties.VALUE_RACE_MARATHON);
+		return properties.getProperty(Configuration.KEY_RACE_TYPE).equals(
+				Configuration.VALUE_RACE_MARATHON);
 	}
 
-	private RacerInfo createRacerInfo(String[] line) {
-		RacerInfo info = new RacerInfo(nameHeader);
+	private ContestantProperties createRacerInfo(String[] line) {
+		ContestantProperties info = new ContestantProperties(nameHeader);
 		for (int i = 0; i < Math.min(line.length, nameHeader.length); i++) {
 			info.put(nameHeader[i], line[i]);
 		}

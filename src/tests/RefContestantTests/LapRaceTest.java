@@ -13,7 +13,7 @@ import org.junit.Test;
 import register.model.Database;
 import register.model.LapContestant;
 import register.model.LapCompetition;
-import register.model.RacerInfo;
+import register.model.ContestantProperties;
 import register.model.Time;
 
 public class LapRaceTest {
@@ -47,10 +47,10 @@ public class LapRaceTest {
 
 	@Test
 	public void testManyLaps() {
-		RacerInfo ri = new RacerInfo(new String[] { "StartNr", "Namn" });
+		ContestantProperties ri = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		ri.put("StartNr", "1");
 		db.addContestantEntry("1", new LapContestant(ri));
-		RacerInfo ri2 = new RacerInfo(new String[] { "StartNr", "Namn" });
+		ContestantProperties ri2 = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		ri2.put("StartNr", "2");
 		LapContestant lc = new LapContestant(ri2);
 		lc.addStartTime(new Time("15.05.55"));

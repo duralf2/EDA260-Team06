@@ -1,7 +1,6 @@
 package io;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedSet;
 
 import register.model.AbstractContestant;
 import register.model.Database;
@@ -29,6 +29,12 @@ public class FileWriter {
 	public FileWriter(String targetPath) {
 		this.target = new File(targetPath);
 	}
+	
+	public static void writeSortedResult(SortedSet<AbstractContestant> contestants, File results) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
+	}
+	
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This

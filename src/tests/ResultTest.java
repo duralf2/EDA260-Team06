@@ -15,6 +15,8 @@ import org.junit.Test;
 import sorter.Sorter;
 import register.model.Database;
 
+//TODO this test is wtf
+
 public class ResultTest {
 	private File[] files; // [0] = starttimes, [1] = finishtimes, [2] =
 							// resultFile
@@ -62,7 +64,7 @@ public class ResultTest {
 	@Test
 	public void testResult() throws IOException {
 		List<String[]> results = new ArrayList<String[]>();
-			sort.sortTime(files, null);
+			sort.sort(files, null);
 			results = ReadFile.readCSV(new File("data/result.txt"));
 
 		//start at 1 to ignore header

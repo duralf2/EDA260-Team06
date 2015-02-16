@@ -15,7 +15,7 @@ public class ResultMain {
 		File finishTimeFile = new File(arg[2]);
 		Sorter sort = new Sorter(new Database());
 		try {
-			sort.sortTime(new File[]{startTimeFile, finishTimeFile}, nameFile);
+			sort.sort(new File[]{startTimeFile, finishTimeFile}, nameFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

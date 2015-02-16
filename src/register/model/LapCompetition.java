@@ -15,7 +15,7 @@ public class LapCompetition implements CompetitionType {
 	}
 
 	@Override
-	public void print(File file) {
+	public String print() {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(generateHeader());
@@ -51,6 +51,7 @@ public class LapCompetition implements CompetitionType {
 		
 		return sb.toString();
 	}
+	
 
 	public int getMaxLaps() {
 		int maxLaps = 0;

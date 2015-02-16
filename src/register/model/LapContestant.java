@@ -100,7 +100,7 @@ public class LapContestant extends AbstractContestant {
 	private Time getRaceTime() {
 		try {
 			Configuration c = new Configuration();
-			String data = c.getProperty(Configuration.KEY_LAPRACE_DURATION,
+			String data = c.getProperty(Configuration.KEY_MINIMUM_RACE_DURATION,
 					"00.00.00");
 			Time time = new Time(data);
 			return time;

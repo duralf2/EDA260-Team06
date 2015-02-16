@@ -1,6 +1,7 @@
 package tests.RefContestantTests;
 
 import static org.junit.Assert.assertEquals;
+import io.FileWriter;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,11 +21,13 @@ public class LapRaceTest {
 	private LapCompetition race;
 	private Database db;
 	private File outfile = new File("testfiles/LapRaceTestResult.txt");
+	private FileWriter fw;
 
 	@Before
 	public void setUp() {
 		db = new Database();
 		race = new LapCompetition(db);
+		fw = new FileWriter(outfile);
 	}
 
 	@After
@@ -33,8 +36,8 @@ public class LapRaceTest {
 	}
 
 	@Test
-	public void testPrintColumnNames() {
-		race.print(outfile);
+	public void testPrintColumnNames() throws IOException {
+		fw.printString(race.print());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -46,7 +49,7 @@ public class LapRaceTest {
 	}
 
 	@Test
-	public void testManyLaps() {
+	public void testManyLaps() throws IOException {
 		ContestantProperties ri = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		ri.put("StartNr", "1");
 		db.addContestantEntry("1", new LapContestant(ri));
@@ -57,7 +60,7 @@ public class LapRaceTest {
 		lc.addLapTime(new Time("16.05.55"));
 		lc.addFinishTime(new Time("17.05.55"));
 		db.addContestantEntry("2", lc);
-		race.print(outfile);
+		fw.printString(race.print());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);

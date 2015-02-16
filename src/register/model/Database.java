@@ -40,4 +40,6 @@ public class Database {
 	public void clearContestantEntries() {
 		contestantEntries.clear();
 	}
+	
+	
 }

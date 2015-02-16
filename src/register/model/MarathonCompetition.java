@@ -15,7 +15,7 @@ public class MarathonCompetition implements CompetitionType{
 	}
 
 	@Override
-	public void print(File file) {
+	public String print() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("StartNr;Namn;");
 		// TODO Använd headern i ContestantFactory för att få ut "StartNr;Namn;..." till raden ovan istället
@@ -26,11 +26,7 @@ public class MarathonCompetition implements CompetitionType{
 			sb.append(c.toString(this) + "\n");
 		}
 		
-		try {
-			new FileWriter(file.getAbsolutePath()).printString(sb.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return sb.toString();
 	}
 
 	public List<AbstractContestant> sort() {

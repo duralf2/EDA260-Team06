@@ -32,7 +32,7 @@ public class AcceptanceTestStory9 extends AbstractAcceptanceTest {
 		outfile = new File("out.txt");
 		Properties properties = new Properties();
 		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
-		properties.put(Configuration.KEY_LAPRACE_DURATION, "01.00.00");
+		properties.put(Configuration.KEY_MINIMUM_RACE_DURATION, "01.00.00");
 		reader = new FileReader(new ContestantFactory(properties));
 	}
 

@@ -26,12 +26,13 @@ import register.model.Time;
 public class FileWriter {
 	private File target;
 	
-	public FileWriter(){
-		target = null;
-	}
 	
 	public FileWriter(String targetPath) {
 		this.target = new File(targetPath);
+	}
+	
+	public FileWriter(File file){
+		target = file;
 	}
 	
 	public void writeSortedResult(SortedSet<AbstractContestant> contestants, Configuration conf, Database db) throws FileNotFoundException, IOException {
@@ -40,8 +41,12 @@ public class FileWriter {
 		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
 		CompetitionType competition = competitionFactory.createCompetition(db);
 		//Write header to file
+<<<<<<< HEAD
 		
 		sb.append(competition.generateHeader());
+=======
+		printString(competition.print());
+>>>>>>> branch 'RefactorBranch' of https://github.com/duralf2/EDA260-Team06.git
 	
 		for(AbstractContestant contestant : contestants){
 			//sb.append(contestant.toString(competition));
@@ -49,6 +54,10 @@ public class FileWriter {
 		}
 		
 		//printString(sb.toString());
+	}
+	
+	public static void writeResultImproved(PrintWriter pw, Database db){
+		
 	}
 	
 	/**

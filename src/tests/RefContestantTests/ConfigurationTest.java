@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import register.model.Configuration;
 
-public class RacePropertiesTest {
+public class ConfigurationTest {
 	
 	private File outfile;
 	
@@ -55,6 +55,7 @@ public class RacePropertiesTest {
 		if (line.equals("raceType=marathon")) return;
 		if (line.equals("resultFilePath=data/result.txt")) return;
 		if (line.equals("nameFilePath=data/namn.txt")) return;
+		if (line.equals("lapraceDuration=00.00.00")) return;
 
 		fail("Invalid/Unknown config line: " + line);
 	}

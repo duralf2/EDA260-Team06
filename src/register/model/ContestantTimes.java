@@ -21,7 +21,7 @@ public class ContestantTimes extends Observable {
 		this.nameFile = nameFile;
 		this.timeFile = timeFile;
 		registeredContestants = new ArrayList<String>();
-		times = new TreeMap<>(new StartNumberComparator());
+		times = new TreeMap<String, ArrayList<String>>(new StartNumberComparator());
 		readContestantsFromFile();
 		readTimesFromFile();
 	}
@@ -97,10 +97,14 @@ public class ContestantTimes extends Observable {
 	}
 
 	public void writeTimesToFile() {
-		try (PrintWriter pw = new PrintWriter(timeFile);) {
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(timeFile);
 			io.FileWriter.writeTimesToFile(pw, times);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} finally {
+			pw.close();
 		}
 	}
 

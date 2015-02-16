@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.AbstractContestant;
+import register.model.ContestantProperties;
 import register.model.Database;
 import register.model.MarathonContestant;
 
@@ -63,7 +64,7 @@ public class ReadFileTest {
 	
 	@Test
 	public void testReadContestantListWhenContestantsAlreadyExists() throws IOException {
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(new ContestantProperties(new String[]{}));
 		contestant.putInformation("Namn", "Gunnar");
 		db.addContestantEntry("1", contestant);
 		

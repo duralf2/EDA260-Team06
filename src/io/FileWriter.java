@@ -34,7 +34,7 @@ public class FileWriter {
 		this.target = new File(targetPath);
 	}
 	
-	public void writeSortedResult(SortedSet<AbstractContestant> contestants, Configuration conf, Database db) throws FileNotFoundException {
+	public void writeSortedResult(SortedSet<AbstractContestant> contestants, Configuration conf, Database db) throws FileNotFoundException, IOException {
 		StringBuilder sb = new StringBuilder();
 		
 		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
@@ -46,10 +46,7 @@ public class FileWriter {
 			sb.append(contestant.toString(competition));
 		}
 		
-		PrintWriter pw = new PrintWriter(target);
-		pw.write(sb.toString());
-		pw.close();
-	
+		printString(sb.toString());
 	}
 	
 	/**

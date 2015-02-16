@@ -111,12 +111,6 @@ public class Sorter {
 			resultFile.createNewFile();
 
 			PrintWriter pw = new PrintWriter(resultFile);
-            String colhead = "Placering; StartNr; Namn; Totaltid; Starttid; ";
-            for(int i=1; i<ds.getMaxLaps(); i++) {
-                colhead += "Varv" + i + "; ";
-            }
-            colhead += "Måltid\n";
-            pw.write(colhead);
 
             List<Contestant> contestants;
             Map<String, ArrayList<Contestant>> groupedContestants = groupByClass(ds);
@@ -133,7 +127,17 @@ public class Sorter {
 		}
 	}
 
+    private void writeHeader(PrintWriter pw) {
+        String colhead = "Placering; StartNr; Namn; Totaltid; Starttid; ";
+        for(int i=1; i<ds.getMaxLaps(); i++) {
+            colhead += "Varv" + i + "; ";
+        }
+        colhead += "Måltid\n";
+        pw.write(colhead);
+    }
+
     private void writeContestantRows(List<Contestant> result, PrintWriter pw) {
+        writeHeader(pw);
         int pos = 1;
         for(Contestant c : result) {
             writeContestantRow(c, pw, pos);
@@ -142,7 +146,8 @@ public class Sorter {
     }
 
     private void writeContestantRow(Contestant c, PrintWriter pw, int position) {
-        String out = position + ";" + c.getStartNumber() + ";" + c.getName() + ";"
+        String pos = c.getFinishTimes().size() > 0 ? "" + position : "";
+        String out = pos + ";" + c.getStartNumber() + ";" + c.getName() + ";"
                 + c.getTotalTime() + ";" + c.getStartTime() + ";";
 
         List<Time> lapTimes = c.getLapTimes();

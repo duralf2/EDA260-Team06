@@ -51,12 +51,15 @@ public class Sorter {
 
 		conf.setProperty(Configuration.KEY_NAME_FILE_PATH, nameFile);
 
+
 		ContestantFactory factory = new ContestantFactory(conf);
 		factory.createRegisteredContestants(db);
+		
+		ReadFile read = new ReadFile(factory);
 
-		ReadFile.readStartTime(startTime, db);
+		read.readStartTime(startTime, db);
 		for (int i = 1; i < finishTimes.length; i++) {
-			ReadFile.readFinishTime(finishTimes[i], db);
+			read.readFinishTime(finishTimes[i], db);
 		}
 
 

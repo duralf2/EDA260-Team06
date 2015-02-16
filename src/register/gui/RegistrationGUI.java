@@ -41,6 +41,7 @@ public class RegistrationGUI extends JFrame {
 		JLabel startNumberLabel = new StartNumberLabel(fontSize);
 		startNumberField = new StartNumberField(fontSize, registrationHandler);
 		JButton registerButton = new RegisterButton(fontSize, registrationHandler, startNumberField);
+		JButton preRegistrationButton = new PreRegistrationButton(fontSize, registrationHandler);
 		entryTable = new EntryList(fontSize, registrationHandler);
 
 		JScrollPane entryList = new JScrollPane(entryTable);
@@ -55,7 +56,9 @@ public class RegistrationGUI extends JFrame {
 				GridBagConstraints.HORIZONTAL, 1, 0);
 		addToGrid(registerButton, gbl, c, 2, 0, 1, 1, GridBagConstraints.NONE,
 				0, 0);
-		addToGrid(entryList, gbl, c, 0, 1, 3, 1, GridBagConstraints.BOTH, 1, 1);
+		addToGrid(preRegistrationButton, gbl, c, 3, 0, 1, 1, GridBagConstraints.NONE,
+				0, 0);
+		addToGrid(entryList, gbl, c, 0, 1, 4, 1, GridBagConstraints.BOTH, 1, 1);
 
 		pack();
 

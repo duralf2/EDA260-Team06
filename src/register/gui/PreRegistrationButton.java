@@ -11,28 +11,23 @@ import javax.swing.border.BevelBorder;
 
 import register.logic.TimeRegistrationHandler;
 
-public class RegisterButton extends JButton implements ActionListener{
+public class PreRegistrationButton extends JButton implements ActionListener {
 	private TimeRegistrationHandler registrationHandler;
-	private StartNumberField startNumberField;
 
-	public RegisterButton(int fontSize, TimeRegistrationHandler registrationHandler, StartNumberField startNumberField) {
-		super ("Register");
+	public PreRegistrationButton(int fontSize,
+			TimeRegistrationHandler registrationHandler) {
+		super("Pre-register");
 		this.registrationHandler = registrationHandler;
-		this.startNumberField = startNumberField;
-		addActionListener(this);
-		setToolTipText("Register entry.");
+		setToolTipText("Pre-register time");
 		setFont(getFont().deriveFont(Font.BOLD, fontSize));
 		setForeground(Color.WHITE);
 		setBackground(new Color(63, 181, 50));
 		setBorder(new BevelBorder(BevelBorder.RAISED));
+		addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		boolean isValid = registrationHandler.register(startNumberField.getText());
-		if(!isValid) {
-			JOptionPane.showMessageDialog(null, registrationHandler.getLastError());
-		}
-		startNumberField.setText("");
+		registrationHandler.register("x");
 	}
 }

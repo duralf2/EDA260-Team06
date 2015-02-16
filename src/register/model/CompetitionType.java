@@ -21,4 +21,5 @@ public interface CompetitionType {
 	 */
 	public List<AbstractContestant> sort();
 	public String generateHeader();
+	
 }

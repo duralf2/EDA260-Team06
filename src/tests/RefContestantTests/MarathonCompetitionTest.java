@@ -44,7 +44,7 @@ public class MarathonCompetitionTest {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider",scan.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider",scan.nextLine());
 		scan.close();
 	}
 	
@@ -68,9 +68,9 @@ public class MarathonCompetitionTest {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		assertEquals("StartNr;Namn;TotalTid;Starttider;Måltider",scan.nextLine());
-		assertEquals("1;;--.--.--;Start?;Slut?",scan.nextLine());
-		assertEquals("2;;02.00.00;10.00.00;12.00.00",scan.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider",scan.nextLine());
+		assertEquals("1; ; --.--.--; Start?; Slut?",scan.nextLine());
+		assertEquals("2; ; 02.00.00; 10.00.00; 12.00.00",scan.nextLine());
 		scan.close();
 	}
 }

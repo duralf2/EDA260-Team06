@@ -12,18 +12,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.RaceProperties;
+import register.model.Configuration;
 
 public class RacePropertiesTest {
 	
 	private File outfile;
 	
-	private RaceProperties properties;
+	private Configuration properties;
 
 	@Before
 	public void setUp() throws IOException {
 		outfile = new File("testfiles/RacePropertiesTestConfig.txt");
-		properties = new RaceProperties(outfile); // This also creates the default config file
+		properties = new Configuration(outfile); // This also creates the default config file
 	}
 
 	@After
@@ -37,8 +37,8 @@ public class RacePropertiesTest {
 		assertEquals("#Enduro config file", scanner.nextLine());
 		assertEquals("#", scanner.nextLine());
 		assertEquals("#Valid race types:", scanner.nextLine());
-		assertEquals("# - " + RaceProperties.VALUE_RACE_MARATHON, scanner.nextLine());
-		assertEquals("# - " + RaceProperties.VALUE_RACE_LAPS, scanner.nextLine());
+		assertEquals("# - " + Configuration.VALUE_RACE_MARATHON, scanner.nextLine());
+		assertEquals("# - " + Configuration.VALUE_RACE_LAPS, scanner.nextLine());
 		assertEquals("#", scanner.nextLine());
 		scanner.nextLine(); // Skip the line with the timestamp
 		while (scanner.hasNextLine())
@@ -69,7 +69,7 @@ public class RacePropertiesTest {
 		out.close();
 		
 		// Creating it again forces it to read the modified config
-		properties = new RaceProperties(outfile);
+		properties = new Configuration(outfile);
 		
 		assertEquals("TestData", properties.get("TestEntry"));
 	}

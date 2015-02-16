@@ -6,7 +6,7 @@ public class MarathonContestant extends AbstractContestant {
 	
 	public MarathonContestant() { }
 
-	public MarathonContestant(RacerInfo racerInfo) {
+	public MarathonContestant(ContestantProperties racerInfo) {
 		super(racerInfo);
 	}
 

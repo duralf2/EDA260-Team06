@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MarathonRace implements CompetitionType{
+public class MarathonCompetition implements CompetitionType{
 	private Database db;
 	
-	public MarathonRace(Database db) {
+	public MarathonCompetition(Database db) {
 		this.db = db;
 	}
 

@@ -10,17 +10,17 @@ import org.junit.Test;
 import register.model.Database;
 import register.model.LapContestant;
 import register.model.MarathonContestant;
-import register.model.MarathonRace;
-import register.model.RacerInfo;
+import register.model.MarathonCompetition;
+import register.model.ContestantProperties;
 import register.model.Time;
 
 public class MarathonContestantTest {
-	private RacerInfo racerInfo;
+	private ContestantProperties racerInfo;
 	private MarathonContestant marathonContestant;
 	
 	@Before
 	public void setUp() {
-		racerInfo = new RacerInfo(new String[]{"Name"});
+		racerInfo = new ContestantProperties(new String[]{"Name"});
 		racerInfo.put("Name","Hannah");
 		marathonContestant = new MarathonContestant(racerInfo);
 	}
@@ -43,7 +43,7 @@ public class MarathonContestantTest {
 		marathonContestant.addStartTime(new Time("12.00.01"));
 		marathonContestant.addFinishTime(new Time("12.21.15"));
 		String match = "Hannah;00.21.14;12.00.01;12.21.15";
-		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
+		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
 	}
 	
 	@Test
@@ -69,7 +69,7 @@ public class MarathonContestantTest {
 		marathonContestant.addStartTime(new Time("12.02.00"));
 		marathonContestant.addFinishTime(new Time("12.20.00"));
 		String match = "Hannah;00.20.00;12.00.00;12.20.00;Flera starttider? 12.01.00 12.02.00";
-		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
+		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
 	}
 	
 	@Test
@@ -80,7 +80,7 @@ public class MarathonContestantTest {
 		marathonContestant.addFinishTime(new Time("12.21.00"));
 		marathonContestant.addFinishTime(new Time("12.22.00"));
 		String match = "Hannah;00.20.00;12.00.00;12.20.00;Flera måltider? 12.21.00 12.22.00";
-		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
+		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
 	}
 	
 	@Test
@@ -89,6 +89,6 @@ public class MarathonContestantTest {
 		marathonContestant.addStartTime(new Time("12.00.00"));
 		marathonContestant.addFinishTime(new Time("12.01.00"));
 		String match = "Hannah;00.01.00;12.00.00;12.01.00;Omöjlig totaltid?";
-		assertEquals(match, marathonContestant.toString(new MarathonRace(new Database())));
+		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
 	}
 }

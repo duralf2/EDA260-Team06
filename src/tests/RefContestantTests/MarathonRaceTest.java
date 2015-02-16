@@ -12,19 +12,19 @@ import org.junit.Test;
 
 import register.model.Database;
 import register.model.MarathonContestant;
-import register.model.MarathonRace;
-import register.model.RacerInfo;
+import register.model.MarathonCompetition;
+import register.model.ContestantProperties;
 import register.model.Time;
 
 public class MarathonRaceTest {
-	private MarathonRace race;
+	private MarathonCompetition race;
 	private Database db;
 	private File outfile = new File("testfiles/MarathonRaceTestResult.txt");
 	
 	@Before
 	public void setUp(){
 		db = new Database();
-		race = new MarathonRace(db);
+		race = new MarathonCompetition(db);
 	}
 	
 	@After
@@ -48,10 +48,10 @@ public class MarathonRaceTest {
 	@Test
 	public void testPrintResults() {
 		
-		RacerInfo ri = new RacerInfo(new String[] { "StartNr", "Namn" });
+		ContestantProperties ri = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		ri.put("StartNr", "1");
 		db.addContestantEntry("1", new MarathonContestant(ri));
-		ri = new RacerInfo(new String[] { "StartNr", "Namn" });
+		ri = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		ri.put("StartNr", "2");
 		MarathonContestant contestant = new MarathonContestant(ri);
 		contestant.addStartTime(new Time("10.00.00"));

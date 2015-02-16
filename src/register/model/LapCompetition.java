@@ -17,10 +17,18 @@ public class LapCompetition implements CompetitionType {
 	@Override
 	public String print() {
 		StringBuilder sb = new StringBuilder();
+		StringBuilder faultySB = new StringBuilder();
 		sb.append(generateHeader());
 		for (AbstractContestant c : db.getAllContestantEntries().values()) {
+			if(c.getInformation("Namn").equals("")){
+				faultySB.append(c.toString(this) + "\n");
+			} else{
 			sb.append(c.toString(this) + "\n");
+			}
 		}
+		sb.append("Icke existerande startnummer\n");
+		sb.append(generateHeader());
+		sb.append(faultySB);
 		return sb.toString().replaceAll(";", "; ").trim();
 	}
 
@@ -61,4 +69,6 @@ public class LapCompetition implements CompetitionType {
 		// in the Sorter class
 		return new ArrayList<AbstractContestant>();
 	}
+	
+	
 }

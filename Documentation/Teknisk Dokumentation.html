@@ -25,7 +25,40 @@
     </p>
 
     <hr>
+    
+    <h2>Registrering</h2>
+	<h3 id="huvuduppgift">Huvuduppgift</h3>
+		<p>Används ute i fält för att registrera start- och sluttider. Programmet generera textfiler på formatet:</p>
+		<p>startnummer; tid</p>
+		<p>Varje person som registrerar tider genererar en egen tidsfil.  Dessa sorteras sedan ihop av sorteringsprogrammet. Utifrån sorteringsprogrammets filer genereras sedan ett resultat. </p>
+	
+	<h3>Struktur</h3>
+		<p>Programmet är uppbyggt efter MVC mönstret. </p>
+	
+	<h4>Model</h4>
+		<p>Modellen utgörs av klassen ContestantTimes som är Observable. Klassen lagrar vilka tider som är associerade med ett visst startnummer. För att registreringar inte ska gå förlorade skrivs alla ändringar till fil direkt. </p>
+	
+	<h4>View</h4>
+		<p>Utgörs huvudsakligen av klassen RegistrationGUI och EntryList. </p>
+		<p>RegistrationGUI motsvarar och bygger upp fönstret. RegistrationGUI har en instans av controllern (TimeRegistrationHandler) som gränsnittets komponenter använder för att uppdatera modellen.  </p>
+		<p>EntryList utgör tabellen av startnummer och tider i gränssnittet. Klassen observerar modellen och uppdaterar tabellen vid förändring.</p>
 
+	<h4>Controller</h4>
+		<p>Utgörs av klassen TimeRegistrationHandler. Klassen innehåller metoder för att uppdatera modellen.</p>
+
+	<h4>Övriga Klasser</h4>
+		<p>Main metoden finns i klassen RegistrationStarter. Klassen läser av konfigurationsfilen (registration.properties) och startar registreringsprogrammet utifrån innehållet. </p>
+
+	<h3>Konfigurationsfil</h3>
+		<p>Programmet använder sig av en konfigurationsfil på formatet </p>
+		<p>key=value</p>
+		<p>Giltiga nycklar är</p>
+		<p>title - Anger rubriken på gränssnittsfönstret.
+			nameFile - Anger sökvägen till namnfilen.
+			timeFile - Anger sökvägen till tidsfilen.</p>
+	
+	<hr>
+	
     <h2>Utvecklingsverktyg</h2>
     <p>
         De flesta automatiserade processer använder sig av ANT. Här dokumenterar vi några av de mest använda.

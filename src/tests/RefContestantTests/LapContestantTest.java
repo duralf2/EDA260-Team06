@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.AbstractContestant;
 import register.model.Configuration;
 import register.model.Database;
 import register.model.LapContestant;
@@ -95,12 +96,13 @@ public class LapContestantTest {
 	@Test
 	public void testAddFinishTime() {
 		try {
+			Configuration oldConfig = AbstractContestant.getConfiguration();
+			
 			File file = new File("test.ini");
 			Configuration config = new Configuration(file);
 			config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
-			config.store(new FileWriter(file), "test");
 			LapContestant lapContestant2 = new LapContestant(racerInfo);
-			lapContestant2.setConfiguration(file);
+			AbstractContestant.setConfiguration(config);
 
 			lapContestant2.addStartTime(new Time("00.00.00"));
 			lapContestant2.addFinishTime(new Time("00.08.01"));
@@ -108,10 +110,9 @@ public class LapContestantTest {
 
 			assertEquals(2, lapContestant2.getLapsCompleted());
 			assertEquals(new Time("13.04.00"), lapContestant2.getFinishTime());
-			lapContestant2.setConfiguration(new File("data/config.ini"));
+			AbstractContestant.setConfiguration(oldConfig);
 			file.delete();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

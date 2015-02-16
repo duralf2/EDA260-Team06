@@ -125,11 +125,15 @@ public class Sorter {
 	}
 
     private void writeHeader(PrintWriter pw) {
-        String colhead = "Placering; StartNr; Namn; Totaltid; Starttid; ";
+        String colhead = "Placering; StartNr; Namn; #Varv; Totaltid; Starttid; ";
         for(int i=1; i<ds.getMaxLaps(); i++) {
             colhead += "Varv" + i + "; ";
         }
-        colhead += "Måltid\n";
+        if (ds.getMaxLaps() > 1) {
+            colhead += "Varv" + ds.getMaxLaps() + "\n";
+        } else {
+            colhead += "Måltid\n";
+        }
         pw.write(colhead);
     }
 
@@ -143,18 +147,29 @@ public class Sorter {
     }
 
     private void writeContestantRow(Contestant c, PrintWriter pw, int position) {
-        String pos = c.getFinishTimes().size() > 0 ? "" + position : "";
+        String pos = c.getFinishTimes().size() > 0 ? Integer.toString(position) : "";
         String out = pos + ";" + c.getStartNumber() + ";" + c.getName() + ";"
-                + c.getTotalTime() + ";" + c.getStartTime() + ";";
+                + c.getLapsCompleted() + ";" + c.getTotalTime() + ";";
 
         List<Time> lapTimes = c.getLapTimes();
-        for(int lap=0; lap < ds.getMaxLaps()-1; lap++) {
-            if(lap < c.getLapsCompleted()) {
-                out += lapTimes.get(lap).toString();
+        Collections.sort(lapTimes, new Comparator<Time>() {
+            @Override
+            public int compare(Time t1, Time t2) {
+                return t1.compareTo(t2);
+            }
+        });
+        for(int lap=0; lap < ds.getMaxLaps(); lap++) {
+            if(lap <= c.getLapsCompleted()) {
+                Time startLapTime = lap - 1 >= 0 ? lapTimes.get(lap - 1) : c.getStartTime();
+                Time endLapTime = lap < lapTimes.size() ? lapTimes.get(lap) : c.getFinishTime();
+                if(!endLapTime.equals(new Time("00.00.00"))) {
+                    out += Time.getTotalTime(startLapTime, endLapTime).toString();
+                }
             }
             out += ";";
         }
-        out += c.getFinishTime() + "\n";
+        out = out.substring(0, out.length()-1);
+        out += "\n";
         pw.write(out.replace(";", "; "));
     }
 

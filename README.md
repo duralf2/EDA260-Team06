@@ -5,16 +5,35 @@
 **Course:**  EDA260  
 **Team:**    #6
 
+## Folder structure
+Source files are located in `src`, naturally. 
+Documentation can be found in `Documentation`. 
+Datafiles used in unit tests exist in `testfiles`.
 
 ## Documentation
 You can find the documentation in `./Documentation/index.html`.
 
-### Design
-Nothing here yet
-
 ## Group members
-Add yourself to this list.
 
- - Hannah Lindblad
+**Coaches**
+
+ - Sebastian Nyberg
+ - Christian Olsson
+
+**Developers**
+
+ - Kevin Andersson
+ - Erik Bjäreholt ([@ErikBjare](github.com/ErikBjare))
+ - Hampus Christensen
+ - Ella Eriksson
+ - Tom Hansson
+ - SebastianHjelm
  - Niklas Jönsson
- - Erik Bjäreholt (@ErikBjare)
+ - Hanna Lindblad
+ - Therese Magnusson
+ - Gustaf Oxenstierna
+ - Oscar Rydh
+ - Kasper Socha
+ - Kasper Tall
+ - Magnus Tullberg
+ 

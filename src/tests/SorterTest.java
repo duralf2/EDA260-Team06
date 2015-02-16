@@ -33,6 +33,7 @@ public class SorterTest {
 	@Test
 	public void testSortLapRace() throws IOException  {
 		conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
+		conf.put(Configuration.KEY_LAPRACE_DURATION, "01.00.00");
 		
 		sorter = new Sorter(new Database(), conf);
 		sorter.sort(nameFile, startTime, finishTimes);

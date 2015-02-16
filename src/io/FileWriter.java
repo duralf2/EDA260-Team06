@@ -44,6 +44,7 @@ public class FileWriter {
 	
 		for(AbstractContestant contestant : contestants){
 			sb.append(contestant.toString(competition));
+			sb.append("\n");
 		}
 		
 		PrintWriter pw = new PrintWriter(target);

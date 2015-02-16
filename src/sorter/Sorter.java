@@ -29,6 +29,12 @@ public class Sorter {
 		fileWriter = new FileWriter(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 	}
 
+	public Sorter(Database db, Configuration conf) throws IOException {
+		this.db = db;
+		this.conf = conf;
+		fileWriter = new FileWriter(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
+	}
+	
 	/**
 	 * Reads and sorts the collected data. After the data is sorted it is
 	 * printed to a results file.
@@ -58,7 +64,7 @@ public class Sorter {
 		ReadFile read = new ReadFile(factory);
 
 		read.readStartTime(startTime, db);
-		for (int i = 1; i < finishTimes.length; i++) {
+		for (int i = 0; i < finishTimes.length; i++) {
 			read.readFinishTime(finishTimes[i], db);
 		}
 

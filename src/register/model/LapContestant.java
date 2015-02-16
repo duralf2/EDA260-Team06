@@ -2,6 +2,7 @@ package register.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class LapContestant extends AbstractContestant {
 
 	public void addLapTime(Time time) {
 		lapTimes.add(time);
+		Collections.sort(lapTimes);
 	}
 
 	// TODO - comment

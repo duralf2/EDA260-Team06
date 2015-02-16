@@ -23,7 +23,7 @@ public class ResultTest {
 	private Sorter sort;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 		sort = new Sorter(new Database());
 		files = new File[] { new File("testfiles/startTimes.txt"),
 				new File("testfiles/finishTimes.txt") };

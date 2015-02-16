@@ -39,7 +39,7 @@ public class Configuration extends Properties {
 			put(KEY_RESULT_FILE_PATH, "data/result.txt");
 			put(KEY_GUI_OUTPUT_FILE_PATH, "data/utdata.txt");
 			put(KEY_RACE_TYPE, VALUE_RACE_MARATHON);
-			put(KEY_MINIMUM_RACE_DURATION, "00.00.00");
+			put(KEY_MINIMUM_RACE_DURATION, "00.15.00");
 			
 			FileOutputStream out = new FileOutputStream(propertiesFile);
 			store(out, generateComment());

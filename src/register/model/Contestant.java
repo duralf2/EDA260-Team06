@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Contestant {
 	private String name;
+    private String startNumber;
     private String className = "";
 	private LinkedList<Time> startTime;
 	private LinkedList<Time> finishTime;
@@ -107,5 +108,13 @@ public class Contestant {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public String getStartNumber() {
+        return startNumber;
+    }
+
+    public void setStartNumber(String startNumber) {
+        this.startNumber = startNumber;
     }
 }

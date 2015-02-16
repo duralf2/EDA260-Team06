@@ -13,6 +13,7 @@ public class DataStructure {
 
 	public void addContestantEntry(String startNumber, Contestant contestant) {
 		contestantEntries.put(startNumber, contestant);
+        contestant.setStartNumber(startNumber);
 	}
 
 	public void setContestantColumnNames(String[] columns) {

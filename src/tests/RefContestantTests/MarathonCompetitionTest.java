@@ -17,7 +17,7 @@ import register.model.MarathonCompetition;
 import register.model.ContestantProperties;
 import register.model.Time;
 
-public class MarathonRaceTest {
+public class MarathonCompetitionTest {
 	private MarathonCompetition race;
 	private Database db;
 	private File outfile = new File("testfiles/MarathonRaceTestResult.txt");

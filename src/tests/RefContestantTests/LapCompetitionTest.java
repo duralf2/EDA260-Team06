@@ -17,7 +17,7 @@ import register.model.LapCompetition;
 import register.model.ContestantProperties;
 import register.model.Time;
 
-public class LapRaceTest {
+public class LapCompetitionTest {
 	private LapCompetition race;
 	private Database db;
 	private File outfile = new File("testfiles/LapRaceTestResult.txt");

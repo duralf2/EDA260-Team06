@@ -12,6 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -28,9 +29,11 @@ import register.model.ContestantTimes;
 public class EntryList extends JTable implements Observer {
 
 	private TimeRegistrationHandler registrationHandler;
+	private StartNumberField sf;
 
 	public EntryList(int fontSize, TimeRegistrationHandler registrationHandler) {
 		super(1, 2);
+		this.sf = sf;
 		this.registrationHandler = registrationHandler;
 		registrationHandler.observContestantTimes(this);
 		setDefaultRenderer(Object.class, new TableRenderer(registrationHandler));
@@ -65,8 +68,8 @@ public class EntryList extends JTable implements Observer {
 		DefaultTableModel model = new NonEditableTableModel(
 				rowData.toArray(new String[0][0]), header);
 		setModel(model);
-//		getSelectionModel().addListSelectionListener(
-//				new PreRegistrationEditListener());
+		getSelectionModel().addListSelectionListener(
+				new PreRegistrationEditListener());
 	}
 
 	private String timesAsString(ArrayList<String> entryTimes) {
@@ -97,21 +100,29 @@ public class EntryList extends JTable implements Observer {
 	}
 
 	// TODO - Add code to update model
-//	private class PreRegistrationEditListener implements ListSelectionListener {
-//		@Override
-//		public void valueChanged(ListSelectionEvent e) {
-//			int selectedRow = getSelectedRow();
-//			String startNumber = (String) getValueAt(selectedRow, 0);
-//			if (startNumber.equals("Pre-registered time")) {
-//				JOptionPane
-//						.showInputDialog(
-//								null,
-//								"Enter start number \nNOT FULLY IMPLEMENTED NO CHANGES IN MODEL",
-//								"Pre-Registration",
-//								JOptionPane.QUESTION_MESSAGE);
-//			}
-//		}
-//
-//	}
+	private class PreRegistrationEditListener implements ListSelectionListener {
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			int selectedRow = getSelectedRow();
+			if (selectedRow != -1) {
+				String startNumber = (String) getValueAt(selectedRow, 0);
+				clearSelection();
+				if (startNumber.equals("Pre-registered time")) {
+					String startNumberInput = JOptionPane
+							.showInputDialog(null, "Enter start number:", "Pre-Registration", JOptionPane.QUESTION_MESSAGE);
+
+					if (startNumberInput != null) {
+						boolean isValid = registrationHandler.register("x="
+								+ startNumberInput);
+						if (!isValid) {
+							JOptionPane.showMessageDialog(null,
+									registrationHandler.getLastError());
+						}
+					}
+				}
+			}
+		}
+
+	}
 
 }

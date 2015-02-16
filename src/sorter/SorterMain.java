@@ -15,7 +15,7 @@ public class SorterMain { // TODO SorterMain should start the sorter and not the
 		File[] files = {new File("testfiles/acceptanstest/Iteration2/acceptanstest18/starttider.txt"),
                         new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider1.txt"),
                         new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider2.txt")};
-		s.sortTime(files, new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfil.txt"));
+		//s.sort(files, new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfil.txt"));
 	}
 
 }

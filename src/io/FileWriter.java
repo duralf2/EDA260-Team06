@@ -1,6 +1,7 @@
 package io;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -8,8 +9,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedSet;
 
 import register.model.AbstractContestant;
+import register.model.CompetitionFactory;
+import register.model.CompetitionType;
+import register.model.Configuration;
 import register.model.Database;
 import register.model.Time;
 
@@ -28,6 +33,25 @@ public class FileWriter {
 	public FileWriter(String targetPath) {
 		this.target = new File(targetPath);
 	}
+	
+	public void writeSortedResult(SortedSet<AbstractContestant> contestants, Configuration conf, Database db) throws FileNotFoundException {
+		StringBuilder sb = new StringBuilder();
+		
+		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
+		CompetitionType competition = competitionFactory.createCompetition(db);
+		//Write header to file
+		competition.print(target);
+	
+		for(AbstractContestant contestant : contestants){
+			sb.append(contestant.toString(competition));
+		}
+		
+		PrintWriter pw = new PrintWriter(target);
+		pw.write(sb.toString());
+		pw.close();
+	
+	}
+	
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This

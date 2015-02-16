@@ -1,15 +1,12 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-import io.FileWriter;
 import io.FileReader;
+import io.FileWriter;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Properties;
 
@@ -21,7 +18,7 @@ import register.model.Configuration;
 import register.model.ContestantFactory;
 import register.model.Database;
 
-public class AcceptanceTestStory9 {
+public class AcceptanceTestStory9 extends AbstractAcceptanceTest {
 
 	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/namnfil.txt";
 	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/starttider.txt";
@@ -59,22 +56,4 @@ public class AcceptanceTestStory9 {
 		
 		assertEquals(acceptenceResult, printedResult);
 	}
-
-	private String readFileAsString(File file) throws IOException {
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file)));
-
-		String fileContents = "";
-		String currentLine = reader.readLine();
-		while (currentLine != null) {
-			fileContents += currentLine.replace("\\s+", "") + "\n";
-			currentLine = reader.readLine();
-		}
-
-		reader.close();
-
-		return fileContents;
-	}
-
 }

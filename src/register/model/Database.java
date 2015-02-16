@@ -41,5 +41,9 @@ public class Database {
 		contestantEntries.clear();
 	}
 	
+	public String printResults(){
+		return 
+	}
+	
 	
 }

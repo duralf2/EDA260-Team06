@@ -26,10 +26,12 @@ public class AcceptanceTestStory6 extends AbstractAcceptanceTest {
 	
 	private File outfile;
 	private FileReader reader;
+	private FileWriter fw;
 	
 	@Before
 	public void setUp() throws IOException {
 		outfile = new File("out.txt");
+		fw = new FileWriter(outfile);
 		
 		Properties properties = new Properties();
 		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_MARATHON);
@@ -50,7 +52,7 @@ public class AcceptanceTestStory6 extends AbstractAcceptanceTest {
 		reader.readFinishTime(new File(finishTimesFilepath), db);
 
 		PrintWriter pw = new PrintWriter(outfile);
-		FileWriter.writeResult(pw, db);
+		fw.printString();
 		
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));

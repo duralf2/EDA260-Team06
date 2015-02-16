@@ -101,16 +101,10 @@ public class LapContestant extends AbstractContestant {
 
 	private Time getRaceTime() {
 		try {
-<<<<<<< HEAD
 			if(config==null){
 				config = new Configuration();
 			}
-			String data = config.getProperty(Configuration.KEY_LAPRACE_DURATION,
-=======
-			Configuration c = new Configuration();
-			String data = c.getProperty(Configuration.KEY_MINIMUM_RACE_DURATION,
->>>>>>> branch 'RefactorBranch' of git@github.com:duralf2/EDA260-Team06.git
-					"00.00.00");
+			String data = config.getProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "00.00.00");
 			Time time = new Time(data);
 			return time;
 		} catch (IOException e) {
@@ -122,7 +116,7 @@ public class LapContestant extends AbstractContestant {
 	public void setConfiguration(File file){
 		try {
 			config = new Configuration(file);
-			System.out.println(config.getProperty(Configuration.KEY_LAPRACE_DURATION));
+			System.out.println(config.getProperty(Configuration.KEY_MINIMUM_RACE_DURATION));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

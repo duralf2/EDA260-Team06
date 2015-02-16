@@ -25,10 +25,12 @@ import register.model.Time;
  */
 public class FileWriter {
 	private File target;
+	private Configuration config;
 	
 	
 	public FileWriter(String targetPath) {
 		this.target = new File(targetPath);
+		
 	}
 	
 	public FileWriter(File file){
@@ -44,8 +46,8 @@ public class FileWriter {
 		
 		sb.append(competition.generateHeader());
 		for(AbstractContestant contestant : contestants){
-			//sb.append(contestant.toString(competition));
-			//sb.append("\n");
+//			sb.append(contestant.toString(competition));
+//			sb.append("\n");
 		}
 		
 		//printString(sb.toString());
@@ -54,6 +56,8 @@ public class FileWriter {
 	public static void writeResultImproved(PrintWriter pw, Database db){
 		
 	}
+	
+	
 	
 	/**
 	 * Prints the specified database to the specified stream. The data will be

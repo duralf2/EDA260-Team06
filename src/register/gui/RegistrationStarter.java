@@ -22,12 +22,14 @@ public class RegistrationStarter {
 		loadProperties();
 		startRegistration();
 	}
-	
+
 	private void loadProperties() {
 		defaultProperties = new Properties();
-		try (FileInputStream in = new FileInputStream(
-				DEFAULT_REGISTRATION_PROPERTIES);) {
+		
+		try {
+			FileInputStream in = new FileInputStream(DEFAULT_REGISTRATION_PROPERTIES);
 			defaultProperties.load(in);
+			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,
@@ -57,19 +59,22 @@ public class RegistrationStarter {
 			System.exit(1);
 		}
 	}
-	
+
 	/**
-	 * Creates all necessary files and directories to use the time and name files specified in the properties file.
+	 * Creates all necessary files and directories to use the time and name
+	 * files specified in the properties file.
+	 * 
 	 * @param nameFile
 	 * @param timeFile
 	 * @throws IOException
 	 */
 
-	private void createFilesAndDirectories(File nameFile, File timeFile) throws IOException {
-			nameFile.getParentFile().mkdirs();
-			nameFile.createNewFile();
-			timeFile.getParentFile().mkdirs();
-			timeFile.createNewFile();
+	private void createFilesAndDirectories(File nameFile, File timeFile)
+			throws IOException {
+		nameFile.getParentFile().mkdirs();
+		nameFile.createNewFile();
+		timeFile.getParentFile().mkdirs();
+		timeFile.createNewFile();
 
 	}
 

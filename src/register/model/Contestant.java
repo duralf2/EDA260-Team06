@@ -48,7 +48,7 @@ public class Contestant {
 	}
 
 	public Time getFinishTime() {
-		return finishTime.get(0);
+		return finishTime.size() > 0 ? finishTime.get(0) : new Time("00.00.00");
 	}
 
     public List<String> getLapDurations() {
@@ -64,6 +64,9 @@ public class Contestant {
     }
 
 	public String getTotalTime() {
+        if(finishTime.size() == 0) {
+            return Time.getTotalTime(startTime.get(0), getLapTimes().getLast()).toString();
+        }
 		return Time.getTotalTime(startTime.get(0), finishTime.get(0)).toString();
 	}
 

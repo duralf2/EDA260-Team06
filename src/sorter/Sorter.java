@@ -9,6 +9,7 @@ import java.util.*;
 
 import register.model.Contestant;
 import register.model.DataStructure;
+import register.model.Time;
 import tests.ContestantTest;
 
 /**
@@ -38,7 +39,7 @@ public class Sorter {
 
         ReadFile.readStartTime(files[0], ds);
         for(int i=1; i < files.length; i++) {
-            ReadFile.readFinishTime(files[i], ds);
+            ReadFile.readFinishTime(files[i], ds, new Time("00.55.00"));
         }
         
         ReadFile.readNames(nameFile, ds);
@@ -48,10 +49,8 @@ public class Sorter {
             // Create the data directory if it doesn't exist
 			new File("data").mkdir();
 
-
-		ArrayList<Contestant> result = sortContestantsByTotal(ds);
 		File resultFile = new File("data/results.txt");
-		writeToFile(result, resultFile);
+		writeToFile(resultFile);
 	}
 
     private Map<String, ArrayList<Contestant>> groupByClass(DataStructure ds) {
@@ -68,36 +67,33 @@ public class Sorter {
         return m;
     }
     
-    private ArrayList<Contestant> sortContestantsByTotal(DataStructure ds) {
-        final Map<String, Contestant> contestants = ds.getAllContestantEntries();
-
-        ArrayList<Contestant> result = new ArrayList<Contestant>(contestants.values());
-        Collections.sort(result,
+    private List<Contestant> sortContestantsByTotal(List<Contestant> contestants) {
+        Collections.sort(contestants,
                 new Comparator<Contestant>() {
                     @Override
-                    public int compare(Contestant c1, Contestant c2)
-                    {
-                        return  c1.getTotalTime().compareTo(c2.getTotalTime());
+                    public int compare(Contestant c1, Contestant c2) {
+                        return c1.getTotalTime().compareTo(c2.getTotalTime());
                     }
                 });
 
-        return result;
+        return contestants;
     }
 
-    private ArrayList<Contestant> sortContestantsByLaps(DataStructure ds) {
+    private List<Contestant> sortContestantsByLaps(List<Contestant> contestants) {
         // This should be used in another public sort method
-        Map<String, Contestant> contestants = ds.getAllContestantEntries();
-
-        ArrayList<ArrayList<Contestant>> al = new ArrayList<ArrayList<Contestant>>();
+        List<List<Contestant>> al = new ArrayList<List<Contestant>>();
         for(int i=0; i <= ds.getMaxLaps(); i++) {
             al.add(new ArrayList<Contestant>());
         }
 
-        for(Contestant c : contestants.values()) {
+        for(Contestant c : contestants) {
             al.get(c.getLapsCompleted()).add(c);
         }
-        ArrayList<Contestant> result = new ArrayList<Contestant>();
-        for(ArrayList<Contestant> a : al) {
+        
+        List<Contestant> result = new ArrayList<Contestant>();
+        for(int i=al.size()-1; i>=0; i--) {
+            List<Contestant> a = al.get(i);
+            a = sortContestantsByTotal(a);
             result.addAll(a);
         }
 
@@ -105,26 +101,72 @@ public class Sorter {
     }
 
 	// private method for writing to file
-	private void writeToFile(ArrayList<Contestant> result, File resultFile) {
+	private void writeToFile(File resultFile) {
 		try {
 			if (!new File("data").isDirectory())
 				new File("data").mkdir();//create the data directory if not exists
 			resultFile.createNewFile();
 
 			PrintWriter pw = new PrintWriter(resultFile);
-			int position = 1;
 
-			pw.write("Placering; StartNr; Namn; Totaltid; Starttid; Måltid\n");
-			for (Contestant c : result) {
-				String out = position + ";" + c.getStartNumber() + ";" + c.getName() + ";"
-						+ c.getTotalTime() + ";" + c.getStartTime()
-						+ ";" + c.getFinishTime() + "\n";
-                pw.write(out.replace(";", "; "));
-				position++;
-			}
-			pw.close();
+            List<Contestant> contestants;
+            Map<String, ArrayList<Contestant>> groupedContestants = groupByClass(ds);
+            for(String cls : groupedContestants.keySet()) {
+                if(hasClasses(ds)) {
+                    pw.write(cls + "\n");
+                }
+                contestants = sortContestantsByLaps(groupedContestants.get(cls));
+                writeContestantRows(contestants, pw);
+            }
+            pw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
+    private void writeHeader(PrintWriter pw) {
+        String colhead = "Placering; StartNr; Namn; Totaltid; Starttid; ";
+        for(int i=1; i<ds.getMaxLaps(); i++) {
+            colhead += "Varv" + i + "; ";
+        }
+        colhead += "Måltid\n";
+        pw.write(colhead);
+    }
+
+    private void writeContestantRows(List<Contestant> result, PrintWriter pw) {
+        writeHeader(pw);
+        int pos = 1;
+        for(Contestant c : result) {
+            writeContestantRow(c, pw, pos);
+            pos++;
+        }
+    }
+
+    private void writeContestantRow(Contestant c, PrintWriter pw, int position) {
+        String pos = c.getFinishTimes().size() > 0 ? "" + position : "";
+        String out = pos + ";" + c.getStartNumber() + ";" + c.getName() + ";"
+                + c.getTotalTime() + ";" + c.getStartTime() + ";";
+
+        List<Time> lapTimes = c.getLapTimes();
+        for(int lap=0; lap < ds.getMaxLaps()-1; lap++) {
+            if(lap < c.getLapsCompleted()) {
+                out += lapTimes.get(lap).toString();
+            }
+            out += ";";
+        }
+        out += c.getFinishTime() + "\n";
+        pw.write(out.replace(";", "; "));
+    }
+
+    // TODO: Move to DataStructure/Contest, make public
+    private boolean hasClasses(DataStructure ds) {
+        boolean hasClass = false;
+        for(Contestant c : ds.getAllContestantEntries().values()) {
+            if(!c.getClassName().equals("")) {
+                hasClass = true;
+                break;
+            }
+        }
+        return hasClass;
+    }
 }

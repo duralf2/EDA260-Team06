@@ -21,7 +21,7 @@ public class LapCompetition implements CompetitionType {
 		for (AbstractContestant c : db.getAllContestantEntries().values()) {
 			sb.append(c.toString(this) + "\n");
 		}
-		return sb.toString();
+		return sb.toString().replaceAll(";", "; ").trim();
 	}
 
 	@Override

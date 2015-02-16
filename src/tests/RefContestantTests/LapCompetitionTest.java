@@ -44,7 +44,7 @@ public class LapCompetitionTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		assertEquals("StartNr;Namn;#Varv;TotalTid;Start;Mål", scan.nextLine());
+		assertEquals("StartNr; Namn; #Varv; TotalTid; Start; Mål", scan.nextLine());
 		scan.close();
 	}
 
@@ -68,11 +68,11 @@ public class LapCompetitionTest {
 			e.printStackTrace();
 		}
 		assertEquals(
-				"StartNr;Namn;#Varv;TotalTid;Varv1;Varv2;Start;Varvning1;Mål",
+				"StartNr; Namn; #Varv; TotalTid; Varv1; Varv2; Start; Varvning1; Mål",
 				scan.nextLine());
-		assertEquals("1;;0;00.00.00;;;;;", scan.nextLine());
+		assertEquals("1; ; 0; 00.00.00; ; ; ; ; ", scan.nextLine());
 		assertEquals(
-				"2;;2;02.00.00;01.00.00;01.00.00;15.05.55;16.05.55;17.05.55",
+				"2; ; 2; 02.00.00; 01.00.00; 01.00.00; 15.05.55; 16.05.55; 17.05.55",
 				scan.nextLine());
 		scan.close();
 	}

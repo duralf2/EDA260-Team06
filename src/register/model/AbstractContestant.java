@@ -88,7 +88,7 @@ public abstract class AbstractContestant implements
 		if (startTimeSize() > 0) {
 			startTime = getStartTime();
 		}
-		Time finishTime = new Time("00.00.00");
+		Time finishTime = startTime;
 		if (finishTimeSize() > 0) {
 			finishTime = getFinishTime();
 		}

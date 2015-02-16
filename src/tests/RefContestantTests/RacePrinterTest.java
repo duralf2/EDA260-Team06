@@ -1,7 +1,7 @@
 package tests.RefContestantTests;
 
 import static org.junit.Assert.assertEquals;
-import io.RacePrinter;
+import io.FileWriter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,7 +33,7 @@ public class RacePrinterTest {
 
 		String expected = "abcd\nedfg";
 		
-		new RacePrinter(outfile.getAbsolutePath()).print(expected);
+		new FileWriter(outfile.getAbsolutePath()).print(expected);
 
 		String printedResult = readFileAsString(outfile);
 		
@@ -43,7 +43,7 @@ public class RacePrinterTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNullData() throws IOException
 	{
-		new RacePrinter(outfile.getAbsolutePath()).print(null);
+		new FileWriter(outfile.getAbsolutePath()).print(null);
 	}
 
 	private String readFileAsString(File file) throws IOException {

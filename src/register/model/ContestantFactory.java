@@ -1,10 +1,6 @@
 package register.model;
 
-import io.ReadFile;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
 public class ContestantFactory {
@@ -42,14 +38,6 @@ public class ContestantFactory {
 	private boolean isMarathonRace() {
 		return properties.getProperty(Configuration.KEY_RACE_TYPE).equals(
 				Configuration.VALUE_RACE_MARATHON);
-	}
-
-	private ContestantProperties createRacerInfo(String[] line) {
-		ContestantProperties info = new ContestantProperties(nameHeader);
-		for (int i = 0; i < Math.min(line.length, nameHeader.length); i++) {
-			info.put(nameHeader[i], line[i]);
-		}
-		return info;
 	}
 
 	public void setContestantColumnNames(String[] contestantColumns) {

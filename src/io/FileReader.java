@@ -14,10 +14,10 @@ import register.model.Time;
  * This class is responsible for reading files formatted in the excel file
  * format and store their contents into a database.
  */
-public class ReadFile {
+public class FileReader {
 	private ContestantFactory cf;
 
-	public ReadFile(ContestantFactory cf) {
+	public FileReader(ContestantFactory cf) {
 		this.cf = cf;
 	}
 

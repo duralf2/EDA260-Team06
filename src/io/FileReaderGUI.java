@@ -8,7 +8,7 @@ import java.util.List;
 
 import register.model.ContestantTimes;
 
-public class ReadFileGUI {
+public class FileReaderGUI {
 	
 	/**
 	 * Returns an list with start numbers in the specified name file.

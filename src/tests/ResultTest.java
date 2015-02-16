@@ -2,7 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 import io.CSVReader;
-import io.ReadFile;
+import io.FileReader;
 
 import java.io.File;
 import java.io.IOException;

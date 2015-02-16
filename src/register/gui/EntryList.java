@@ -1,6 +1,6 @@
 package register.gui;
 
-import io.ReadFile;
+import io.FileReader;
 
 import java.awt.Font;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-import io.ReadFile;
+import io.FileReader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +20,7 @@ import register.model.MarathonContestant;
 
 public class ReadFileTest {
 	private Database db;
-	private ReadFile reader;
+	private FileReader reader;
 	private ContestantFactory factory;
 	
 	@Before
@@ -30,7 +30,7 @@ public class ReadFileTest {
 		Properties properties = new Properties();
 		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_MARATHON);
 		factory = new ContestantFactory(properties);
-		reader = new ReadFile(factory);
+		reader = new FileReader(factory);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)

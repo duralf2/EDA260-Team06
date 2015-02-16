@@ -48,7 +48,7 @@ public class FileWriter {
 		printString(sb.toString());
 	}
 	
-	public void writeResultImproved(Configuration config, Database db) throws IOException{
+	public void writeResults(Configuration config, Database db) throws IOException{
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
 		CompetitionType competition = competitionFactory.createCompetition(db);
 		printString(competition.print());

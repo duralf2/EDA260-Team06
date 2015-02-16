@@ -76,9 +76,27 @@ public class LapContestant extends AbstractContestant {
 
 		if (!finishTime.isEmpty())
 			sb.append(getFinishTime());
-
+		
+		
 		return sb.toString();
 
+	}
+	
+	@Override
+	public Time getTotalTime()
+	{
+		Time startTime = new Time("00.00.00");
+		if (startTimeSize() > 0) {
+			startTime = getStartTime();
+		}
+		Time finishTime = startTime;
+		if (finishTimeSize() > 0) {
+			finishTime = getFinishTime();
+		}
+		else if (!lapTimes.isEmpty()) {
+			finishTime = lapTimes.getLast();
+		}
+		return Time.getTotalTime(startTime, finishTime);
 	}
 
 	@Override

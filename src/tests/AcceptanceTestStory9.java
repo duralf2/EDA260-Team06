@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import register.model.AbstractContestant;
 import register.model.Configuration;
 import register.model.ContestantFactory;
 import register.model.Database;
@@ -32,12 +33,10 @@ public class AcceptanceTestStory9 extends AbstractAcceptanceTest {
 	@Before
 	public void setUp() throws IOException {
 		outfile = new File("out.txt");
-		config = new Configuration();
 		fw = new FileWriter(outfile);
-		Properties properties = new Properties();
-		properties.put(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
-		properties.put(Configuration.KEY_MINIMUM_RACE_DURATION, "01.00.00");
-		reader = new FileReader(new ContestantFactory(properties));
+		config = new Configuration(new File("testfiles/config/lapContestant.ini"));
+		reader = new FileReader(new ContestantFactory(config));
+		AbstractContestant.setConfiguration(config);
 	}
 
 	@After
@@ -52,7 +51,7 @@ public class AcceptanceTestStory9 extends AbstractAcceptanceTest {
 		reader.readStartTime(new File(startTimesFilepath), db);
 		reader.readFinishTime(new File(finishTimesFilepath), db);
 
-		fw.writeResultImproved(config, db);
+		fw.writeResults(config, db);
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));
 		

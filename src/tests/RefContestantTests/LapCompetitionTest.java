@@ -70,6 +70,8 @@ public class LapCompetitionTest {
 		assertEquals(
 				"StartNr; Namn; #Varv; TotalTid; Varv1; Varv2; Start; Varvning1; Mål",
 				scan.nextLine());
+		assertEquals("Icke existerande startnummer", scan.nextLine());
+		assertEquals(race.generateHeader().replaceAll(";", "; ").trim(), scan.nextLine());
 		assertEquals("1; ; 0; 00.00.00; ; ; ; ; ", scan.nextLine());
 		assertEquals(
 				"2; ; 2; 02.00.00; 01.00.00; 01.00.00; 15.05.55; 16.05.55; 17.05.55",

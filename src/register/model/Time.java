@@ -34,7 +34,7 @@ public class Time implements Comparable<Time> {
 		sb.append(format(seconds));
 		return sb.toString();
 	}
-
+	
 	public Time multiply(int multiplier) {
 		int totalSeconds = this.totalSeconds() * multiplier;
 		return convertSecondsToTime(totalSeconds);

@@ -1,5 +1,7 @@
 package io;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -17,7 +19,15 @@ import register.model.Time;
  * <code>PrintWriter</code> that is passed along with the data.
  */
 public class FileWriter {
-
+	private File target;
+	
+	public FileWriter(){
+		target = null;
+	}
+	
+	public FileWriter(String targetPath) {
+		this.target = new File(targetPath);
+	}
 	/**
 	 * Prints the specified database to the specified stream. The data will be
 	 * written in a format that is compatible with the excel file format. This
@@ -275,4 +285,22 @@ public class FileWriter {
 			sb.deleteCharAt(sb.length() - 1);
 		pw.print(sb.toString());
 	}
+	
+	public void print(String data) throws IOException
+	{
+		if (data != null)
+		{
+			File parentFile = target.getParentFile();
+			if (parentFile != null)
+				parentFile.mkdirs();
+			java.io.FileWriter out = new java.io.FileWriter(target);
+			out.write(data);
+			out.close();
+		}
+		else
+		{
+			throw new IllegalArgumentException("Can't print null!");
+		}
+	}
 }
+

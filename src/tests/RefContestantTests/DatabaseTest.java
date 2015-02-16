@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.AbstractContestant;
+import register.model.ContestantProperties;
 import register.model.Database;
 import register.model.MarathonContestant;
 import register.model.Time;
@@ -19,10 +20,12 @@ import register.model.Time;
 public class DatabaseTest {
 
 	private Database db;
-
+	private ContestantProperties prop;
+	
 	@Before
 	public void setUp() throws Exception {
 		db = new Database();
+		prop = new ContestantProperties(new String[]{});
 	}
 
 	@After
@@ -33,9 +36,9 @@ public class DatabaseTest {
 	//TODO: add test cases for other type of Contestants
 	@Test
 	public void testGetAllContestantEntries() {
-		AbstractContestant contestant1 = new MarathonContestant();
-		AbstractContestant contestant2 = new MarathonContestant();
-		AbstractContestant contestant3 = new MarathonContestant();
+		AbstractContestant contestant1 = new MarathonContestant(prop);
+		AbstractContestant contestant2 = new MarathonContestant(prop);
+		AbstractContestant contestant3 = new MarathonContestant(prop);
 		db.addContestantEntry("1", contestant1);
 		db.addContestantEntry("2", contestant2);
 		db.addContestantEntry("3", contestant3);
@@ -49,14 +52,14 @@ public class DatabaseTest {
 
 	@Test
 	public void testAddContestantEntry() {
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(prop);
 		db.addContestantEntry("1", contestant);
 		assertEquals(contestant, db.getContestant("1"));
 	}
 
 	@Test
 	public void testRemoveContestantEntry() {
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(prop);
 		db.addContestantEntry("1", contestant);
 		assertEquals(contestant, db.removeContestant("1"));
 		assertEquals(null, db.getContestant("1"));
@@ -65,7 +68,7 @@ public class DatabaseTest {
 	@Test
 	public void testEquals() {
 		Database ds2 = new Database();
-		AbstractContestant contestant = new MarathonContestant();
+		AbstractContestant contestant = new MarathonContestant(prop);
 		contestant.addStartTime(new Time("12.00.00"));
 		ds2.addContestantEntry("1", contestant);
 		db.addContestantEntry("1", contestant);
@@ -80,7 +83,7 @@ public class DatabaseTest {
 	
 	@Test
 	public void testClearContestantEntries(){
-		db.addContestantEntry("1", new MarathonContestant());
+		db.addContestantEntry("1", new MarathonContestant(prop));
 		db.clearContestantEntries();
 		assertEquals(0, db.getAllContestantEntries().size());
 	}

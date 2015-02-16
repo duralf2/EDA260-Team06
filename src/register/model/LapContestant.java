@@ -8,10 +8,6 @@ import java.util.List;
 public class LapContestant extends AbstractContestant {
 	private LinkedList<Time> lapTimes;
 
-	public LapContestant() {
-		lapTimes = new LinkedList<Time>();
-	}
-
 	public LapContestant(ContestantProperties racerInfo) {
 		super(racerInfo);
 		lapTimes = new LinkedList<Time>();

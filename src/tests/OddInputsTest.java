@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import register.model.AbstractContestant;
+import register.model.ContestantProperties;
 import register.model.Database;
 import register.model.MarathonContestant;
 import register.model.Time;
@@ -33,7 +34,7 @@ public class OddInputsTest {
 		pw = new PrintWriter(fos);
 		db = new Database();
 		sc = new Scanner(f);
-		contestant = new MarathonContestant();
+		contestant = new MarathonContestant(new ContestantProperties(new String[]{}));
 		contestant.putInformation("Namn", "Göran");
 		contestant.addStartTime(new Time("13.23.34"));
 	}

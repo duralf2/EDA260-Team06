@@ -18,25 +18,13 @@
 
     <hr>
 
-    <h2>Arkitektur</h2>
+    <h2 id="arkitektur">Arkitektur</h2>
     <p>
-        Programmet har vid skrivande stund en något konstig arkitektur med
-        aningen förvirrande namn. Detta bör fixas vid nästa refaktoriseringstillfälle.
+    	Programmets klasser är uppdelade i fem olika paket. Paketet sorter innehåller main-klassen till programmet för sortering av resultat.
+    	 Main-klassen för huvudprogrammet (GUI) finns i paketet <code>register.gui</code>.
     </p>
-
-    <hr>
     
-    <h2>Registrering</h2>
-	<h3 id="huvuduppgift">Huvuduppgift</h3>
-		<p>
-            Används ute i fält för att registrera start- och sluttider. 
-            Programmet generera textfiler på formatet:
-        </p>
-		<p>startnummer; tid</p>
-		<p>
-            Varje person som registrerar tider genererar en egen tidsfil. 
-            Dessa sorteras sedan ihop av sorteringsprogrammet. Utifrån sorteringsprogrammets filer genereras sedan ett resultat.
-        </p>
+    <h2 id="registrering">Registrering</h2>
 	
 	<h3>Struktur</h3>
 		<p>Programmet är uppbyggt efter MVC mönstret. </p>
@@ -65,30 +53,117 @@
             Utgörs av klassen TimeRegistrationHandler. 
             Klassen innehåller metoder för att uppdatera modellen.
         </p>
-
-	<h4>Övriga Klasser</h4>
-		<p>
-            Main metoden finns i klassen RegistrationStarter. 
-            Klassen läser av konfigurationsfilen (registration.properties) och startar registreringsprogrammet utifrån innehållet.
-        </p>
-
-	<h3>Konfigurationsfil</h3>
-		<p>
-            Programmet använder sig av en konfigurationsfil på formatet <code>key=value</code>
-        </p>
-		<p>Giltiga nycklar är:</p>
-        <ul>
-            <li>title - Anger rubriken på gränssnittsfönstret.</li>
-            <li>nameFile - Anger sökvägen till namnfilen.</li>
-            <li>timeFile - Anger sökvägen till tidsfilen.</li>
-        </ul>
-
-	<hr>
-	
-    <h2>Utvecklingsverktyg</h2>
+        
+    <h2 id="paketstruktur"> Paketstruktur </h2>
+    
+    <h3> sorter </h3>
     <p>
-        De flesta automatiserade processer använder sig av ANT. 
-        Här dokumenterar vi några av de mest använda.
+    	Resultatprogrammet läser en fil med starttider, en fil med sluttider, en fil med namn samt startnummer för samtliga deltagare. Från dessa genereras en fil med
+    	resultat.
+    	
+    </p>
+    <h3> register.logic </h3>
+    <p>
+    	Paketet innehåller klassen <code>TimeRegistrationHandler</code> som behandlar olika typer av registreringar, t.ex då startnummer saknas. <code>Register</code>
+    	är deprecated. 
+    </p>
+    <h3>register.model</h3>
+    <p>
+    	<code>Configuration</code> ansvarar för de olika konfigurationsparametrarna i config.ini. Javas standardklass <code>java.util.Properties</code> används för att hantera parametrarna.
+    	Configfilen måste finnas i en undermapp i programmappen som heter data. Om denna ej existerar så kommer den skapas av programmet.
+    </p>
+    <p>
+    	Paketet innehåller många klasser för att representera olika typer av deltagare och lopp. En klass för att representera tid ingår också. 
+    	Eftersom det kan förekomma olika sorters lopp används olika subklasser av en klass för deltagare som heter <code>AbstractContestant</code>. I denna struktur används
+    	template method för utskrift av tider.
+    </p>
+    <p>
+    	Factory method-mönstret används i två klasser. <code>CompetitionFactory</code> skapar ett <code>CompetitionType</code>-objekt beroende på vad raceType-parametern har för värde
+    	i config-filen (config.ini). <code>ContestantFactory</code> går igenom den namnfil som anges i config.ini och lägger till namn samt startnummer i databasen.
+    	<code>ContestantFactory</code> tar även tävlingstyp (raceType i config.ini) i beakting och skapar objekt av lämplig subklass till <code>AbstractContestant</code>.
+    </p>
+    <p>
+        <code>ContestantProperties</code> innehåller övrig information om varje deltagare, t.ex klubb, sponsring etc. Då denna information varierar från tävling till tävling lagras
+    	den i en <code>HashMap</code>. Vilken information som skall lagras framgår av headern i namnfilen och vid utskrift så skrivs endast information som fanns i namnheadern ut.
+    </p>
+    <p>
+    Klassen Time används för att representera tider inom programmet. Här finns även metoder för beräkningar av tider. 
+    </p>
+    <p>
+    	<code>Database</code> ansvarar för lagring av <code>Contestant</code>-objekt. Objekten lagras internt i en <code>TreeMap</code> som sorterar med avseende på startnummer.
+    </p>
+    <p>
+    	För att jämföra startnummer korrekt används <code>StartNumberComparator</code>. Detta behövs då startnummer sparas som strängar och vi vill kunna exponera dessa
+    	i växande ordning i huvudprogrammet.
+    </p>
+    <h3> io </h3>
+    <p>
+    	 <code>ReadFile</code> och <code>FileWriter</code> hanterar inläsning respektive utskrift av information. För att läsa CSV används biblioteket <a href="https://code.google.com/p/jcsv/">JCSV</a>.
+    	<code>CSVReader</code> använder JCSV för att läsa en CSV-fil. <code>ReadFileGUI</code> innehåller metoder för att läsa från filer som används av GUI:t.
+    </p>
+    
+    <h3> test </h3>
+    <p>
+    	För närvarande uppdelat i två paket (test och test.RefContestantTest) men målet är dessa skall slås ihop i paketet test. I paketet finns enhetstester för koden.
+    	Vi använder ramverket <code>JUnit</code> för att skriva tester.
+    </p>
+
+    <hr>
+    
+    <h2 id="filformat"> Filformat </h2>
+    <p>
+    	Den här sektionen beskriver de olika filformat programmet använder sig av.
+    </p>
+    
+    <h3> Properties </h3>
+    <p>
+    	Parametrar skrivs på formen "&ltkey&gt=&ltvalue&gt". En rad får endast innehålla en parameter.
+    	Kommentarer inleds med '#' i början av raden.
+    </p>
+    
+    <h3>CSV</h3>
+    <p>
+    	Systemet använder CSV för att lagring och kommunikation mellan delsystem. Viktiga CSV-filer har en header som beskriver formatet, dvs vilka kolumner som 
+    	representerar vilka värden.
+    </p>
+    <p>
+    	Filer med registrerade tider har ej nödvändigtvis en header då systemet ej vet om en viss tid i dessa filer representerar en start-, slut eller varvtid.
+    </p> 
+    <hr>
+    
+    
+    <h2 id="huvuduppgift">Huvuduppgift </h2>
+	
+	<p>
+		Registreringsprogrammet (GUI) används ute i fält för att registrera start- och sluttider. 
+		Det går bra att köra många instanser av programmet på olika 
+		maskiner samtidigt.
+		 Programmet generera textfiler på formatet:
+        
+    </p>
+     
+	<p>startnummer; tid</p>
+	<p>
+        Varje person som registrerar tider genererar en egen tidsfil. 
+        Dessa sorteras sedan ihop av sorteringsprogrammet. Utifrån sorteringsprogrammets filer genereras sedan ett resultat.
+    </p>
+	<p>
+		Att generera ett resultat utförs via terminalen. Detta görs genom att läsa in en namnfil och flera tidsfiler. En jämförelse görs mellan tidsfilerna och en resultatfil genereras.
+		Denna fil innehåller diverse information om start och sluttider, varvtider, totaltider osv. 
+	
+	</p>	
+	<p>
+		Sorteringsprogrammet kräver en datorkunnig person och körs utifrån resultatfilerna från registreringsprogrammet. Då sorteringsprogrammet endast
+		behandlar tider beror resultatet man får på vilka filer man matar in. Sorteringsprogrammet kan användas för att generera olika sorters resultat tex:
+		delresultat, slutresultat etc.
+	</p>
+	
+
+    <hr>
+
+    <h2 id="utvecklingsverktyg">Utvecklingsverktyg</h2>
+    <p>
+        De flesta automatiserade processer använder sig av ANT. Här dokumenterar vi några av de mest använda.
     </p>
 
     <h3>Generera javadocs</h3>

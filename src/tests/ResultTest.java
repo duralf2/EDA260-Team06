@@ -68,7 +68,7 @@ public class ResultTest {
         sort.sortTime(files, new File("testfiles/namn.txt"));
         results = ReadFile.readCSV(new File("data/results.txt"));
 
-        ArrayList<String> al = new ArrayList<>();
+        ArrayList<String> al = new ArrayList<String>();
         //start at 1 to ignore header
         for(int i=1; i<results.size(); i++) {
             al.add(results.get(i)[3] + results.get(i)[4] + results.get(i)[5]);

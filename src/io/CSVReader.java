@@ -8,6 +8,10 @@ import java.util.List;
 
 import com.googlecode.jcsv.reader.internal.CSVReaderBuilder;
 
+/**
+ * This class is responsible for reading files formatted in the excel file
+ * format and return a String array of the lines in the files.
+ */
 public class CSVReader {
 	/**
 	 * Reads all the contents of the specified file and splits them into a list

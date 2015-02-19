@@ -9,7 +9,6 @@ import register.model.ContestantFactory;
 import register.model.Database;
 import register.model.Time;
 
-
 /**
  * This class is responsible for reading files formatted in the excel file
  * format and store their contents into a database.
@@ -17,6 +16,12 @@ import register.model.Time;
 public class FileReader {
 	private ContestantFactory cf;
 
+	/**
+	 * Constructor for FileReader.
+	 * 
+	 * @param cf The <code>ContestantFactory</code> to be used for creating
+	 *            <code>Contestants</code>.
+	 */
 	public FileReader(ContestantFactory cf) {
 		this.cf = cf;
 	}
@@ -27,12 +32,9 @@ public class FileReader {
 	 * creating new <code>Contestants</code> if there are none with the correct
 	 * starting numbers.
 	 * 
-	 * @param file
-	 *            The file to load the names from
-	 * @param db
-	 *            The database to put the names into
-	 * @throws IOException
-	 *             If the file doesn't exist or couldn't be closed
+	 * @param file The file to load the names from
+	 * @param db The database to put the names into
+	 * @throws IOException If the file doesn't exist or couldn't be closed
 	 */
 	public void readNames(File file, Database db) throws IOException {
 		List<String[]> data = CSVReader.read(file);
@@ -41,17 +43,18 @@ public class FileReader {
 		readContestantColumns(contestantColumns);
 		data.remove(0);
 
-		String startNumberOrClassName, name, className = "";
-		AbstractContestant contestant;
 		for (String[] line : data) {
-			startNumberOrClassName = line[0];
+			String className = "";
+			String startNumberOrClassName = line[0];
 			if (isStartNumber(startNumberOrClassName)) {
 
-				contestant = getContestant(startNumberOrClassName, db);
+				AbstractContestant contestant = getContestant(
+						startNumberOrClassName, db);
 				for (int i = 0; i < line.length; i++) {
-					contestant.putInformation(contestantColumns[i], line[i].trim());
+					contestant.putInformation(contestantColumns[i],
+							line[i].trim());
 				}
-				
+
 				contestant.setClassName(className);
 				db.addContestantEntry(startNumberOrClassName, contestant);
 			} else {
@@ -77,12 +80,9 @@ public class FileReader {
 	 * <code>Contestants</code> if there are none with the correct starting
 	 * numbers.
 	 * 
-	 * @param file
-	 *            The file to load the start times from
-	 * @param db
-	 *            The database to put the start times into
-	 * @throws IOException
-	 *             If the file doesn't exist or couldn't be closed
+	 * @param file The file to load the start times from
+	 * @param db The database to put the start times into
+	 * @throws IOException If the file doesn't exist or couldn't be closed
 	 */
 	public void readStartTime(File file, Database db) throws IOException {
 		readTime(file, db, false);
@@ -95,19 +95,16 @@ public class FileReader {
 	 * numbers. All the times loaded will be set as finish times, creating no
 	 * lap times.
 	 * 
-	 * @param file
-	 *            The file to load the finish times from
-	 * @param db
-	 *            The database to put the finish times into
-	 * @throws IOException
-	 *             If the file doesn't exist or couldn't be closed
+	 * @param file The file to load the finish times from
+	 * @param db The database to put the finish times into
+	 * @throws IOException If the file doesn't exist or couldn't be closed
 	 */
-	public void readFinishTime(File file, Database db)
-			throws IOException {
+	public void readFinishTime(File file, Database db) throws IOException {
 		readTime(file, db, true);
 	}
-	
-	private void readTime(File file, Database db, boolean isFinishTime) throws IOException {
+
+	private void readTime(File file, Database db, boolean isFinishTime)
+			throws IOException {
 		List<String[]> data = CSVReader.read(file);
 
 		for (String[] line : data) {
@@ -118,14 +115,14 @@ public class FileReader {
 			}
 
 			AbstractContestant contestant = getContestant(startNr, db);
-			if(isFinishTime){
+			if (isFinishTime) {
 				contestant.addFinishTime(time);
-			}else{
+			} else {
 				contestant.addStartTime(time);
 			}
 		}
 	}
-	
+
 	private AbstractContestant getContestant(String startNr, Database db) {
 		AbstractContestant contestant = db.getContestant(startNr);
 		if (contestant == null) {

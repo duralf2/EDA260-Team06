@@ -24,15 +24,37 @@ import register.model.Database;
 public class FileWriter {
 	private File target;
 
+	/**
+	 * Constructor for FileRWriter.
+	 * 
+	 * @param targetPath The pathway to find the file where the data will be
+	 *            stored.
+	 */
 	public FileWriter(String targetPath) {
-		this.target = new File(targetPath);
+		target = new File(targetPath);
 
 	}
 
+	/**
+	 * Constructor for FileWriter.
+	 * 
+	 * @param file the file where the data will be stored.
+	 */
 	public FileWriter(File file) {
 		target = file;
 	}
 
+	/**
+	 * Write the result with all specified information sorted according to the
+	 * competition type.
+	 * 
+	 * @param contestants The contestants to the race.
+	 * @param conf The information about competition type, and what informaion
+	 *            we have on the contestants.
+	 * @param db The database for the race.
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void writeSortedResult(ArrayList<AbstractContestant> contestants,
 			Configuration conf, Database db) throws FileNotFoundException,
 			IOException {
@@ -51,6 +73,13 @@ public class FileWriter {
 		printString(sb.toString());
 	}
 
+	/**
+	 * Write the result with all specified information.
+	 * 
+	 * @param config The information we have on the contestants.
+	 * @param db The database for the race
+	 * @throws IOException
+	 */
 	public void writeResults(Configuration config, Database db)
 			throws IOException {
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
@@ -63,10 +92,8 @@ public class FileWriter {
 	 * written in a format that is compatible with the excel file format. This
 	 * method is to be used for simple races (marathon races).
 	 * 
-	 * @param pw
-	 *            The <code>PrintWriter</code> to where the data will be written
-	 * @param db
-	 *            The database containing the data to write
+	 * @param pw The <code>PrintWriter</code> to where the data will be written
+	 * @param db The database containing the data to write
 	 */
 	public static void writeResult(PrintWriter pw, Database ds) {
 		// StringBuilder sb = new StringBuilder();
@@ -113,10 +140,8 @@ public class FileWriter {
 	 * written in a format that is compatible with the excel file format. This
 	 * method is to be used for lap races.
 	 * 
-	 * @param pw
-	 *            The <code>PrintWriter</code> to where the data will be written
-	 * @param db
-	 *            The database containing the data to write
+	 * @param pw The <code>PrintWriter</code> to where the data will be written
+	 * @param db The database containing the data to write
 	 */
 	public static void writeLapResult(PrintWriter pw, Database ds) {
 		// StringBuilder sb = new StringBuilder();
@@ -149,6 +174,14 @@ public class FileWriter {
 		// pw.close();
 	}
 
+	/**
+	 * Prints the finishtimes of the specified database to the specified stream.
+	 * The data will be written in a format that is compatible with the excel
+	 * file format.
+	 * 
+	 * @param pw The <code>PrintWriter</code> to where the data will be written
+	 * @param db The database containing the data to write
+	 */
 	public static void writeFinishTimes(PrintWriter pw, Database ds) {
 		// Map<String, Contestant> entries = ds.getAllContestantEntries();
 		// StringBuilder sb = new StringBuilder();
@@ -165,12 +198,9 @@ public class FileWriter {
 	 * start numbers as keys and arraylists of times in string format (HH.mm.ss)
 	 * as values.
 	 * 
-	 * @param pw
-	 *            PrintWriter to use for writing the time file.
-	 * @param times
-	 *            <StartNumber, ArrayList<Times in string format>>
+	 * @param pw PrintWriter to use for writing the time file.
+	 * @param times <StartNumber, ArrayList<Times in string format>>
 	 */
-
 	public static void writeTimesToFile(PrintWriter pw,
 			Map<String, ArrayList<String>> times) {
 		StringBuilder sb = new StringBuilder();
@@ -190,8 +220,7 @@ public class FileWriter {
 	/**
 	 * Prints a string to a specified location(for example a file)
 	 * 
-	 * @param data
-	 *            String to be printed
+	 * @param data String to be printed
 	 * @throws IOException
 	 */
 	public void printString(String data) throws IOException {
@@ -208,30 +237,42 @@ public class FileWriter {
 		}
 	}
 
+	/**
+	 * Write the result with all specified information with placement in race.
+	 * 
+	 * @param sortedContestants The contestants to the race sorted by their
+	 *            placement in race.
+	 * @param conf The information about competition type, and what informaion
+	 *            we have on the contestants.
+	 * @param db The database for the race.
+	 * @throws IOException
+	 */
 	public void writeResultList(
 			LinkedList<AbstractContestant> sortedContestants,
 			Configuration conf, Database db) throws IOException {
-		
+
 		CompetitionType competitionType = new CompetitionFactory(conf)
 				.createCompetition(db);
 
 		StringBuilder sb = new StringBuilder();
 		String incompleted = "";
-		
+
 		sb.append("Plac; " + competitionType.generateHeader());
 		int place = 1;
 		for (int i = 0; i < sortedContestants.size(); i++) {
 			AbstractContestant contestant = sortedContestants.get(i);
 			if (contestant.completedRace()) {
-				sb.append(place + "; " + contestant.toString(competitionType) + "\n");
+				sb.append(place + "; " + contestant.toString(competitionType)
+						+ "\n");
 				place++;
 			} else {
-				incompleted += "; " + contestant.toString(competitionType) + "\n";
+				incompleted += "; " + contestant.toString(competitionType)
+						+ "\n";
 			}
 		}
-		
+
 		sb.append(incompleted);
-		
+
 		printString(sb.toString());
 
 	}

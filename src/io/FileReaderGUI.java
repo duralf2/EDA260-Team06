@@ -8,6 +8,10 @@ import java.util.List;
 
 import register.model.ContestantTimes;
 
+/**
+ * This class is responsible for reading files formatted in the excel file
+ * format for the GUI.
+ */
 public class FileReaderGUI {
 	
 	/**

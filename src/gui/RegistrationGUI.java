@@ -1,4 +1,6 @@
-package register.gui;
+package gui;
+
+import gui.model.TimeRegistrationHandler;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,8 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
-
-import register.logic.TimeRegistrationHandler;
 
 /**
  * This class represents the program frame and is the core of the gui.

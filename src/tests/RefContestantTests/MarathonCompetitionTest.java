@@ -26,6 +26,7 @@ public class MarathonCompetitionTest {
 	@Before
 	public void setUp(){
 		db = new Database();
+		db.setContestantColumnNames(new String[] { "StartNr", "Namn" });
 		race = new MarathonCompetition(db);
 		fw = new FileWriter(outfile);
 	}
@@ -37,7 +38,7 @@ public class MarathonCompetitionTest {
 	
 	@Test
 	public void testPrintColumnNames() throws IOException {
-		fw.printString(race.print());
+		fw.printString(race.toResultString());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -59,9 +60,10 @@ public class MarathonCompetitionTest {
 		MarathonContestant contestant = new MarathonContestant(ri);
 		contestant.addStartTime(new Time("10.00.00"));
 		contestant.addFinishTime(new Time("12.00.00"));
+		contestant.putInformation("Namn", "Bertil");
 		db.addContestantEntry("2", contestant);
 		
-		fw.printString(race.print());
+		fw.printString(race.toResultString());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -69,8 +71,10 @@ public class MarathonCompetitionTest {
 			e.printStackTrace();
 		}
 		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider",scan.nextLine());
+		assertEquals("2; Bertil; 02.00.00; 10.00.00; 12.00.00",scan.nextLine());
+		assertEquals("Icke existerande startnummer", scan.nextLine());
+		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", scan.nextLine());
 		assertEquals("1; ; --.--.--; Start?; Slut?",scan.nextLine());
-		assertEquals("2; ; 02.00.00; 10.00.00; 12.00.00",scan.nextLine());
 		scan.close();
 	}
 }

@@ -1,6 +1,5 @@
 package register.model;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -15,15 +14,15 @@ public abstract class AbstractContestant implements
 	protected ContestantProperties racerInfo;
 
 	public AbstractContestant() {
-		startTime = new LinkedList<Time>();
-		finishTime = new LinkedList<Time>();
-		racerInfo = new ContestantProperties(new String[0]);
+		this (new ContestantProperties(new String[0]));
 	}
 
 	public AbstractContestant(ContestantProperties racerInfo) {
 		startTime = new LinkedList<Time>();
 		finishTime = new LinkedList<Time>();
 		this.racerInfo = racerInfo;
+
+		className = "";
 	}
 
 	public static void setConfiguration(Configuration config) {
@@ -74,15 +73,18 @@ public abstract class AbstractContestant implements
 	}
 
 	public String toString(CompetitionType competitionType) {
+		return toString(competitionType, false);
+	}
+	public String toString(CompetitionType competitionType, boolean useShortFormat) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(racerInfo.toString());
-		sb.append(specifiedToString(competitionType));
+		sb.append(specifiedToString(competitionType, useShortFormat));
 		return sb.toString();
 	}
 
-	protected abstract String specifiedToString(CompetitionType competitionType);
+	protected abstract String specifiedToString(CompetitionType competitionType, boolean useShortFormat);
 
-	public Time getTotalTime() // Default implementation
+	public Time getTotalTime()
 	{
 		Time startTime = new Time("00.00.00");
 		if (startTimeSize() > 0) {
@@ -104,13 +106,7 @@ public abstract class AbstractContestant implements
 		return className;
 	}
 	
-	@Override
-	public int compareTo(AbstractContestant o) {
-		return 0;
-	}
-	
 	public boolean completedRace() {
 		 return !startTime.isEmpty() && !finishTime.isEmpty();
 	}
-
 }

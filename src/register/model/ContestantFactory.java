@@ -13,7 +13,7 @@ public class ContestantFactory {
 
 
 	public AbstractContestant createContestant() {
-		return createContestant(createRaceInfo());
+		return createContestant(createContestantProperties());
 	}
 
 	public AbstractContestant createContestant(ContestantProperties info) {
@@ -26,7 +26,7 @@ public class ContestantFactory {
 		return contestant;
 	}
 
-	public ContestantProperties createRaceInfo() {
+	public ContestantProperties createContestantProperties() {
 		return new ContestantProperties(nameHeader);
 	}
 

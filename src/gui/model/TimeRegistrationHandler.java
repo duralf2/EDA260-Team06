@@ -1,10 +1,9 @@
-package register.logic;
+package gui.model;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observer;
 
-import register.model.ContestantTimes;
 import register.model.Time;
 
 public class TimeRegistrationHandler {
@@ -87,12 +86,7 @@ public class TimeRegistrationHandler {
 		return lastError;
 	}
 	
-	/**
-	 * Adds an observer.
-	 * 
-	 * @param o The Observer
-	 */
-	public void observContestantTimes(Observer o) {
+	public void addObserverToContestantTimes(Observer o) {
 		times.addObserver(o);
 	}
 	
@@ -110,5 +104,4 @@ public class TimeRegistrationHandler {
 	public boolean isRegistered(String startNumber) {
 		return times.isRegistered(startNumber);
 	}
-
 }

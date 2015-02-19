@@ -26,6 +26,7 @@ public class LapCompetitionTest {
 	@Before
 	public void setUp() {
 		db = new Database();
+		db.setContestantColumnNames(new String[] { "StartNr", "Namn" });
 		race = new LapCompetition(db);
 		fw = new FileWriter(outfile);
 	}
@@ -37,7 +38,7 @@ public class LapCompetitionTest {
 
 	@Test
 	public void testPrintColumnNames() throws IOException {
-		fw.printString(race.print());
+		fw.printString(race.toResultString());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -55,27 +56,25 @@ public class LapCompetitionTest {
 		db.addContestantEntry("1", new LapContestant(ri));
 		ContestantProperties ri2 = new ContestantProperties(new String[] { "StartNr", "Namn" });
 		ri2.put("StartNr", "2");
-		LapContestant lc = new LapContestant(ri2);
-		lc.addStartTime(new Time("15.05.55"));
-		lc.addLapTime(new Time("16.05.55"));
-		lc.addFinishTime(new Time("17.05.55"));
-		db.addContestantEntry("2", lc);
-		fw.printString(race.print());
+		LapContestant contestant = new LapContestant(ri2);
+		contestant.addStartTime(new Time("15.05.55"));
+		contestant.addLapTime(new Time("16.05.55"));
+		contestant.addFinishTime(new Time("17.05.55"));
+		contestant.putInformation("Namn", "Bertil");
+		db.addContestantEntry("2", contestant);
+		fw.printString(race.toResultString());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		assertEquals(
-				"StartNr; Namn; #Varv; TotalTid; Varv1; Varv2; Start; Varvning1; Mål",
-				scan.nextLine());
+		assertEquals("StartNr; Namn; #Varv; TotalTid; Varv1; Varv2; Start; Varvning1; Mål", scan.nextLine());
+		assertEquals("2; Bertil; 2; 02.00.00; 01.00.00; 01.00.00; 15.05.55; 16.05.55; 17.05.55", scan.nextLine());
 		assertEquals("Icke existerande startnummer", scan.nextLine());
-		assertEquals(race.generateHeader().replaceAll(";", "; ").trim(), scan.nextLine());
-		assertEquals("1; ; 0; 00.00.00; ; ; ; ; ", scan.nextLine());
-		assertEquals(
-				"2; ; 2; 02.00.00; 01.00.00; 01.00.00; 15.05.55; 16.05.55; 17.05.55",
-				scan.nextLine());
+		assertEquals("StartNr; Namn; #Varv; TotalTid; Varv1; Varv2; Start; Varvning1; Mål", scan.nextLine());
+		assertEquals("1; ; 0; 00.00.00; ; ; ; ;", scan.nextLine());
+				
 		scan.close();
 	}
 

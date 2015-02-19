@@ -13,7 +13,7 @@ import register.model.Configuration;
 import register.model.Database;
 import sorter.Sorter;
 
-public class SorterTest extends AbstractAcceptanceTest {
+public class SorterTest extends AbstractFileComparisonTest {
 	private Sorter sorter;
 	private File startTime;
 	String nameFile;
@@ -55,7 +55,7 @@ public class SorterTest extends AbstractAcceptanceTest {
 	}
 	
 	//TODO Finish test
-	/*@Test
+	@Test
 	public void testSortedResultList() throws IOException {
 		
 		startTime = new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/starttider.txt");
@@ -80,7 +80,7 @@ public class SorterTest extends AbstractAcceptanceTest {
 		assertEquals(s1,s2);
 		
 		AbstractContestant.setConfiguration(c);
-	}*/
+	}
 	
 	//TODO test marathon race
 

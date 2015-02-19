@@ -1,4 +1,4 @@
-package register.model;
+package gui.model;
 
 import java.math.BigInteger;
 import java.util.Comparator;

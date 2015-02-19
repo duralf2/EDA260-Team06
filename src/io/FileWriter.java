@@ -90,7 +90,7 @@ public class FileWriter {
 			throws IOException {
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
 		CompetitionType competition = competitionFactory.createCompetition(db);
-		printString(competition.print());
+		printString(competition.toResultString());
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class FileWriter {
 		// }
 		// }
 		//
-		// pw.write(sb.toString().replaceAll(";", "; ").trim());
+		// pw.write(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim());
 		// pw.close();
 	}
 
@@ -247,23 +247,23 @@ public class FileWriter {
 		StringBuilder sb = new StringBuilder();
 		String incompleted = "";
 
-		sb.append("Plac; " + competitionType.generateHeader());
+		sb.append("Plac;" + competitionType.generateHeader(true));
 		int place = 1;
 		for (int i = 0; i < sortedContestants.size(); i++) {
 			AbstractContestant contestant = sortedContestants.get(i);
 			if (contestant.completedRace()) {
-				sb.append(place + "; " + contestant.toString(competitionType)
+				sb.append(place + ";" + contestant.toString(competitionType, true)
 						+ "\n");
 				place++;
 			} else {
-				incompleted += "; " + contestant.toString(competitionType)
+				incompleted += ";" + contestant.toString(competitionType, true)
 						+ "\n";
 			}
 		}
 
 		sb.append(incompleted);
 
-		printString(sb.toString());
+		printString(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n"));
 
 	}
 

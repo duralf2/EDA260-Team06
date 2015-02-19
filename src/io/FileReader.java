@@ -40,11 +40,11 @@ public class FileReader {
 		List<String[]> data = CSVReader.read(file);
 
 		String[] contestantColumns = data.get(0);
-		readContestantColumns(contestantColumns);
+		readContestantColumns(contestantColumns, db);
 		data.remove(0);
 
+		String className = "";
 		for (String[] line : data) {
-			String className = "";
 			String startNumberOrClassName = line[0];
 			if (isStartNumber(startNumberOrClassName)) {
 
@@ -67,11 +67,12 @@ public class FileReader {
 		return startNumber.matches("[1-9][0-9]*") || startNumber.equals("x");
 	}
 
-	private void readContestantColumns(String[] contestantColumns) {
+	private void readContestantColumns(String[] contestantColumns, Database db) {
 		for (int i = 0; i < contestantColumns.length; i++) {
 			contestantColumns[i] = contestantColumns[i].trim();
 		}
 		cf.setContestantColumnNames(contestantColumns);
+		db.setContestantColumnNames(contestantColumns);
 	}
 
 	/**

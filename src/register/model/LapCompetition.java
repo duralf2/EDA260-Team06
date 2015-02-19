@@ -1,57 +1,35 @@
 package register.model;
 
-import io.FileWriter;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LapCompetition implements CompetitionType {
-	private Database db;
+public class LapCompetition extends CompetitionType {
 
 	public LapCompetition(Database db) {
-		this.db = db;
+		super (db);
 	}
 
 	@Override
-	public String print() {
-		StringBuilder sb = new StringBuilder();
-		StringBuilder faultySB = new StringBuilder();
-		sb.append(generateHeader());
-		for (AbstractContestant c : db.getAllContestantEntries().values()) {
-			if(c.getInformation("Namn").equals("")){
-				faultySB.append(c.toString(this) + "\n");
-			} else{
-			sb.append(c.toString(this) + "\n");
-			}
-		}
-		if(faultySB.length() > 0){
-			sb.append("Icke existerande startnummer\n");
-			sb.append(generateHeader());
-			sb.append(faultySB);
-		}
-		return sb.toString().replaceAll(";", "; ").trim();
-	}
-
-	@Override
-	public String generateHeader() {
+	public String generateHeader(boolean useShortFormat) {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("StartNr;Namn;");
-		// TODO Använd headern i ContestantFactory för att få ut
-		// "StartNr;Namn;..." till raden ovan istället
-		sb.append("#Varv;TotalTid;");
+		for (String h : db.getContestantColumnNames())
+			sb.append(h + ";");
+		sb.append("#Varv;TotalTid");
 		int maxLaps = getMaxLaps();
 
 		for (int i = 1; i <= maxLaps; i++)
-			sb.append("Varv" + i + ";");
-		sb.append("Start;");
-
-		for (int i = 1; i <= maxLaps - 1; i++)
-			sb.append("Varvning" + i + ";");
-
-		sb.append("Mål\n");
+			sb.append(";Varv" + i);
+		
+		if (!useShortFormat) {
+			sb.append(";Start");
+	
+			for (int i = 1; i <= maxLaps - 1; i++)
+				sb.append(";Varvning" + i);
+	
+			sb.append(";Mål");
+		}
+		sb.append("\n");
 
 		return sb.toString();
 	}
@@ -71,6 +49,4 @@ public class LapCompetition implements CompetitionType {
 		// in the Sorter class
 		return new ArrayList<AbstractContestant>();
 	}
-	
-	
 }

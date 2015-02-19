@@ -1,12 +1,12 @@
 package io;
 
+import gui.model.ContestantTimes;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import register.model.ContestantTimes;
 
 /**
  * This class is responsible for reading files formatted in the excel file
@@ -46,6 +46,7 @@ public class FileReaderGUI {
 	 * @param times
 	 *            ContestantTimes instance to hold the data.
 	 */
+
 	public static void readTimesFromFile(File timeFile, ContestantTimes times) {
 		try {
 			List<String[]> nameFile = CSVReader.read(timeFile);

@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public abstract class AbstractAcceptanceTest {
+public abstract class AbstractFileComparisonTest {
 
 	protected String readFileAsString(File file) throws IOException {
 

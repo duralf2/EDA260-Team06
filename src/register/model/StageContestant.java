@@ -84,7 +84,7 @@ public class StageContestant extends AbstractContestant {
 	}
 
 	@Override
-	protected String specifiedToString(CompetitionType competitionType) {
+	protected String specifiedToString(CompetitionType competitionType, boolean useShortFormat) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getTotalTime().toString());
 		sb.append(";");

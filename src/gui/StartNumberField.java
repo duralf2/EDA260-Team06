@@ -1,4 +1,6 @@
-package register.gui;
+package gui;
+
+import gui.model.TimeRegistrationHandler;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -8,8 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
-
-import register.logic.TimeRegistrationHandler;
 
 public class StartNumberField extends JTextField implements ActionListener {
 	private TimeRegistrationHandler registrationHandler;

@@ -1,13 +1,10 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import io.FileWriter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 import org.junit.After;
@@ -18,7 +15,6 @@ import register.model.AbstractContestant;
 import register.model.Configuration;
 import register.model.ContestantProperties;
 import register.model.Database;
-import register.model.MarathonCompetition;
 import register.model.MarathonContestant;
 import register.model.Time;
 
@@ -40,6 +36,7 @@ public class OddInputsTest {
 		f = new File("testfiles/outputOddInputsTest.txt");
 		fileWriter = new FileWriter(f);
 		db = new Database();
+		db.setContestantColumnNames(new String[] { "StartNr", "Namn" });
 		contestant = new MarathonContestant(new ContestantProperties(
 				new String[] { "StartNr", "Namn" }));
 		contestant.putInformation("Namn", "Göran");

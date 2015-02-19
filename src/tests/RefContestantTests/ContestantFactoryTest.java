@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import io.FileReader;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -57,7 +56,7 @@ public class ContestantFactoryTest {
 
 	@Test
 	public void testCreateContestant() {
-		ContestantProperties info = factory.createRaceInfo();
+		ContestantProperties info = factory.createContestantProperties();
 		info.put("StartNr", "1");
 		info.put("Namn", "Bertil");
 		AbstractContestant contestant = factory.createContestant();

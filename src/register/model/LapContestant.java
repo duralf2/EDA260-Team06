@@ -1,7 +1,5 @@
 package register.model;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -42,7 +40,7 @@ public class LapContestant extends AbstractContestant {
 	
 
 	@Override
-	protected String specifiedToString(CompetitionType competitionType) {
+	protected String specifiedToString(CompetitionType competitionType, boolean useShortFormat) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getLapsCompleted());
 		sb.append(";");
@@ -65,22 +63,26 @@ public class LapContestant extends AbstractContestant {
 			sb.append(";");
 		}
 
-		if (!startTime.isEmpty())
-			sb.append(getStartTime());
-		sb.append(";");
-
-		for (int i = 0; i < maxLaps - 1; i++) {
-			if (lapTimes.size() > i)
-				sb.append(lapTimes.get(i));
+		if (!useShortFormat) {
+			if (!startTime.isEmpty())
+				sb.append(getStartTime());
 			sb.append(";");
+	
+			for (int i = 0; i < maxLaps - 1; i++) {
+				if (lapTimes.size() > i)
+					sb.append(lapTimes.get(i));
+				sb.append(";");
+			}
+	
+			if (!finishTime.isEmpty())
+				sb.append(getFinishTime());
 		}
-
-		if (!finishTime.isEmpty())
-			sb.append(getFinishTime());
-		
+		else {
+			// Remove the ; that was appended earlier 
+			sb.deleteCharAt(sb.length() - 1);
+		}
 		
 		return sb.toString();
-
 	}
 	
 	@Override

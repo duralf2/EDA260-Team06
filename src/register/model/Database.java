@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 public class Database {
 	private Map<String, AbstractContestant> contestantEntries;
+	private String[] contestantColumnNames;
 
 	public Database() {
 		contestantEntries = new TreeMap<String, AbstractContestant>();
@@ -15,12 +16,21 @@ public class Database {
 		contestantEntries.put(startNumber, contestant);
 	}
 
+	public void setContestantColumnNames(String[] columns) {
+		contestantColumnNames = columns;
+	}
+
 	public AbstractContestant getContestant(String startNumber) {
 		return contestantEntries.get(startNumber);
 	}
 
 	public Map<String, AbstractContestant> getAllContestantEntries() {
 		return contestantEntries;
+	}
+
+	public String[] getContestantColumnNames()
+	{
+		return contestantColumnNames;
 	}
 
 	public AbstractContestant removeContestant(String startNumber) {

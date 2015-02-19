@@ -32,7 +32,4 @@ public class StageContestantTest {
 	public void testToString() {
 		assertTrue(true);
 	}
-	
-	
-
 }

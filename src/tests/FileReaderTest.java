@@ -18,7 +18,7 @@ import register.model.ContestantProperties;
 import register.model.Database;
 import register.model.MarathonContestant;
 
-public class ReadFileTest {
+public class FileReaderTest {
 	private Database db;
 	private FileReader reader;
 	private ContestantFactory factory;

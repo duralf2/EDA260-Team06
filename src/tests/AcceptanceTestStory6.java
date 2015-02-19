@@ -17,7 +17,7 @@ import register.model.Configuration;
 import register.model.ContestantFactory;
 import register.model.Database;
 
-public class AcceptanceTestStory6 extends AbstractAcceptanceTest {
+public class AcceptanceTestStory6 extends AbstractFileComparisonTest {
 	private String namesFilepath = "testfiles/acceptanstest/acceptanstest6/namnfil.txt";
 	private String startTimesFilepath = "testfiles/acceptanstest/acceptanstest6/starttider.txt";
 	private String finishTimesFilepath = "testfiles/acceptanstest/acceptanstest6/maltider.txt";

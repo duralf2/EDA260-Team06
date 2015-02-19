@@ -88,4 +88,11 @@ public class DatabaseTest {
 		assertEquals(0, db.getAllContestantEntries().size());
 	}
 
+
+	@Test
+	public void testContestantColumnNames() {
+		String[] columns = new String[] {"c1", "c2", "c3"};
+		db.setContestantColumnNames(columns);
+		assertTrue(columns.equals(db.getContestantColumnNames()));
+	}
 }

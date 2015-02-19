@@ -1,4 +1,4 @@
-package register.model;
+package gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;

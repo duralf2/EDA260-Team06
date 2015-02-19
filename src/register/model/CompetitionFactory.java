@@ -9,7 +9,7 @@ public class CompetitionFactory {
 		this.prop = prop;
 	}
 	
-	public CompetitionType createCompetition(Database db){
+	public CompetitionType createCompetition(Database db) {
 		CompetitionType ct = null;
 		if(prop.getProperty(Configuration.KEY_RACE_TYPE).equals(Configuration.VALUE_RACE_MARATHON)){
 			ct = new MarathonCompetition(db);

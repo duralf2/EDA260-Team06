@@ -7,9 +7,6 @@ import io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Properties;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +16,7 @@ import register.model.Configuration;
 import register.model.ContestantFactory;
 import register.model.Database;
 
-public class AcceptanceTestStory9 extends AbstractAcceptanceTest {
+public class AcceptanceTestStory9 extends AbstractFileComparisonTest {
 
 	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/namnfil.txt";
 	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/starttider.txt";

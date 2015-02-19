@@ -40,7 +40,7 @@ public class AdditionalContestantTests {
 		}
 
 		@Override
-		protected String specifiedToString(CompetitionType competitionType) {
+		protected String specifiedToString(CompetitionType competitionType, boolean useShortFormat) {
 			return null;
 		}
 

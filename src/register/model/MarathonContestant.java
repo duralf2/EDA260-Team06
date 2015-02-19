@@ -18,7 +18,7 @@ public class MarathonContestant extends AbstractContestant {
 	}
 
 	@Override
-	protected String specifiedToString(CompetitionType competitionType) {
+	protected String specifiedToString(CompetitionType competitionType, boolean useShortFormat) {
 		StringBuilder sb = new StringBuilder();
 		appendErrorStringTo(sb);
 		return sb.toString().trim();

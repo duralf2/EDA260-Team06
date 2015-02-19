@@ -1,4 +1,6 @@
-package register.gui;
+package gui;
+
+import gui.model.TimeRegistrationHandler;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,8 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.BevelBorder;
-
-import register.logic.TimeRegistrationHandler;
 
 public class RegisterButton extends JButton implements ActionListener{
 	private TimeRegistrationHandler registrationHandler;

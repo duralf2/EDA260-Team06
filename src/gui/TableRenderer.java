@@ -1,13 +1,12 @@
-package register.gui;
+package gui;
+
+import gui.model.TimeRegistrationHandler;
 
 import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-
-import register.logic.TimeRegistrationHandler;
-import register.model.ContestantTimes;
 
 /**
  * This class is a custom table renderer used to make the contents of the gui

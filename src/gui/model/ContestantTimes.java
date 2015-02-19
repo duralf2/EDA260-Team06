@@ -1,5 +1,8 @@
-package register.model;
+package gui.model;
 
+
+import io.FileReaderGUI;
+import io.FileWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,7 +85,7 @@ public class ContestantTimes extends Observable {
 	}
 
 	private void readContestantsFromFile() {
-		registeredContestants = io.ReadFile.readStartNumbers(nameFile);
+		registeredContestants = FileReaderGUI.readStartNumbers(nameFile);
 		for (String startNumber : registeredContestants) {
 			times.put(startNumber, new ArrayList<String>());
 		}
@@ -91,7 +94,7 @@ public class ContestantTimes extends Observable {
 	}
 
 	public void readTimesFromFile() {
-		io.ReadFile.readTimesFromFile(timeFile, this);
+		FileReaderGUI.readTimesFromFile(timeFile, this);
 		setChanged();
 		notifyObservers();
 	}
@@ -100,7 +103,7 @@ public class ContestantTimes extends Observable {
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(timeFile);
-			io.FileWriter.writeTimesToFile(pw, times);
+			FileWriter.writeTimesToFile(pw, times);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} finally {

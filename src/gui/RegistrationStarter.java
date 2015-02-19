@@ -1,4 +1,7 @@
-package register.gui;
+package gui;
+
+import gui.model.ContestantTimes;
+import gui.model.TimeRegistrationHandler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,9 +9,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
-
-import register.logic.TimeRegistrationHandler;
-import register.model.ContestantTimes;
 
 
 /**

@@ -1,4 +1,4 @@
-package register.gui;
+package gui;
 
 import java.awt.Font;
 

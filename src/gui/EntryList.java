@@ -1,4 +1,6 @@
-package register.gui;
+package gui;
+
+import gui.model.TimeRegistrationHandler;
 
 import java.awt.Font;
 import java.util.ArrayList;
@@ -14,9 +16,6 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-
-import register.logic.TimeRegistrationHandler;
-import register.model.PreRegistrationDialog;
 
 
 /**
@@ -36,7 +35,7 @@ public class EntryList extends JTable implements Observer {
 	public EntryList(int fontSize, TimeRegistrationHandler registrationHandler) {
 		super(1, 2);
 		this.registrationHandler = registrationHandler;
-		registrationHandler.observContestantTimes(this);
+		registrationHandler.addObserverToContestantTimes(this);
 		setDefaultRenderer(Object.class, new TableRenderer(registrationHandler));
 		setFillsViewportHeight(true);
 		setFont(getFont().deriveFont(Font.BOLD, fontSize));

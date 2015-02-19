@@ -11,7 +11,7 @@ import javax.swing.border.BevelBorder;
 
 import register.logic.TimeRegistrationHandler;
 
-public class RegisterButton extends JButton implements ActionListener {
+public class RegisterButton extends JButton implements ActionListener{
 	private TimeRegistrationHandler registrationHandler;
 	private StartNumberField startNumberField;
 
@@ -22,10 +22,8 @@ public class RegisterButton extends JButton implements ActionListener {
 	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
 	 * @param startNumberField The <code>StartNumberField</code>
 	 */
-	public RegisterButton(int fontSize,
-			TimeRegistrationHandler registrationHandler,
-			StartNumberField startNumberField) {
-		super("Register");
+	public RegisterButton(int fontSize, TimeRegistrationHandler registrationHandler, StartNumberField startNumberField) {
+		super ("Register");
 		this.registrationHandler = registrationHandler;
 		this.startNumberField = startNumberField;
 		addActionListener(this);
@@ -43,11 +41,9 @@ public class RegisterButton extends JButton implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		boolean isValid = registrationHandler.register(startNumberField
-				.getText());
-		if (!isValid) {
-			JOptionPane.showMessageDialog(null,
-					registrationHandler.getLastError());
+		boolean isValid = registrationHandler.register(startNumberField.getText());
+		if(!isValid) {
+			JOptionPane.showMessageDialog(null, registrationHandler.getLastError());
 		}
 		startNumberField.setText("");
 	}

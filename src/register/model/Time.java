@@ -14,10 +14,12 @@ public class Time implements Comparable<Time> {
 		if(!time.matches("(([0-1][0-9])|(2[0-3])).[0-5][0-9].[0-5][0-9]")){
 			throw new IllegalArgumentException();
 		}
+
+		String[] hms = time.split("\\.");
 		try {
-			hours = Integer.parseInt(time.substring(0, 2));
-			minutes = Integer.parseInt(time.substring(3, 5));
-			seconds = Integer.parseInt(time.substring(6, 8));
+			hours = Integer.parseInt(hms[0]);
+			minutes = Integer.parseInt(hms[1]);
+			seconds = Integer.parseInt(hms[2]);
 		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}

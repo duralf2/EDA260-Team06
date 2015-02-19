@@ -20,8 +20,7 @@ public class StartNumberField extends JTextField implements ActionListener {
 	 * @param fontSize The wanted size of the font.
 	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
 	 */
-	public StartNumberField(int fontSize,
-			TimeRegistrationHandler registrationHandler) {
+	public StartNumberField(int fontSize, TimeRegistrationHandler registrationHandler) {
 		this.registrationHandler = registrationHandler;
 		addActionListener(this);
 		setToolTipText("Input start number.");
@@ -37,9 +36,8 @@ public class StartNumberField extends JTextField implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		boolean isValid = registrationHandler.register(getText());
-		if (!isValid) {
-			JOptionPane.showMessageDialog(null,
-					registrationHandler.getLastError());
+		if(!isValid) {
+			JOptionPane.showMessageDialog(null, registrationHandler.getLastError());
 		}
 		setText("");
 	}

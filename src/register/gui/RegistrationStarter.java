@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import register.logic.TimeRegistrationHandler;
 import register.model.ContestantTimes;
 
+
 /**
  * This class starts the registration process.
  */
@@ -17,18 +18,10 @@ public class RegistrationStarter {
 	private static final String DEFAULT_REGISTRATION_PROPERTIES = "RegistrationData/registration.properties";
 	private Properties defaultProperties;
 
-	/**
-	 * Main method.
-	 * 
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		new RegistrationStarter();
 	}
 
-	/**
-	 * Constructor for <code>RegistrationStarter</code>.
-	 */
 	public RegistrationStarter() {
 		loadProperties();
 		startRegistration();
@@ -36,9 +29,11 @@ public class RegistrationStarter {
 
 	private void loadProperties() {
 		defaultProperties = new Properties();
-		try (FileInputStream in = new FileInputStream(
-				DEFAULT_REGISTRATION_PROPERTIES);) {
+		
+		try {
+			FileInputStream in = new FileInputStream(DEFAULT_REGISTRATION_PROPERTIES);
 			defaultProperties.load(in);
+			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,
@@ -69,24 +64,19 @@ public class RegistrationStarter {
 		}
 	}
 
-	// /**
-	// * Creates all necessary files and directories to use the time and name
-	// * files specified in the properties file.
-	// *
-	// * @param nameFile The file with names and startnumbers of
-	// * <code>contestants</code>
-	// * @param timeFile The file with the times belonging to the
-	// * <code>contestants</code>
-	// * @throws IOException
-	// */
-	// TODO Javadoc för privata methoder?
+	/**
+	 * Creates all necessary files and directories to use the time and name
+	 * files specified in the properties file.
+	 * 
+	 * @param nameFile
+	 * @param timeFile
+	 * @throws IOException
+	 */
 	private void createFilesAndDirectories(File nameFile, File timeFile)
 			throws IOException {
 		nameFile.getParentFile().mkdirs();
 		nameFile.createNewFile();
 		timeFile.getParentFile().mkdirs();
 		timeFile.createNewFile();
-
 	}
-
 }

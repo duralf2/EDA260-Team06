@@ -18,11 +18,44 @@
 
     <hr>
 
-    <h2>Arkitektur</h2>
+    <h2 id="arkitektur">Arkitektur</h2>
     <p>
     	Programmets klasser är uppdelade i fem olika paket. Paketet sorter innehåller main-klassen till programmet för sortering av resultat.
     	 Main-klassen för huvudprogrammet (GUI) finns i paketet <code>register.gui</code>.
     </p>
+    
+    <h2 id="registrering">Registrering</h2>
+	
+	<h3>Struktur</h3>
+		<p>Programmet är uppbyggt efter MVC mönstret. </p>
+	
+	<h4>Modell</h4>
+		<p>
+            Modellen utgörs av klassen ContestantTimes som är Observable. 
+            Klassen lagrar vilka tider som är associerade med ett visst startnummer. 
+            För att registreringar inte ska gå förlorade skrivs alla ändringar till fil direkt. 
+        </p>
+	
+	<h4>View</h4>
+		<p>Utgörs huvudsakligen av klassen RegistrationGUI och EntryList. </p>
+		<p>
+            RegistrationGUI motsvarar och bygger upp fönstret. 
+            RegistrationGUI har en instans av controllern (TimeRegistrationHandler).
+            Gränsnittets komponenter använder denna för att uppdatera modellen.  
+        </p>
+		<p>
+            EntryList utgör tabellen av startnummer och tider i gränssnittet. 
+            Klassen observerar modellen och uppdaterar tabellen vid förändring.
+        </p>
+
+	<h4>Controller</h4>
+		<p>
+            Utgörs av klassen TimeRegistrationHandler. 
+            Klassen innehåller metoder för att uppdatera modellen.
+        </p>
+        
+    <h2 id="paketstruktur"> Paketstruktur </h2>
+    
     <h3> sorter </h3>
     <p>
     	Resultatprogrammet läser en fil med starttider, en fil med sluttider, en fil med namn samt startnummer för samtliga deltagare. Från dessa genereras en fil med
@@ -37,8 +70,7 @@
     <h3>register.model</h3>
     <p>
     	<code>Configuration</code> ansvarar för de olika konfigurationsparametrarna i config.ini. Javas standardklass <code>java.util.Properties</code> används för att hantera parametrarna.
-    	Configfilen måste finnas i en undermapp i programmappen som heter data. Om denna ej existerar så kommer den skapas av programmet men man kan inte läsa en configfil
-    	som finns sparad på annat ställe.
+    	Configfilen måste finnas i en undermapp i programmappen som heter data. Om denna ej existerar så kommer den skapas av programmet.
     </p>
     <p>
     	Paketet innehåller många klasser för att representera olika typer av deltagare och lopp. En klass för att representera tid ingår också. 
@@ -55,7 +87,7 @@
     	den i en <code>HashMap</code>. Vilken information som skall lagras framgår av headern i namnfilen och vid utskrift så skrivs endast information som fanns i namnheadern ut.
     </p>
     <p>
-    Klassen Time används för att representera tider inom programmet. Här finns även metoder för beräkningar angående tider. 
+    Klassen Time används för att representera tider inom programmet. Här finns även metoder för beräkningar av tider. 
     </p>
     <p>
     	<code>Database</code> ansvarar för lagring av <code>Contestant</code>-objekt. Objekten lagras internt i en <code>TreeMap</code> som sorterar med avseende på startnummer.
@@ -78,7 +110,7 @@
 
     <hr>
     
-    <h2> Filformat </h2>
+    <h2 id="filformat"> Filformat </h2>
     <p>
     	Den här sektionen beskriver de olika filformat programmet använder sig av.
     </p>
@@ -99,13 +131,27 @@
     </p> 
     <hr>
     
-    <h2> Distribuering av systemet </h2>
+    
+    <h2 id="huvuduppgift">Huvuduppgift </h2>
 	
 	<p>
-		Registreringsprogrammet (GUI) är menat att användas ute i fält under tävlingen. Det går bra att köra många instanser av programmet på olika 
+		Registreringsprogrammet (GUI) används ute i fält för att registrera start- och sluttider. 
+		Det går bra att köra många instanser av programmet på olika 
 		maskiner samtidigt.
-	</p>
+		 Programmet generera textfiler på formatet:
+        
+    </p>
+     
+	<p>startnummer; tid</p>
+	<p>
+        Varje person som registrerar tider genererar en egen tidsfil. 
+        Dessa sorteras sedan ihop av sorteringsprogrammet. Utifrån sorteringsprogrammets filer genereras sedan ett resultat.
+    </p>
+	<p>
+		Att generera ett resultat utförs via terminalen. Detta görs genom att läsa in en namnfil och flera tidsfiler. En jämförelse görs mellan tidsfilerna och en resultatfil genereras.
+		Denna fil innehåller diverse information om start och sluttider, varvtider, totaltider osv. 
 	
+	</p>	
 	<p>
 		Sorteringsprogrammet kräver en datorkunnig person och körs utifrån resultatfilerna från registreringsprogrammet. Då sorteringsprogrammet endast
 		behandlar tider beror resultatet man får på vilka filer man matar in. Sorteringsprogrammet kan användas för att generera olika sorters resultat tex:
@@ -115,7 +161,7 @@
 
     <hr>
 
-    <h2>Utvecklingsverktyg</h2>
+    <h2 id="utvecklingsverktyg">Utvecklingsverktyg</h2>
     <p>
         De flesta automatiserade processer använder sig av ANT. Här dokumenterar vi några av de mest använda.
     </p>

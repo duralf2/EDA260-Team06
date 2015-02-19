@@ -1,13 +1,10 @@
 package sorter;
 
 import java.io.File;
-import java.io.IOException;
-
-import register.model.Database;
 
 public class ResultMain {
 	
-	public static void main(String arg[]) {
+	public static void main(String arg[]) { // TODO Refactor; Implementera main-metod
 		if(arg.length < 3)
 			throw new IllegalArgumentException("Need 3 files to read");
 		File nameFile = new File(arg[0]);

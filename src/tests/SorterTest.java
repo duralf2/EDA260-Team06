@@ -1,24 +1,19 @@
 package tests;
 
-import static org.junit.Assert.*;
-import io.CSVReader;
+import static org.junit.Assert.assertEquals;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import register.model.AbstractContestant;
 import register.model.Configuration;
 import register.model.Database;
 import sorter.Sorter;
 
-public class SorterTest {
+public class SorterTest extends AbstractAcceptanceTest {
 	private Sorter sorter;
 	private File startTime;
 	String nameFile;
@@ -88,23 +83,5 @@ public class SorterTest {
 	}*/
 	
 	//TODO test marathon race
-	
-	
-	private String readFileAsString(File file) throws IOException {
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file)));
-
-		String fileContents = "";
-		String currentLine = reader.readLine();
-		while (currentLine != null) {
-			fileContents += currentLine.replace("\\s+", "") + "\n";
-			currentLine = reader.readLine();
-		}
-
-		reader.close();
-
-		return fileContents.trim();
-	}
 
 }

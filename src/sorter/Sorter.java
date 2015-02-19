@@ -1,18 +1,19 @@
 package sorter;
 
-import io.FileWriter;
 import io.FileReader;
+import io.FileWriter;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Map;
 
 import register.model.AbstractContestant;
 import register.model.Configuration;
 import register.model.ContestantFactory;
 import register.model.Database;
-import register.model.Time;
 
 /**
  * This class is responsible for loading the data collected during the contests
@@ -70,7 +71,7 @@ public class Sorter {
 		 contestants = db.getAllContestantEntries();
 	}
 
-	/**
+    /**
 	 * Reads and sorts the collected data. After the data is sorted it is
 	 * printed to a results file.
 	 * 
@@ -87,7 +88,7 @@ public class Sorter {
 		setUp(nameFile, startTime, finishTimes);
 
 
-		LinkedList<AbstractContestant> sortedContestants = new LinkedList<>();
+		LinkedList<AbstractContestant> sortedContestants = new LinkedList<AbstractContestant>();
 		for (AbstractContestant c : contestants.values()) {
 			sortedContestants.add(c);
 		}
@@ -95,65 +96,157 @@ public class Sorter {
 
 		
 		fileWriter.writeResultList(sortedContestants, conf, db);
-
-		/*
-		 * 
-		 * ArrayList<AbstractContestant> result = sortContestants(db); File
-		 * resultFile = new File("data/results.txt"); writeToFile(result,
-		 * resultFile, nameFile); }
-		 * 
-		 * private Map<String, ArrayList<AbstractContestant>>
-		 * groupByClass(Database db) { HashMap<String,
-		 * ArrayList<AbstractContestant>> m = new HashMap<String,
-		 * ArrayList<AbstractContestant>>();
-		 * 
-		 * for(AbstractContestant c : db.getAllContestantEntries().values()) {
-		 * if (!m.containsKey(c.getClassName())) { m.put(c.getClassName(), new
-		 * ArrayList<AbstractContestant>()); }
-		 * 
-		 * m.get(c.getClassName()).add(c); }
-		 * 
-		 * return m;
-		 */
 	}
+	
+//	public void sortTime(File[] files, File nameFile) throws IOException {
+//		ds.clearContestantEntries();
+//
+//        ReadFile.readStartTime(files[0], ds);
+//        for(int i=1; i < files.length; i++) {
+//            ReadFile.readFinishTime(files[i], ds, new Time("00.55.00"));
+//        }
+//        
+//        ReadFile.readNames(nameFile, ds);
+//
+//		// TODO: change this file to be a parameter for the function
+//		if (!new File("data").isDirectory())
+//            // Create the data directory if it doesn't exist
+//			new File("data").mkdir();
+//
+//		File resultFile = new File("data/results.txt");
+//		writeToFile(resultFile);
+//	}
 
-	/*
-	 * private ArrayList<AbstractContestant> sortContestants(Database db) {
-	 * Map<String,AbstractContestant> contestants =
-	 * db.getAllContestantEntries(); SortedSet<AbstractContestant>
-	 * sortedContestants = new
-	 * TreeSet<AbstractContestant>(contestants.values());
-	 * 
-	 * /*ArrayList<ArrayList<AbstractContestant>> al = new
-	 * ArrayList<ArrayList<AbstractContestant>>(); for(int i=0; i <=
-	 * db.getMaxLaps(); i++) { al.add(new ArrayList<AbstractContestant>()); }
-	 * 
-	 * for(AbstractContestant c : contestants.values()) {
-	 * al.get(c.getLapsCompleted()).add(c); } ArrayList<AbstractContestant>
-	 * result = new ArrayList<AbstractContestant>();
-	 * for(ArrayList<AbstractContestant> a : al) { result.addAll(a); }
-	 * 
-	 * return result; }
-	 */
 
-	// private method for writing to file
-	/*
-	 * private void writeToFile(ArrayList<AbstractContestant> result, File
-	 * resultFile, File nameFile) { try { if (!new File("data").isDirectory())
-	 * new File("data").mkdir();//create the data directory if not exists
-	 * resultFile.createNewFile();
-	 * 
-	 * PrintWriter pw = new PrintWriter(resultFile);
-	 * 
-	 * int i = 1; List<String[]> startNumbers = ReadFile.readCSV(nameFile);
-	 * for(String[] s : startNumbers) { System.out.println(s[0]); }
-	 * 
-	 * pw.write("Placering; StartNr; Namn; Totaltid; Starttid; Måltid\n"); for
-	 * (AbstractContestant c : result) { String s = ""; for (String[] s1 :
-	 * startNumbers) { if (s1[1].trim().equalsIgnoreCase(c.getName())) s =
-	 * s1[0]; } String out = i + ";" + s + ";" + c.getName() + ";" +
-	 * c.getTotalTime() + ";" + c.getStartTime() + ";" + c.getFinishTime() +
-	 * "\n"; pw.write(out.replace(";", "; ")); i++; } pw.close(); } catch
-	 * (IOException e) { e.printStackTrace(); } }
-	 */
+//    private Map<String, ArrayList<Contestant>> groupByClass(DataStructure ds) {
+//        HashMap<String, ArrayList<Contestant>> m = new HashMap<String, ArrayList<Contestant>>();
+//
+//        for(Contestant c : ds.getAllContestantEntries().values()) {
+//            if (!m.containsKey(c.getClassName())) {
+//                m.put(c.getClassName(), new ArrayList<Contestant>());
+//            }
+//
+//            m.get(c.getClassName()).add(c);
+//        }
+//
+//        return m;
+//    }
+//    
+//    private List<Contestant> sortContestantsByTotal(List<Contestant> contestants) {
+//        Collections.sort(contestants,
+//                new Comparator<Contestant>() {
+//                    @Override
+//                    public int compare(Contestant c1, Contestant c2) {
+//                        return c1.getTotalTime().compareTo(c2.getTotalTime());
+//                    }
+//                });
+//
+//        return contestants;
+//    }
+//
+//    private List<Contestant> sortContestantsByLaps(List<Contestant> contestants) {
+//        // This should be used in another public sort method
+//        List<List<Contestant>> al = new ArrayList<List<Contestant>>();
+//        for(int i=0; i <= ds.getMaxLaps(); i++) {
+//            al.add(new ArrayList<Contestant>());
+//        }
+//
+//        for(Contestant c : contestants) {
+//            al.get(c.getLapsCompleted()).add(c);
+//        }
+//        
+//        List<Contestant> result = new ArrayList<Contestant>();
+//        for(int i=al.size()-1; i>=0; i--) {
+//            List<Contestant> a = al.get(i);
+//            a = sortContestantsByTotal(a);
+//            result.addAll(a);
+//        }
+//
+//        return result;
+//    }
+//
+//	// private method for writing to file
+//	private void writeToFile(File resultFile) {
+//		try {
+//			if (!new File("data").isDirectory())
+//				new File("data").mkdir();//create the data directory if not exists
+//			resultFile.createNewFile();
+//
+//			PrintWriter pw = new PrintWriter(resultFile);
+//
+//            List<Contestant> contestants;
+//            Map<String, ArrayList<Contestant>> groupedContestants = groupByClass(ds);
+//            for(String cls : groupedContestants.keySet()) {
+//                if(hasClasses(ds)) {
+//                    pw.write(cls + "\n");
+//                }
+//                contestants = sortContestantsByLaps(groupedContestants.get(cls));
+//                writeContestantRows(contestants, pw);
+//            }
+//            pw.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//    private void writeHeader(PrintWriter pw) {
+//        String colhead = "Placering; StartNr; Namn; #Varv; Totaltid; Starttid; ";
+//        for(int i=1; i<ds.getMaxLaps(); i++) {
+//            colhead += "Varv" + i + "; ";
+//        }
+//        if (ds.getMaxLaps() > 1) {
+//            colhead += "Varv" + ds.getMaxLaps() + "\n";
+//        } else {
+//            colhead += "Måltid\n";
+//        }
+//        pw.write(colhead);
+//    }
+//
+//    private void writeContestantRows(List<Contestant> result, PrintWriter pw) {
+//        writeHeader(pw);
+//        int pos = 1;
+//        for(Contestant c : result) {
+//            writeContestantRow(c, pw, pos);
+//            pos++;
+//        }
+//    }
+//
+//    private void writeContestantRow(Contestant c, PrintWriter pw, int position) {
+//        String pos = c.getFinishTimes().size() > 0 ? Integer.toString(position) : "";
+//        String out = pos + ";" + c.getStartNumber() + ";" + c.getName() + ";"
+//                + c.getLapsCompleted() + ";" + c.getTotalTime() + ";";
+//
+//        List<Time> lapTimes = c.getLapTimes();
+//        Collections.sort(lapTimes, new Comparator<Time>() {
+//            @Override
+//            public int compare(Time t1, Time t2) {
+//                return t1.compareTo(t2);
+//            }
+//        });
+//        for(int lap=0; lap < ds.getMaxLaps(); lap++) {
+//            if(lap <= c.getLapsCompleted()) {
+//                Time startLapTime = lap - 1 >= 0 ? lapTimes.get(lap - 1) : c.getStartTime();
+//                Time endLapTime = lap < lapTimes.size() ? lapTimes.get(lap) : c.getFinishTime();
+//                if(!endLapTime.equals(new Time("00.00.00"))) {
+//                    out += Time.getTotalTime(startLapTime, endLapTime).toString();
+//                }
+//            }
+//            out += ";";
+//        }
+//        out = out.substring(0, out.length()-1);
+//        out += "\n";
+//        pw.write(out.replace(";", "; "));
+//    }
+//
+//    // TODO: Move to DataStructure/Contest, make public
+//    private boolean hasClasses(DataStructure ds) {
+//        boolean hasClass = false;
+//        for(Contestant c : ds.getAllContestantEntries().values()) {
+//            if(!c.getClassName().equals("")) {
+//                hasClass = true;
+//                break;
+//            }
+//        }
+//        return hasClass;
+//    }
 }

@@ -1,7 +1,6 @@
 package register.model;
 
-import io.FileWriter;
-import io.FileReaderGUI;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -22,8 +21,7 @@ public class ContestantTimes extends Observable {
 		this.nameFile = nameFile;
 		this.timeFile = timeFile;
 		registeredContestants = new ArrayList<String>();
-		times = new TreeMap<String, ArrayList<String>>(
-				new StartNumberComparator());
+		times = new TreeMap<String, ArrayList<String>>(new StartNumberComparator());
 		readContestantsFromFile();
 		readTimesFromFile();
 	}
@@ -84,7 +82,7 @@ public class ContestantTimes extends Observable {
 	}
 
 	private void readContestantsFromFile() {
-		registeredContestants = FileReaderGUI.readStartNumbers(nameFile);
+		registeredContestants = io.ReadFile.readStartNumbers(nameFile);
 		for (String startNumber : registeredContestants) {
 			times.put(startNumber, new ArrayList<String>());
 		}
@@ -93,21 +91,24 @@ public class ContestantTimes extends Observable {
 	}
 
 	public void readTimesFromFile() {
-		FileReaderGUI.readTimesFromFile(timeFile, this);
+		io.ReadFile.readTimesFromFile(timeFile, this);
 		setChanged();
 		notifyObservers();
 	}
 
 	public void writeTimesToFile() {
-		try (PrintWriter pw = new PrintWriter(timeFile);) {
-			FileWriter.writeTimesToFile(pw, times);
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(timeFile);
+			io.FileWriter.writeTimesToFile(pw, times);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} finally {
+			pw.close();
 		}
 	}
 
 	public Map<String, ArrayList<String>> getTimes() {
 		return times;
 	}
-
 }

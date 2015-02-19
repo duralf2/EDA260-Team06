@@ -26,7 +26,7 @@
 		<mkdir dir="build/jar" />
 		<jar destfile="build/jar/program.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="sorter.SorterMain" />
+				<attribute name="Main-Class" value="register.gui.RegistrationStarter" />
 				<!--Sets the main class of the program -->
 			</manifest>
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />

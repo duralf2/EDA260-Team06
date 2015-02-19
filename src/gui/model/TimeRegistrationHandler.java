@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observer;
 
-import register.model.Time;
+import sorter.model.Time;
 
 public class TimeRegistrationHandler {
 	private ContestantTimes times;

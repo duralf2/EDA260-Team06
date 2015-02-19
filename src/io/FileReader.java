@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import register.model.AbstractContestant;
-import register.model.ContestantFactory;
-import register.model.Database;
-import register.model.Time;
+import sorter.model.AbstractContestant;
+import sorter.model.ContestantFactory;
+import sorter.model.Database;
+import sorter.model.Time;
 
 /**
  * This class is responsible for reading files formatted in the excel file

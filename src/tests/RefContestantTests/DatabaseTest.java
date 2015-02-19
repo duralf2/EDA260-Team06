@@ -11,11 +11,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.AbstractContestant;
-import register.model.ContestantProperties;
-import register.model.Database;
-import register.model.MarathonContestant;
-import register.model.Time;
+import sorter.model.AbstractContestant;
+import sorter.model.ContestantProperties;
+import sorter.model.Database;
+import sorter.model.MarathonContestant;
+import sorter.model.Time;
 
 public class DatabaseTest {
 

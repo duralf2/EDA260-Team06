@@ -1,4 +1,4 @@
-package register.model;
+package sorter.model;
 
 import java.util.ArrayList;
 import java.util.Collections;

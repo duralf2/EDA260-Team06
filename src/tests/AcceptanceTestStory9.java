@@ -7,14 +7,15 @@ import io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.AbstractContestant;
-import register.model.Configuration;
-import register.model.ContestantFactory;
-import register.model.Database;
+import sorter.model.AbstractContestant;
+import sorter.model.Configuration;
+import sorter.model.ContestantFactory;
+import sorter.model.Database;
 
 public class AcceptanceTestStory9 extends AbstractFileComparisonTest {
 

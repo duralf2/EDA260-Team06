@@ -1,4 +1,4 @@
-package register.model;
+package sorter.model;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.AbstractContestant;
-import register.model.CompetitionType;
-import register.model.Time;
+import sorter.model.AbstractContestant;
+import sorter.model.CompetitionType;
+import sorter.model.Time;
 
 public class AdditionalContestantTests {
 	

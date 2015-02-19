@@ -1,4 +1,4 @@
-package register.model;
+package sorter.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

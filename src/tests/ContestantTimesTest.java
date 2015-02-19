@@ -16,7 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.Time;
+import sorter.model.Time;
 
 public class ContestantTimesTest {
 	File nameFile = new File("testfiles/RegistrationTestFiles/namn.txt");

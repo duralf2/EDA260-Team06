@@ -11,11 +11,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.Database;
-import register.model.MarathonContestant;
-import register.model.MarathonCompetition;
-import register.model.ContestantProperties;
-import register.model.Time;
+import sorter.model.ContestantProperties;
+import sorter.model.Database;
+import sorter.model.MarathonCompetition;
+import sorter.model.MarathonContestant;
+import sorter.model.Time;
 
 public class MarathonCompetitionTest {
 	private MarathonCompetition race;
@@ -38,7 +38,7 @@ public class MarathonCompetitionTest {
 	
 	@Test
 	public void testPrintColumnNames() throws IOException {
-		fw.printString(race.toResultString());
+		fw.writeString(race.toResultString());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -63,7 +63,7 @@ public class MarathonCompetitionTest {
 		contestant.putInformation("Namn", "Bertil");
 		db.addContestantEntry("2", contestant);
 		
-		fw.printString(race.toResultString());
+		fw.writeString(race.toResultString());
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);

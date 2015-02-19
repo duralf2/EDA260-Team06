@@ -8,10 +8,10 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.AbstractContestant;
-import register.model.Configuration;
-import register.model.Database;
 import sorter.Sorter;
+import sorter.model.AbstractContestant;
+import sorter.model.Configuration;
+import sorter.model.Database;
 
 public class SorterTest extends AbstractFileComparisonTest {
 	private Sorter sorter;

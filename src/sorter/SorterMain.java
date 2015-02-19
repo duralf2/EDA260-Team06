@@ -3,7 +3,7 @@ package sorter;
 import java.io.File;
 import java.io.IOException;
 
-import register.model.Database;
+import sorter.model.Database;
 
 public class SorterMain {
 

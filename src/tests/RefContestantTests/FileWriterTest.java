@@ -33,7 +33,7 @@ public class FileWriterTest {
 
 		String expected = "abcd\nedfg";
 		
-		new FileWriter(outfile.getAbsolutePath()).printString(expected);
+		new FileWriter(outfile.getAbsolutePath()).writeString(expected);
 
 		String printedResult = readFileAsString(outfile);
 		
@@ -43,7 +43,7 @@ public class FileWriterTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNullData() throws IOException
 	{
-		new FileWriter(outfile.getAbsolutePath()).printString(null);
+		new FileWriter(outfile.getAbsolutePath()).writeString(null);
 	}
 
 	private String readFileAsString(File file) throws IOException {

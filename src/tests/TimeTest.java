@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.Time;
+import sorter.model.Time;
 
 public class TimeTest {
 	private Time t1;

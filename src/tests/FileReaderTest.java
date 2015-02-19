@@ -11,12 +11,12 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.AbstractContestant;
-import register.model.Configuration;
-import register.model.ContestantFactory;
-import register.model.ContestantProperties;
-import register.model.Database;
-import register.model.MarathonContestant;
+import sorter.model.AbstractContestant;
+import sorter.model.Configuration;
+import sorter.model.ContestantFactory;
+import sorter.model.ContestantProperties;
+import sorter.model.Database;
+import sorter.model.MarathonContestant;
 
 public class FileReaderTest {
 	private Database db;

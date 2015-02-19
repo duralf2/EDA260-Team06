@@ -1,0 +1,2 @@
+StartNr; Namn; TotalTid; Starttider; Måltider
+1; Göran; 01.07.00; 13.23.34; 14.30.34; Flera starttider? 13.24.35

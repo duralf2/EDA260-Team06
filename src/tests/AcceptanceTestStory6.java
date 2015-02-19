@@ -12,10 +12,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.AbstractContestant;
-import register.model.Configuration;
-import register.model.ContestantFactory;
-import register.model.Database;
+import sorter.model.AbstractContestant;
+import sorter.model.Configuration;
+import sorter.model.ContestantFactory;
+import sorter.model.Database;
 
 public class AcceptanceTestStory6 extends AbstractFileComparisonTest {
 	private String namesFilepath = "testfiles/acceptanstest/acceptanstest6/namnfil.txt";

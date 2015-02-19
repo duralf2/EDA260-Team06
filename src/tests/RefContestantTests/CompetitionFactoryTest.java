@@ -8,11 +8,11 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.CompetitionFactory;
-import register.model.CompetitionType;
-import register.model.LapCompetition;
-import register.model.MarathonCompetition;
-import register.model.Configuration;
+import sorter.model.CompetitionFactory;
+import sorter.model.CompetitionType;
+import sorter.model.Configuration;
+import sorter.model.LapCompetition;
+import sorter.model.MarathonCompetition;
 public class CompetitionFactoryTest {
 	private CompetitionFactory cf;
 	private Configuration rp;

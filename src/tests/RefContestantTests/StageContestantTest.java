@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.StageContestant;
+import sorter.model.StageContestant;
 
 public class StageContestantTest {
 	private StageContestant stageContestant;

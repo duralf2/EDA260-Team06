@@ -10,14 +10,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.AbstractContestant;
-import register.model.Configuration;
-import register.model.Database;
-import register.model.LapContestant;
-import register.model.MarathonContestant;
-import register.model.MarathonCompetition;
-import register.model.ContestantProperties;
-import register.model.Time;
+import sorter.model.AbstractContestant;
+import sorter.model.Configuration;
+import sorter.model.ContestantProperties;
+import sorter.model.Database;
+import sorter.model.LapContestant;
+import sorter.model.MarathonCompetition;
+import sorter.model.MarathonContestant;
+import sorter.model.Time;
 
 public class MarathonContestantTest {
 	private ContestantProperties racerInfo;

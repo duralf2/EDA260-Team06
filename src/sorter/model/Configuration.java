@@ -1,4 +1,4 @@
-package register.model;
+package sorter.model;
 
 import java.io.File;
 import java.io.FileInputStream;

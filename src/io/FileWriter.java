@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import register.model.AbstractContestant;
-import register.model.CompetitionFactory;
-import register.model.CompetitionType;
-import register.model.Configuration;
-import register.model.Database;
+import sorter.model.AbstractContestant;
+import sorter.model.CompetitionFactory;
+import sorter.model.CompetitionType;
+import sorter.model.Configuration;
+import sorter.model.Database;
 
 /**
  * This class is responsible for writing data to files. The methods of this
@@ -66,15 +66,15 @@ public class FileWriter {
 
 		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
 		CompetitionType competition = competitionFactory.createCompetition(db);
+		
 		// Write header to file
-
 		sb.append(competition.generateHeader());
 		for (AbstractContestant contestant : contestants) {
 			sb.append(contestant.toString(competition));
 			sb.append("\n");
 		}
 
-		printString(sb.toString());
+		writeString(sb.toString());
 	}
 
 	/**
@@ -90,129 +90,17 @@ public class FileWriter {
 			throws IOException {
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
 		CompetitionType competition = competitionFactory.createCompetition(db);
-		printString(competition.toResultString());
+		writeString(competition.toResultString());
 	}
 
 	/**
-	 * Prints the specified database to the specified stream. The data will be
-	 * written in a format that is compatible with the excel file format. This
-	 * method is to be used for simple races (marathon races).
-	 * 
-	 * @param pw
-	 *            The <code>PrintWriter</code> to where the data will be written
-	 * @param db
-	 *            The database containing the data to write
-	 */
-	public static void writeResult(PrintWriter pw, Database ds) {
-		// StringBuilder sb = new StringBuilder();
-		// Map<String, Contestant> entries = ds.getAllContestantEntries();
-		// sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
-		//
-		// // TODO how to handle setContestantColumnNames() in Datastrucure?
-		//
-		// Contestant contestant;
-		// for (String startNumber : entries.keySet()) {
-		// contestant = entries.get(startNumber);
-		// sb.append(startNumber + "; ");
-		// sb.append(contestant.getName() + "; ");
-		//
-		// writeTotalTime(contestant, sb);
-		//
-		// if (contestant.startTimeSize() == 0) {
-		// sb.append("Start?" + "; ");
-		// } else {
-		// sb.append(contestant.getStartTime() + "; ");
-		// }
-		// if (contestant.finishTimeSize() == 0) {
-		// sb.append("Slut?");
-		// } else {
-		// if (isImpossibleTime(contestant)) {
-		// sb.append(contestant.getFinishTime() + "; "
-		// + "Omöjlig totaltid?");
-		// } else {
-		// sb.append(contestant.getFinishTime());
-		// }
-		// }
-		// checkMultipleTimes(contestant, sb);
-		// sb.append("\n");
-		//
-		// }
-		//
-		// pw.write(sb.toString());
-		// pw.close();
-	}
-
-	// TODO: Remove when writeResult implemented
-	/**
-	 * Prints the specified database to the specified stream. The data will be
-	 * written in a format that is compatible with the excel file format. This
-	 * method is to be used for lap races.
-	 * 
-	 * @param pw
-	 *            The <code>PrintWriter</code> to where the data will be written
-	 * @param db
-	 *            The database containing the data to write
-	 */
-	public static void writeLapResult(PrintWriter pw, Database ds) {
-		// StringBuilder sb = new StringBuilder();
-		// Map<String, Contestant> entries = ds.getAllContestantEntries();
-		// int maxLaps = ds.getMaxLaps();
-		//
-		// makeColumnNames(sb, maxLaps);
-		//
-		// List<String> incorrectRegistrations = new ArrayList<String>();
-		// for (String startNumber : entries.keySet()) {
-		// Contestant contestant = entries.get(startNumber);
-		//
-		// if (contestant.getName().equals(""))
-		// incorrectRegistrations.add(startNumber);
-		// else {
-		// writeContestant(sb, contestant, startNumber, maxLaps);
-		// }
-		// }
-		//
-		// if (!incorrectRegistrations.isEmpty()) {
-		// sb.append("Icke existerande startnummer\n");
-		// makeColumnNames(sb, maxLaps);
-		// for (String startNumber : incorrectRegistrations) {
-		// writeContestant(sb, ds.getContestant(startNumber), startNumber,
-		// maxLaps);
-		// }
-		// }
-		//
-		// pw.write(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim());
-		// pw.close();
-	}
-
-	/**
-	 * Prints the finishtimes of the specified database to the specified stream.
-	 * The data will be written in a format that is compatible with the excel
-	 * file format.
-	 * 
-	 * @param pw
-	 *            The <code>PrintWriter</code> to where the data will be written
-	 * @param db
-	 *            The database containing the data to write
-	 */
-	public static void writeFinishTimes(PrintWriter pw, Database ds) {
-		// Map<String, Contestant> entries = ds.getAllContestantEntries();
-		// StringBuilder sb = new StringBuilder();
-		// Contestant contestant;
-		// for (String startNumber : entries.keySet()) {
-		// contestant = entries.get(startNumber);
-		// printTimes(contestant.getFinishTimes(), sb, startNumber);
-		// }
-		// pw.append(sb.toString());
-	}
-
-	/**
-	 * Prints a string to a specified location(for example a file)
+	 * Writes a string to the file.
 	 * 
 	 * @param data
 	 *            String to be printed
 	 * @throws IOException
 	 */
-	public void printString(String data) throws IOException {
+	public void writeString(String data) throws IOException {
 		if (data != null) {
 			File parentFile = target.getParentFile();
 			if (parentFile != null)
@@ -263,7 +151,7 @@ public class FileWriter {
 
 		sb.append(incompleted);
 
-		printString(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n"));
+		writeString(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n"));
 
 	}
 

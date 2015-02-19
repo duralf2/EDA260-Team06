@@ -27,7 +27,14 @@ public class RegistrationGUI extends JFrame {
 	private StartNumberField startNumberField;
 	private EntryList entryTable;
 
-	public RegistrationGUI(String title, TimeRegistrationHandler registrationHandler) {
+	/**
+	 * Constructor for <code>RegistrationGUI</code>.
+	 * 
+	 * @param title Name of window.
+	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
+	 */
+	public RegistrationGUI(String title,
+			TimeRegistrationHandler registrationHandler) {
 		super(title);
 
 		GridBagLayout gbl = new GridBagLayout();
@@ -40,7 +47,8 @@ public class RegistrationGUI extends JFrame {
 
 		JLabel startNumberLabel = new StartNumberLabel(fontSize);
 		startNumberField = new StartNumberField(fontSize, registrationHandler);
-		JButton registerButton = new RegisterButton(fontSize, registrationHandler, startNumberField);
+		JButton registerButton = new RegisterButton(fontSize,
+				registrationHandler, startNumberField);
 		entryTable = new EntryList(fontSize, registrationHandler);
 
 		JScrollPane entryList = new JScrollPane(entryTable);

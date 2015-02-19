@@ -29,6 +29,12 @@ public class EntryList extends JTable implements Observer {
 
 	private TimeRegistrationHandler registrationHandler;
 
+	/**
+	 * Constructor for <code>EntryList</code>.
+	 * 
+	 * @param fontSize The wanted size of the font.
+	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
+	 */
 	public EntryList(int fontSize, TimeRegistrationHandler registrationHandler) {
 		super(1, 2);
 		this.registrationHandler = registrationHandler;
@@ -42,6 +48,13 @@ public class EntryList extends JTable implements Observer {
 		update(null, null);
 	}
 
+	/**
+	 * Update-method for observer.
+	 * 
+	 * @param arg0 The Observable
+	 * @param arg1 The Object
+	 * 
+	 */
 	public void update(Observable arg0, Object arg1) {
 		Map<String, ArrayList<String>> timeEntries = registrationHandler
 				.getAllRegisteredTimes();
@@ -65,8 +78,8 @@ public class EntryList extends JTable implements Observer {
 		DefaultTableModel model = new NonEditableTableModel(
 				rowData.toArray(new String[0][0]), header);
 		setModel(model);
-//		getSelectionModel().addListSelectionListener(
-//				new PreRegistrationEditListener());
+		// getSelectionModel().addListSelectionListener(
+		// new PreRegistrationEditListener());
 	}
 
 	private String timesAsString(ArrayList<String> entryTimes) {
@@ -97,21 +110,22 @@ public class EntryList extends JTable implements Observer {
 	}
 
 	// TODO - Add code to update model
-//	private class PreRegistrationEditListener implements ListSelectionListener {
-//		@Override
-//		public void valueChanged(ListSelectionEvent e) {
-//			int selectedRow = getSelectedRow();
-//			String startNumber = (String) getValueAt(selectedRow, 0);
-//			if (startNumber.equals("Pre-registered time")) {
-//				JOptionPane
-//						.showInputDialog(
-//								null,
-//								"Enter start number \nNOT FULLY IMPLEMENTED NO CHANGES IN MODEL",
-//								"Pre-Registration",
-//								JOptionPane.QUESTION_MESSAGE);
-//			}
-//		}
-//
-//	}
+	// private class PreRegistrationEditListener implements
+	// ListSelectionListener {
+	// @Override
+	// public void valueChanged(ListSelectionEvent e) {
+	// int selectedRow = getSelectedRow();
+	// String startNumber = (String) getValueAt(selectedRow, 0);
+	// if (startNumber.equals("Pre-registered time")) {
+	// JOptionPane
+	// .showInputDialog(
+	// null,
+	// "Enter start number \nNOT FULLY IMPLEMENTED NO CHANGES IN MODEL",
+	// "Pre-Registration",
+	// JOptionPane.QUESTION_MESSAGE);
+	// }
+	// }
+	//
+	// }
 
 }

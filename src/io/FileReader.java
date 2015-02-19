@@ -17,7 +17,7 @@ public class FileReader {
 	private ContestantFactory cf;
 
 	/**
-	 * Constructor for FileReader.
+	 * Constructor for <code>FileReader</code>.
 	 * 
 	 * @param cf The <code>ContestantFactory</code> to be used for creating
 	 *            <code>Contestants</code>.

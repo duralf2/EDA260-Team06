@@ -11,12 +11,21 @@ import javax.swing.border.BevelBorder;
 
 import register.logic.TimeRegistrationHandler;
 
-public class RegisterButton extends JButton implements ActionListener{
+public class RegisterButton extends JButton implements ActionListener {
 	private TimeRegistrationHandler registrationHandler;
 	private StartNumberField startNumberField;
-	
-	public RegisterButton(int fontSize, TimeRegistrationHandler registrationHandler, StartNumberField startNumberField) {
-		super ("Register");
+
+	/**
+	 * The register button for the <code>RegistrationGUI</code>.
+	 * 
+	 * @param fontSize The wanted size of the font.
+	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
+	 * @param startNumberField The <code>StartNumberField</code>
+	 */
+	public RegisterButton(int fontSize,
+			TimeRegistrationHandler registrationHandler,
+			StartNumberField startNumberField) {
+		super("Register");
 		this.registrationHandler = registrationHandler;
 		this.startNumberField = startNumberField;
 		addActionListener(this);
@@ -27,11 +36,18 @@ public class RegisterButton extends JButton implements ActionListener{
 		setBorder(new BevelBorder(BevelBorder.RAISED));
 	}
 
+	/**
+	 * Empties the field when registered a <code>contestant</code>.
+	 * 
+	 * @param e The action performed.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		boolean isValid = registrationHandler.register(startNumberField.getText());
-		if(!isValid) {
-			JOptionPane.showMessageDialog(null, registrationHandler.getLastError());
+		boolean isValid = registrationHandler.register(startNumberField
+				.getText());
+		if (!isValid) {
+			JOptionPane.showMessageDialog(null,
+					registrationHandler.getLastError());
 		}
 		startNumberField.setText("");
 	}

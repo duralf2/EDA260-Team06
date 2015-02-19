@@ -13,7 +13,15 @@ import register.logic.TimeRegistrationHandler;
 
 public class StartNumberField extends JTextField implements ActionListener {
 	private TimeRegistrationHandler registrationHandler;
-	public StartNumberField(int fontSize, TimeRegistrationHandler registrationHandler) {
+
+	/**
+	 * The startnumber field for the <code>RegistrationGUI</code>.
+	 * 
+	 * @param fontSize The wanted size of the font.
+	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
+	 */
+	public StartNumberField(int fontSize,
+			TimeRegistrationHandler registrationHandler) {
 		this.registrationHandler = registrationHandler;
 		addActionListener(this);
 		setToolTipText("Input start number.");
@@ -21,11 +29,17 @@ public class StartNumberField extends JTextField implements ActionListener {
 		setFont(getFont().deriveFont(Font.PLAIN, fontSize));
 	}
 
+	/**
+	 * Empties the field when registered a <code>contestant</code>.
+	 * 
+	 * @param arg0 The action performed.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		boolean isValid = registrationHandler.register(getText());
-		if(!isValid) {
-			JOptionPane.showMessageDialog(null, registrationHandler.getLastError());
+		if (!isValid) {
+			JOptionPane.showMessageDialog(null,
+					registrationHandler.getLastError());
 		}
 		setText("");
 	}

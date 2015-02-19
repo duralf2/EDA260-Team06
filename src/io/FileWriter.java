@@ -25,7 +25,7 @@ public class FileWriter {
 	private File target;
 
 	/**
-	 * Constructor for FileRWriter.
+	 * Constructor for <code>FileRWriter</code>.
 	 * 
 	 * @param targetPath The pathway to find the file where the data will be
 	 *            stored.
@@ -36,7 +36,7 @@ public class FileWriter {
 	}
 
 	/**
-	 * Constructor for FileWriter.
+	 * Constructor for <code>FileWriter</code>.
 	 * 
 	 * @param file the file where the data will be stored.
 	 */

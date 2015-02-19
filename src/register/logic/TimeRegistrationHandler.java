@@ -7,14 +7,28 @@ import java.util.Observer;
 import register.model.ContestantTimes;
 import register.model.Time;
 
+/**
+ * 
+ */
 public class TimeRegistrationHandler {
 	private ContestantTimes times;
 	private String lastError;
 
+	/**
+	 * Constructor for <code>TimeRegistrationHandler</code>.
+	 * 
+	 * @param times The <code>ContestantTimes</ode>.
+	 */
 	public TimeRegistrationHandler(ContestantTimes times) {
 		this.times = times;
 	}
 
+	/**
+	 * Register a new time to a given startnumber.
+	 * 
+	 * @param startNumber The startnumber to register a time to.
+	 * @return true if the time were registered otherwise false.
+	 */
 	public boolean register(String startNumber) {
 		boolean validStartNumber = true;
 		if (isNumerical(startNumber)) {
@@ -77,18 +91,39 @@ public class TimeRegistrationHandler {
 		return startNumber.matches("[1-9][0-9]*");
 	}
 
+	/**
+	 * Returns the last error.
+	 * 
+	 * @return The last error
+	 */
 	public String getLastError() {
 		return lastError;
 	}
-	
+
+	/**
+	 * Adds an observer.
+	 * 
+	 * @param o The Observer
+	 */
 	public void observContestantTimes(Observer o) {
 		times.addObserver(o);
 	}
-	
+
+	/**
+	 * Returns all the registered times.
+	 * 
+	 * @return All the registered times.
+	 */
 	public Map<String, ArrayList<String>> getAllRegisteredTimes() {
 		return times.getTimes();
 	}
-	
+
+	/**
+	 * Checks if the startnumber is registered.
+	 * 
+	 * @param startNumber The startnumber to check.
+	 * @return True if the startnumber is registered, otherwise false.
+	 */
 	public boolean isRegistered(String startNumber) {
 		return times.isRegistered(startNumber);
 	}

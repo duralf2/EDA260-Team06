@@ -1,73 +1,59 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import io.FileReader;
 import io.FileWriter;
-import io.ReadFile;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.DataStructure;
-import register.model.Time;
+import sorter.model.AbstractContestant;
+import sorter.model.Configuration;
+import sorter.model.ContestantFactory;
+import sorter.model.Database;
 
-public class AcceptanceTestStory9 {
+public class AcceptanceTestStory9 extends AbstractFileComparisonTest {
 
 	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/namnfil.txt";
 	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/starttider.txt";
 	private String finishTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/maltider.txt";
 	private String resultFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest9/resultat.txt";
 	private File outfile;
+	private FileReader reader;
+	private FileWriter fw;
+	private Configuration config;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 		outfile = new File("out.txt");
+		fw = new FileWriter(outfile);
+		config = new Configuration(new File("testfiles/config/lapContestant.ini"));
+		reader = new FileReader(new ContestantFactory(config));
+		AbstractContestant.setConfiguration(config);
 	}
 
 	@After
-	public void tearDown() {
-		 outfile.delete();
+	public void tearDown() throws IOException {
+		outfile.delete();
+		AbstractContestant.setConfiguration(new Configuration());
 	}
 
 	@Test
 	public void testStory9() throws IOException, FileNotFoundException {
-		DataStructure ds = new DataStructure();
-		ReadFile.readNames(new File(namesFilepath), ds);
-		ReadFile.readStartTime(new File(startTimesFilepath), ds);
-		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("01.00.00"));
+		Database db = new Database();
+		reader.readNames(new File(namesFilepath), db);
+		reader.readStartTime(new File(startTimesFilepath), db);
+		reader.readFinishTime(new File(finishTimesFilepath), db);
 
-		PrintWriter pw = new PrintWriter(outfile);
-		FileWriter.writeLapResult(pw, ds);
-
+		fw.writeResults(config, db);
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));
 		
 		assertEquals(acceptenceResult, printedResult);
 	}
-
-	private String readFileAsString(File file) throws IOException {
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file)));
-
-		String fileContents = "";
-		String currentLine = reader.readLine();
-		while (currentLine != null) {
-			fileContents += currentLine.replace("\\s+", "") + "\n";
-			currentLine = reader.readLine();
-		}
-
-		reader.close();
-
-		return fileContents;
-	}
-
 }

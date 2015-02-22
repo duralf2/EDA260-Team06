@@ -1,6 +1,8 @@
 package tests;
 
 import static org.junit.Assert.*;
+import gui.model.ContestantTimes;
+import gui.model.TimeRegistrationHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,10 +14,6 @@ import java.util.Map.Entry;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import register.logic.TimeRegistrationHandler;
-import register.model.ContestantTimes;
-import register.model.Time;
 
 public class TimeRegistrationHandlerTest {
 	File nameFile = new File("testfiles/RegistrationTestFiles/namn.txt");
@@ -75,7 +73,6 @@ public class TimeRegistrationHandlerTest {
 	public void testRemovePreRegister() {
 		assertTrue(registrationhandler.register("x"));
 		Map<String, ArrayList<String>> entries = times.getTimes();
-		ArrayList<String> conTimes = entries.get("x");
 		assertTrue(registrationhandler.register("dx"));
 		assertFalse(entries.containsKey("x"));
 	}

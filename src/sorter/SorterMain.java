@@ -3,21 +3,21 @@ package sorter;
 import java.io.File;
 import java.io.IOException;
 
-import register.gui.RegistrationGUI;
-import register.logic.Register;
-import register.model.DataStructure;
+import sorter.model.Database;
 
+//TODO: vilken skall användas, denna eller ResultMain? Kund vill ha en jar fil för gui och en för sortering.
 /**
- * This class is the entry point of the program, currently it only starts the gui.
+ * Main for the sorting program, filepaths hardcoded for now.
  */
-public class SorterMain { // TODO SorterMain should start the sorter and not the gui? Or maybe be called GUIMain?
+public class SorterMain {
 
 	public static void main(String[] args) throws IOException {
-		Sorter s = new Sorter(new DataStructure());
+		// TODO Refactor; Anropa sortering i main
+		Sorter s = new Sorter(new Database());
 		File[] files = {new File("testfiles/acceptanstest/Iteration2/acceptanstest18/starttider.txt"),
                         new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider1.txt"),
                         new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider2.txt")};
-		s.sortTime(files, new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfil.txt"));
+		//s.sort(files, new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfil.txt"));
 	}
 
 }

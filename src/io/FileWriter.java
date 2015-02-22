@@ -1,12 +1,20 @@
 package io;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import register.model.Contestant;
-import register.model.DataStructure;
-import register.model.Time;
+import sorter.model.AbstractContestant;
+import sorter.model.CompetitionFactory;
+import sorter.model.CompetitionType;
+import sorter.model.Configuration;
+import sorter.model.Database;
 
 /**
  * This class is responsible for writing data to files. The methods of this
@@ -14,238 +22,139 @@ import register.model.Time;
  * <code>PrintWriter</code> that is passed along with the data.
  */
 public class FileWriter {
+	private File target;
 
 	/**
-	 * Prints the specified database to the specified stream. The data will be
-	 * written in a format that is compatible with the excel file format. This
-	 * method is to be used for simple races (marathon races).
+	 * Constructor for <code>FileRWriter</code>.
 	 * 
-	 * @param pw
-	 *            The <code>PrintWriter</code> to where the data will be written
-	 * @param ds
-	 *            The database containing the data to write
+	 * @param targetPath
+	 *            The pathway to find the file where the data will be stored.
 	 */
-	public static void writeResult(PrintWriter pw, DataStructure ds) {
-		StringBuilder sb = new StringBuilder();
-		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		sb.append("StartNr; Namn; TotalTid; Starttider; Måltider\n");
+	public FileWriter(String targetPath) {
+		target = new File(targetPath);
 
-		// TODO how to handle setContestantColumnNames() in Datastrucure?
+	}
+
+	/**
+	 * Constructor for <code>FileWriter</code>.
+	 * 
+	 * @param file
+	 *            the file where the data will be stored.
+	 */
+	public FileWriter(File file) {
+		target = file;
+	}
+
+	/**
+	 * Write the result with all specified information sorted according to the
+	 * competition type.
+	 * 
+	 * @param contestants
+	 *            The contestants to the race.
+	 * @param conf
+	 *            The information about competition type, and what informaion we
+	 *            have on the contestants.
+	 * @param db
+	 *            The database for the race.
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void writeSortedResult(ArrayList<AbstractContestant> contestants,
+			Configuration conf, Database db) throws FileNotFoundException,
+			IOException {
+		StringBuilder sb = new StringBuilder();
+
+		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
+		CompetitionType competition = competitionFactory.createCompetition(db);
 		
-		Contestant contestant;
-		for (String startNumber : entries.keySet()) {
-			contestant = entries.get(startNumber);
-			sb.append(startNumber + "; ");
-			sb.append(contestant.getName() + "; ");
-
-			writeTotalTime(contestant, sb);
-
-			if (contestant.startTimeSize() == 0) {
-				sb.append("Start?" + "; ");
-			} else {
-				sb.append(contestant.getStartTime() + "; ");
-			}
-			if (contestant.finishTimeSize() == 0) {
-				sb.append("Slut?");
-			} else {
-				if (isImpossibleTime(contestant)) {
-					sb.append(contestant.getFinishTime() + "; "
-							+ "Omöjlig totaltid?");
-				} else {
-					sb.append(contestant.getFinishTime());
-				}
-			}
-			checkMultipleTimes(contestant, sb);
+		// Write header to file
+		sb.append(competition.generateHeader());
+		for (AbstractContestant contestant : contestants) {
+			sb.append(contestant.toString(competition));
 			sb.append("\n");
-
 		}
 
-		pw.write(sb.toString());
-		pw.close();
+		writeString(sb.toString());
 	}
 
 	/**
-	 * Prints the specified database to the specified stream. The data will be
-	 * written in a format that is compatible with the excel file format. This
-	 * method is to be used for lap races.
+	 * Write the result with all specified information.
 	 * 
-	 * @param pw
-	 *            The <code>PrintWriter</code> to where the data will be written
-	 * @param ds
-	 *            The database containing the data to write
+	 * @param config
+	 *            The information we have on the contestants.
+	 * @param db
+	 *            The database for the race
+	 * @throws IOException
 	 */
-	public static void writeLapResult(PrintWriter pw, DataStructure ds) {
+	public void writeResults(Configuration config, Database db)
+			throws IOException {
+		CompetitionFactory competitionFactory = new CompetitionFactory(config);
+		CompetitionType competition = competitionFactory.createCompetition(db);
+		writeString(competition.toResultString());
+	}
+
+	/**
+	 * Writes a string to the file.
+	 * 
+	 * @param data
+	 *            String to be printed
+	 * @throws IOException
+	 */
+	public void writeString(String data) throws IOException {
+		if (data != null) {
+			File parentFile = target.getParentFile();
+			if (parentFile != null)
+				parentFile.mkdirs();
+			java.io.FileWriter out = new java.io.FileWriter(target);
+			out.write(data);
+			out.close();
+		} else {
+			throw new IllegalArgumentException("Can't print null!");
+		}
+	}
+
+	/**
+	 * Write the result with all specified information with placement in race.
+	 * 
+	 * @param sortedContestants
+	 *            The contestants to the race sorted by their placement in race.
+	 * @param conf
+	 *            The information about competition type, and what informaion we
+	 *            have on the contestants.
+	 * @param db
+	 *            The database for the race.
+	 * @throws IOException
+	 */
+	public void writeResultList(
+			LinkedList<AbstractContestant> sortedContestants,
+			Configuration conf, Database db) throws IOException {
+
+		CompetitionType competitionType = new CompetitionFactory(conf)
+				.createCompetition(db);
+
 		StringBuilder sb = new StringBuilder();
-		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		int maxLaps = ds.getMaxLaps();
+		String incompleted = "";
 
-		makeColumnNames(sb, maxLaps);
-
-		List<String> incorrectRegistrations = new ArrayList<String>();
-		for (String startNumber : entries.keySet()) {
-			Contestant contestant = entries.get(startNumber);
-
-			if (contestant.getName().equals(""))
-				incorrectRegistrations.add(startNumber);
-			else {
-				writeContestant(sb, contestant, startNumber, maxLaps);
-			}
-		}
-
-		if (!incorrectRegistrations.isEmpty()) {
-			sb.append("Icke existerande startnummer\n");
-			makeColumnNames(sb, maxLaps);
-			for (String startNumber : incorrectRegistrations) {
-				writeContestant(sb, ds.getContestant(startNumber), startNumber,
-						maxLaps);
-			}
-		}
-
-		pw.write(sb.toString().replaceAll(";", "; ").trim());
-		pw.close();
-	}
-
-	private static void makeColumnNames(StringBuilder sb, int maxLaps) {
-		sb.append("StartNr;Namn;");
-		sb.append("#Varv;");
-		sb.append("TotalTid;");
-		for (int i = 1; i <= maxLaps; i++)
-			sb.append("Varv" + i + ";");
-		sb.append("Start;");
-
-		for (int i = 1; i <= maxLaps - 1; i++)
-			sb.append("Varvning" + i + ";");
-
-		sb.append("Mål\n");
-	}
-
-	private static void writeContestant(StringBuilder sb,
-			Contestant contestant, String startNumber, int maxLaps) {
-		sb.append(startNumber + ";");
-		sb.append(contestant.getName() + ";");
-
-		sb.append(contestant.getLapsCompleted()).append(";");
-		LinkedList<Time> finishTimes = contestant.getFinishTimes();
-		LinkedList<Time> lapTimes = contestant.getLapTimes();
-		if (finishTimes.size() > 0) {
-			sb.append(Time.getTotalTime(contestant.getStartTime(),
-					contestant.getFinishTime()));
-		} else {
-			if (lapTimes.size() != 0) {
-				sb.append(Time.getTotalTime(contestant.getStartTime(),
-						lapTimes.getLast()));
+		sb.append("Plac;" + competitionType.generateHeader(true));
+		int place = 1;
+		for (int i = 0; i < sortedContestants.size(); i++) {
+			AbstractContestant contestant = sortedContestants.get(i);
+			if (contestant.completedRace()) {
+				sb.append(place + ";" + contestant.toString(competitionType, true)
+						+ "\n");
+				place++;
 			} else {
-				sb.append("--.--.--");
+				incompleted += ";" + contestant.toString(competitionType, true)
+						+ "\n";
 			}
 		}
-		sb.append(";");
 
-		for (String time : contestant.getLapDurations())
-			sb.append(time + ";");
-		for (int i = contestant.getLapDurations().size(); i < maxLaps; i++)
-			sb.append(";");
+		sb.append(incompleted);
 
-		if (contestant.startTimeSize() == 0)
-			sb.append("Start?;");
-		else
-			sb.append(contestant.getStartTime() + ";");
-
-		for (Time time : lapTimes)
-			sb.append(time.toString() + ";");
-		for (int i = lapTimes.size(); i < maxLaps - 1; i++)
-			sb.append(";");
-
-		if (contestant.finishTimeSize() == 0) {
-			// sb.append("Slut?");
-		} else {
-			if (isImpossibleTime(contestant)) {
-				sb.append(contestant.getFinishTime() + ";"
-						+ "Omöjlig totaltid?");
-			} else {
-				sb.append(contestant.getFinishTime());
-			}
-		}
-		checkMultipleTimes(contestant, sb);
-		sb.append("\n");
+		writeString(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n"));
 
 	}
 
-	private static void checkMultipleTimes(Contestant contestant,
-			StringBuilder sb) {
-		checkMultipleTimesStart(contestant, sb);
-		checkMultipleTimesFinish(contestant, sb);
-	}
-
-	private static void checkMultipleTimesFinish(Contestant contestant,
-			StringBuilder sb) {
-		if (contestant.finishTimeSize() > 1) {
-			sb.append("; " + "Flera måltider?");
-			LinkedList<Time> finishTimes = contestant.getFinishTimes();
-			Iterator<Time> iterator = finishTimes.iterator();
-			iterator.next();
-			while (iterator.hasNext()) {
-				sb.append(" " + iterator.next());
-			}
-		}
-	}
-
-	private static void checkMultipleTimesStart(Contestant contestant,
-			StringBuilder sb) {
-		if (contestant.startTimeSize() > 1) {
-			sb.append("; " + "Flera starttider?");
-			LinkedList<Time> startTimes = contestant.getStartTimes();
-			Iterator<Time> iterator = startTimes.iterator();
-			iterator.next();
-			while (iterator.hasNext()) {
-				sb.append(" " + iterator.next());
-			}
-		}
-	}
-
-	private static void writeTotalTime(Contestant contestant, StringBuilder sb) {
-		// Getting sizes of lists containing starttimes and finishtimes, if size
-		// = 0 time is missing
-		if (contestant.startTimeSize() == 0 || contestant.finishTimeSize() == 0) {
-			sb.append("--.--.--" + "; ");
-		} else {
-			sb.append(contestant.getTotalTime() + "; ");
-		}
-	}
-
-	private static boolean isImpossibleTime(Contestant contestant) {
-		boolean impossible;
-		try {
-			impossible = contestant.startTimeSize() != 0
-					&& Integer.parseInt(contestant.getTotalTime().substring(0,
-							2)) < 1
-					&& Integer.parseInt(contestant.getTotalTime().substring(3,
-							5)) <= 15;
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace(); // negative total time throws the exception.
-			return true;
-		}
-		return impossible;
-	}
-
-	public static void writeFinishTimes(PrintWriter pw, DataStructure ds) {
-		Map<String, Contestant> entries = ds.getAllContestantEntries();
-		StringBuilder sb = new StringBuilder();
-		Contestant contestant;
-		for (String startNumber : entries.keySet()) {
-			contestant = entries.get(startNumber);
-			printTimes(contestant.getFinishTimes(), sb, startNumber);
-		}
-		pw.append(sb.toString());
-	}
-
-	private static void printTimes(LinkedList<Time> timeList, StringBuilder sb,
-			String startNumber) {
-		for (Time time : timeList) {
-			sb.append(startNumber.toString() + "; ");
-			sb.append(time.toString() + "\n");
-		}
-	}
-	
 	/**
 	 * Prints start and finish time files based on the provided map containing
 	 * start numbers as keys and arraylists of times in string format (HH.mm.ss)
@@ -256,7 +165,6 @@ public class FileWriter {
 	 * @param times
 	 *            <StartNumber, ArrayList<Times in string format>>
 	 */
-
 	public static void writeTimesToFile(PrintWriter pw,
 			Map<String, ArrayList<String>> times) {
 		StringBuilder sb = new StringBuilder();

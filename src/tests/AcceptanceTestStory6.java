@@ -1,88 +1,60 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
+import io.FileReader;
 import io.FileWriter;
-import io.ReadFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import register.model.DataStructure;
-import register.model.Time;
+import sorter.model.AbstractContestant;
+import sorter.model.Configuration;
+import sorter.model.ContestantFactory;
+import sorter.model.Database;
 
-public class AcceptanceTestStory6 extends TestCase {
+public class AcceptanceTestStory6 extends AbstractFileComparisonTest {
 	private String namesFilepath = "testfiles/acceptanstest/acceptanstest6/namnfil.txt";
 	private String startTimesFilepath = "testfiles/acceptanstest/acceptanstest6/starttider.txt";
 	private String finishTimesFilepath = "testfiles/acceptanstest/acceptanstest6/maltider.txt";
 	private String resultFilepath = "testfiles/acceptanstest/acceptanstest6/resultat.txt";
+	
 	private File outfile;
-	DataStructure ds;
+	private FileReader reader;
+	private FileWriter fw;
+	private Configuration config;
+	
 	@Before
 	public void setUp() throws IOException {
-		ds = new DataStructure();
-		
 		outfile = new File("out.txt");
+		fw = new FileWriter(outfile);
+
+		config = new Configuration(new File("testfiles/config/marathonContestant.ini"));
+		reader = new FileReader(new ContestantFactory(config));
+		AbstractContestant.setConfiguration(config);
 	}
 
 	@After
-	public void tearDown() {
+	public void tearDown() throws IOException {
 		outfile.delete();
+		AbstractContestant.setConfiguration(new Configuration());
 	}
 
 	@Test
-	public void testMergeTimes() throws IOException, FileNotFoundException {
-		DataStructure ds = new DataStructure();
-		ReadFile.readNames(new File(namesFilepath), ds);
-		ReadFile.readStartTime(new File(startTimesFilepath), ds);
-		ReadFile.readFinishTime(new File(finishTimesFilepath), ds, new Time("13.00.00"));
+	public void testStory6() throws IOException, FileNotFoundException {
+		Database db = new Database();
+		reader.readNames(new File(namesFilepath), db);
+		reader.readStartTime(new File(startTimesFilepath), db);
+		reader.readFinishTime(new File(finishTimesFilepath), db);
+		
+		fw.writeResults(config, db);
+		String printedResult = readFileAsString(outfile);
+		String acceptenceResult = readFileAsString(new File(resultFilepath));
 
-		PrintWriter pw = new PrintWriter(outfile);
-		FileWriter.writeResult(pw, ds);
-
-		DataStructure dsOut = new DataStructure();
-		ReadFile.readResult(outfile, dsOut);
-
-		DataStructure dsCorrect = new DataStructure();
-		ReadFile.readResult(new File(resultFilepath), dsCorrect);
-
-		assertTrue(dsOut.equals(dsCorrect));
-	}
-
-	@Test
-	public void testFileloading() throws IOException, FileNotFoundException {
-		DataStructure ds1 = new DataStructure();
-		ReadFile.readResult(new File(resultFilepath), ds1);
-
-		DataStructure ds2 = new DataStructure();
-		ReadFile.readResult(new File(resultFilepath), ds2);
-
-		assertTrue(ds1.equals(ds2));
-	}
-
-	@Test
-	public void testFileWriterWriteResult() throws IOException {
-		File result = new File("result.txt");
-		FileOutputStream fos = new FileOutputStream(result);
-
-		PrintWriter pw2 = new PrintWriter(fos);
-
-		FileWriter.writeResult(pw2, ds);
-
-		Scanner sc2 = new Scanner(result);
-		Scanner sc3 = new Scanner(new File(
-				"testfiles/acceptanstest/acceptanstest6/resultat.txt"));
-		while (sc2.hasNext()) {
-			assertEquals(sc3.nextLine(), sc2.nextLine());
-		}
-		result.delete();
+		assertEquals(acceptenceResult, printedResult);
 	}
 }

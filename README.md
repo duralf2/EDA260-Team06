@@ -11,7 +11,15 @@ Documentation can be found in `Documentation`.
 Datafiles used in unit tests exist in `testfiles`.
 
 ## Documentation
+<<<<<<< HEAD
+For user manual, see Documentation/manual.html
+
+### Design
+For technical documentation, see Documentation/Teknisk Dokumentation.html
+Instructions for javadoc generation is included in the technical documentation.
+=======
 You can find the documentation in `./Documentation/index.html`.
+>>>>>>> refs/remotes/origin/master
 
 ## Group members
 
@@ -29,6 +37,11 @@ You can find the documentation in `./Documentation/index.html`.
  - Tom Hansson
  - SebastianHjelm
  - Niklas Jönsson
+<<<<<<< HEAD
+ - Erik Bjäreholt (@ErikBjare)
+ - Gustaf Oxenstierna
+ - Tom Hansson
+=======
  - Hanna Lindblad
  - Therese Magnusson
  - Gustaf Oxenstierna
@@ -37,3 +50,4 @@ You can find the documentation in `./Documentation/index.html`.
  - Kasper Tall
  - Magnus Tullberg
  
+>>>>>>> refs/remotes/origin/master

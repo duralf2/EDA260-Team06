@@ -6,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Contains static standard keys for different type of settings to be stored in the config file
+ * @extends Properties
+ */
 public class Configuration extends Properties {
 
 	public static final String VALUE_RACE_MARATHON = "marathon";
@@ -30,6 +34,13 @@ public class Configuration extends Properties {
 	public Configuration() throws IOException {
 		this (DEFAULT_PROPERTIES_FILE);
 	}
+	/**
+	 * Creates a new Properties while passing the path to the config file as a parameter.
+	 * if the config file exists it will read the contents, otherwise it will create a new file
+	 * and add some default configuration values.
+	 * @param propertiesFile the absolute pathname to the config file
+	 * @throws IOException if the config file could not be read.
+	 */
 	public Configuration(File propertiesFile) throws IOException {
 		File parentFile = propertiesFile.getParentFile();
 		if(parentFile!=null){

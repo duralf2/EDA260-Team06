@@ -3,6 +3,11 @@ package sorter.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contains methods for generating header and sorting the results of a
+ * lap competition
+ * @extends CompetitionType
+ */
 public class LapCompetition extends CompetitionType {
 
 	public LapCompetition(Database db) {
@@ -33,7 +38,12 @@ public class LapCompetition extends CompetitionType {
 
 		return sb.toString();
 	}
-
+	
+	//TODO: rename to getMostLaps?
+	/**
+	 * Calculates the highest amount of laps a contestant in this competition has completed. 
+	 * @return the highest number of laps completed in this competition.
+	 */
 	public int getMaxLaps() {
 		int maxLaps = 0;
 		for (AbstractContestant c : db.getAllContestantEntries().values()) {

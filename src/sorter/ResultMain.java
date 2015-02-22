@@ -2,6 +2,11 @@ package sorter;
 
 import java.io.File;
 
+//TODO: deprecated? Merga med SorterMain?
+/**
+ * Main class for the sorting program, takes commandline arguments on the form: 
+ * &ltnameFile&gt &ltstartTimeFile&gt &ltfinishTimeFile&gt
+ */
 public class ResultMain {
 	
 	public static void main(String arg[]) { // TODO Refactor; Implementera main-metod

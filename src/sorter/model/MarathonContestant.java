@@ -2,6 +2,11 @@ package sorter.model;
 
 import java.util.Iterator;
 
+/**
+ * This class contains the information of a contestant in a marathon event and
+ * methods to manipulate this data.
+ * @extends AbstractContestant
+ */
 public class MarathonContestant extends AbstractContestant {
 
 	public MarathonContestant(ContestantProperties racerInfo) {

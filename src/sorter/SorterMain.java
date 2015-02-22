@@ -5,6 +5,10 @@ import java.io.IOException;
 
 import sorter.model.Database;
 
+//TODO: vilken skall användas, denna eller ResultMain? Kund vill ha en jar fil för gui och en för sortering.
+/**
+ * Main for the sorting program, filepaths hardcoded for now.
+ */
 public class SorterMain {
 
 	public static void main(String[] args) throws IOException {

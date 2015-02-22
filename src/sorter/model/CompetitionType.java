@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Abstract superclass to the different types of competitions, contains methods needed by each
+ * subclass.
+ */
 public abstract class CompetitionType {
 	
 	protected Database db;
@@ -69,10 +73,19 @@ public abstract class CompetitionType {
 		sb.append(headerLine);
 	}
 	
-	
+	/**
+	 * delegates method call to generateHeader(boolean)
+	 * @return a CSV style String of the header
+	 */
 	public String generateHeader() {
 		return generateHeader(false);
 	}
+	
+	/**
+	 * Generates the CSV header for a competition
+	 * @param useShortFormat to indicate if all columns should be included in result
+	 * @return a String representation of the header.
+	 */
 	public abstract String generateHeader(boolean useShortFormat);
 	
 	/**

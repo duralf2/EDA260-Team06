@@ -5,6 +5,13 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This class holds information for a contestant participating in a lap event
+ * and methods neccessary for adding laptimes, computing total time, getting the number of laps,
+ * comparing two contestants, adding finish times
+ * and converting this information to a printable String.
+ *@extends AbstractContestant
+ */
 public class LapContestant extends AbstractContestant {
 	private LinkedList<Time> lapTimes;
 	
@@ -12,13 +19,16 @@ public class LapContestant extends AbstractContestant {
 		super(racerInfo);
 		lapTimes = new LinkedList<Time>();
 	}
-
+	
+	/**
+	 * Adds a laptime for this contestant.
+	 * @param time a Time object representing the laptime to be added.
+	 */
 	public void addLapTime(Time time) {
 		lapTimes.add(time);
 		Collections.sort(lapTimes);
 	}
 
-	// TODO - javadoc
 	@Override
 	public int compareTo(AbstractContestant o) {
 		if (o instanceof LapContestant) {
@@ -30,7 +40,11 @@ public class LapContestant extends AbstractContestant {
 		}
 		throw new IllegalArgumentException("Wrong object type to CompareTo()");
 	}
-
+	
+	/**
+	 * Calculates how many laps this contestant has completed.
+	 * @return an integer representing the number of completed laps.
+	 */
 	public int getLapsCompleted() {
 		if (!finishTime.isEmpty())
 			return lapTimes.size() + 1;

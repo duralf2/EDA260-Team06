@@ -3,6 +3,10 @@ package sorter.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Time class keeps track of a timestamp on the form "hh.mm.ss".
+ * @implements Comparable to enable comparison of Time objects.
+ */
 public class Time implements Comparable<Time> {
 	private int hours;
 	private int minutes;
@@ -25,7 +29,6 @@ public class Time implements Comparable<Time> {
 		}
 	}
 
-
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -37,6 +40,11 @@ public class Time implements Comparable<Time> {
 		return sb.toString();
 	}
 	
+	/**
+	 * Multiplies a Time object with an integer
+	 * @param multiplier number to multiply with
+	 * @return
+	 */
 	public Time multiply(int multiplier) {
 		int totalSeconds = this.totalSeconds() * multiplier;
 		return convertSecondsToTime(totalSeconds);
@@ -55,7 +63,14 @@ public class Time implements Comparable<Time> {
 		return new Time(format(hours) + "." + format(minutes) + "."
 				+ format(seconds));
 	}
-
+	
+	/**
+	 * Returns the total time given a start time and a finish time
+	 * @param startTime start time in hh.mm.ss
+	 * @param finishTime finish time in hh.mm.ss
+	 * @return Time object containing the total time.
+	 * @throws IllegalArgumentException if total time is negative
+	 */
 	public static Time getTotalTime(Time startTime, Time finishTime)
 			throws IllegalArgumentException {
 		int totalHours = finishTime.hours - startTime.hours;
@@ -79,7 +94,8 @@ public class Time implements Comparable<Time> {
 	private static String format(int time) {
 		return time < 10 ? "0" + time : Integer.toString(time);
 	}
-
+	
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Time) {
 			Time t = (Time) obj;
@@ -105,7 +121,12 @@ public class Time implements Comparable<Time> {
 	private int totalSeconds() {
 		return hours * 3600 + minutes * 60 + seconds;
 	}
-
+	
+	/**
+	 * Adds a Time object to this Time object.
+	 * @param time Time to be added
+	 * @return the resulting Time object after addition
+	 */
 	public Time add(Time time) {
 		int timeSeconds = time.totalSeconds();
 		int mySeconds = this.totalSeconds();

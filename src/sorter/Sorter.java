@@ -36,7 +36,14 @@ public class Sorter {
 		fileWriter = new FileWriter(
 				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 	}
-
+	
+	/**
+	 * Generates a sorted result file for a lap event based on the input files.
+	 * @param nameFile a File object of the file with the contestant name and start number mapping.
+	 * @param startTime a File object containing the file with all the start times for the contestants of this event.
+	 * @param finishTimes a File[] containing the files with finish times for the contestants of this event.
+	 * @throws IOException if any of the Files could not be read.
+	 */
 	public void sortLapTimes(String nameFile, File startTime, File[] finishTimes) throws IOException {
 		setUp(nameFile, startTime, finishTimes);
 		
@@ -48,7 +55,7 @@ public class Sorter {
 	}
 	
 	
-
+	//TODO: should be a private method?
 	public void setUp(String nameFile, File startTime, File[] finishTimes)
 			throws IOException {
 		if (!new File("data").isDirectory())

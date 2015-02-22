@@ -17,7 +17,11 @@ public class StageContestant extends AbstractContestant {
 		stageTimes = new HashMap<Integer, StageTime>();
 		currentStageNbr = 1;
 	}
-
+	
+	/**
+	 * An inner class containing a start- and finishtime entry for a stage with a multiplier indicating
+	 * how much the time for this stage should be multiplied.
+	 */
 	private static class StageTime {
 		private Time startTime, finishTime;
 		private int multiplier;

@@ -13,6 +13,13 @@ import sorter.model.Database;
 public class SorterMain {
 
 	public static void main(String[] args) throws IOException { // TODO SorterMain; Testa den här klassen?
+		
+		// Set the working directory of the program to the folder containing the program.
+		// If you double-click a jar-file in linux the working directory is set to the user home by default.
+		// We want it to be set to the folder of the program, therefore these lines are necessary
+		File path = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		System.setProperty("user.dir", path.getParent());
+
 		Configuration config = new Configuration();
 		
 		File nameFile = new File(config.getProperty(Configuration.KEY_NAME_FILE_PATH));

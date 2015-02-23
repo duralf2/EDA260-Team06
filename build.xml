@@ -24,6 +24,8 @@
 
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
+		<mkdir dir="build/jar/data/starttimes" />
+		<mkdir dir="build/jar/data/finishtimes" />
 		<jar destfile="build/jar/Enduro GUI.jar" basedir="bin">
 			<manifest>
 				<attribute name="Main-Class" value="gui.RegistrationStarter" />

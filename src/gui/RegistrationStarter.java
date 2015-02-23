@@ -16,6 +16,8 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import sorter.SorterMain;
+
 
 /**
  * This class starts the registration process.
@@ -26,6 +28,13 @@ public class RegistrationStarter {
 	private Properties defaultProperties;
 
 	public static void main(String[] args) {
+		
+		// Set the working directory of the program to the folder containing the program.
+		// If you double-click a jar-file in linux the working directory is set to the user home by default.
+		// We want it to be set to the folder of the program, therefore these lines are necessary
+		File path = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		System.setProperty("user.dir", path.getParent());
+		
 		new RegistrationStarter();
 	}
 

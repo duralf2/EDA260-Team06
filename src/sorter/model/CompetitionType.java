@@ -36,8 +36,10 @@ public abstract class CompetitionType {
 		String headerLine = generateHeader(useShortFormat);
 		
 		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
+		
 		sortByClass(contestants);
 		String currentClass = "";
+		
 		for (AbstractContestant c : contestants) {
 			if (c.getInformation("Namn").equals("")){
                 c.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
@@ -62,6 +64,72 @@ public abstract class CompetitionType {
 		if (currentClass.equals(""))
 			sb.insert(0, headerLine);
 		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
+	}
+	
+	public String toResultStringWithPlacement(boolean useShortFormat) {
+		StringBuilder sb = new StringBuilder();
+		List<AbstractContestant> incorrectlyRegisteredContestants = new ArrayList<AbstractContestant>();
+		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
+		List<AbstractContestant> contestantsByClass = new ArrayList<AbstractContestant>();
+		
+		sortByClass(contestants);
+		String currentClass = "";
+		
+		for (AbstractContestant c : contestants) {
+			if (c.getInformation("Namn").equals("")){
+                c.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
+				incorrectlyRegisteredContestants.add(c);
+			} else {
+				if (!currentClass.equals(c.getClassName())) {
+					currentClass = c.getClassName();
+					if(contestantsByClass.size() > 0) {
+						sb.append(contestantsByClass.get(0).getClassName() + "\n");
+						sortWithinClass(contestantsByClass, sb);
+					}
+					contestantsByClass = new ArrayList<AbstractContestant>();
+					
+				}
+				contestantsByClass.add(c);
+			}
+			
+		}
+		
+		if(contestantsByClass.size() > 0) {
+			sb.append(currentClass + "\n");
+			sortWithinClass(contestantsByClass, sb);
+		}
+		
+		if(incorrectlyRegisteredContestants.size() > 0){
+			sb.append("Icke existerande startnummer\n");
+			sb.append(generateHeader(incorrectlyRegisteredContestants, useShortFormat));
+            for(AbstractContestant c : incorrectlyRegisteredContestants) {
+                sb.append(c.toString(this, useShortFormat) + "\n");
+            }
+		}
+		
+	//	if (currentClass.equals(""))
+		//	sb.insert(0, headerLine);
+		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
+	}
+	
+	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb) {
+		Collections.sort(contestants);
+		String incompleted = "";
+
+		sb.append("Plac;" + generateHeader(new ArrayList<AbstractContestant>(contestants), true));
+		int place = 1;
+		for (int i = 0; i < contestants.size(); i++) {
+			AbstractContestant contestant = contestants.get(i);
+			if (contestant.completedRace()) {
+				sb.append(place + ";" + contestant.toString(this, true)
+						+ "\n");
+				place++;
+			} else {
+				incompleted += ";" + contestant.toString(this, true)
+						+ "\n";
+			}
+		}
+		sb.append(incompleted);
 	}
 
 	private void sortByClass(List<AbstractContestant> contestants) {

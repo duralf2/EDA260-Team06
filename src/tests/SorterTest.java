@@ -82,6 +82,32 @@ public class SorterTest extends AbstractFileComparisonTest {
 		AbstractContestant.setConfiguration(c);
 	}
 	
-	//TODO test marathon race
+	//TODO Finish test, use classes
+		@Test
+		public void testSortedResultListWithClasses() throws IOException {
+			startTime = new File("testfiles/acceptanstest/Iteration2/acceptanstest18/starttider.txt");
+			finishTimes[0] = new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider1.txt");
+			finishTimes[1] = new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider2.txt");
+			nameFile = new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfil.txt");	
+			
+			conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
+			conf.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "01.00.00");
+			
+			Configuration c = AbstractContestant.getConfiguration();
+			
+			AbstractContestant.setConfiguration(conf);
+			
+			sorter = new Sorter(new Database(), conf);
+			sorter.sort(nameFile, new File[] { startTime }, finishTimes);
+			
+			String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest18/sortresultat.txt"));
+			String s2 = readFileAsString(new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
+		
+			assertEquals(s1,s2);
+			
+			AbstractContestant.setConfiguration(c);
+		}
+	
+	//TODO add test marathon race : IS DONE
 
 }

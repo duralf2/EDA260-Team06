@@ -55,7 +55,7 @@ public class AcceptanceTestStory13 extends AbstractFileComparisonTest {
 		reader.readFinishTime(new File(finishTimes1Filepath), db);
 		reader.readFinishTime(new File(finishTimes2Filepath), db);
 
-		fw.writeResults(config, db);
+		fw.writeResults(config, db, false);
 
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));

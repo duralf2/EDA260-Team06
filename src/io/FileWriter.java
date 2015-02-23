@@ -84,14 +84,16 @@ public class FileWriter {
 	 *            The information we have on the contestants.
 	 * @param db
 	 *            The database for the race
+	 * @param useShortFormat TODO
 	 * @throws IOException
 	 */
-	public void writeResults(Configuration config, Database db)
+	public void writeResults(Configuration config, Database db, boolean useShortFormat)
 			throws IOException {
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
 		CompetitionType competition = competitionFactory.createCompetition(db);
-		writeString(competition.toResultString());
+		writeString(competition.toResultString(useShortFormat));
 	}
+	
 
 	/**
 	 * Writes a string to the file.
@@ -125,8 +127,9 @@ public class FileWriter {
 	 *            The database for the race.
 	 * @throws IOException
 	 */
-	public void writeResultList(
-			LinkedList<AbstractContestant> sortedContestants,
+	public void writeResultList(Configuration config, Database db, boolean useShortFormat)
+			throws IOException {
+			/*LinkedList<AbstractContestant> sortedContestants,
 			Configuration conf, Database db) throws IOException {
 
 		CompetitionType competitionType = new CompetitionFactory(conf)
@@ -151,8 +154,10 @@ public class FileWriter {
 
 		sb.append(incompleted);
 
-		writeString(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n"));
-
+		writeString(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n"));*/
+			CompetitionFactory competitionFactory = new CompetitionFactory(config);
+			CompetitionType competition = competitionFactory.createCompetition(db);
+			writeString(competition.toResultStringWithPlacement(useShortFormat));
 	}
 
 	/**

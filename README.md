@@ -34,7 +34,6 @@ Instructions for javadoc generation is included in the documentation under techn
  - Tom Hansson
  - Sebastian Hjelm
  - Niklas Jönsson
- - Gustaf Oxenstierna
  - Tom Hansson
  - Hanna Lindblad
  - Therese Magnusson

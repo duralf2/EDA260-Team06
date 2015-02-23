@@ -32,7 +32,7 @@ public abstract class CompetitionType {
 	public String toResultString(boolean useShortFormat)
 	{
 		StringBuilder sb = new StringBuilder();
-		StringBuilder incorrectlyRegisteredContestants = new StringBuilder();
+		List<AbstractContestant> incorrectlyRegisteredContestants = new ArrayList<AbstractContestant>();
 		String headerLine = generateHeader(useShortFormat);
 		
 		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
@@ -40,19 +40,23 @@ public abstract class CompetitionType {
 		String currentClass = "";
 		for (AbstractContestant c : contestants) {
 			if (c.getInformation("Namn").equals("")){
-				incorrectlyRegisteredContestants.append(c.toString(this, useShortFormat) + "\n");
-			} else{
+                c.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
+				incorrectlyRegisteredContestants.add(c);
+			} else {
 				if (!currentClass.equals(c.getClassName())) {
 					currentClass = c.getClassName();
+                    headerLine = generateHeader(new ArrayList<AbstractContestant>(db.getAllContestantsByClass(currentClass).values()), useShortFormat);
 					appendClassHeader(headerLine, currentClass, sb);
 				}
 				sb.append(c.toString(this, useShortFormat) + "\n");
 			}
 		}
-		if(incorrectlyRegisteredContestants.length() > 0){
+		if(incorrectlyRegisteredContestants.size() > 0){
 			sb.append("Icke existerande startnummer\n");
-			sb.append(generateHeader(useShortFormat));
-			sb.append(incorrectlyRegisteredContestants);
+			sb.append(generateHeader(incorrectlyRegisteredContestants, useShortFormat));
+            for(AbstractContestant c : incorrectlyRegisteredContestants) {
+                sb.append(c.toString(this, useShortFormat) + "\n");
+            }
 		}
 		
 		if (currentClass.equals(""))
@@ -87,6 +91,8 @@ public abstract class CompetitionType {
 	 * @return a String representation of the header.
 	 */
 	public abstract String generateHeader(boolean useShortFormat);
+    
+    public abstract String generateHeader(List<AbstractContestant> contestants, boolean useShortFormat);
 	
 	/**
 	 * Sorts the contents of the database associated with this competition type

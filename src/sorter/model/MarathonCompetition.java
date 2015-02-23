@@ -27,4 +27,9 @@ public class MarathonCompetition extends CompetitionType {
 		sb.append("TotalTid;Starttider;Måltider\n");
 		return sb.toString();
 	}
+
+    @Override
+    public String generateHeader(List<AbstractContestant> contestants, boolean useShortFormat) {
+        return generateHeader(useShortFormat);
+    }
 }

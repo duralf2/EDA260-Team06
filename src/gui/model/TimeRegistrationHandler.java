@@ -45,11 +45,12 @@ public class TimeRegistrationHandler {
 	public void preRegister() {
 		times.preRegister(Time.getCurrentTime());
 	}
+
 	
 	public void removePreRegisteredTime() {
 		times.removePreRegisteredTime();
 	}
-	
+
 
 	public boolean assignPreRegistrationStartNumber(String startNumber) {
 		if (isNumerical(startNumber)) {

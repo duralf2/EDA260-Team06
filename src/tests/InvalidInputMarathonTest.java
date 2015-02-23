@@ -33,7 +33,7 @@ public class InvalidInputMarathonTest {
 				"testfiles/config/marathonContestant.ini"));
 		AbstractContestant.setConfiguration(conf);
 
-		f = new File("testfiles/outputOddInputsTest.txt");
+		f = new File("testfiles/outputInvalidInputMarathonTest.txt");
 		fileWriter = new FileWriter(f);
 		db = new Database();
 		db.setContestantColumnNames(new String[] { "StartNr", "Namn" });

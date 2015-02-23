@@ -40,6 +40,10 @@ public class ConfigurationTest {
 		assertEquals("# - " + Configuration.VALUE_RACE_MARATHON, scanner.nextLine());
 		assertEquals("# - " + Configuration.VALUE_RACE_LAPS, scanner.nextLine());
 		assertEquals("#", scanner.nextLine());
+		assertEquals("#Valid result formats:", scanner.nextLine());
+		assertEquals("# - " + Configuration.VALUE_FORMAT_CSV, scanner.nextLine());
+		assertEquals("# - " + Configuration.VALUE_FORMAT_HTML + " (not supported yet)", scanner.nextLine());
+		assertEquals("#", scanner.nextLine());
 		scanner.nextLine(); // Skip the line with the timestamp
 		while (scanner.hasNextLine())
 			assertLine(scanner.nextLine());
@@ -50,13 +54,18 @@ public class ConfigurationTest {
 	{
 		if (!line.contains("="))
 			fail("The config line must contain an '=', line: " + line);
+
+		if (line.equals(Configuration.KEY_NAME_FILE_PATH + "=data/namn.txt")) return;
+		if (line.equals(Configuration.KEY_START_TIME_FOLDER_PATH + "=data/starttimes/")) return;
+		if (line.equals(Configuration.KEY_FINISH_TIME_FOLDER_PATH + "=data/finishtimes/")) return;
+		if (line.equals(Configuration.KEY_RESULT_FILE_PATH + "=data/result.txt")) return;
 		
-		if (line.equals("guiOutputFilePath=data/utdata.txt")) return;
-		if (line.equals("raceType=marathon")) return;
-		if (line.equals("resultFilePath=data/result.txt")) return;
-		if (line.equals("nameFilePath=data/namn.txt")) return;
-		if (line.equals("minimumRaceDuration=00.15.00")) return;
-		if (line.equals("maximumRaceDuration=23.59.59")) return;
+		if (line.equals(Configuration.KEY_RACE_TYPE + "=marathon")) return;
+		if (line.equals(Configuration.KEY_SHORTEST_POSSIBLE_TIME + "=00.15.00")) return;
+		if (line.equals(Configuration.KEY_START_TIME_LIMIT + "=01.00.00")) return;
+		
+		if (line.equals(Configuration.KEY_RESULT_FORMAT + "=" + Configuration.VALUE_FORMAT_CSV)) return;
+		if (line.equals(Configuration.KEY_RESULT_SORTED + "=false")) return;
 
 		fail("Invalid/Unknown config line: " + line);
 	}
@@ -76,14 +85,15 @@ public class ConfigurationTest {
 		assertEquals("TestData", properties.get("TestEntry"));
 	}
 	
-	@Test
-	public void testMultipleStages() {
-		properties.setProperty(Configuration.KEY_STAGE_NAMES, "etapp1,etapp2,etapp3");
-		String[] stages = properties.getProperty(Configuration.KEY_STAGE_NAMES).split(",");
-		int i = 1;
-		for (String s : stages) {
-			assertEquals(s, "etapp"+i);
-			i++;
-		}
-	}
+	// TODO ConfigurationTest; Lägg tillbaka testet när etapplopp finns
+//	@Test
+//	public void testMultipleStages() {
+//		properties.setProperty(Configuration.KEY_STAGE_NAMES, "etapp1,etapp2,etapp3");
+//		String[] stages = properties.getProperty(Configuration.KEY_STAGE_NAMES).split(",");
+//		int i = 1;
+//		for (String s : stages) {
+//			assertEquals(s, "etapp"+i);
+//			i++;
+//		}
+//	}
 }

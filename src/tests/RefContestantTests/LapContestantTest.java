@@ -28,7 +28,7 @@ public class LapContestantTest {
 	@Before
 	public void setUp() throws IOException {
 		db = new Database();
-		
+
 		File file = new File("testfiles/config/lapContestant.ini");
 		config = new Configuration(file);
 		AbstractContestant.setConfiguration(config);
@@ -53,24 +53,33 @@ public class LapContestantTest {
 	}
 
 	@Test
+	public void testManyStartTimes() {
+		lapContestant.addStartTime(new Time("00.01.00"));
+		assertEquals(
+				"1;Lars;3;01.00.01;00.02.00;00.04.00;00.54.01;00.00.00;00.02.00;00.06.00;01.00.01;Flera starttider? 00.01.00",
+				lapContestant.toString(new LapCompetition(db)));
+	}
+
+	@Test
 	public void testToString() {
 		assertEquals(
 				"1;Lars;3;01.00.01;00.02.00;00.04.00;00.54.01;00.00.00;00.02.00;00.06.00;01.00.01",
 				lapContestant.toString(new LapCompetition(db)));
 	}
-//	"StartNr;Namn;#Varv;TotalTid;Varv1;Varv2;Start;Varvning1;Mål",
-	
-//	lapContestant.addStartTime(new Time("00.00.00"));
-//	lapContestant.addLapTime(new Time("00.02.00"));
-//	lapContestant.addLapTime(new Time("00.06.00"));
-//	lapContestant.addFinishTime(new Time("00.10.01"));
-//
-//	db.addContestantEntry("1", lapContestant);
 
+	// "StartNr;Namn;#Varv;TotalTid;Varv1;Varv2;Start;Varvning1;Mål",
+
+	// lapContestant.addStartTime(new Time("00.00.00"));
+	// lapContestant.addLapTime(new Time("00.02.00"));
+	// lapContestant.addLapTime(new Time("00.06.00"));
+	// lapContestant.addFinishTime(new Time("00.10.01"));
+	//
+	// db.addContestantEntry("1", lapContestant);
+	// TODO: Doesnt work as story 15.
 	@Test
 	public void testToStringMissingData() {
 		lapContestant = new LapContestant(racerInfo);
-		assertEquals("1;Lars;0;00.00.00;;;;;;;",
+		assertEquals("1;Lars;0;--.--.--;;;;Start?;;;Slut?",
 				lapContestant.toString(new LapCompetition(db)));
 	}
 
@@ -108,7 +117,7 @@ public class LapContestantTest {
 
 	@Test
 	public void testAddFinishTime() {
-		config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
+
 		
 		LapContestant lapContestant2 = new LapContestant(racerInfo);
 		lapContestant2.addStartTime(new Time("00.00.00"));
@@ -118,4 +127,5 @@ public class LapContestantTest {
 		assertEquals(2, lapContestant2.getLapsCompleted());
 		assertEquals(new Time("13.04.00"), lapContestant2.getFinishTime());
 	}
+
 }

@@ -6,10 +6,17 @@ import java.util.Observer;
 
 import sorter.model.Time;
 
+/**
+ * This class handles the time registration.
+ */
 public class TimeRegistrationHandler {
 	private ContestantTimes times;
 	private String lastError;
 
+	/**
+	 * Initializes the times for contestants.
+	 * @param times The <code>ContestantTimes</code>.
+	 */
 	public TimeRegistrationHandler(ContestantTimes times) {
 		this.times = times;
 	}
@@ -42,16 +49,26 @@ public class TimeRegistrationHandler {
 		times.performMassStart(time);
 	}
 	
+	/**
+	 * Pre-register a <code>contestant</code> for current time.
+	 */
 	public void preRegister() {
 		times.preRegister(Time.getCurrentTime());
 	}
 
-	
+	/**
+	 * Removes a pre-registered <code>contestant</code>.
+	 */
 	public void removePreRegisteredTime() {
 		times.removePreRegisteredTime();
 	}
 
-
+	/**
+	 * Assigns a start number to a pre-registered time.
+	 * 
+	 * @param startNumber The start number in question.
+	 * @return True if successful, otherwise False.
+	 */
 	public boolean assignPreRegistrationStartNumber(String startNumber) {
 		if (isNumerical(startNumber)) {
 			String preRegisteredTime = times.getPreRegisteredTime();
@@ -72,15 +89,27 @@ public class TimeRegistrationHandler {
 	private boolean isNumerical(String startNumber) {
 		return startNumber.matches("[1-9][0-9]*");
 	}
-
+	
+	/**
+	 * Return last error.
+	 * @return The error.
+	 */
 	public String getLastError() {
 		return lastError;
 	}
 	
+	/**
+	 * Adds a Observer to times.
+	 * @param o - the Observer
+	 */
 	public void addObserverToContestantTimes(Observer o) {
 		times.addObserver(o);
 	}
 	
+	/**
+	 * Returns all registered times.
+	 * @return A Map of the times.
+	 */
 	public Map<String, ArrayList<String>> getAllRegisteredTimes() {
 		return times.getTimes();
 	}

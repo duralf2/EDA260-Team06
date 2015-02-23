@@ -106,14 +106,7 @@ public class RegistrationStarter {
 		}
 	}
 
-	/**
-	 * Creates all necessary files and directories to use the time and name
-	 * files specified in the properties file.
-	 * 
-	 * @param nameFile
-	 * @param timeFile
-	 * @throws IOException
-	 */
+
 	private void createFilesAndDirectories(File nameFile, File timeFile)
 			throws IOException {
 		nameFile.getParentFile().mkdirs();

@@ -30,6 +30,9 @@ public class Configuration extends Properties {
 	public static final String KEY_SHORTEST_POSSIBLE_TIME = "shortestPossibleTime";
 	public static final String KEY_START_TIME_LIMIT = "startTimeLimit";
 	
+	public static final String KEY_TIME_FILE_PATH = "timeFilePath";
+	public static final String KEY_GUI_TITLE = "guiTitle";
+	
 //	public static final String KEY_STAGE_AMOUNT = "stageAmount";
 //	public static final String KEY_STAGE_NAMES = "stageNames"; //stageNames=etapp1,etapp2,etapp3
 //	public static final String KEY_SPECIAL_STAGE_NAMES = "specialStageNames"; //specialStageNames=etapp1*2

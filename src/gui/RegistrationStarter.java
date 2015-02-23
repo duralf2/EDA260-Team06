@@ -16,6 +16,8 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import sorter.model.Configuration;
+
 
 /**
  * This class starts the registration process.
@@ -59,14 +61,14 @@ public class RegistrationStarter {
 		try {
 			FileInputStream in = new FileInputStream(DEFAULT_REGISTRATION_PROPERTIES);
 			defaultProperties.load(in);
-			if(defaultProperties.getProperty("title") == null) {
-				defaultProperties.setProperty("title", "Enduro\\ Start/Finish\\ Time\\ Registration");
+			if(defaultProperties.getProperty(Configuration.KEY_GUI_TITLE) == null) {
+				defaultProperties.setProperty(Configuration.KEY_GUI_TITLE, "Enduro\\ Start/Finish\\ Time\\ Registration");
 			}
-			if(defaultProperties.getProperty("nameFile") == null) {
-				defaultProperties.setProperty("nameFile", "RegistrationData/namn.txt");
+			if(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH) == null) {
+				defaultProperties.setProperty(Configuration.KEY_NAME_FILE_PATH, "RegistrationData/namn.txt");
 			}
-			if(defaultProperties.getProperty("timeFile") == null) {
-				defaultProperties.setProperty("timeFile", "RegistrationData/times.txt");
+			if(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH) == null) {
+				defaultProperties.setProperty(Configuration.KEY_TIME_FILE_PATH, "RegistrationData/times.txt");
 			}
 			defaultProperties.store(new FileOutputStream(props), null);
 			in.close();
@@ -82,37 +84,12 @@ public class RegistrationStarter {
 	}
 
 	private void startRegistration() {
-		File nameFile = new File(defaultProperties.getProperty("nameFile"));
-		File timeFile = new File(defaultProperties.getProperty("timeFile"));
-		String title = defaultProperties.getProperty("title");
-		try {
-			createFilesAndDirectories(nameFile, timeFile);
-			ContestantTimes times = new ContestantTimes(nameFile, timeFile);
-			TimeRegistrationHandler registrationHandler = new TimeRegistrationHandler(
-					times);
-			new RegistrationGUI(title, registrationHandler);
-		} catch (IOException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Could not load files:"
-					+ "\nClosing registration system", "Error",
-					JOptionPane.ERROR_MESSAGE);
-			System.exit(1);
-		}
-	}
-
-	/**
-	 * Creates all necessary files and directories to use the time and name
-	 * files specified in the properties file.
-	 * 
-	 * @param nameFile
-	 * @param timeFile
-	 * @throws IOException
-	 */
-	private void createFilesAndDirectories(File nameFile, File timeFile)
-			throws IOException {
-		nameFile.getParentFile().mkdirs();
-		nameFile.createNewFile();
-		timeFile.getParentFile().mkdirs();
-		timeFile.createNewFile();
+		File nameFile = new File(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
+		File timeFile = new File(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
+		String title = defaultProperties.getProperty(Configuration.KEY_GUI_TITLE);
+		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
+		TimeRegistrationHandler registrationHandler = new TimeRegistrationHandler(
+				times);
+		new RegistrationGUI(title, registrationHandler);
 	}
 }

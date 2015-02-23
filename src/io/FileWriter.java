@@ -1,5 +1,7 @@
 package io;
 
+import gui.model.StartNumberComparator;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -174,6 +176,9 @@ public class FileWriter {
 			ArrayList<String> entryTimes = e.getValue();
 			for (String time : entryTimes) {
 				sb.append(startNumber + "; " + time + "\n");
+			}
+			if (entryTimes.size() == 0 && !StartNumberComparator.isStartNumber(startNumber)) {
+				sb.append(startNumber + "\n");
 			}
 		}
 		if (sb.length() > 0)

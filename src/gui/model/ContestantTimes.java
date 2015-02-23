@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Observable;
@@ -16,6 +18,7 @@ import java.util.TreeMap;
 
 public class ContestantTimes extends Observable {
 	private Map<String, ArrayList<String>> times;
+	private List<String> errorTimes;
 	private ArrayList<String> registeredContestants;
 	private File nameFile;
 	private File timeFile;
@@ -25,6 +28,7 @@ public class ContestantTimes extends Observable {
 		this.timeFile = timeFile;
 		registeredContestants = new ArrayList<String>();
 		times = new TreeMap<String, ArrayList<String>>(new StartNumberComparator());
+		errorTimes = new LinkedList<String>();
 		readContestantsFromFile();
 		readTimesFromFile();
 	}
@@ -94,13 +98,20 @@ public class ContestantTimes extends Observable {
 	}
 
 	public void readTimesFromFile() {
-		FileReaderGUI.readTimesFromFile(timeFile, this);
+		errorTimes = FileReaderGUI.readTimesFromFile(timeFile, this);
+		writeTimesToFile();
 		setChanged();
 		notifyObservers();
 	}
 
 	public void writeTimesToFile() {
 		PrintWriter pw = null;
+		Map<String, ArrayList<String>> times = new TreeMap<String, ArrayList<String>>(new StartNumberComparator());
+		times.putAll(this.times);
+		ArrayList<String> emptyList = new ArrayList<String>();
+		for (String str : errorTimes) {
+			times.put(str, emptyList);
+		}
 		try {
 			pw = new PrintWriter(timeFile);
 			FileWriter.writeTimesToFile(pw, times);

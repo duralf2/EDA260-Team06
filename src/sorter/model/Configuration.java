@@ -22,6 +22,7 @@ public class Configuration extends Properties {
 	public static final String KEY_RESULT_FILE_PATH = "resultFilePath";
 	public static final String KEY_NAME_FILE_PATH = "nameFilePath";
 	public static final String KEY_MINIMUM_RACE_DURATION = "minimumRaceDuration";
+	public static final String KEY_MINIMUM_LAP_DURATION = "minimumLapDuration";
 	public static final String KEY_MINIMUM_STAGE_DURATION = "minimumStageDuration";
 	public static final String KEY_MAXIMUM_LAP_DURATION = "maximumLapDuration";
 	public static final String KEY_MAXIMUM_RACE_DURATION = "maximumRaceDuration";

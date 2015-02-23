@@ -80,6 +80,8 @@ public class LapContestant extends AbstractContestant {
 		if (!useShortFormat) {
 			if (!startTime.isEmpty())
 				sb.append(getStartTime());
+			else
+				sb.append("Start?");
 			sb.append(";");
 	
 			for (int i = 0; i < maxLaps - 1; i++) {
@@ -90,12 +92,29 @@ public class LapContestant extends AbstractContestant {
 	
 			if (!finishTime.isEmpty())
 				sb.append(getFinishTime());
+			else
+				sb.append("Slut?");
+			
+			sb.append(generateExtraColumn());
+			
 		}
 		else {
 			// Remove the ; that was appended earlier 
 			sb.deleteCharAt(sb.length() - 1);
 		}
 		
+		return sb.toString();
+	}
+	
+	private String generateExtraColumn(){
+		StringBuilder sb = new StringBuilder();
+		if(startTimeSize() > 1) {
+			sb.append(";Flera starttider?");
+			for (int i = 1; i < startTimeSize(); i++){
+				sb.append(" " + startTime.get(i).toString());
+			}
+		}
+		Time minLapTime = new Time(config.getProperty(Configuration.KEY_MINIMUM_LAP_DURATION));
 		return sb.toString();
 	}
 	

@@ -66,11 +66,11 @@ public class LapContestantTest {
 //	lapContestant.addFinishTime(new Time("00.10.01"));
 //
 //	db.addContestantEntry("1", lapContestant);
-
+//	TODO: Doesnt work as story 15.
 	@Test
 	public void testToStringMissingData() {
 		lapContestant = new LapContestant(racerInfo);
-		assertEquals("1;Lars;0;00.00.00;;;;;;;",
+		assertEquals("1;Lars;0;--.--.--;;;;;;;",
 				lapContestant.toString(new LapCompetition(db)));
 	}
 
@@ -108,7 +108,7 @@ public class LapContestantTest {
 
 	@Test
 	public void testAddFinishTime() {
-		config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
+		config.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "13.00.00");
 		
 		LapContestant lapContestant2 = new LapContestant(racerInfo);
 		lapContestant2.addStartTime(new Time("00.00.00"));

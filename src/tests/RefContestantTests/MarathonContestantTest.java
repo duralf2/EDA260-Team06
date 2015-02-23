@@ -97,7 +97,7 @@ public class MarathonContestantTest {
 	@Test
 	public void testToStringImpossibleTotalTime() throws IOException
 	{
-		config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
+		config.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "13.00.00");
 		
 		marathonContestant.addStartTime(new Time("12.00.00"));
 		marathonContestant.addFinishTime(new Time("12.01.00"));

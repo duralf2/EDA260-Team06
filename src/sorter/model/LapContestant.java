@@ -58,7 +58,7 @@ public class LapContestant extends AbstractContestant {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getLapsCompleted());
 		sb.append(";");
-		sb.append(getTotalTime().toString());
+		sb.append(formattedTotalTime());
 		sb.append(";");
 
 		List<Time> allLapTimes = new ArrayList<Time>(lapTimes);
@@ -99,6 +99,15 @@ public class LapContestant extends AbstractContestant {
 		return sb.toString();
 	}
 	
+	
+	private String formattedTotalTime(){
+		if(startTimeSize() > 0 && lapTimes.size() > 0){
+			return getTotalTime().toString();
+		}
+		return "--.--.--";
+	}
+	
+	
 	@Override
 	public Time getTotalTime()
 	{
@@ -134,7 +143,7 @@ public class LapContestant extends AbstractContestant {
 	}
 
 	private Time getRaceTime() {
-		String data = getConfiguration().getProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "00.00.00");
+		String data = getConfiguration().getProperty(Configuration.KEY_START_TIME_LIMIT, "00.00.00");
 		Time time = new Time(data);
 		return time;
 	}

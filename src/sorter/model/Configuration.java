@@ -7,29 +7,33 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Contains static standard keys for different type of settings to be stored in the config file
- * @extends Properties
+ * Contains standard keys for different settings.
  */
 public class Configuration extends Properties {
 
 	public static final String VALUE_RACE_MARATHON = "marathon";
 	public static final String VALUE_RACE_LAPS = "laps";
+
+	public static final String VALUE_FORMAT_CSV = "csv";
+	public static final String VALUE_FORMAT_HTML = "html";
 	
 	private static final File DEFAULT_PROPERTIES_FILE = new File("data/config.ini"); 
 
 	public static final String KEY_RACE_TYPE = "raceType";	
-	public static final String KEY_GUI_OUTPUT_FILE_PATH = "guiOutputFilePath";
+	public static final String KEY_START_TIME_FILE_PATH = "startTimeFilePath";
+	public static final String KEY_FINISH_TIME_FILE_PATH = "finishTimeFilePath";
 	public static final String KEY_RESULT_FILE_PATH = "resultFilePath";
 	public static final String KEY_NAME_FILE_PATH = "nameFilePath";
-	public static final String KEY_MINIMUM_RACE_DURATION = "minimumRaceDuration";
-	public static final String KEY_MINIMUM_STAGE_DURATION = "minimumStageDuration";
-	public static final String KEY_MAXIMUM_LAP_DURATION = "maximumLapDuration";
-	public static final String KEY_MAXIMUM_RACE_DURATION = "maximumRaceDuration";
-	public static final String KEY_STAGE_AMOUNT = "stageAmount";
-	public static final String KEY_STAGE_NAMES = "stageNames"; //stageNames=etapp1,etapp2,etapp3
-	public static final String KEY_SPECIAL_STAGE_NAMES = "specialStageNames"; //specialStageNames=etapp1*2
-	public static final String KEY_RESULT_FORMAT="resultFormat"; //CSV or HTML
-	public static final String KEY_RESULT_SORTED="resultSorted"; //true or false
+	
+	public static final String KEY_SHORTEST_POSSIBLE_TIME = "shortestPossibleTime";
+	public static final String KEY_START_TIME_LIMIT = "startTimeLimit";
+	
+//	public static final String KEY_STAGE_AMOUNT = "stageAmount";
+//	public static final String KEY_STAGE_NAMES = "stageNames"; //stageNames=etapp1,etapp2,etapp3
+//	public static final String KEY_SPECIAL_STAGE_NAMES = "specialStageNames"; //specialStageNames=etapp1*2
+	
+	public static final String KEY_RESULT_FORMAT = "resultFormat"; //CSV or HTML
+	public static final String KEY_RESULT_SORTED = "resultSorted"; //true or false
 	
 	public Configuration() throws IOException {
 		this (DEFAULT_PROPERTIES_FILE);
@@ -55,22 +59,32 @@ public class Configuration extends Properties {
 		else
 		{
 			put(KEY_NAME_FILE_PATH, "data/namn.txt");
+			put(KEY_START_TIME_FILE_PATH, "data/starttimes/");
+			put(KEY_FINISH_TIME_FILE_PATH, "data/finishtimes/");
 			put(KEY_RESULT_FILE_PATH, "data/result.txt");
-			put(KEY_GUI_OUTPUT_FILE_PATH, "data/utdata.txt");
+			
 			put(KEY_RACE_TYPE, VALUE_RACE_MARATHON);
-			put(KEY_MINIMUM_RACE_DURATION, "00.15.00");
-			put(KEY_MAXIMUM_RACE_DURATION, "23.59.59");
+			put(KEY_SHORTEST_POSSIBLE_TIME, "00.15.00");
+			put(KEY_START_TIME_LIMIT, "01.00.00");
+			
+			put(KEY_RESULT_FORMAT, VALUE_FORMAT_CSV);
+			put(KEY_RESULT_SORTED, "false");
 			
 			FileOutputStream out = new FileOutputStream(propertiesFile);
 			store(out, generateComment());
 			out.close();
 		}
 	}
+	
 
 	private String generateComment() {
 		return "Enduro config file\n\n"
 				+ "Valid race types:\n"
 				+ " - " + VALUE_RACE_MARATHON + "\n"
-				+ " - " + VALUE_RACE_LAPS + "\n";
+				+ " - " + VALUE_RACE_LAPS + "\n"
+				+ "\n"
+				+ "Valid result formats:\n"
+				+ " - " + VALUE_FORMAT_CSV + "\n"
+				+ " - " + VALUE_FORMAT_HTML + " (not supported yet)\n";
 	}
 }

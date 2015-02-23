@@ -98,11 +98,7 @@ public class PreRegistrationDialog extends JDialog implements ActionListener {
 		return startNumberField.getText();
 	}
 
-	/**
-	 * Update option depending on event, Register or Remove.
-	 * 
-	 * @param e The event.
-	 */
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == register) {

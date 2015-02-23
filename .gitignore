@@ -54,3 +54,6 @@ local.properties
 # IntelliJ IDEA specific
 .idea
 *.iml
+
+# wat?
+.nfs*

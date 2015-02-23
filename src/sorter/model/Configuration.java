@@ -2,9 +2,12 @@ package sorter.model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+
+import sorter.SorterMain;
 
 /**
  * Contains standard keys for different settings.
@@ -17,7 +20,7 @@ public class Configuration extends Properties {
 	public static final String VALUE_FORMAT_CSV = "csv";
 	public static final String VALUE_FORMAT_HTML = "html";
 	
-	private static final File DEFAULT_PROPERTIES_FILE = new File("data/config.ini"); 
+	private static final String DEFAULT_PROPERTIES_FILE = "data/config.ini"; 
 
 	 // TODO Configuration; Ändra så att startTimeFilePath och finishTimeFilePath har Folder istället för File i namnet
 	 // ALLA MÅSTE TA BORT SINA CONFIG-FILER OM DETTA ÄNDRAS! Uppdatera även filerna i testfiles/config/
@@ -41,7 +44,13 @@ public class Configuration extends Properties {
 	public static final String KEY_RESULT_SORTED = "resultSorted"; //true or false
 	
 	public Configuration() throws IOException {
-		this (DEFAULT_PROPERTIES_FILE);
+		// Set the working directory of the program to the folder containing the program.
+		// If you double-click a jar-file in linux the working directory is set to the user home by default.
+		// We want it to be set to the folder of the program, therefore these lines are necessary
+		File workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
+		File defaultProperties = new File(workingDirectory, DEFAULT_PROPERTIES_FILE);
+		
+		init(defaultProperties);
 	}
 	/**
 	 * Creates a new Properties while passing the path to the config file as a parameter.
@@ -51,6 +60,10 @@ public class Configuration extends Properties {
 	 * @throws IOException if the config file could not be read.
 	 */
 	public Configuration(File propertiesFile) throws IOException {
+		init(propertiesFile);
+	}
+	private void init(File propertiesFile) throws FileNotFoundException,
+			IOException {
 		File parentFile = propertiesFile.getParentFile();
 		if(parentFile!=null){
 			propertiesFile.getParentFile().mkdirs();

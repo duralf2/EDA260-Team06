@@ -3,8 +3,18 @@ package gui.model;
 import java.math.BigInteger;
 import java.util.Comparator;
 
+/**
+ * Compares the times for two start numbers.
+ */
 public class StartNumberComparator implements Comparator<String> {
 
+	/**
+	 * Compares the times for two start numbers.
+	 * 
+	 * @param contestant1 the first start number
+	 * @param contestant2 the second start number
+	 * @return -1, 0 or 1 as the time for contestant1 is numerically less than, equal to, or greater than that of contestant2.
+	 */
 	@Override
 	public int compare(String o1, String o2) {
 		boolean pre1 = o1.equals("Pre-registered time");

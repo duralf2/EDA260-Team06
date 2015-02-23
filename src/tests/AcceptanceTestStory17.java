@@ -17,12 +17,13 @@ import sorter.model.Configuration;
 import sorter.model.ContestantFactory;
 import sorter.model.Database;
 
-public class AcceptanceTestStory16 extends AbstractFileComparisonTest {
+public class AcceptanceTestStory17 extends AbstractFileComparisonTest {
 
-	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16/namnfil.txt";
-	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16/starttider.txt";
-	private String finishTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16/maltider.txt";
-	private String resultFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest16/resultat.txt";
+	private String namesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest17/namnfil.txt";
+	private String startTimesFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest17/starttider.txt";
+	private String finishTimesFilepath1 = "testfiles/acceptanstest/Iteration2/acceptanstest17/maltider1.txt";
+	private String finishTimesFilepath2 = "testfiles/acceptanstest/Iteration2/acceptanstest17/maltider2.txt";
+	private String resultFilepath = "testfiles/acceptanstest/Iteration2/acceptanstest17/resultat.txt";
 	private File outfile;
 	private FileWriter fw;
 	private Configuration config;
@@ -46,12 +47,13 @@ public class AcceptanceTestStory16 extends AbstractFileComparisonTest {
 	}
 
 	@Test
-	public void testStory16() throws IOException, FileNotFoundException {
+	public void testStory17() throws IOException, FileNotFoundException {
 		Database db = new Database();
 		
 		reader.readNames(new File(namesFilepath), db);
 		reader.readStartTime(new File(startTimesFilepath), db);
-		reader.readFinishTime(new File(finishTimesFilepath), db);
+		reader.readFinishTime(new File(finishTimesFilepath1), db);
+		reader.readFinishTime(new File(finishTimesFilepath2), db);
 
 		fw.writeResults(config, db, false);
 

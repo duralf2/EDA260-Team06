@@ -12,7 +12,7 @@ public abstract class AbstractContestant implements
 	protected static Configuration config;
 
 	protected LinkedList<Time> startTime, finishTime;
-	// TODO: Hantera finishTime då denna är null!
+
 
 	private String className;
 	protected ContestantProperties racerInfo;
@@ -116,7 +116,7 @@ public abstract class AbstractContestant implements
 		return finishTime.size();
 	}
 	
-	//TODO: why do we have two different toString methods, would it not be simpler to remove this one?
+
 	/**
 	 * This method only delegates to the toString(CompetitionType, boolean) method.
 	 * @param competitionType the type of competition this contestant is in
@@ -148,6 +148,10 @@ public abstract class AbstractContestant implements
 	 */
 	protected abstract String specifiedToString(CompetitionType competitionType, boolean useShortFormat);
 
+	/**
+	 * Returns the total time of the race.
+	 * @return The total time of the race.
+	 */
 	public Time getTotalTime()
 	{
 		Time startTime = new Time("00.00.00");

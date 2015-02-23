@@ -16,6 +16,9 @@ import java.util.Observable;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * This class handles time registration logic.
+ */
 public class ContestantTimes extends Observable {
 	private Map<String, ArrayList<String>> times;
 	private List<String> errorTimes;
@@ -23,6 +26,12 @@ public class ContestantTimes extends Observable {
 	private File nameFile;
 	private File timeFile;
 
+	/**
+	 * The constructor for <code>ContestantTimes</code>.
+	 * 
+	 * @param nameFile The file with names.
+	 * @param timeFile The file with times.
+	 */
 	public ContestantTimes(File nameFile, File timeFile) {
 		this.nameFile = nameFile;
 		this.timeFile = timeFile;
@@ -33,6 +42,12 @@ public class ContestantTimes extends Observable {
 		readTimesFromFile();
 	}
 
+	/**
+	 * Adds a time to the start number.
+	 * 
+	 * @param startNumber The start number.
+	 * @param time The time.
+	 */
 	public void addTime(String startNumber, String time) {
 		ArrayList<String> contestantTimes = times.get(startNumber);
 		if (contestantTimes == null) {
@@ -46,6 +61,11 @@ public class ContestantTimes extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Pre-registers a time.
+	 * 
+	 * @param time The time.
+	 */
 	public void preRegister(String time) {
 		ArrayList<String> preRegisteredTime = new ArrayList<String>();
 		preRegisteredTime.add(time);
@@ -56,6 +76,9 @@ public class ContestantTimes extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Removes a pre-registered time.
+	 */
 	public void removePreRegisteredTime() {
 		times.remove("Pre-registered time");
 
@@ -64,6 +87,11 @@ public class ContestantTimes extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Returns pre-registered time.
+	 * 
+	 * @return The pre-registered time, if no pre-registered time exists returns null.
+	 */
 	public String getPreRegisteredTime() {
 		if (times.containsKey("Pre-registered time")) {
 			ArrayList<String> preRegisteredTime = times.get("Pre-registered time");
@@ -73,6 +101,11 @@ public class ContestantTimes extends Observable {
 		}
 	}
 
+	/**
+	 * Performs mass start.
+	 * 
+	 * @param time The time. 
+	 */
 	public void performMassStart(String time) {
 		Set<Entry<String, ArrayList<String>>> entries = times.entrySet();
 
@@ -84,6 +117,12 @@ public class ContestantTimes extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Checks if the start number is registered.
+	 * 
+	 * @param startNumber The start number.
+	 * @return True if start number is registered, otherwise False.
+	 */
 	public boolean isRegistered(String startNumber) {
 		return registeredContestants.contains(startNumber);
 	}
@@ -97,6 +136,9 @@ public class ContestantTimes extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Reads times from timeFile.
+	 */
 	public void readTimesFromFile() {
 		errorTimes = FileReaderGUI.readTimesFromFile(timeFile, this);
 		writeTimesToFile();
@@ -104,6 +146,9 @@ public class ContestantTimes extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Writes times to timeFile.
+	 */
 	public void writeTimesToFile() {
 		PrintWriter pw = null;
 		Map<String, ArrayList<String>> times = new TreeMap<String, ArrayList<String>>(new StartNumberComparator());
@@ -122,6 +167,11 @@ public class ContestantTimes extends Observable {
 		}
 	}
 
+	/**
+	 * Returns all registered times.
+	 * 
+	 * @return A Map containing all times.
+	 */
 	public Map<String, ArrayList<String>> getTimes() {
 		return times;
 	}

@@ -38,7 +38,7 @@ public class LapCompetitionTest {
 
 	@Test
 	public void testPrintColumnNames() throws IOException {
-		fw.writeString(race.toResultString());
+		fw.writeString(race.toResultString(false));
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -62,7 +62,7 @@ public class LapCompetitionTest {
 		contestant.addFinishTime(new Time("17.05.55"));
 		contestant.putInformation("Namn", "Bertil");
 		db.addContestantEntry("2", contestant);
-		fw.writeString(race.toResultString());
+		fw.writeString(race.toResultString(false));
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -72,9 +72,10 @@ public class LapCompetitionTest {
 		assertEquals("StartNr; Namn; #Varv; TotalTid; Varv1; Varv2; Start; Varvning1; Mål", scan.nextLine());
 		assertEquals("2; Bertil; 2; 02.00.00; 01.00.00; 01.00.00; 15.05.55; 16.05.55; 17.05.55", scan.nextLine());
 		assertEquals("Icke existerande startnummer", scan.nextLine());
-		assertEquals("StartNr; Namn; #Varv; TotalTid; Varv1; Varv2; Start; Varvning1; Mål", scan.nextLine());
-		assertEquals("1; ; 0; --.--.--; ; ; Start?; ; Slut?", scan.nextLine());
-				
+
+		assertEquals("StartNr; Namn; #Varv; TotalTid; Start; Mål", scan.nextLine());
+        assertEquals("1; ; 0; --.--.--; Start?; Slut?", scan.nextLine());
+
 		scan.close();
 	}
 

@@ -15,13 +15,13 @@ import sorter.model.LapCompetition;
 import sorter.model.MarathonCompetition;
 public class CompetitionFactoryTest {
 	private CompetitionFactory cf;
-	private Configuration rp;
+	private Configuration config;
 	
 	@Before
 	public void setUp(){
 		try{
-			rp = new Configuration();
-			cf = new CompetitionFactory(rp);
+			config = new Configuration();
+			cf = new CompetitionFactory(config);
 		}catch(IOException e){
 			fail("Could not read data/config.ini");
 		}
@@ -29,19 +29,19 @@ public class CompetitionFactoryTest {
 	
 	@Test
 	public void testCompFact() {
-		assertTrue(cf.createCompetition(null)!=null);;
+		assertTrue(cf.createCompetition(null)!=null);
 	}
 	
 	@Test
 	public void testLapRace() {
-			rp.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
+			config.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
 			CompetitionType ct = cf.createCompetition(null);
 			assertTrue(ct instanceof LapCompetition);
 	}
 	
 	@Test
 	public void testMarathonRace() {
-		rp.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_MARATHON);
+		config.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_MARATHON);
 		CompetitionType ct = cf.createCompetition(null);
 		assertTrue(ct instanceof MarathonCompetition);
 	}

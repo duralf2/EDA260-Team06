@@ -13,6 +13,12 @@ import javax.swing.border.BevelBorder;
 public class PreRegistrationButton extends JButton implements ActionListener {
 	private TimeRegistrationHandler registrationHandler;
 
+	/**
+	 * The pre-register button for the <code>RegistrationGUI</code>.
+	 * 
+	 * @param fontSize The wanted size of the font.
+	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
+	 */
 	public PreRegistrationButton(int fontSize, TimeRegistrationHandler registrationHandler) {
 		super("Pre-register");
 		this.registrationHandler = registrationHandler;
@@ -25,6 +31,11 @@ public class PreRegistrationButton extends JButton implements ActionListener {
 		addActionListener(this);
 	}
 
+	/**
+	 * Pre-register a <code>contestant</code>.
+	 * 
+	 * @param e The action performed.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		registrationHandler.preRegister();

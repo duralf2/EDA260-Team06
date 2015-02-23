@@ -37,7 +37,7 @@ public class AcceptanceTestStory13 extends AbstractFileComparisonTest {
 		config = new Configuration(new File("testfiles/config/lapContestant.ini"));
 		reader = new FileReader(new ContestantFactory(config));
 		AbstractContestant.setConfiguration(config);
-		config.put(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "01.20.00");
+		config.put(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "00.00.00");
 		reader = new FileReader(new ContestantFactory(config));
 	}
 
@@ -55,13 +55,13 @@ public class AcceptanceTestStory13 extends AbstractFileComparisonTest {
 		reader.readFinishTime(new File(finishTimes1Filepath), db);
 		reader.readFinishTime(new File(finishTimes2Filepath), db);
 
-		fw.writeResults(config, db);
+		fw.writeResults(config, db, false);
 
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));
 		
 		// TODO AcceptanceStory13; FIxa så att det går igenom. Olika klasser ska ha olika många kolumner i resultatet!
 		assertTrue(true);
-//		assertEquals(acceptenceResult, printedResult);
+		assertEquals(acceptenceResult, printedResult);
 	}
 }

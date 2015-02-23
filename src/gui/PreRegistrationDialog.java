@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
+/**
+ * This class handles the pre-registration dialog logic.
+ */
 public class PreRegistrationDialog extends JDialog implements ActionListener {
 	private JLabel startNumberLabel;
 	private JTextField startNumberField;
@@ -25,6 +28,11 @@ public class PreRegistrationDialog extends JDialog implements ActionListener {
 	public static final int REMOVE_OPTION = 1;
 	private int option;
 
+	/**
+	 * The constructor for PreRegistrationDialog.
+	 * 
+	 * @param fontSize The wanted font size.
+	 */
 	public PreRegistrationDialog(int fontSize) {
 		setTitle("Edit pre-registered time");
 		setModal(true);
@@ -42,11 +50,13 @@ public class PreRegistrationDialog extends JDialog implements ActionListener {
 		
 		register.setForeground(Color.WHITE);
 		register.setBackground(new Color(63, 181, 50));
+		register.setOpaque(true);
 		register.setBorder(new BevelBorder(BevelBorder.RAISED));
 		register.setFont(register.getFont().deriveFont(Font.BOLD, fontSize/2));
 		
 		removePreRegister.setForeground(Color.WHITE);
 		removePreRegister.setBackground(new Color(243, 83, 83));
+		removePreRegister.setOpaque(true);
 		removePreRegister.setBorder(new BevelBorder(BevelBorder.RAISED));
 		removePreRegister.setFont(removePreRegister.getFont().deriveFont(Font.BOLD, fontSize/2));
 		
@@ -70,14 +80,29 @@ public class PreRegistrationDialog extends JDialog implements ActionListener {
 		setVisible(true);
 	}
 
+	/**
+	 * Returns the option, register a start number or remove the pre-registration.
+	 * 
+	 * @return The option.
+	 */
 	public int getOption() {
 		return option;
 	}
 
+	/**
+	 * Returns the start number associated with the pre-registrated time.
+	 * 
+	 * @return The start number.
+	 */
 	public String getStartNumber() {
 		return startNumberField.getText();
 	}
 
+	/**
+	 * Update option depending on event, Register or Remove.
+	 * 
+	 * @param e The event.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == register) {

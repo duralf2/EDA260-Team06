@@ -27,32 +27,34 @@
     <h1>Registreringsprogrammet</h1>
     <p>Registreringsprogrammet är det som används på banan av funktionärer för att registrera tider.</p>
 
+    <p>
+        Fönstret har ett fält för manuell inmatning av startnummer,
+        en knapp för att registrera det givna startnummer, en knapp för förregistrering, samt en logg
+        som visar alla tidigare registrerade tävlande.
+        
+        Båda knapparna är gröna och på dem står "Register" respektive "Pre-register".
+        Framför fältet för inmatning av ett startnummer står "Start number:".
+        Loggen för tidigare registreringar är placerad under fältet för startnummer
+        och registreringsknappen.
+        
+        I loggen finns två kolumner, en för startnummer och en för tidpunkt
+        vid registrering. De två kolumnerna har varsin titel: "Start number" samt "Time".
+        I fall startnummer inte finns registrerat till något namn markeras den raden röd.
+        Om det är en förregistrerad tid ligger den överst i loggen och är blåmarkerad.
+    </p>
+
     <h3>Hur du startar programmet</h3>
     <p>
-        Högerklicka på "program.jar" och välj "Open with OpenJDK java7 runtime" för att starta programmet. 
+        Högerklicka på "Enduro GUI.jar" och välj "Open with OpenJDK java6 runtime" för att starta programmet. 
         Ett fönster för registrering ska nu synas på skärmen. 
     </p>
 
 	<p> För att programmet ska fungera behövs en namnfil. Namnfilen måste innehålla dels en titelrad med "StartNr; Namn".
-		Därefter listas alla tävlande, en person per rad, med startnumret följt av ett semikolon, följt av för- och efternanm.
-		Denna fil ska ligga i en mapp som ska heta data.
+		Därefter listas alla tävlande, en person per rad, med startnummer följt av ett semikolon, följt av för- och efternamn.
+		Denna fil ska ligga i en mapp som ska heta RegistrationData.
 	</p>
 
     <h3>Registrering av ett startnummer</h3>
-
-    <p>
-        Fönstret har ett fält för manuell inmatning av startnummer,
-        en knapp för att registrera det givna startnumret, samt en logg
-        som visar alla tidigare registrerade tävlande.
-        Användarfönstret har en rubrik "Registration GUI".
-        Knappen för registrering är grön och på den står "Register".
-        Framför fältet för inmatning av ett startnummer står "Start number:".
-        Loggen för tidigare registreringar är placerad under fältet för startnummer
-        och registreringsknappen, samt en titel "Registrations".
-        I fältet finns två tabeller, en för startnummer och en för tidpunkt
-        vid registrering. De två tabellerna har varsin titel: "Start number" samt "Time".
-        I fall startnumret inte finns registrerat till något namn markeras den raden röd.
-    </p>
 
     <ol>
         <li>Skriv in startnummer i registreringsfältet.</li>
@@ -73,10 +75,10 @@
         Det finns även en funktion för att förregistrera en tid. 
         Den kan användas i de fall nummerskylten inte syns för att temporärt spara korrekt tid.
         Detta görs genom att klicka på Pre-registration knappen.
-        Den förregistrerade tiden syns sen med blå bakgrund i tabellen.
-        Man kan sedan tilldela tiden till korrekt startnummer genom att klicka på tiden i tabellen.
-        Skriv sedan in startnumret och klicka på Register knappen.
-        Ifall förregistrering sker av misstag kan den tas bort genom att klicka på tiden i tabellen och sedan klicka på Remove pre-registration.</p>
+        Den förregistrerade tiden syns sen med blå bakgrund överst i loggen.
+        Man kan sedan tilldela tiden till korrekt startnummer genom att klicka på tiden i loggen.
+        Skriv sedan in startnummer och klicka på Register knappen.
+        Ifall förregistrering sker av misstag kan den tas bort genom att klicka på tiden i loggen och sedan klicka på Remove pre-registration.</p>
 
 
      <h1>Resultatprogrammet</h1>
@@ -88,40 +90,81 @@
      <h3>Hur du kör programmet</h3>
 
      <p> Öppna terminalfönstret och navigera till programmappen. 
-         Generera en resultatfil genom att skriva "java -jar resultGenerator.jar &ltnamnfil&gt &ltstarttidsfil&gt &ltsluttidsfil&gt".
+         Generera en resultatfil genom att skriva: java -jar "Result Generator.jar"
          Programmet har nu genererat en fil med resultaten.</p>
 
      <h3>Filformat</h3>
 
-     <p> Filer kan korrigeras manuellt, de ligger i mappen data. De behöver då ha följande format: </p>
+     <p> Filerna kan korrigeras manuellt, de ligger i mappen data. De har följande format: </p>
 
 
      <ul>
          <li>
              <h4>Namnfil</h4>
-             <p>En namnfil inleds med en rad som innehåller "StartNr; Namn". Därefter skrivs startnumret följt av ett semikolon, följt av för- och efternanm, radvis per person. </p>
+             <p>En namnfil inleds med en titelrad som innehåller "StartNr; Namn" och eventuellt fler kolumner med ytterliggare information, separerat med semikolon.
+             	Därefter har varje tävlande sin egen rad med information som matchar titelraden. Informationen separeras med semikolon. 
+             	Det är möjligt att utelämna information om den tävlande, men alla semikolon måste fortfarande finnas.
+             	Det går att dela in de tävlande i klasser genom att skriva ett klassnamn på en egen rad.
+             	Alla tävlande som kommer efter klassnamnet, innan nästkommande klassnamn, kommer tillhöra den givna klassen.
+             	Om inga klassnamn anges blir alla tävlande klasslösa, då skrivs inte heller några klasser ut i resultatet.
+             </p>
          </li>
          <li>
-             <h4>Tidsfil</h4>
-             <p>En tidsfil innehåller rader med startnummer följt av ett semikolon, följt av tidpunkt. Tiden skrivs på formen "hh.mm.ss".</p>
+             <h4>Tidsfiler</h4>
+             <p>En tidsfil innehåller rader med startnummer följt av ett semikolon, följt av tidpunkt. Tiden skrivs på formen "hh.mm.ss".
+             	Tiderna är indelade i två undermappar, namngivna "starttimes" respektive "finishtimes", som är för starttider respektive måltider/varvtider.
+             	I undermapparna går det att lägga in godtyckligt antal tidsfiler.
+             </p>
+             
          </li>
          <li>
              <h4>Resultatfil</h4>
              <p>
-                 En resultatfil inleds med en rad som innehåller "Placering; StartNr; Namn; Totaltid; Starttid; Måltid". 
-                 Därefter skrivs startnummer, total tid, starttid och måltid ut,radvis per person. Var del separeras med ett semikolon.
+                 En resultatfil är indelad klassvis, om klasser finns, varje avsnitt inleds med en titelrad med varierande innehåll. Varje kolumn separeras med ett semikolon.
+                 Titelraden ser olika ut beroende på tävlingstyp och sortering, däremot finns informationen i namnfilens titelrad alltid med.
+                 Därefter följer de tävlande från avsnittets klass, listade en tävlande per rad.
+             </p>
+             <p>
+             	Eventuella fel som inträffar under sorteringen presenteras i resultatfilen, följande fel kan inträffa:
+             	<ul>
+        			 <li> Ifall tider för start eller mål saknas skrivs "start?" respektive "slut?" ut istället. Dessutom skrivs "--.--.--" ut istället för en total tid för loppet.
+             		</li>
+             		<li> Om fler än en starttid för en tävlande har registrerats, skrivs "Flera starttider?" ut sist i fältet följt av de övriga starttiderna. Motsvarande gäller för flera måltider.
+             		</li>
+             		<li> Om den totala tiden för loppet understiger den satta minimumgränsen skrivs istället "Omöjlig totaltid?" ut.
+             		</li>
+             		<li> Om det finns tävlande utan namn läggs de i ett eget avsnitt i slutet av resultatfilen.
+             		</li>
+             	</ul>
+             </p>
+             
+         </li>
+         <li>
+             <h4>Konfigurationsfil</h4>
+             <p>
+                 Konfigurationsfilen bestämmer hur sorteringsprogrammet fungerar. Den är formaterad som klassiska ini-filer (med "inställning=val"). Följande inställningar finns:
+                 <ul>
+        			<li> nameFilePath - Specificerar var namnfilen finns.
+             		</li>
+             		<li> startTimeFilePath - Specificerar var mappen med starttider finns.
+             		</li>
+        			<li> finishTimeFilePath - Specificerar var mappen med starttider finns.
+        			</li>
+             		<li> resultFilePath - Specificerar var resultatfilen ska sparas.
+             		</li>
+             		<li> raceType - Vilken typ av tävling som ska sorteras (kan vara "marathon" eller "laps").
+             		</li>
+             		<li> shortestPossibleTime - Minsta godkända totaltid på ett varv eller tävling.
+             		</li>
+             		<li> startTimeLimit - Under hur lång tid nya varv kan påbörjas (endast varvlopp).
+             		</li>
+					<li> resultFormat - Vilket format resultatet ska levereras i (för tillfället endast "csv").
+             		</li>
+             		<li> resultSorted - Hurvida resultatet ska sorteras efter placering.
+             		</li>
+             	</ul>
              </p>
          </li>
      </ul>
-
-    <!--
-    <h3> Undantagsutskrifter </h3>
-    <p>Ifall tider för start eller mål saknas skrivs "start?" respektive "slut?" ut istället.
-    Om något av dessa saknas skrivs "--.--.--" ut istället för en total tid för loppet.
-    Om den totala tiden för loppet understiger 15 minuter skrivs istället "Omöjlig totaltid?" ut.
-    Om fler än en starttid för en tävlande har registrerats, skrivs "Flera starttider?" ut sist i fältet följt av de övriga starttiderna. Motsvarande gäller för flera måltider.
-    I det fall då ett registrerat startnummer inte kan matchas med en deltagare från den givna deltagarlistan, markeras registreringen med rött i registreringsloggen i användarfönstret.
-    Ett felmeddelande ges även för varje okänt registrerat startnummer.
-    </p>-->
 </body>
 </html> 

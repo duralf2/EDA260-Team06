@@ -67,7 +67,7 @@ public class LapContestant extends AbstractContestant {
 		Time previousTime = new Time("00.00.00");
 		if (!startTime.isEmpty())
 			previousTime = getStartTime();
-		int maxLaps = ((LapCompetition) competitionType).getMaxLaps();
+		int maxLaps = ((LapCompetition) competitionType).getMaxLapsByClass(getClassName());
 		for (int i = 0; i < maxLaps; i++) {
 			if (allLapTimes.size() > i) {
 				sb.append(Time.getTotalTime(previousTime, allLapTimes.get(i))
@@ -89,7 +89,7 @@ public class LapContestant extends AbstractContestant {
 					sb.append(lapTimes.get(i));
 				sb.append(";");
 			}
-	
+
 			if (!finishTime.isEmpty())
 				sb.append(getFinishTime());
 			else
@@ -115,19 +115,22 @@ public class LapContestant extends AbstractContestant {
 			}
 		}
 		Time minLapTime = new Time(config.getProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME));
-		System.out.print(minLapTime.toString());
+		Time previousTime = new Time("00.00.00");
+		if (!startTime.isEmpty())
+			previousTime = getStartTime();
 		for(int i = 0; i < lapTimes.size(); i++){
-			if(lapTimes.get(i).compareTo(minLapTime) < 0){
+			if(Time.getTotalTime(previousTime, lapTimes.get(i)).compareTo(minLapTime) < 0){
 				sb.append(";Omöjlig varvtid?");
 				break;
 			}
+			previousTime = lapTimes.get(i);
 		}
 		return sb.toString();
 	}
 	
 	
 	private String formattedTotalTime(){
-		if(startTimeSize() > 0 && lapTimes.size() > 0){
+		if(startTimeSize() > 0 && (lapTimes.size() > 0 || finishTimeSize() > 0)){
 			return getTotalTime().toString();
 		}
 		return "--.--.--";

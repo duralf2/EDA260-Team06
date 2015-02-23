@@ -5,16 +5,13 @@ import gui.model.TimeRegistrationHandler;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
+
+import sorter.SorterMain;
 
 import sorter.model.Configuration;
 
@@ -26,20 +23,27 @@ public class RegistrationStarter {
 	private static final String DEFAULT_REGISTRATION_DIRECTORY = "RegistrationData";
 	private static final String DEFAULT_REGISTRATION_PROPERTIES = DEFAULT_REGISTRATION_DIRECTORY + "/registration.properties";
 	private Properties defaultProperties;
+	private File workingDirectory;
 
 	public static void main(String[] args) {
 		new RegistrationStarter();
 	}
 
 	public RegistrationStarter() {
+		// Set the working directory of the program to the folder containing the program.
+		// If you double-click a jar-file in linux the working directory is set to the user home by default.
+		// We want it to be set to the folder of the program, therefore these lines are necessary
+		workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
+		System.setProperty("user.dir", workingDirectory.getParent());
+		
 		loadProperties();
 		startRegistration();
 	}
 
 	private void loadProperties() {
 		defaultProperties = new Properties();
-		File path = new File(DEFAULT_REGISTRATION_DIRECTORY);
-		File props = new File(DEFAULT_REGISTRATION_PROPERTIES);
+		File path = new File(workingDirectory, DEFAULT_REGISTRATION_DIRECTORY);
+		File props = new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES);
 		
 		if (!path.exists()) {
 			path.mkdir();
@@ -59,7 +63,7 @@ public class RegistrationStarter {
 		}
 		
 		try {
-			FileInputStream in = new FileInputStream(DEFAULT_REGISTRATION_PROPERTIES);
+			FileInputStream in = new FileInputStream(new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES));
 			defaultProperties.load(in);
 			if(defaultProperties.getProperty(Configuration.KEY_GUI_TITLE) == null) {
 				defaultProperties.setProperty(Configuration.KEY_GUI_TITLE, "Enduro\\ Start/Finish\\ Time\\ Registration");

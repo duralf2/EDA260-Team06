@@ -109,8 +109,17 @@ public class EntryList extends JTable implements Observer {
 		}
 	}
 
+	/**
+	 * Handles the pre-registration.
+	 */
 	// TODO - Add code to update model
 	private class PreRegistrationEditListener implements ListSelectionListener {
+		
+		/**
+		 * Handles the pre-registration. Either adds a start number or removes the pre-registration.
+		 * 
+		 * @param e The event to be done.
+		 */
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			int selectedRow = getSelectedRow();

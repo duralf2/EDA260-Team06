@@ -19,7 +19,7 @@ public class LapCompetition extends CompetitionType {
 	public String generateHeader(boolean useShortFormat) {
         return generateHeader(new ArrayList<AbstractContestant>(db.getAllContestantEntries().values()), useShortFormat);
 	}
-    
+    @Override
     public String generateHeader(List<AbstractContestant> contestants, boolean useShortFormat) {
         StringBuilder sb = new StringBuilder();
         for (String h : db.getContestantColumnNames())
@@ -47,16 +47,26 @@ public class LapCompetition extends CompetitionType {
 	//TODO: rename to getMostLaps?
 	/**
 	 * Calculates the highest amount of laps a contestant in this competition has completed. 
-	 * @return the highest number of laps completed in this competition.
+	 * @return The highest number of laps completed in this competition.
 	 */
 	public int getMaxLaps() {
         return getMaxLaps(new ArrayList<AbstractContestant>(db.getAllContestantEntries().values()));
 	}
-    
+    /**
+     * Calculates the highest amount of laps a contestant in this competition has completed by class.
+     * 
+     * @param cls the class
+     * @return The highest number of laps completed in this class.
+     */
     public int getMaxLapsByClass(String cls) {
         return getMaxLaps(new ArrayList<AbstractContestant>(db.getAllContestantsByClass(cls).values()));
     }
-    
+    /**
+     * Calculates the highest amount of laps a contestant in this competition has completed.
+     * 
+     * @param contestants The contestants in the competition.
+     * @return The highest number of laps completed among the given contestants.
+     */
     public int getMaxLaps(List<AbstractContestant> contestants) {
         int maxLaps = 0;
         for (AbstractContestant c : contestants) {
@@ -67,6 +77,7 @@ public class LapCompetition extends CompetitionType {
         return maxLaps;
     }
 
+    @Override
 	public List<AbstractContestant> sort() {
 		// TODO LapRace; Implement sort algorithm! Take a look at the algorithm
 		// in the Sorter class

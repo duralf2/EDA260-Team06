@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
+/**
+ * This class handles the pre-registration dialog logic.
+ */
 public class PreRegistrationDialog extends JDialog implements ActionListener {
 	private JLabel startNumberLabel;
 	private JTextField startNumberField;
@@ -25,6 +28,11 @@ public class PreRegistrationDialog extends JDialog implements ActionListener {
 	public static final int REMOVE_OPTION = 1;
 	private int option;
 
+	/**
+	 * The constructor for PreRegistrationDialog.
+	 * 
+	 * @param fontSize The wanted font size.
+	 */
 	public PreRegistrationDialog(int fontSize) {
 		setTitle("Edit pre-registered time");
 		setModal(true);
@@ -72,14 +80,29 @@ public class PreRegistrationDialog extends JDialog implements ActionListener {
 		setVisible(true);
 	}
 
+	/**
+	 * Returns the option, register a start number or remove the pre-registration.
+	 * 
+	 * @return The option.
+	 */
 	public int getOption() {
 		return option;
 	}
 
+	/**
+	 * Returns the start number associated with the pre-registrated time.
+	 * 
+	 * @return The start number.
+	 */
 	public String getStartNumber() {
 		return startNumberField.getText();
 	}
 
+	/**
+	 * Update option depending on event, Register or Remove.
+	 * 
+	 * @param e The event.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == register) {

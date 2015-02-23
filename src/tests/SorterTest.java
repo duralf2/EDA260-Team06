@@ -36,7 +36,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 		nameFile = new File("testfiles/acceptanstest/Iteration2/acceptanstest10/namnfil.txt");	
 		
 		conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
-		conf.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "01.00.00");
+		conf.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "00.00.00");
 		
 		Configuration c = AbstractContestant.getConfiguration();
 		

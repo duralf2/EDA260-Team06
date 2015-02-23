@@ -1,11 +1,11 @@
 package io;
 
+import gui.model.FormatErrorHandler;
 import gui.model.StartNumberComparator;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 
 import sorter.model.AbstractContestant;
 import sorter.model.ContestantFactory;
@@ -53,7 +53,7 @@ public class FileReader {
 						startNumberOrClassName, db);
 				for (int i = 0; i < line.length; i++) {
 					if (i == 0 && !StartNumberComparator.isStartNumber(line[i])) {
-						FileReaderGUI.raiseNotice(false, 0);
+						FormatErrorHandler.addError(FormatErrorHandler.NAME, i + 2);
 					} else {
 						contestant.putInformation(contestantColumns[i],
 								line[i].trim());

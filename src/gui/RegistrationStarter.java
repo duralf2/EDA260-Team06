@@ -1,6 +1,7 @@
 package gui;
 
 import gui.model.ContestantTimes;
+import gui.model.FormatErrorHandler;
 import gui.model.TimeRegistrationHandler;
 
 import java.io.File;
@@ -12,7 +13,6 @@ import java.util.Properties;
 import javax.swing.JOptionPane;
 
 import sorter.SorterMain;
-
 import sorter.model.Configuration;
 
 
@@ -92,6 +92,9 @@ public class RegistrationStarter {
 		File timeFile = new File(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
 		String title = defaultProperties.getProperty(Configuration.KEY_GUI_TITLE);
 		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
+		if (FormatErrorHandler.getErrorCount() > 0) {
+			JOptionPane.showMessageDialog(null, FormatErrorHandler.errorToString());
+		}
 		TimeRegistrationHandler registrationHandler = new TimeRegistrationHandler(
 				times);
 		new RegistrationGUI(title, registrationHandler);

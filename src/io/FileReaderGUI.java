@@ -1,6 +1,7 @@
 package io;
 
 import gui.model.ContestantTimes;
+import gui.model.FormatErrorHandler;
 import gui.model.StartNumberComparator;
 
 import java.io.File;
@@ -32,15 +33,15 @@ public class FileReaderGUI {
 			List<String[]> names = CSVReader.read(nameFile);
 			if (names.size() > 0) {
 				Iterator<String[]> iterator = names.iterator();
+				int counter = 2;
 				for (iterator.next(); iterator.hasNext();) {
 					String number = iterator.next()[0];
 					if (!StartNumberComparator.isStartNumber(number)) {
-//						System.err.println("Format error at line " + counter + " in name file.");
-						raiseNotice(false, 0);
+						FormatErrorHandler.addError(FormatErrorHandler.NAME, counter);
 					} else {
 						startNumbers.add(number);
-					
 					}
+					counter++;
 				}
 			}
 		} catch (IOException e) {
@@ -58,21 +59,24 @@ public class FileReaderGUI {
 	 * @param times
 	 *            ContestantTimes instance to hold the data.
 	 */
-
+	//TODO: Handle wrong time format
 	public static List<String> readTimesFromFile(File timeFile, ContestantTimes times) {
 		List<String> errorTimes = new LinkedList<String>();
 		try {
 			List<String[]> nameFile = CSVReader.read(timeFile);
 			for (String[] lines : nameFile) {
 				if (!StartNumberComparator.isStartNumber(lines[0])) {
-//					System.err.println("Format error at line " + counter+" in time file " + lines[0]);
-						raiseNotice(true, 0);
+						FormatErrorHandler.addError(FormatErrorHandler.TIME, 0);
 					StringBuilder sb = new StringBuilder();
 					for (String str : lines) {
 						sb.append(str + ";");
 					}
 					sb.deleteCharAt(sb.length() - 1);
-					errorTimes.add(sb.toString());
+					String s = sb.toString();
+					if (!s.contains("#ERROR")) {
+						s += "\t\t#ERROR";
+					}
+					errorTimes.add(s);
 				} else {
 					String startNumber = lines[0];
 					String time = lines[1].trim();
@@ -83,15 +87,5 @@ public class FileReaderGUI {
 			e.printStackTrace();
 		}
 		return errorTimes;
-	}
-
-	public static void raiseNotice(boolean isTime, int line) {
-		if (!timeErrorFlag && isTime) {
-			JOptionPane.showMessageDialog(null, "Format error in time file");
-			timeErrorFlag = true;
-		} else if (!nameErrorFlag && !isTime) {
-			JOptionPane.showMessageDialog(null, "Format error in name file");
-			nameErrorFlag = true;
-		}
 	}
 }

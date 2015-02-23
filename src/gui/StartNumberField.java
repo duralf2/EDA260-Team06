@@ -16,6 +16,7 @@ public class StartNumberField extends JTextField implements ActionListener {
 
 	/**
 	 * The startnumber field for the <code>RegistrationGUI</code>.
+	 * @param fontSize 
 	 * 
 	 * @param fontSize The wanted size of the font.
 	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.

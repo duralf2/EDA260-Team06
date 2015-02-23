@@ -36,7 +36,7 @@ public class AcceptanceTestStory16 extends AbstractFileComparisonTest {
 		config = new Configuration(new File("testfiles/config/lapContestant.ini"));
 		reader = new FileReader(new ContestantFactory(config));
 		AbstractContestant.setConfiguration(config);
-		config.put(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "01.00.00");
+		config.put(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "00.00.00");
 		reader = new FileReader(new ContestantFactory(config));
 	}
 

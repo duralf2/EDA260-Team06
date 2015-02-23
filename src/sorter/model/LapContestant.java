@@ -115,12 +115,16 @@ public class LapContestant extends AbstractContestant {
 			}
 		}
 		Time minLapTime = new Time(config.getProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME));
-		System.out.print(minLapTime.toString());
+		Time previousTime = new Time("00.00.00");
+		if (!startTime.isEmpty())
+			previousTime = getStartTime();
+		
 		for(int i = 0; i < lapTimes.size(); i++){
-			if(lapTimes.get(i).compareTo(minLapTime) < 0){
+			if(Time.getTotalTime(previousTime, lapTimes.get(i)).compareTo(minLapTime) < 0){
 				sb.append(";Omöjlig varvtid?");
 				break;
 			}
+			previousTime = lapTimes.get(i);
 		}
 		return sb.toString();
 	}

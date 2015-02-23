@@ -75,12 +75,12 @@ public class ContestantTimesTest {
 		String t = "00.00.00";
 		times.preRegister(t);
 		Map<String, ArrayList<String>> entries = times.getTimes();
-		ArrayList<String> c1Times = entries.get("x");
+		ArrayList<String> c1Times = entries.get("Pre-registered time");
 		assertEquals(t, c1Times.get(0));
 		String t2 = "11.11.11";
 		times.preRegister(t2);
 		entries = times.getTimes();
-		c1Times = entries.get("x");
+		c1Times = entries.get("Pre-registered time");
 		assertEquals(t2, c1Times.get(0));
 	}
 
@@ -89,9 +89,9 @@ public class ContestantTimesTest {
 		String t = "00.00.00";
 		times.preRegister(t);
 		Map<String, ArrayList<String>> entries = times.getTimes();
-		assertTrue(entries.containsKey("x"));
+		assertTrue(entries.containsKey("Pre-registered time"));
 		times.removePreRegisteredTime();
-		assertFalse(entries.containsKey("x"));
+		assertFalse(entries.containsKey("Pre-registered time"));
 	}
 
 	@Test
@@ -137,6 +137,6 @@ public class ContestantTimesTest {
 		assertEquals(t1, entries.get("6").get(0));
 		assertEquals(t2, entries.get("7").get(0));
 		assertEquals(8, entries.size()); // masstart = 5 + 2 + preregistratino 
-		assertTrue(entries.containsKey("x"));
+		assertTrue(entries.containsKey("Pre-registered time"));
 	}
 }

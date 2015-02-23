@@ -62,44 +62,44 @@ public class TimeRegistrationHandlerTest {
 
 	@Test
 	public void testPreRegister() {
-		assertTrue(registrationhandler.register("x"));
+		registrationhandler.preRegister();
 		Map<String, ArrayList<String>> entries = times.getTimes();
-		ArrayList<String> conTimes = entries.get("x");
-		assertTrue(entries.containsKey("x"));
+		ArrayList<String> conTimes = entries.get("Pre-registered time");
+		assertTrue(entries.containsKey("Pre-registered time"));
 		assertEquals(1, conTimes.size());
 	}
 
 	@Test
 	public void testRemovePreRegister() {
-		assertTrue(registrationhandler.register("x"));
+		registrationhandler.preRegister();
 		Map<String, ArrayList<String>> entries = times.getTimes();
-		assertTrue(registrationhandler.register("dx"));
-		assertFalse(entries.containsKey("x"));
+		registrationhandler.removePreRegisteredTime();
+		assertFalse(entries.containsKey("Pre-registered time"));
 	}
 
 	@Test
 	public void testAssignStartNumberToPreRegistration() {
-		assertTrue(registrationhandler.register("x"));
+		registrationhandler.preRegister();
 		Map<String, ArrayList<String>> entries = times.getTimes();
 		String t = times.getPreRegisteredTime();
-		assertTrue(registrationhandler.register("x=356"));
+		assertTrue(registrationhandler.assignPreRegistrationStartNumber("356"));
 		assertTrue(entries.containsKey("356"));
 		assertEquals(t, entries.get("356").get(0));
-		assertFalse(entries.containsKey("x"));
+		assertFalse(entries.containsKey("Pre-registered time"));
 	}
 
 	@Test
 	public void testRegisterInvalid() {
-		assertFalse(registrationhandler.register("a"));
+		assertFalse(registrationhandler.assignPreRegistrationStartNumber("a"));
 		Map<String, ArrayList<String>> entries = times.getTimes();
 		assertEquals(5, entries.size());
 		String error = registrationhandler.getLastError();
-		assertEquals("Invalid startnumber, must be a number or x.", error);
+		assertEquals("Invalid startnumber, must be a number.", error);
 	}
 
 	@Test
 	public void testRegisterInvalidPreRegistration() {
-		assertFalse(registrationhandler.register("x=111"));
+		registrationhandler.assignPreRegistrationStartNumber("111");
 		Map<String, ArrayList<String>> entries = times.getTimes();
 		assertEquals(5, entries.size());
 		assertFalse(entries.containsKey("111"));

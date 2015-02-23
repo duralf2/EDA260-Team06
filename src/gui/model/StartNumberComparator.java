@@ -7,15 +7,15 @@ public class StartNumberComparator implements Comparator<String> {
 
 	@Override
 	public int compare(String o1, String o2) {
-		boolean x1 = o1.equals("x");
-		boolean x2 = o2.equals("x");
-		if (x1 && x2) {
+		boolean pre1 = o1.equals("Pre-registered time");
+		boolean pre2 = o2.equals("Pre-registered time");
+		if (pre1 && pre2) {
 			return 0;
 		}
-		if (x1) {
+		if (pre1) {
 			return -1;
 		}
-		if (x2) {
+		if (pre2) {
 			return 1;
 		}
 		BigInteger start1 = new BigInteger(o1);

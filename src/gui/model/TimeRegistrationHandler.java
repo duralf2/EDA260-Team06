@@ -26,10 +26,8 @@ public class TimeRegistrationHandler {
 			registerContestantTime(startNumber);
 		} else if (startNumber.equals("*")) {
 			registerMassStart();
-		} else if (isPreRegistration(startNumber)) {
-			validStartNumber = preRegister(startNumber);
 		} else {
-			lastError = "Invalid startnumber, must be a number or x.";
+			lastError = "Invalid startnumber, must be a number or *(Mass start).";
 			validStartNumber = false;
 		}
 		return validStartNumber;
@@ -43,25 +41,17 @@ public class TimeRegistrationHandler {
 		String time = Time.getCurrentTime();
 		times.performMassStart(time);
 	}
-
-	private boolean isPreRegistration(String input) {
-		return input.startsWith("x") || input.equals("dx");
+	
+	public void preRegister() {
+		times.preRegister(Time.getCurrentTime());
 	}
-
-	private boolean preRegister(String input) {
-		boolean validPreRegistration = true;
-		if (input.equals("x")) {
-			times.preRegister(Time.getCurrentTime());
-		} else if (input.equals("dx")) {
-			times.removePreRegisteredTime();
-		} else if (input.startsWith("x=")) {
-			validPreRegistration = assignStartNumberToPreRegistration(input);
-		}
-		return validPreRegistration;
+	
+	public void removePreRegisteredTime() {
+		times.removePreRegisteredTime();
 	}
+	
 
-	private boolean assignStartNumberToPreRegistration(String input) {
-		String startNumber = input.substring(2);
+	public boolean assignPreRegistrationStartNumber(String startNumber) {
 		if (isNumerical(startNumber)) {
 			String preRegisteredTime = times.getPreRegisteredTime();
 			if (preRegisteredTime == null) {

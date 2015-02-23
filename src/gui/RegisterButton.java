@@ -17,6 +17,7 @@ public class RegisterButton extends JButton implements ActionListener{
 
 	/**
 	 * The register button for the <code>RegistrationGUI</code>.
+	 * @param fontSize 
 	 * 
 	 * @param fontSize The wanted size of the font.
 	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.

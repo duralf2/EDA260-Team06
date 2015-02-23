@@ -66,11 +66,11 @@ public class LapContestantTest {
 //	lapContestant.addFinishTime(new Time("00.10.01"));
 //
 //	db.addContestantEntry("1", lapContestant);
-
+//	TODO: Doesnt work as story 15.
 	@Test
 	public void testToStringMissingData() {
 		lapContestant = new LapContestant(racerInfo);
-		assertEquals("1;Lars;0;00.00.00;;;;;;;",
+		assertEquals("1;Lars;0;--.--.--;;;;;;;",
 				lapContestant.toString(new LapCompetition(db)));
 	}
 

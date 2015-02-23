@@ -1,0 +1,15 @@
+Inför onsdagens planeringsmöte, kommentarer av kund!
+Release1b Fixes:
+- Skriv in beskrivning vilka stories som är nya (löpande)
+- Fixa merge fel med Manualen
+- Lägg till utförlig info om namnfil för att man ska veta hur det fungerar.
+- Fixa namn på "starttid" "sluttid"
+- Fixa in config fil så att man kan ändra minsta möjliga totaltid.
+
+Ny storyE2:
+Förregistrering ska ske via en knapp bredvid register knappen. 
+
+Ny storyE3:
+Förbättre gui så att man kan klicka på en förregistrerad tid och skriva in den siffra man vill den ska matchas till, istället för att skriva x=startnummret i register fältet. 
+
+

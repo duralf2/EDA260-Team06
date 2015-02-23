@@ -6,26 +6,44 @@ import io.FileWriter;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import sorter.model.Configuration;
 import sorter.model.ContestantFactory;
 import sorter.model.Database;
 
 public class SorterMain {
 
-	public static void main(String[] args) throws IOException { // TODO SorterMain; Testa den här klassen?
+	public static void main(String[] args) { // TODO SorterMain; Testa den här klassen?
 		
+		boolean succeeded = true;
+		try
+		{
+			runProgram();
+		}
+		catch (Throwable e) {
+			succeeded = false;
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Exception occured: " + e.getMessage(), "Exception occured", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		if (succeeded)
+			JOptionPane.showMessageDialog(null, "Result file generated!", "Done", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private static void runProgram() throws IOException {
 		// Set the working directory of the program to the folder containing the program.
 		// If you double-click a jar-file in linux the working directory is set to the user home by default.
 		// We want it to be set to the folder of the program, therefore these lines are necessary
-		File path = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		System.setProperty("user.dir", path.getParent());
+		File workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
+		System.setProperty("user.dir", workingDirectory.getParent());
 
 		Configuration config = new Configuration();
 		
-		File nameFile = new File(config.getProperty(Configuration.KEY_NAME_FILE_PATH));
-		File startTimeFolder = new File(config.getProperty(Configuration.KEY_START_TIME_FOLDER_PATH));
-		File finishTimeFolder = new File(config.getProperty(Configuration.KEY_FINISH_TIME_FOLDER_PATH));
-		File resultFile = new File(config.getProperty(Configuration.KEY_RESULT_FILE_PATH));
+		File nameFile = new File(workingDirectory, config.getProperty(Configuration.KEY_NAME_FILE_PATH));
+		File startTimeFolder = new File(workingDirectory, config.getProperty(Configuration.KEY_START_TIME_FOLDER_PATH));
+		File finishTimeFolder = new File(workingDirectory, config.getProperty(Configuration.KEY_FINISH_TIME_FOLDER_PATH));
+		File resultFile = new File(workingDirectory, config.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 
 		boolean sortResults = Boolean.parseBoolean(config.getProperty(Configuration.KEY_RESULT_SORTED, "false"));
 		if (sortResults) {

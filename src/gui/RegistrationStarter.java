@@ -5,10 +5,8 @@ import gui.model.TimeRegistrationHandler;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -23,27 +21,27 @@ public class RegistrationStarter {
 	private static final String DEFAULT_REGISTRATION_DIRECTORY = "RegistrationData";
 	private static final String DEFAULT_REGISTRATION_PROPERTIES = DEFAULT_REGISTRATION_DIRECTORY + "/registration.properties";
 	private Properties defaultProperties;
+	private File workingDirectory;
 
 	public static void main(String[] args) {
-		
-		// Set the working directory of the program to the folder containing the program.
-		// If you double-click a jar-file in linux the working directory is set to the user home by default.
-		// We want it to be set to the folder of the program, therefore these lines are necessary
-		File path = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		System.setProperty("user.dir", path.getParent());
-		
 		new RegistrationStarter();
 	}
 
 	public RegistrationStarter() {
+		// Set the working directory of the program to the folder containing the program.
+		// If you double-click a jar-file in linux the working directory is set to the user home by default.
+		// We want it to be set to the folder of the program, therefore these lines are necessary
+		workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
+		System.setProperty("user.dir", workingDirectory.getParent());
+		
 		loadProperties();
 		startRegistration();
 	}
 
 	private void loadProperties() {
 		defaultProperties = new Properties();
-		File path = new File(DEFAULT_REGISTRATION_DIRECTORY);
-		File props = new File(DEFAULT_REGISTRATION_PROPERTIES);
+		File path = new File(workingDirectory, DEFAULT_REGISTRATION_DIRECTORY);
+		File props = new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES);
 		
 		if (!path.exists()) {
 			path.mkdir();
@@ -88,8 +86,8 @@ public class RegistrationStarter {
 	}
 
 	private void startRegistration() {
-		File nameFile = new File(defaultProperties.getProperty("nameFile"));
-		File timeFile = new File(defaultProperties.getProperty("timeFile"));
+		File nameFile = new File(workingDirectory, defaultProperties.getProperty("nameFile"));
+		File timeFile = new File(workingDirectory, defaultProperties.getProperty("timeFile"));
 		String title = defaultProperties.getProperty("title");
 		try {
 			createFilesAndDirectories(nameFile, timeFile);

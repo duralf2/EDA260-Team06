@@ -42,7 +42,7 @@ public class StartNumberComparator implements Comparator<String> {
 	}
 	
 	public static boolean isStartNumber(String startNumber) {
-		return startNumber.matches("[1-9][0-9]*");
+		return startNumber.matches("[1-9][0-9]*") || startNumber.equals("Pre-registered time");
 	}
 
 }

@@ -69,8 +69,9 @@ public class FileReaderGUI {
 						raiseNotice(true, 0);
 					StringBuilder sb = new StringBuilder();
 					for (String str : lines) {
-						sb.append(str);
+						sb.append(str + ";");
 					}
+					sb.deleteCharAt(sb.length() - 1);
 					errorTimes.add(sb.toString());
 				} else {
 					String startNumber = lines[0];

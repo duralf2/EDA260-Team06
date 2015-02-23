@@ -56,6 +56,9 @@ public class TimeRegistrationHandler {
 			times.removePreRegisteredTime();
 		} else if (input.startsWith("x=")) {
 			validPreRegistration = assignStartNumberToPreRegistration(input);
+		} else {
+			validPreRegistration = false;
+			lastError = "Invalid preregistration command.";
 		}
 		return validPreRegistration;
 	}

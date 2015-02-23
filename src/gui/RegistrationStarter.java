@@ -3,6 +3,7 @@ package gui;
 import gui.model.ContestantTimes;
 import gui.model.TimeRegistrationHandler;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,9 +11,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.ColorUIResource;
 
 import sorter.SorterMain;
-
 import sorter.model.Configuration;
 
 
@@ -35,7 +38,7 @@ public class RegistrationStarter {
 		// We want it to be set to the folder of the program, therefore these lines are necessary
 		workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
 		System.setProperty("user.dir", workingDirectory.getParent());
-		
+		UIManager.put("Table.gridColor", new ColorUIResource(Color.gray));
 		loadProperties();
 		startRegistration();
 	}

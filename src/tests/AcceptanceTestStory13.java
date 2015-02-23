@@ -62,6 +62,6 @@ public class AcceptanceTestStory13 extends AbstractFileComparisonTest {
 		
 		// TODO AcceptanceStory13; FIxa så att det går igenom. Olika klasser ska ha olika många kolumner i resultatet!
 		assertTrue(true);
-//		assertEquals(acceptenceResult, printedResult);
+		assertEquals(acceptenceResult, printedResult);
 	}
 }

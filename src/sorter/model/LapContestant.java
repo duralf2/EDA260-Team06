@@ -67,7 +67,7 @@ public class LapContestant extends AbstractContestant {
 		Time previousTime = new Time("00.00.00");
 		if (!startTime.isEmpty())
 			previousTime = getStartTime();
-		int maxLaps = ((LapCompetition) competitionType).getMaxLaps();
+		int maxLaps = ((LapCompetition) competitionType).getMaxLapsByClass(getClassName());
 		for (int i = 0; i < maxLaps; i++) {
 			if (allLapTimes.size() > i) {
 				sb.append(Time.getTotalTime(previousTime, allLapTimes.get(i))
@@ -87,7 +87,7 @@ public class LapContestant extends AbstractContestant {
 					sb.append(lapTimes.get(i));
 				sb.append(";");
 			}
-	
+
 			if (!finishTime.isEmpty())
 				sb.append(getFinishTime());
 		}

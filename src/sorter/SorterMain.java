@@ -19,29 +19,41 @@ public class SorterMain {
 		File startTimeFolder = new File(config.getProperty(Configuration.KEY_START_TIME_FOLDER_PATH));
 		File finishTimeFolder = new File(config.getProperty(Configuration.KEY_FINISH_TIME_FOLDER_PATH));
 		File resultFile = new File(config.getProperty(Configuration.KEY_RESULT_FILE_PATH));
-		
+
 		boolean sortResults = Boolean.parseBoolean(config.getProperty(Configuration.KEY_RESULT_SORTED, "false"));
 		if (sortResults) {
-			// TODO SorterMain; Fixa sortering här!
+			sort(config, nameFile, startTimeFolder, finishTimeFolder);
+		} else {
+			noSort(config, nameFile, startTimeFolder, finishTimeFolder, resultFile);
 		}
-		else {
-			Database db = new Database();
-			ContestantFactory cf = new ContestantFactory(config);
-			FileReader reader = new FileReader(cf);
-			reader.readNames(nameFile, db);
-			if (startTimeFolder.isDirectory()) {
-				for (File file : startTimeFolder.listFiles()) {
-					reader.readStartTime(file, db);
-				}
+	}
+
+	private static void sort(Configuration config, File nameFile,
+			File startTimeFolder, File finishTimeFolder) throws IOException {
+		Database db = new Database();
+		Sorter sorter = new Sorter(db, config);
+		sorter.sort(nameFile, startTimeFolder.listFiles(), finishTimeFolder.listFiles());
+	}
+
+	private static void noSort(Configuration config, File nameFile,
+			File startTimeFolder, File finishTimeFolder, File resultFile) throws IOException {
+
+		Database db = new Database();
+		ContestantFactory cf = new ContestantFactory(config);
+		FileReader reader = new FileReader(cf);
+		reader.readNames(nameFile, db);
+		if (startTimeFolder.isDirectory()) {
+			for (File file : startTimeFolder.listFiles()) {
+				reader.readStartTime(file, db);
 			}
-			if (finishTimeFolder.isDirectory()) {
-				for (File file : finishTimeFolder.listFiles()) {
-					reader.readFinishTime(file, db);
-				}
-			}
-			
-			FileWriter writer = new FileWriter(resultFile);
-			writer.writeResults(config, db);
 		}
+		if (finishTimeFolder.isDirectory()) {
+			for (File file : finishTimeFolder.listFiles()) {
+				reader.readFinishTime(file, db);
+			}
+		}
+		
+		FileWriter writer = new FileWriter(resultFile);
+		writer.writeResults(config, db);
 	}
 }

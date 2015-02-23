@@ -24,14 +24,14 @@
 
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
-		<jar destfile="build/jar/program.jar" basedir="bin">
+		<jar destfile="build/jar/Enduro GUI.jar" basedir="bin">
 			<manifest>
 				<attribute name="Main-Class" value="gui.RegistrationStarter" />
 				<!--Sets the main class of the program -->
 			</manifest>
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />
 		</jar>
-		<jar destfile="build/jar/resultGenerator.jar" basedir="bin">
+		<jar destfile="build/jar/Result Generator.jar" basedir="bin">
 					<manifest>
 						<attribute name="Main-Class" value="sorter.SorterMain" />
 						<!--Sets the main class of the program -->
@@ -84,7 +84,7 @@
 
             <batchtest fork="yes">
                 <fileset dir="src">
-                    <include name="tests/*" />
+                    <include name="tests/**" />
                 	<not>
                     	<filename name="tests/AbstractFileComparisonTest.java" />
                 	</not>

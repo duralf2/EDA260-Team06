@@ -25,22 +25,22 @@
         <td style="width: 15%">
             <div>
                 <ul>
-                    <li><a href="#" onclick="document.getElementById('viewer').src = 'Manual.html';">
+                    <li><a href="#manual">
                         Manual
                     </a>
-                    <li><a href="#" onclick="document.getElementById('viewer').src = 'Teknisk Dokumentation.html';">
+                    <li><a href="#tekdok">
                         Teknisk Dokumentation
                     </a>
                 </ul>
 
                 <ul>
-                    <li><a href="#" onclick="document.getElementById('viewer').src = 'BeskrivningAvRelease1.html';">
+                    <li><a href="#release1">
                         Release 1
                     </a>
-                    <li><a href="#" onclick="document.getElementById('viewer').src = 'BeskrivningAvRelease1b.html';">
+                    <li><a href="#release1b">
                         Release 1b
                     </a>
-                    <li><a href="#" onclick="document.getElementById('viewer').src = 'BeskrivningAvRelease2.html';">
+                    <li><a href="#release2">
                         Release 2
                     </a>
                 </ul>
@@ -55,12 +55,30 @@
 </table>
 
 <script>
+    var routes = {
+        "tekdok": 'Teknisk Dokumentation.html',
+        "manual": 'Manual.html',
+        "release1": "BeskrivningAvRelease1.html",
+        "release1b": "BeskrivningAvRelease1b.html",
+        "release2": "BeskrivningAvRelease2.html"
+    };
+    
+    
     var resizeTable = function() {
         document.getElementsByTagName("table")[0].style.height = window.innerHeight-16 + "px";
     };
 
     resizeTable();
     window.addEventListener('resize', resizeTable, false);
+
+    window.onhashchange = function() {
+        var hash = window.location.hash.substring(1);
+        document.getElementById('viewer').src = routes[hash];
+    };
+    
+    window.onload = function() {
+        window.onhashchange();
+    };
 </script>
 
 </body>

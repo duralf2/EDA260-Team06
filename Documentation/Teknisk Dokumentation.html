@@ -68,11 +68,23 @@
     <h3>Huvuduppgift</h3>
     <p>
         Registreringsprogrammet används ute i fält för att registrera start- och sluttider. 
-        Programmet generera textfiler på formatet:
+        Programmet genererar textfiler, så kallade starttidsfiler, på formatet:
     </p>
     <p>
-        startnummer; tid
+        startnummer; tid, med filtypen .txt.
     </p> 
+    
+    <p>
+        Exempel:
+<pre>StartNo; Namn
+1; Anders Asson
+2; Bengt Bsson
+3; Chris Csson
+4; David Dsson
+5; Erik Esson</pre>
+
+    </p>
+    
     <p>
         Varje person som registrerar tider kör en egen intans av programmet och genererar en egen tidsfil. 
         Dessa filer används sedan av sorteringsprogrammet för att generera en resultatfil.
@@ -81,12 +93,15 @@
     <p>
         Programmet har ett grafiskt användargränssnitt och ska kunna användas av personer med liten datorvana.
     </p>
+    
+    <img class="center" src="img/screenshot.png" style="max-width: 100%; border: 1px solid; margin: 2em;">
 
     <h3>Struktur</h3>
     <p>
         Programmet är uppbyggt efter MVC mönstret. Figuren nedan ger en något förenklad överblick av programmet.
         GUI klassen består egentligen av ett flertal mindre klasser som tillsammans utgör användargränssnittet.
-        Main-metoden som skapar de olika delklasserna och startar programmet finns i klasen <code>RegistrationStarter</code>. 
+        Main-metoden som skapar de olika delklasserna och startar programmet finns i klasen <code>RegistrationStarter</code>, 
+        som befinner sig i GUI-paketet.
     </p>
 
     <img class="center" src="img/register.png">
@@ -129,6 +144,10 @@
         Programmet sorterar ihop flera start- och måltidsfiler. Utifrån tidsfilerna och en namnifl genereras sedan en resultatfil.
         Resultatfilens utseende varierar beroende på typ av lopp, den innehåller information om exempelvis start- och sluttider, varvtider, totaltider osv. 
     </p>    
+    
+    <p>
+        Ex. resultatfil
+    </p>
 
     <h3>Struktur</h3>
     
@@ -143,7 +162,8 @@
         minsta möjliga totaltid anges i en separat konfigurationsfil, <code>config.ini</code>.
     </p>
     <p>
-        Klassen <code>Configuration</code> ansvarar för de olika konfigurationsparametrarna i config.ini.
+        Klassen <code>Configuration</code> ansvarar för de olika konfigurationsparametrarna i <code>config.ini</code>, samt är ansvarig för
+        förändring av konfigurationsparametrar.
         Javas standardklass <code>java.util.Properties</code> används för att hantera parametrarna.
         Configfilen måste finnas i en undermapp i programmappen som heter data. Om denna ej existerar så kommer den skapas av programmet.
     </p>

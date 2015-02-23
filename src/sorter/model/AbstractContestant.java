@@ -148,6 +148,10 @@ public abstract class AbstractContestant implements
 	 */
 	protected abstract String specifiedToString(CompetitionType competitionType, boolean useShortFormat);
 
+	/**
+	 * Returns the total time of the race.
+	 * @return The total time of the race.
+	 */
 	public Time getTotalTime()
 	{
 		Time startTime = new Time("00.00.00");

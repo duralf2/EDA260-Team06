@@ -28,6 +28,7 @@ public abstract class CompetitionType {
 	 * Writes the contents of this competition to a string and returns it. The result
 	 *  will be formatted like a result file in the excel file format, including the header.
 	 * @param useShortFormat Whether or not to print all the columns into the result
+	 * @return A string with the results.
 	 */
 	public String toResultString(boolean useShortFormat)
 	{
@@ -92,6 +93,12 @@ public abstract class CompetitionType {
 	 */
 	public abstract String generateHeader(boolean useShortFormat);
     
+	/**
+	 * Generates the CSV header for a competition
+	 * @param contestants a list of contestants
+	 * @param useShortFormat to indicate if all columns should be included in result
+	 * @return a String representation of the header.
+	 */
     public abstract String generateHeader(List<AbstractContestant> contestants, boolean useShortFormat);
 	
 	/**

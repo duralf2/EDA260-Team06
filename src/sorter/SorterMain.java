@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 import sorter.model.Configuration;
 import sorter.model.ContestantFactory;
 import sorter.model.Database;
-
+/**
+ * Handles the sorting process.
+ */
 public class SorterMain {
 
 	public static void main(String[] args) { // TODO SorterMain; Testa den här klassen?

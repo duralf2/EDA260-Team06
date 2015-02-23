@@ -12,12 +12,12 @@ import sorter.model.Database;
 
 public class SorterMain {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException { // TODO SorterMain; Testa den här klassen?
 		Configuration config = new Configuration();
 		
 		File nameFile = new File(config.getProperty(Configuration.KEY_NAME_FILE_PATH));
-		File startTimeFolder = new File(config.getProperty(Configuration.KEY_START_TIME_FILE_PATH));
-		File finishTimeFolder = new File(config.getProperty(Configuration.KEY_FINISH_TIME_FILE_PATH));
+		File startTimeFolder = new File(config.getProperty(Configuration.KEY_START_TIME_FOLDER_PATH));
+		File finishTimeFolder = new File(config.getProperty(Configuration.KEY_FINISH_TIME_FOLDER_PATH));
 		File resultFile = new File(config.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 		
 		boolean sortResults = Boolean.parseBoolean(config.getProperty(Configuration.KEY_RESULT_SORTED, "false"));
@@ -44,5 +44,4 @@ public class SorterMain {
 			writer.writeResults(config, db);
 		}
 	}
-
 }

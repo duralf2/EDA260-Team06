@@ -56,8 +56,8 @@ public class ConfigurationTest {
 			fail("The config line must contain an '=', line: " + line);
 
 		if (line.equals(Configuration.KEY_NAME_FILE_PATH + "=data/namn.txt")) return;
-		if (line.equals(Configuration.KEY_START_TIME_FILE_PATH + "=data/starttimes/")) return;
-		if (line.equals(Configuration.KEY_FINISH_TIME_FILE_PATH + "=data/finishtimes/")) return;
+		if (line.equals(Configuration.KEY_START_TIME_FOLDER_PATH + "=data/starttimes/")) return;
+		if (line.equals(Configuration.KEY_FINISH_TIME_FOLDER_PATH + "=data/finishtimes/")) return;
 		if (line.equals(Configuration.KEY_RESULT_FILE_PATH + "=data/result.txt")) return;
 		
 		if (line.equals(Configuration.KEY_RACE_TYPE + "=marathon")) return;

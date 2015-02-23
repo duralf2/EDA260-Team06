@@ -39,12 +39,12 @@ public class Sorter {
 	
 	/**
 	 * Generates a sorted result file for a lap event based on the input files.
-	 * @param nameFile a File object of the file with the contestant name and start number mapping.
-	 * @param startTime a File object containing the file with all the start times for the contestants of this event.
-	 * @param finishTimes a File[] containing the files with finish times for the contestants of this event.
-	 * @throws IOException if any of the Files could not be read.
+	 * @param nameFile a File object of the file with the contestant name and start number mapping
+	 * @param startTime a File[] object containing the files with all the start times
+	 * @param finishTimes a File[] containing the files with finish times
+	 * @throws IOException if any of the files could not be read
 	 */
-	public void sortLapTimes(String nameFile, File startTime, File[] finishTimes) throws IOException {
+	public void sortLapTimes(File nameFile, File[] startTime, File[] finishTimes) throws IOException {
 		setUp(nameFile, startTime, finishTimes);
 		
 		ArrayList<AbstractContestant> list = new ArrayList<AbstractContestant>();
@@ -54,9 +54,7 @@ public class Sorter {
 		fileWriter.writeSortedResult(list, conf, db);
 	}
 	
-	
-	//TODO: should be a private method?
-	public void setUp(String nameFile, File startTime, File[] finishTimes)
+	private void setUp(File nameFile, File[] startTimes, File[] finishTimes)
 			throws IOException {
 		if (!new File("data").isDirectory())
 			// Create the data directory if it doesn't exist
@@ -68,9 +66,11 @@ public class Sorter {
 		
 		FileReader read = new FileReader(factory);
 
-		read.readNames(new File(nameFile), db);
+		read.readNames(nameFile, db);
 		
-		read.readStartTime(startTime, db);
+		for (int i = 0; i < startTimes.length; i++) {
+			read.readStartTime(startTimes[i], db);
+		}
 		for (int i = 0; i < finishTimes.length; i++) {
 			read.readFinishTime(finishTimes[i], db);
 		}
@@ -82,18 +82,15 @@ public class Sorter {
 	 * Reads and sorts the collected data. After the data is sorted it is
 	 * printed to a results file.
 	 * 
-	 * @param files
-	 *            All the files containing finish times
-	 * @param nameFile
-	 *            TODO
+	 * @param nameFile a File object of the file with the contestant name and start number mapping
+	 * @param startTime a File[] object containing the files with all the start times
+	 * @param finishTimes a File[] containing the files with finish times
 	 * @throws IOException
 	 *             If any of the files doesn't exist or couldn't be closed
 	 */
-	public void sort(String nameFile, File startTime, File[] finishTimes)
+	public void sort(File nameFile, File[] startTime, File[] finishTimes)
 			throws IOException {
-		
 		setUp(nameFile, startTime, finishTimes);
-
 
 		LinkedList<AbstractContestant> sortedContestants = new LinkedList<AbstractContestant>();
 		for (AbstractContestant c : contestants.values()) {

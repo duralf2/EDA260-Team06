@@ -16,7 +16,7 @@ import sorter.model.Database;
 public class SorterTest extends AbstractFileComparisonTest {
 	private Sorter sorter;
 	private File startTime;
-	String nameFile;
+	private File nameFile;
 	private File[] finishTimes;
 	private Configuration conf;
 	
@@ -33,7 +33,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 		startTime = new File("testfiles/acceptanstest/Iteration2/acceptanstest10/starttider.txt");
 		finishTimes[0] = new File("testfiles/acceptanstest/Iteration2/acceptanstest10/maltider1.txt");
 		finishTimes[1] = new File("testfiles/acceptanstest/Iteration2/acceptanstest10/maltider2.txt");
-		nameFile = "testfiles/acceptanstest/Iteration2/acceptanstest10/namnfil.txt";	
+		nameFile = new File("testfiles/acceptanstest/Iteration2/acceptanstest10/namnfil.txt");	
 		
 		conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
 		conf.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "00.00.00");
@@ -43,7 +43,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 		AbstractContestant.setConfiguration(conf);
 		
 		sorter = new Sorter(new Database(), conf);
-		sorter.sortLapTimes(nameFile, startTime, finishTimes);
+		sorter.sortLapTimes(nameFile, new File[] { startTime }, finishTimes);
 		
 		String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest10/resultat.txt"));
 		String s2 = readFileAsString(new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
@@ -54,14 +54,14 @@ public class SorterTest extends AbstractFileComparisonTest {
 		
 	}
 	
-	//TODO Finish test
+	//TODO Finish test, use classes
 	@Test
 	public void testSortedResultList() throws IOException {
 		
 		startTime = new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/starttider.txt");
 		finishTimes[0] = new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/maltider1.txt");
 		finishTimes[1] = new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/maltider2.txt");
-		nameFile = "testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/namnfil.txt";	
+		nameFile = new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/namnfil.txt");	
 		
 		
 		conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
@@ -72,7 +72,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 		AbstractContestant.setConfiguration(conf);
 		
 		sorter = new Sorter(new Database(), conf);
-		sorter.sort(nameFile, startTime, finishTimes);
+		sorter.sort(nameFile, new File[] { startTime }, finishTimes);
 		
 		String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/sortresultat.txt"));
 		String s2 = readFileAsString(new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));

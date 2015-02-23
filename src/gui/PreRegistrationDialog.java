@@ -42,11 +42,13 @@ public class PreRegistrationDialog extends JDialog implements ActionListener {
 		
 		register.setForeground(Color.WHITE);
 		register.setBackground(new Color(63, 181, 50));
+		register.setOpaque(true);
 		register.setBorder(new BevelBorder(BevelBorder.RAISED));
 		register.setFont(register.getFont().deriveFont(Font.BOLD, fontSize/2));
 		
 		removePreRegister.setForeground(Color.WHITE);
 		removePreRegister.setBackground(new Color(243, 83, 83));
+		removePreRegister.setOpaque(true);
 		removePreRegister.setBorder(new BevelBorder(BevelBorder.RAISED));
 		removePreRegister.setFont(removePreRegister.getFont().deriveFont(Font.BOLD, fontSize/2));
 		

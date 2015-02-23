@@ -9,12 +9,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
+
+import sorter.SorterMain;
 
 
 /**
@@ -26,6 +25,13 @@ public class RegistrationStarter {
 	private Properties defaultProperties;
 
 	public static void main(String[] args) {
+		
+		// Set the working directory of the program to the folder containing the program.
+		// If you double-click a jar-file in linux the working directory is set to the user home by default.
+		// We want it to be set to the folder of the program, therefore these lines are necessary
+		File path = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		System.setProperty("user.dir", path.getParent());
+		
 		new RegistrationStarter();
 	}
 
@@ -38,7 +44,6 @@ public class RegistrationStarter {
 		defaultProperties = new Properties();
 		File path = new File(DEFAULT_REGISTRATION_DIRECTORY);
 		File props = new File(DEFAULT_REGISTRATION_PROPERTIES);
-		System.out.println(path.exists() + " " + props.exists());
 		
 		if (!path.exists()) {
 			path.mkdir();
@@ -61,7 +66,6 @@ public class RegistrationStarter {
 			FileInputStream in = new FileInputStream(DEFAULT_REGISTRATION_PROPERTIES);
 			defaultProperties.load(in);
 			if(defaultProperties.getProperty("title") == null) {
-				System.out.println("null1");
 				defaultProperties.setProperty("title", "Enduro\\ Start/Finish\\ Time\\ Registration");
 			}
 			if(defaultProperties.getProperty("nameFile") == null) {

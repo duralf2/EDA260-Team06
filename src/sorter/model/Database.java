@@ -1,5 +1,6 @@
 package sorter.model;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -50,7 +51,23 @@ public class Database {
 	public Map<String, AbstractContestant> getAllContestantEntries() {
 		return contestantEntries;
 	}
-	
+
+    /**
+     * Filters all contestants by a classname
+     * @param cls class to filter on
+     * @return filtered map of all contestants
+     */
+    public Map<String, AbstractContestant> getAllContestantsByClass(String cls) {
+        Map<String, AbstractContestant> contestants = getAllContestantEntries();
+        Map<String, AbstractContestant> contestantsFiltered = new HashMap<String, AbstractContestant>();
+        for(String key : getAllContestantEntries().keySet()) {
+            if(contestants.get(key).getClassName().equals(cls)) {
+                contestantsFiltered.put(key, contestants.get(key));
+            }
+        }
+        return contestantsFiltered;
+    }
+    
 	/**
 	 * @return the CSV-header for the contestants.
 	 */

@@ -27,6 +27,36 @@
         Delprogrammen är sammankopplade genom att användarna av registreringsprogrammet manuellt överför (usb, mail osv. ) tidsfilerna som genereras
         av registreringsprogrammet till användaren av sorteringsprogrammet.
     </p>
+    <h3>Paketstruktur </h3>
+    	Programmet har följande paketstruktur:
+    	<table>
+    		<tr>
+    			<td>Paket</td>
+    			<td>Beskrivning</td>
+    		</tr>
+    		<tr>
+    			<td>GUI</td>
+    			<td>Innehåller de klasser som bygger upp programmets användargränssnitt</td>
+    		</tr>
+    		<tr>
+    			<td>GUI.model</td>
+    			<td>Här finns klasser som hanterar tävlingstider och registreringar</td>
+    		</tr>
+    		<tr>
+    			<td>IO</td>
+    			<td>Paket för all hantering av input och output till filer</td>
+    		</tr>
+    		<tr>
+    			<td>Sorter</td>
+    			<td>Har de klasser som sorterar resultatsfiler</td>
+    		</tr>
+    		<tr>
+    			<td>Sorter.model</td>
+    			<td>Innehåller databasen för tävlande, tider, tävlingar samt konfigurationsstöd</td>
+    		</tr>
+    	</table>
+    	
+    	<p>Till programmet hör även två paket med testfiler. </p>
     <p>
         Nedan beskrivs delprogrammen mer ingående var för sig. 
     </p>
@@ -145,7 +175,7 @@
         för att skapa olika typer av tävlingar utifrån vad som anges i konfigurationsfilen.
     </p>
     
-    <h4>Öriga Klassser</h4>
+    <h4>Övriga Klasser</h4>
     <p>
         Klassen Time används för att representera tider inom programmet. Här finns även metoder för beräkningar av tider. 
     </p>
@@ -155,7 +185,7 @@
 
     <h4>Koppling mellan klasser</h4>
     <p>
-        Utifrån propertiesfilen skapas rätt typ av tävling. Tävlingen har en <code>Database</code> som utifrån innehållet i tidsfilerna och tävlingstyp fylls med rätt typ av tävlingsdeltagare.
+        Utifrån konfigurationsfilen skapas rätt typ av tävling. Tävlingen har en <code>Database</code> som utifrån innehållet i tidsfilerna och tävlingstyp fylls med rätt typ av tävlingsdeltagare.
         Varje typ av tävling håller själv reda på hur dess resultatfil ska skrivas ut. Motsvarande gäller för de olika typerna av tävlingsdeltagare som håller reda på 
         hur deras tider och information ska skrivas ut.
     </p>
@@ -176,7 +206,7 @@
         Vi använder ramverket <code>JUnit</code> för att skriva tester.
     </p>
 
-    <h3>Properties</h3>
+    <h3>Configuration</h3>
     <p>
         Parametrar skrivs på formen "&ltkey&gt=&ltvalue&gt". En rad får endast innehålla en parameter.
         Kommentarer inleds med '#' i början av raden.

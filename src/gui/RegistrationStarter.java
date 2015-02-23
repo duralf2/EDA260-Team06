@@ -65,9 +65,6 @@ public class RegistrationStarter {
 		try {
 			FileInputStream in = new FileInputStream(new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES));
 			defaultProperties.load(in);
-			if(defaultProperties.getProperty(Configuration.KEY_GUI_TITLE) == null) {
-				defaultProperties.setProperty(Configuration.KEY_GUI_TITLE, "Enduro Start/Finish Time Registration");
-			}
 			if(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH) == null) {
 				defaultProperties.setProperty(Configuration.KEY_NAME_FILE_PATH, "RegistrationData/namn.txt");
 			}
@@ -90,10 +87,9 @@ public class RegistrationStarter {
 	private void startRegistration() {
 		File nameFile = new File(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
 		File timeFile = new File(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
-		String title = defaultProperties.getProperty(Configuration.KEY_GUI_TITLE);
 		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
 		TimeRegistrationHandler registrationHandler = new TimeRegistrationHandler(
 				times);
-		new RegistrationGUI(title, registrationHandler);
+		new RegistrationGUI("Enduro Time Registration", registrationHandler);
 	}
 }

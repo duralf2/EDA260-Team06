@@ -39,7 +39,9 @@
 						<!--Sets the main class of the program -->
 					</manifest>
 					<zipgroupfileset dir="lib/" includes="**/*.jar" />
-				</jar>
+		</jar>
+		<chmod file="build/jar/Enduro GUI.jar" perm="700"/>
+		<chmod file="build/jar/Result Generator.jar" perm="700"/>
 	</target>
 	
 	<target name="main" depends="clean,jar,test, copy-data" />

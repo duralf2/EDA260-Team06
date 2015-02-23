@@ -71,12 +71,16 @@ public class SorterMain {
 		reader.readNames(nameFile, db);
 		if (startTimeFolder.isDirectory()) {
 			for (File file : startTimeFolder.listFiles()) {
-				reader.readStartTime(file, db);
+				if(file.getName().charAt(0)!='.'){
+					reader.readStartTime(file, db);					
+				}
 			}
 		}
 		if (finishTimeFolder.isDirectory()) {
 			for (File file : finishTimeFolder.listFiles()) {
-				reader.readFinishTime(file, db);
+				if(file.getName().charAt(0)!='.'){
+					reader.readFinishTime(file, db);					
+				}
 			}
 		}
 		

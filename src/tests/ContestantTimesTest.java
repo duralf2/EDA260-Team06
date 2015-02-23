@@ -130,15 +130,12 @@ public class ContestantTimesTest {
 		times.performMassStart(t1);
 		times.addTime("6", t1);
 		times.addTime("7", t2);
-		System.out.println(times.getTimes().size());
 		times.preRegister("t2");
-		System.out.println(times.getTimes().size());
 		
 		times = new ContestantTimes(nameFile, timeFile);
 		Map<String, ArrayList<String>> entries = times.getTimes();
 		assertEquals(t1, entries.get("6").get(0));
 		assertEquals(t2, entries.get("7").get(0));
-		System.out.println(entries.size());
 		assertEquals(8, entries.size()); // masstart = 5 + 2 + preregistratino 
 		assertTrue(entries.containsKey("Pre-registered time"));
 	}

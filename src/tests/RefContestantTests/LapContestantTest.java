@@ -108,7 +108,7 @@ public class LapContestantTest {
 
 	@Test
 	public void testAddFinishTime() {
-		config.setProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "13.00.00");
+		config.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "13.00.00");
 		
 		LapContestant lapContestant2 = new LapContestant(racerInfo);
 		lapContestant2.addStartTime(new Time("00.00.00"));

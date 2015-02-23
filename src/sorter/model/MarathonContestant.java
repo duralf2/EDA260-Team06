@@ -73,7 +73,7 @@ public class MarathonContestant extends AbstractContestant {
 		}
 
 		String time = getConfiguration().getProperty(
-				Configuration.KEY_MINIMUM_RACE_DURATION, "00.15.00");
+				Configuration.KEY_SHORTEST_POSSIBLE_TIME, "00.15.00");
 
 		if (!startTime.isEmpty() && !finishTime.isEmpty()) {
 			if (getTotalTime().compareTo(new Time(time)) < 0)

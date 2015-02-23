@@ -66,7 +66,7 @@ public class RegistrationStarter {
 			FileInputStream in = new FileInputStream(new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES));
 			defaultProperties.load(in);
 			if(defaultProperties.getProperty(Configuration.KEY_GUI_TITLE) == null) {
-				defaultProperties.setProperty(Configuration.KEY_GUI_TITLE, "Enduro\\ Start/Finish\\ Time\\ Registration");
+				defaultProperties.setProperty(Configuration.KEY_GUI_TITLE, "Enduro Start/Finish Time Registration");
 			}
 			if(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH) == null) {
 				defaultProperties.setProperty(Configuration.KEY_NAME_FILE_PATH, "RegistrationData/namn.txt");

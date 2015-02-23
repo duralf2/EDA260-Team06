@@ -28,6 +28,12 @@ public class Time implements Comparable<Time> {
 			throw new IllegalArgumentException();
 		}
 	}
+	
+	public Time(int hours, int minutes, int seconds){
+		this.hours = hours;
+		this.minutes = minutes;
+		this.seconds = seconds;
+	}
 
 	@Override
 	public String toString() {
@@ -60,8 +66,7 @@ public class Time implements Comparable<Time> {
 		int minutes = (totalSeconds % 3600) / 60;
 		int seconds = totalSeconds % 60;
 
-		return new Time(format(hours) + "." + format(minutes) + "."
-				+ format(seconds));
+		return new Time(hours, minutes, seconds);
 	}
 	
 	/**

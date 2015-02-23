@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.StyledEditorKit.FontSizeAction;
 
 
 /**
@@ -23,11 +24,13 @@ import javax.swing.table.DefaultTableModel;
  * invalid registrations and temporary registrations.
  */
 public class EntryList extends JTable implements Observer {
+	
+	private int fontSize;
 
 	private TimeRegistrationHandler registrationHandler;
-
 	/**
 	 * Constructor for <code>EntryList</code>.
+	 * @param fontSize 
 	 * 
 	 * @param fontSize The wanted size of the font.
 	 * @param registrationHandler The <code>TimeRegistrationHandler</code>.
@@ -36,6 +39,7 @@ public class EntryList extends JTable implements Observer {
 		super(1, 2);
 		this.registrationHandler = registrationHandler;
 		registrationHandler.addObserverToContestantTimes(this);
+		this.fontSize = fontSize;
 		setDefaultRenderer(Object.class, new TableRenderer(registrationHandler));
 		setFillsViewportHeight(true);
 		setFont(getFont().deriveFont(Font.BOLD, fontSize));
@@ -43,6 +47,7 @@ public class EntryList extends JTable implements Observer {
 		setOpaque(true);
 		setToolTipText("Old registrations.");
 		update(null, null);
+		
 	}
 
 	/**
@@ -64,8 +69,6 @@ public class EntryList extends JTable implements Observer {
 				String currentRow = timesAsString(entryTimes);
 				String[] row = new String[2];
 				String startNumber = e.getKey();
-				if (startNumber.equals("x"))
-					startNumber = "Pre-registered time";
 				row[0] = startNumber;
 				row[1] = currentRow;
 				rowData.add(row);
@@ -115,18 +118,17 @@ public class EntryList extends JTable implements Observer {
 				String startNumber = (String) getValueAt(selectedRow, 0);
 				clearSelection();
 				if (startNumber.equals("Pre-registered time")) {
-					PreRegistrationDialog t = new PreRegistrationDialog();
+					PreRegistrationDialog t = new PreRegistrationDialog(fontSize);
 					
 					if (t.getOption()==PreRegistrationDialog.REGISTER_OPTION){
 						String startNumberInput = t.getStartNumber();
-						boolean isValid = registrationHandler.register("x="
-								+ startNumberInput);
+						boolean isValid = registrationHandler.assignPreRegistrationStartNumber(startNumberInput);
 						if (!isValid) {
 							JOptionPane.showMessageDialog(null,
 								registrationHandler.getLastError());
 						}
 					}else if (t.getOption()==PreRegistrationDialog.REMOVE_OPTION){
-						registrationHandler.register("dx");
+						registrationHandler.removePreRegisteredTime();
 					}
 				}
 			}

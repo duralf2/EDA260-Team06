@@ -58,7 +58,7 @@ public class LapContestant extends AbstractContestant {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getLapsCompleted());
 		sb.append(";");
-		sb.append(getTotalTime().toString());
+		sb.append(formattedTotalTime());
 		sb.append(";");
 
 		List<Time> allLapTimes = new ArrayList<Time>(lapTimes);
@@ -98,6 +98,15 @@ public class LapContestant extends AbstractContestant {
 		
 		return sb.toString();
 	}
+	
+	
+	private String formattedTotalTime(){
+		if(startTimeSize() > 0 && lapTimes.size() > 0){
+			return getTotalTime().toString();
+		}
+		return "--.--.--";
+	}
+	
 	
 	@Override
 	public Time getTotalTime()

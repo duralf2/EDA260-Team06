@@ -1,8 +1,11 @@
 package io;
 
+import gui.model.StartNumberComparator;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
 
 import sorter.model.AbstractContestant;
 import sorter.model.ContestantFactory;
@@ -38,7 +41,6 @@ public class FileReader {
 	 */
 	public void readNames(File file, Database db) throws IOException {
 		List<String[]> data = CSVReader.read(file);
-
 		String[] contestantColumns = data.get(0);
 		readContestantColumns(contestantColumns, db);
 		data.remove(0);
@@ -46,25 +48,23 @@ public class FileReader {
 		String className = "";
 		for (String[] line : data) {
 			String startNumberOrClassName = line[0];
-			if (isStartNumber(startNumberOrClassName)) {
-
+			if (StartNumberComparator.isStartNumber(startNumberOrClassName)) {
 				AbstractContestant contestant = getContestant(
 						startNumberOrClassName, db);
 				for (int i = 0; i < line.length; i++) {
-					contestant.putInformation(contestantColumns[i],
-							line[i].trim());
+					if (i == 0 && !StartNumberComparator.isStartNumber(line[i])) {
+						FileReaderGUI.raiseNotice(false, 0);
+					} else {
+						contestant.putInformation(contestantColumns[i],
+								line[i].trim());
+					}
 				}
-
 				contestant.setClassName(className);
 				db.addContestantEntry(startNumberOrClassName, contestant);
 			} else {
 				className = startNumberOrClassName;
 			}
 		}
-	}
-
-	private boolean isStartNumber(String startNumber) {
-		return startNumber.matches("[1-9][0-9]*") || startNumber.equals("x");
 	}
 
 	private void readContestantColumns(String[] contestantColumns, Database db) {

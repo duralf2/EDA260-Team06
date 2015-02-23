@@ -62,8 +62,8 @@
         "release1b": "BeskrivningAvRelease1b.html",
         "release2": "BeskrivningAvRelease2.html"
     };
-    
-    
+
+
     var resizeTable = function() {
         document.getElementsByTagName("table")[0].style.height = window.innerHeight-16 + "px";
     };
@@ -72,10 +72,12 @@
     window.addEventListener('resize', resizeTable, false);
 
     window.onhashchange = function() {
-        var hash = window.location.hash.substring(1);
-        document.getElementById('viewer').src = routes[hash];
+      var hash = window.location.hash.substring(1);
+      if(routes[hash] === undefined)
+        hash = "manual";
+      document.getElementById('viewer').src = routes[hash];
     };
-    
+
     window.onload = function() {
         window.onhashchange();
     };

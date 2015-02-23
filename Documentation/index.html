@@ -23,7 +23,12 @@
 <table style="height: 100%; width: 100%; vertical-align: top;">
     <tr>
         <td style="width: 15%">
-            <div>
+          <div>
+            <div style="margin: 1em 0 0 1em; ">
+              <h2 style="margin-bottom: 0;">Enduro</h2>
+              <small>Team 06</small>
+              <hr style="margin-right: -1em;">
+            </div>
                 <ul>
                     <li><a href="#manual">
                         Manual
@@ -48,7 +53,7 @@
         </td>
 
         <td>
-            <iframe id=viewer src="Manual.html" style="width: 100%; height: 100%; overflow: hidden;"></iframe>
+            <iframe id=viewer style="width: 100%; height: 100%; overflow: hidden;"></iframe>
         </td>
     </tr>
 
@@ -62,8 +67,8 @@
         "release1b": "BeskrivningAvRelease1b.html",
         "release2": "BeskrivningAvRelease2.html"
     };
-    
-    
+
+
     var resizeTable = function() {
         document.getElementsByTagName("table")[0].style.height = window.innerHeight-16 + "px";
     };
@@ -72,10 +77,12 @@
     window.addEventListener('resize', resizeTable, false);
 
     window.onhashchange = function() {
-        var hash = window.location.hash.substring(1);
-        document.getElementById('viewer').src = routes[hash];
+      var hash = window.location.hash.substring(1);
+      if(routes[hash] === undefined)
+        hash = "manual";
+      document.getElementById('viewer').src = routes[hash];
     };
-    
+
     window.onload = function() {
         window.onhashchange();
     };

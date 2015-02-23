@@ -59,6 +59,14 @@ public class LapContestantTest {
 				"1;Lars;3;01.00.01;00.02.00;00.04.00;00.54.01;00.00.00;00.02.00;00.06.00;01.00.01;Flera starttider? 00.01.00",
 				lapContestant.toString(new LapCompetition(db)));
 	}
+
+	@Test
+	public void testManyFinishTimes() {
+		lapContestant.addFinishTime(new Time("01.01.00"));
+		assertEquals(
+				"1;Lars;3;01.00.01;00.02.00;00.04.00;00.54.01;00.00.00;00.02.00;00.06.00;01.00.01;Flera måltider? 01.01.00",
+				lapContestant.toString(new LapCompetition(db)));
+	}
 	@Test
 	public void testImpossibleLapTime() {
 		lapContestant.addLapTime(new Time("00.06.04"));

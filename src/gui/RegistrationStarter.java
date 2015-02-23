@@ -4,6 +4,7 @@ import gui.model.ContestantTimes;
 import gui.model.FormatErrorHandler;
 import gui.model.TimeRegistrationHandler;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,6 +12,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.ColorUIResource;
 
 import sorter.SorterMain;
 import sorter.model.Configuration;
@@ -35,7 +39,7 @@ public class RegistrationStarter {
 		// We want it to be set to the folder of the program, therefore these lines are necessary
 		workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
 		System.setProperty("user.dir", workingDirectory.getParent());
-		
+		UIManager.put("Table.gridColor", new ColorUIResource(Color.gray));
 		loadProperties();
 		startRegistration();
 	}
@@ -65,9 +69,6 @@ public class RegistrationStarter {
 		try {
 			FileInputStream in = new FileInputStream(new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES));
 			defaultProperties.load(in);
-			if(defaultProperties.getProperty(Configuration.KEY_GUI_TITLE) == null) {
-				defaultProperties.setProperty(Configuration.KEY_GUI_TITLE, "Enduro Start/Finish Time Registration");
-			}
 			if(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH) == null) {
 				defaultProperties.setProperty(Configuration.KEY_NAME_FILE_PATH, "RegistrationData/namn.txt");
 			}
@@ -90,13 +91,12 @@ public class RegistrationStarter {
 	private void startRegistration() {
 		File nameFile = new File(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
 		File timeFile = new File(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
-		String title = defaultProperties.getProperty(Configuration.KEY_GUI_TITLE);
 		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
 		if (FormatErrorHandler.getErrorCount() > 0) {
 			JOptionPane.showMessageDialog(null, FormatErrorHandler.errorToString());
 		}
 		TimeRegistrationHandler registrationHandler = new TimeRegistrationHandler(
 				times);
-		new RegistrationGUI(title, registrationHandler);
+		new RegistrationGUI("Enduro Time Registration", registrationHandler);
 	}
 }

@@ -41,24 +41,25 @@ public abstract class CompetitionType {
 		sortByClass(contestants);
 		String currentClass = "";
 		
-		for (AbstractContestant c : contestants) {
-			if (c.getInformation("Namn").equals("")){
-                c.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
-				incorrectlyRegisteredContestants.add(c);
+		for (AbstractContestant contestant : contestants) {
+			if (contestant.getInformation("Namn").equals("")){
+                contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
+				incorrectlyRegisteredContestants.add(contestant);
 			} else {
-				if (!currentClass.equals(c.getClassName())) {
-					currentClass = c.getClassName();
+				if (!currentClass.equals(contestant.getClassName())) {
+					currentClass = contestant.getClassName();
                     headerLine = generateHeader(new ArrayList<AbstractContestant>(db.getAllContestantsByClass(currentClass).values()), useShortFormat);
-					appendClassHeader(headerLine, currentClass, sb);
+                    sb.append(currentClass + "\n");
+            		sb.append(headerLine);
 				}
-				sb.append(c.toString(this, useShortFormat) + "\n");
+				sb.append(contestant.toString(this, useShortFormat) + "\n");
 			}
 		}
 		if(incorrectlyRegisteredContestants.size() > 0){
 			sb.append("Icke existerande startnummer\n");
 			sb.append(generateHeader(incorrectlyRegisteredContestants, useShortFormat));
-            for(AbstractContestant c : incorrectlyRegisteredContestants) {
-                sb.append(c.toString(this, useShortFormat) + "\n");
+            for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
+                sb.append(contestant.toString(this, useShortFormat) + "\n");
             }
 		}
 		
@@ -84,20 +85,20 @@ public abstract class CompetitionType {
 		sortByClass(contestants);
 		String currentClass = "";
 		
-		for (AbstractContestant c : contestants) {
-			if (c.getInformation("Namn").equals("")){
-                c.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
-				incorrectlyRegisteredContestants.add(c);
+		for (AbstractContestant contestant : contestants) {
+			if (contestant.getInformation("Namn").equals("")){
+                contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
+				incorrectlyRegisteredContestants.add(contestant);
 			} else {
-				if (!currentClass.equals(c.getClassName())) {
-					currentClass = c.getClassName();
+				if (!currentClass.equals(contestant.getClassName())) {
+					currentClass = contestant.getClassName();
 					if(contestantsByClass.size() > 0) {
 						sb.append(contestantsByClass.get(0).getClassName() + "\n");
 						sortWithinClass(contestantsByClass, sb);
 					}
 					contestantsByClass = new ArrayList<AbstractContestant>();
 				}
-				contestantsByClass.add(c);
+				contestantsByClass.add(contestant);
 			}
 		}
 		
@@ -109,8 +110,8 @@ public abstract class CompetitionType {
 		if(incorrectlyRegisteredContestants.size() > 0){
 			sb.append("Icke existerande startnummer\n");
 			sb.append(generateHeader(incorrectlyRegisteredContestants, useShortFormat));
-            for(AbstractContestant c : incorrectlyRegisteredContestants) {
-                sb.append(c.toString(this, useShortFormat) + "\n");
+            for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
+                sb.append(contestant.toString(this, useShortFormat) + "\n");
             }
 		}
 		
@@ -139,19 +140,15 @@ public abstract class CompetitionType {
 
 	private void sortByClass(List<AbstractContestant> contestants) {
 		Collections.sort(contestants, new Comparator<AbstractContestant>() {
-			public int compare(AbstractContestant o1, AbstractContestant o2) {
-				return o2.getClassName().compareTo(o1.getClassName());
+			public int compare(AbstractContestant contestant1, AbstractContestant contestant2) {
+				return contestant2.getClassName().compareTo(contestant1.getClassName());
 			}
 		});
 	}
 	
-	private void appendClassHeader(String headerLine, String className, StringBuilder sb) {
-		sb.append(className + "\n");
-		sb.append(headerLine);
-	}
 	
 	/**
-	 * delegates method call to generateHeader(boolean)
+	 * Delegates method call to generateHeader(boolean)
 	 * @return a CSV style String of the header
 	 */
 	public String generateHeader() {

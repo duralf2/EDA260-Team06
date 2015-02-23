@@ -2,6 +2,7 @@ package sorter.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -106,12 +107,19 @@ public class LapContestant extends AbstractContestant {
 		return sb.toString();
 	}
 	
-	private String generateExtraColumn(){
+	private String generateExtraColumn() {
 		StringBuilder sb = new StringBuilder();
 		if(startTimeSize() > 1) {
 			sb.append(";Flera starttider?");
 			for (int i = 1; i < startTimeSize(); i++){
 				sb.append(" " + startTime.get(i).toString());
+			}
+		}
+		if (finishTime.size() > 1) {
+			sb.append(";Flera måltider?");
+
+			for (int i = 1; i < finishTimeSize(); i++){
+				sb.append(" " + finishTime.get(i).toString());
 			}
 		}
 		Time minLapTime = new Time(config.getProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME));

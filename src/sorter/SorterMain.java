@@ -1,23 +1,48 @@
 package sorter;
 
+import io.FileReader;
+import io.FileWriter;
+
 import java.io.File;
 import java.io.IOException;
 
+import sorter.model.Configuration;
+import sorter.model.ContestantFactory;
 import sorter.model.Database;
 
-//TODO: vilken skall användas, denna eller ResultMain? Kund vill ha en jar fil för gui och en för sortering.
-/**
- * Main for the sorting program, filepaths hardcoded for now.
- */
 public class SorterMain {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Refactor; Anropa sortering i main
-		Sorter s = new Sorter(new Database());
-		File[] files = {new File("testfiles/acceptanstest/Iteration2/acceptanstest18/starttider.txt"),
-                        new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider1.txt"),
-                        new File("testfiles/acceptanstest/Iteration2/acceptanstest18/maltider2.txt")};
-		//s.sort(files, new File("testfiles/acceptanstest/Iteration2/acceptanstest18/namnfil.txt"));
+		Configuration config = new Configuration();
+		
+		File nameFile = new File(config.getProperty(Configuration.KEY_NAME_FILE_PATH));
+		File startTimeFolder = new File(config.getProperty(Configuration.KEY_START_TIME_FILE_PATH));
+		File finishTimeFolder = new File(config.getProperty(Configuration.KEY_FINISH_TIME_FILE_PATH));
+		File resultFile = new File(config.getProperty(Configuration.KEY_RESULT_FILE_PATH));
+		
+		boolean sortResults = Boolean.parseBoolean(config.getProperty(Configuration.KEY_RESULT_SORTED, "false"));
+		if (sortResults) {
+			// TODO SorterMain; Fixa sortering här!
+		}
+		else {
+			Database db = new Database();
+			ContestantFactory cf = new ContestantFactory(config);
+			FileReader reader = new FileReader(cf);
+			reader.readNames(nameFile, db);
+			if (startTimeFolder.isDirectory()) {
+				for (File file : startTimeFolder.listFiles()) {
+					reader.readStartTime(file, db);
+				}
+			}
+			if (finishTimeFolder.isDirectory()) {
+				for (File file : finishTimeFolder.listFiles()) {
+					reader.readFinishTime(file, db);
+				}
+			}
+			
+			FileWriter writer = new FileWriter(resultFile);
+			writer.writeResults(config, db);
+		}
 	}
 
 }

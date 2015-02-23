@@ -66,7 +66,6 @@ public class ContestantTimes extends Observable {
 		ArrayList<String> preRegisteredTime = new ArrayList<String>();
 		preRegisteredTime.add(time);
 		times.put("Pre-registered time", preRegisteredTime);
-
 		writeTimesToFile();
 		setChanged();
 		notifyObservers();

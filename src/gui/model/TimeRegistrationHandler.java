@@ -62,6 +62,14 @@ public class TimeRegistrationHandler {
 	public void removePreRegisteredTime() {
 		times.removePreRegisteredTime();
 	}
+	
+	public boolean hasPreRegistered(){
+		if(times.getPreRegisteredTime()!=null)
+		{
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Assigns a start number to a pre-registered time.

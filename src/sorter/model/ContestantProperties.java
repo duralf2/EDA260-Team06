@@ -15,7 +15,7 @@ public class ContestantProperties {
 	}
 	
 	/**
-	 * Adds an Key-Value entry to the contestant properties.
+	 * Adds an entry to the contestant properties.
 	 * @param key a String of the property name
 	 * @param value a String representing the property value
 	 */

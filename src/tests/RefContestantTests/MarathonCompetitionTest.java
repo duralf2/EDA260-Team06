@@ -38,7 +38,7 @@ public class MarathonCompetitionTest {
 	
 	@Test
 	public void testPrintColumnNames() throws IOException {
-		fw.writeString(race.toResultString());
+		fw.writeString(race.toResultString(false));
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);
@@ -63,7 +63,7 @@ public class MarathonCompetitionTest {
 		contestant.putInformation("Namn", "Bertil");
 		db.addContestantEntry("2", contestant);
 		
-		fw.writeString(race.toResultString());
+		fw.writeString(race.toResultString(false));
 		Scanner scan = null;
 		try {
 			scan = new Scanner(outfile);

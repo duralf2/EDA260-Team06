@@ -59,6 +59,7 @@ public class FileWriter {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
+	//TODO this method is not used - remove?
 	public void writeSortedResult(ArrayList<AbstractContestant> contestants,
 			Configuration conf, Database db) throws FileNotFoundException,
 			IOException {
@@ -84,14 +85,16 @@ public class FileWriter {
 	 *            The information we have on the contestants.
 	 * @param db
 	 *            The database for the race
+	 * @param useShortFormat TODO
 	 * @throws IOException
 	 */
-	public void writeResults(Configuration config, Database db)
+	public void writeResults(Configuration config, Database db, boolean useShortFormat)
 			throws IOException {
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
 		CompetitionType competition = competitionFactory.createCompetition(db);
-		writeString(competition.toResultString());
+		writeString(competition.toResultString(useShortFormat));
 	}
+	
 
 	/**
 	 * Writes a string to the file.
@@ -125,34 +128,11 @@ public class FileWriter {
 	 *            The database for the race.
 	 * @throws IOException
 	 */
-	public void writeResultList(
-			LinkedList<AbstractContestant> sortedContestants,
-			Configuration conf, Database db) throws IOException {
-
-		CompetitionType competitionType = new CompetitionFactory(conf)
-				.createCompetition(db);
-
-		StringBuilder sb = new StringBuilder();
-		String incompleted = "";
-
-		sb.append("Plac;" + competitionType.generateHeader(true));
-		int place = 1;
-		for (int i = 0; i < sortedContestants.size(); i++) {
-			AbstractContestant contestant = sortedContestants.get(i);
-			if (contestant.completedRace()) {
-				sb.append(place + ";" + contestant.toString(competitionType, true)
-						+ "\n");
-				place++;
-			} else {
-				incompleted += ";" + contestant.toString(competitionType, true)
-						+ "\n";
-			}
-		}
-
-		sb.append(incompleted);
-
-		writeString(sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n"));
-
+	public void writeResultList(Configuration config, Database db, boolean useShortFormat)
+			throws IOException {
+			CompetitionFactory competitionFactory = new CompetitionFactory(config);
+			CompetitionType competition = competitionFactory.createCompetition(db);
+			writeString(competition.toResultStringWithPlacement(useShortFormat));
 	}
 
 	/**

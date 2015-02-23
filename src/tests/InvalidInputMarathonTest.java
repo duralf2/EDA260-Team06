@@ -54,7 +54,7 @@ public class InvalidInputMarathonTest {
 		db.addContestantEntry("1", contestant);
 
 		contestant.addFinishTime(new Time("13.23.34"));
-		fileWriter.writeResults(conf, db);
+		fileWriter.writeResults(conf, db, false);
 
 		sc = new Scanner(f);
 		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
@@ -66,7 +66,7 @@ public class InvalidInputMarathonTest {
 		db.addContestantEntry("1", contestant);
 		contestant.addStartTime(new Time("13.23.34"));
 
-		fileWriter.writeResults(conf, db);
+		fileWriter.writeResults(conf, db, false);
 
 		sc = new Scanner(f);
 		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
@@ -79,7 +79,7 @@ public class InvalidInputMarathonTest {
 
 		contestant.addStartTime(new Time("13.23.34"));
 		contestant.addFinishTime(new Time("13.30.34"));
-		fileWriter.writeResults(conf, db);
+		fileWriter.writeResults(conf, db, false);
 
 		sc = new Scanner(f);
 		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
@@ -94,7 +94,7 @@ public class InvalidInputMarathonTest {
 		contestant.addFinishTime(new Time("14.30.34"));
 		db.addContestantEntry("1", contestant);
 
-		fileWriter.writeResults(conf, db);
+		fileWriter.writeResults(conf, db, false);
 
 		sc = new Scanner(f);
 		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());
@@ -110,7 +110,7 @@ public class InvalidInputMarathonTest {
 		contestant.addFinishTime(new Time("14.31.34"));
 		db.addContestantEntry("1", contestant);
 		
-		fileWriter.writeResults(conf, db);
+		fileWriter.writeResults(conf, db, false);
 
 		sc = new Scanner(f);
 		assertEquals("StartNr; Namn; TotalTid; Starttider; Måltider", sc.nextLine());

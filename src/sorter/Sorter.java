@@ -51,7 +51,7 @@ public class Sorter {
 		for( AbstractContestant c : contestants.values()) {
 			list.add(c);
 		}
-		fileWriter.writeSortedResult(list, conf, db);
+		fileWriter.writeResults(conf, db, false);
 	}
 	
 	private void setUp(File nameFile, File[] startTimes, File[] finishTimes)
@@ -92,13 +92,13 @@ public class Sorter {
 			throws IOException {
 		setUp(nameFile, startTime, finishTimes);
 
-		LinkedList<AbstractContestant> sortedContestants = new LinkedList<AbstractContestant>();
-		for (AbstractContestant c : contestants.values()) {
-			sortedContestants.add(c);
-		}
-		Collections.sort(sortedContestants);
-
-		
-		fileWriter.writeResultList(sortedContestants, conf, db);
+//		LinkedList<AbstractContestant> sortedContestants = new LinkedList<AbstractContestant>();
+//		for (AbstractContestant c : contestants.values()) {
+//			sortedContestants.add(c);
+//		}
+//		Collections.sort(sortedContestants);
+//
+		fileWriter.writeResultList( conf, db, true);
+//		fileWriter.writeResultList(conf, db, true);
 	}
 }

@@ -81,6 +81,6 @@ public class SorterMain {
 		}
 		
 		FileWriter writer = new FileWriter(resultFile);
-		writer.writeResults(config, db);
+		writer.writeResults(config, db, false);
 	}
 }

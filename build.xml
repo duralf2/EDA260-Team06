@@ -86,7 +86,7 @@
 
             <batchtest fork="yes">
                 <fileset dir="src">
-                    <include name="tests/*" />
+                    <include name="tests/**" />
                 	<not>
                     	<filename name="tests/AbstractFileComparisonTest.java" />
                 	</not>

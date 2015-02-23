@@ -45,7 +45,7 @@ public class ContestantTimes extends Observable {
 	public void preRegister(String time) {
 		ArrayList<String> preRegisteredTime = new ArrayList<String>();
 		preRegisteredTime.add(time);
-		times.put("x", preRegisteredTime);
+		times.put("Pre-registered time", preRegisteredTime);
 
 		writeTimesToFile();
 		setChanged();
@@ -53,7 +53,7 @@ public class ContestantTimes extends Observable {
 	}
 
 	public void removePreRegisteredTime() {
-		times.remove("x");
+		times.remove("Pre-registered time");
 
 		writeTimesToFile();
 		setChanged();
@@ -61,8 +61,8 @@ public class ContestantTimes extends Observable {
 	}
 
 	public String getPreRegisteredTime() {
-		if (times.containsKey("x")) {
-			ArrayList<String> preRegisteredTime = times.get("x");
+		if (times.containsKey("Pre-registered time")) {
+			ArrayList<String> preRegisteredTime = times.get("Pre-registered time");
 			return preRegisteredTime.get(0);
 		} else {
 			return null;

@@ -19,9 +19,11 @@ public class Configuration extends Properties {
 	
 	private static final File DEFAULT_PROPERTIES_FILE = new File("data/config.ini"); 
 
+	 // TODO Configuration; Ändra så att startTimeFilePath och finishTimeFilePath har Folder istället för File i namnet
+	 // ALLA MÅSTE TA BORT SINA CONFIG-FILER OM DETTA ÄNDRAS! Uppdatera även filerna i testfiles/config/
 	public static final String KEY_RACE_TYPE = "raceType";	
-	public static final String KEY_START_TIME_FILE_PATH = "startTimeFilePath";
-	public static final String KEY_FINISH_TIME_FILE_PATH = "finishTimeFilePath";
+	public static final String KEY_START_TIME_FOLDER_PATH = "startTimeFilePath";
+	public static final String KEY_FINISH_TIME_FOLDER_PATH = "finishTimeFilePath";
 	public static final String KEY_RESULT_FILE_PATH = "resultFilePath";
 	public static final String KEY_NAME_FILE_PATH = "nameFilePath";
 	
@@ -59,8 +61,8 @@ public class Configuration extends Properties {
 		else
 		{
 			put(KEY_NAME_FILE_PATH, "data/namn.txt");
-			put(KEY_START_TIME_FILE_PATH, "data/starttimes/");
-			put(KEY_FINISH_TIME_FILE_PATH, "data/finishtimes/");
+			put(KEY_START_TIME_FOLDER_PATH, "data/starttimes/");
+			put(KEY_FINISH_TIME_FOLDER_PATH, "data/finishtimes/");
 			put(KEY_RESULT_FILE_PATH, "data/result.txt");
 			
 			put(KEY_RACE_TYPE, VALUE_RACE_MARATHON);

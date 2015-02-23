@@ -130,7 +130,7 @@ public class LapContestant extends AbstractContestant {
 	
 	
 	private String formattedTotalTime(){
-		if(startTimeSize() > 0 && lapTimes.size() > 0){
+		if(startTimeSize() > 0 && (lapTimes.size() > 0 || finishTimeSize() > 0)){
 			return getTotalTime().toString();
 		}
 		return "--.--.--";

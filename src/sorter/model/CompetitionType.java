@@ -26,7 +26,7 @@ public abstract class CompetitionType {
 	}
 	/**
 	 * Writes the contents of this competition to a string and returns it. The result
-	 *  will be formatted like a result file in the excel file format, including the header.
+	 *  will be formatted like a result file in the excel file format, including the header. 
 	 * @param useShortFormat Whether or not to print all the columns into the result
 	 * @return A string with the results.
 	 */
@@ -67,8 +67,16 @@ public abstract class CompetitionType {
 		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
 	}
 	
+	/**
+	 * Writes the contents of this competition to a string and returns it. The result
+	 *  will be formatted like a result file in the excel file format, including the header. 
+	 *  This method also adds placement to the contestants.
+	 * @param useShortFormat Whether or not to print all the columns into the result
+	 * @return A string with the results.
+	 */
 	public String toResultStringWithPlacement(boolean useShortFormat) {
 		StringBuilder sb = new StringBuilder();
+		
 		List<AbstractContestant> incorrectlyRegisteredContestants = new ArrayList<AbstractContestant>();
 		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
 		List<AbstractContestant> contestantsByClass = new ArrayList<AbstractContestant>();
@@ -88,11 +96,9 @@ public abstract class CompetitionType {
 						sortWithinClass(contestantsByClass, sb);
 					}
 					contestantsByClass = new ArrayList<AbstractContestant>();
-					
 				}
 				contestantsByClass.add(c);
 			}
-			
 		}
 		
 		if(contestantsByClass.size() > 0) {
@@ -108,8 +114,6 @@ public abstract class CompetitionType {
             }
 		}
 		
-	//	if (currentClass.equals(""))
-		//	sb.insert(0, headerLine);
 		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
 	}
 	

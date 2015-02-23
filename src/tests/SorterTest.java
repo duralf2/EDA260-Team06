@@ -53,8 +53,6 @@ public class SorterTest extends AbstractFileComparisonTest {
 		AbstractContestant.setConfiguration(c);
 		
 	}
-	
-	//TODO Finish test, use classes
 	@Test
 	public void testSortedResultList() throws IOException {
 		
@@ -82,7 +80,6 @@ public class SorterTest extends AbstractFileComparisonTest {
 		AbstractContestant.setConfiguration(c);
 	}
 	
-	//TODO Finish test, use classes
 		@Test
 		public void testSortedResultListWithClasses() throws IOException {
 			startTime = new File("testfiles/acceptanstest/Iteration2/acceptanstest18/starttider.txt");

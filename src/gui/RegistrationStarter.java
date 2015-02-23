@@ -61,7 +61,7 @@ public class RegistrationStarter {
 		}
 		
 		try {
-			FileInputStream in = new FileInputStream(DEFAULT_REGISTRATION_PROPERTIES);
+			FileInputStream in = new FileInputStream(new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES));
 			defaultProperties.load(in);
 			if(defaultProperties.getProperty("title") == null) {
 				defaultProperties.setProperty("title", "Enduro\\ Start/Finish\\ Time\\ Registration");

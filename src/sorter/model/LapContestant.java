@@ -114,7 +114,14 @@ public class LapContestant extends AbstractContestant {
 				sb.append(" " + startTime.get(i).toString());
 			}
 		}
-		Time minLapTime = new Time(config.getProperty(Configuration.KEY_MINIMUM_LAP_DURATION));
+		Time minLapTime = new Time(config.getProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME));
+		System.out.print(minLapTime.toString());
+		for(int i = 0; i < lapTimes.size(); i++){
+			if(lapTimes.get(i).compareTo(minLapTime) < 0){
+				sb.append(";Omöjlig varvtid?");
+				break;
+			}
+		}
 		return sb.toString();
 	}
 	
@@ -162,7 +169,7 @@ public class LapContestant extends AbstractContestant {
 	}
 
 	private Time getRaceTime() {
-		String data = getConfiguration().getProperty(Configuration.KEY_MINIMUM_RACE_DURATION, "00.00.00");
+		String data = getConfiguration().getProperty(Configuration.KEY_START_TIME_LIMIT, "00.00.00");
 		Time time = new Time(data);
 		return time;
 	}

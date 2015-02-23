@@ -15,7 +15,7 @@
 
 	<target name="compile">
         <mkdir dir="bin" />
-		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath"/>
+		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath" source="1.6" target="1.6"/>
 	</target>
 
     <target name="javadoc">
@@ -26,7 +26,7 @@
 		<mkdir dir="build/jar" />
 		<jar destfile="build/jar/program.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="register.gui.RegistrationStarter" />
+				<attribute name="Main-Class" value="gui.RegistrationStarter" />
 				<!--Sets the main class of the program -->
 			</manifest>
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />
@@ -40,7 +40,7 @@
 				</jar>
 	</target>
 	
-	<target name="main" depends="clean,jar,test" />
+	<target name="main" depends="clean,jar,test, copy-data" />
 	<!--Runs clean, jar and test in order-->
 
 	<target name="testreports">
@@ -85,8 +85,22 @@
             <batchtest fork="yes">
                 <fileset dir="src">
                     <include name="tests/*" />
+                	<not>
+                    	<filename name="tests/AbstractFileComparisonTest.java" />
+                	</not>
                 </fileset>
             </batchtest>
         </junit>
     </target>
+	
+	<target name="copy-data" depends="test">
+		<mkdir dir="build/jar/data" />
+		<copy todir="build/jar/data">
+		    <fileset dir="data" />
+		</copy>
+		<mkdir dir="build/jar/RegistrationData" />
+		<copy todir="build/jar/RegistrationData">
+			<fileset dir="RegistrationData" />
+		</copy>
+	</target>
 </project>

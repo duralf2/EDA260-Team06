@@ -2,10 +2,10 @@ package sorter;
 
 import io.FileReader;
 import io.FileWriter;
+import io.WorkingDirectory;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -39,16 +39,7 @@ public class SorterMain {
 	}
 
 	private static void runProgram() throws IOException {
-		// Set the working directory of the program to the folder containing the program.
-		// If you double-click a jar-file in linux the working directory is set to the user home by default.
-		// We want it to be set to the folder of the program, therefore these lines are necessary
-		File workingDirectory = null;
-		try {
-			workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
-			System.setProperty("user.dir", workingDirectory.getParent());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
+		File workingDirectory = new WorkingDirectory().getDirectory();
 
 		Configuration config = new Configuration();
 

@@ -96,6 +96,11 @@ public class RegistrationStarter {
             timeFile.createNewFile();
         } catch(IOException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Could not create name or time file"
+                            + "\nClosing registration system", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         }
 		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
 		if (FormatErrorHandler.getErrorCount() > 0) {

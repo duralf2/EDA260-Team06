@@ -13,10 +13,8 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.ColorUIResource;
 
-import sorter.SorterMain;
 import sorter.model.Configuration;
 
 
@@ -37,7 +35,8 @@ public class RegistrationStarter {
 		// Set the working directory of the program to the folder containing the program.
 		// If you double-click a jar-file in linux the working directory is set to the user home by default.
 		// We want it to be set to the folder of the program, therefore these lines are necessary
-		workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
+		
+		workingDirectory = new File(RegistrationStarter.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
 		System.setProperty("user.dir", workingDirectory.getParent());
 		UIManager.put("Table.gridColor", new ColorUIResource(Color.gray));
 		loadProperties();
@@ -65,7 +64,6 @@ public class RegistrationStarter {
 				System.exit(1);
 			}
 		}
-		
 		try {
 			FileInputStream in = new FileInputStream(new File(workingDirectory, DEFAULT_REGISTRATION_PROPERTIES));
 			defaultProperties.load(in);
@@ -89,8 +87,8 @@ public class RegistrationStarter {
 	}
 
 	private void startRegistration() {
-		File nameFile = new File(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
-		File timeFile = new File(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
+		File nameFile = new File(workingDirectory, defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
+		File timeFile = new File(workingDirectory, defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
         try {
             nameFile.createNewFile();
             timeFile.createNewFile();
@@ -102,6 +100,7 @@ public class RegistrationStarter {
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
+
 		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
 		if (FormatErrorHandler.getErrorCount() > 0) {
 			JOptionPane.showMessageDialog(null, FormatErrorHandler.errorToString());

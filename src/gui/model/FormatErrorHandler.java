@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.TreeSet;
 
+import javax.swing.JOptionPane;
+
+import sorter.SorterMain;
 import sorter.model.Configuration;
 
 public class FormatErrorHandler {
@@ -43,13 +46,17 @@ public class FormatErrorHandler {
 	}
 	
 	private static void setUp() {
+		
+		File workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
+		System.setProperty("user.dir", workingDirectory.getParent());
+		
         if(tree == null) {
             tree = new TreeSet<String>();
         }
 		if (conf == null) {
             try {
 				conf = new Properties();
-				conf.load(new FileReader(new File("RegistrationData/registration.properties")));
+				conf.load(new FileReader(new File(workingDirectory, "RegistrationData/registration.properties")));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

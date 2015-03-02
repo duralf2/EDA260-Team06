@@ -144,12 +144,19 @@
 
 		<copy todir="build/release/program/runnable">
 			<fileset dir="build/jar" />
+						
 			<fileset dir=".">
-				<include name="RegistrationData/**" />
+				<include name="RegistrationData/registration.properties" />
 				<include name="data/**" />
 			</fileset>
 		</copy>
+		
+		<copy file="antSetup/namn.txt" todir="build/release/program/runnable/RegistrationData"/>
+		<touch file="build/release/program/runnable/RegistrationData/times.txt" />
+		
 
+		<chmod file="build/release/program/runnable/Enduro GUI.jar" perm="700" />
+		<chmod file="build/release/program/runnable/Result Generator.jar" perm="700" />
 
 	</target>
 

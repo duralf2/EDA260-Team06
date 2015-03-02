@@ -63,7 +63,6 @@ public class SorterTest extends AbstractFileComparisonTest {
 		finishTimes[1] = new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/maltider2.txt");
 		nameFile = new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/namnfil.txt");	
 		
-		
 		conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
 		conf.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "01.00.00");
 		conf.setProperty(Configuration.KEY_RESULT_SORTED, "true");
@@ -136,6 +135,34 @@ public class SorterTest extends AbstractFileComparisonTest {
 			AbstractContestant.setConfiguration(c);
 		}
 		
+		
+		@Test
+		public void testOneLapOverAnHour() throws IOException{
+			startTime = new File("testfiles/SorterTestOverAnHour/starttimesOverAnHour.txt");
+			
+			File[] finishTime = new File[1]; 
+			finishTime[0] = new File("testfiles/SorterTestOverAnHour/finishtimesOverAnHour.txt");
+			
+			nameFile = new File("testfiles/SorterTestOverAnHour/namnfil.txt");	
+			
+			conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
+			
+			Configuration c = AbstractContestant.getConfiguration();
+			conf.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "01.00.00");
+			conf.setProperty(Configuration.KEY_RESULT_SORTED, "true");
+			
+			AbstractContestant.setConfiguration(conf);
+			
+			sorter = new SorterSetUp(new Database(), conf);
+			sorter.sort(nameFile, new File[] { startTime }, finishTime);
+			
+			String s1 = readFileAsString(new File("testfiles/SorterTestOverAnHour/resultsOverAnHour.txt"));
+			String s2 = readFileAsString(new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
+		
+			assertEquals(s1,s2);
+			
+			AbstractContestant.setConfiguration(c);	
+		}
 	
 	//TODO add test marathon race : IS DONE
 

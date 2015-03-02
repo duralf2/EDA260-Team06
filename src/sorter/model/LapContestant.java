@@ -35,7 +35,7 @@ public class LapContestant extends AbstractContestant {
 		if (o instanceof LapContestant) {
 			LapContestant lapContestant = (LapContestant) o;
 			if (getLapsCompleted() == lapContestant.getLapsCompleted()) {
-				return getTotalTime().compareTo(lapContestant.getTotalTime());
+				return lapContestant.getTotalTime().compareTo(getTotalTime());
 			}
 			return getLapsCompleted() - lapContestant.getLapsCompleted();
 		}

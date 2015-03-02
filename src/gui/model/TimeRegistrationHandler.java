@@ -1,5 +1,6 @@
 package gui.model;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observer;
@@ -29,8 +30,8 @@ public class TimeRegistrationHandler {
 	 */
 	public boolean register(String startNumber) {
 		boolean validStartNumber = true;
-		if (isNumerical(startNumber)) {
-			registerContestantTime(startNumber);
+		if (StartNumberComparator.isStartNumber(startNumber)) {
+			registerContestantTime(new BigInteger(startNumber).toString());
 		} else if (startNumber.equals("*")) {
 			registerMassStart();
 		} else {
@@ -78,7 +79,7 @@ public class TimeRegistrationHandler {
 	 * @return True if successful, otherwise False.
 	 */
 	public boolean assignPreRegistrationStartNumber(String startNumber) {
-		if (isNumerical(startNumber)) {
+		if (StartNumberComparator.isStartNumber(startNumber)) {
 			String preRegisteredTime = times.getPreRegisteredTime();
 			if (preRegisteredTime == null) {
 				lastError = "No preregistered time set.";
@@ -92,10 +93,6 @@ public class TimeRegistrationHandler {
 			lastError = "Invalid startnumber, must be a number.";
 			return false;
 		}
-	}
-
-	private boolean isNumerical(String startNumber) {
-		return startNumber.matches("[0-9]*");
 	}
 	
 	/**

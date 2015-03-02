@@ -36,10 +36,6 @@ public class Configuration extends Properties {
 	
 	public static final String KEY_TIME_FILE_PATH = "timeFilePath";
 	
-//	public static final String KEY_STAGE_AMOUNT = "stageAmount";
-//	public static final String KEY_STAGE_NAMES = "stageNames"; //stageNames=etapp1,etapp2,etapp3
-//	public static final String KEY_SPECIAL_STAGE_NAMES = "specialStageNames"; //specialStageNames=etapp1*2
-	
 	public static final String KEY_RESULT_FORMAT = "resultFormat"; //CSV or HTML
 	public static final String KEY_RESULT_SORTED = "resultSorted"; //true or false
 	

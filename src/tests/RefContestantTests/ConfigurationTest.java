@@ -84,16 +84,4 @@ public class ConfigurationTest {
 		
 		assertEquals("TestData", properties.get("TestEntry"));
 	}
-	
-	// TODO ConfigurationTest; Lägg tillbaka testet när etapplopp finns
-//	@Test
-//	public void testMultipleStages() {
-//		properties.setProperty(Configuration.KEY_STAGE_NAMES, "etapp1,etapp2,etapp3");
-//		String[] stages = properties.getProperty(Configuration.KEY_STAGE_NAMES).split(",");
-//		int i = 1;
-//		for (String s : stages) {
-//			assertEquals(s, "etapp"+i);
-//			i++;
-//		}
-//	}
 }

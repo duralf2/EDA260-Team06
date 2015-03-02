@@ -11,8 +11,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 /**
  * This class is responsible for reading files formatted in the excel file
  * format for the GUI.
@@ -59,7 +57,6 @@ public class FileReaderGUI {
 	 * @param times
 	 *            ContestantTimes instance to hold the data.
 	 */
-	//TODO: Handle wrong time format
 	public static List<String> readTimesFromFile(File timeFile, ContestantTimes times) {
 		List<String> errorTimes = new LinkedList<String>();
 		try {

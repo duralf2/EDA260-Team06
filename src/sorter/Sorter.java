@@ -1,9 +1,13 @@
 package sorter;
 
+import gui.model.StartNumberComparator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import sorter.model.AbstractContestant;
 import sorter.model.CompetitionType;
@@ -82,7 +86,9 @@ public class Sorter {
 		String currentClass = "";
 		
 		for (AbstractContestant contestant : contestants) {
+			System.out.println(contestant.getInformation("Namn"));
 			if (contestant.getInformation("Namn").equals("")){
+				System.out.println(contestant.getInformation("Namn") + " har inget namn");
                 contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
 				incorrectlyRegisteredContestants.add(contestant);
 			} else {
@@ -97,10 +103,10 @@ public class Sorter {
 					incorrectlyRegisteredContestants.clear();
 				}
 				
-				if(contestant.completedRace())
+//				if(contestant.completedRace())
 					contestantsByClass.add(contestant);
-				else
-					incorrectlyRegisteredContestants.add(contestant);
+//				else
+//					incorrectlyRegisteredContestants.add(contestant);
 			}
 		}
 		
@@ -110,9 +116,14 @@ public class Sorter {
 		}
 		
 		if(incorrectlyRegisteredContestants.size() > 0){
+			sb.append("Icke existerande startnummer\n");
+			sb.append(competitionType.generateHeader(incorrectlyRegisteredContestants, useShortFormat));
             for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
-                sb.append(";" + contestant.toString(competitionType, useShortFormat) + "\n");
+                sb.append(contestant.toString(competitionType, useShortFormat) + "\n");
             }
+//            for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
+//                sb.append(";" + contestant.toString(competitionType, useShortFormat) + "\n");
+//            }
 		}
 		
 		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
@@ -127,6 +138,7 @@ public class Sorter {
 	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb, boolean useShortFormat) {
 		Collections.sort(contestants);
 		String incompleted = "";
+		TreeMap<String, String> t = new TreeMap<String, String>(new StartNumberComparator());
 
 		sb.append("Plac;" + competitionType.generateHeader(new ArrayList<AbstractContestant>(contestants), useShortFormat));
 		int place = 1;
@@ -137,9 +149,12 @@ public class Sorter {
 						+ "\n");
 				place++;
 			} else {
-				incompleted += ";" + contestant.toString(competitionType, useShortFormat)
-						+ "\n";
+				t.put(contestant.getInformation("StartNr"),";" + contestant.toString(competitionType, useShortFormat)
+						+ "\n");
 			}
+		}
+		for (String s : t.values()) {
+			incompleted += s;
 		}
 		sb.append(incompleted);
 	}

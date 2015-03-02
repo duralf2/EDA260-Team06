@@ -20,13 +20,9 @@ public class Time implements Comparable<Time> {
 		}
 
 		String[] hms = time.split("\\.");
-		try {
-			hours = Integer.parseInt(hms[0]);
-			minutes = Integer.parseInt(hms[1]);
-			seconds = Integer.parseInt(hms[2]);
-		} catch (Exception e) {
-			throw new IllegalArgumentException();
-		}
+		hours = Integer.parseInt(hms[0]);
+		minutes = Integer.parseInt(hms[1]);
+		seconds = Integer.parseInt(hms[2]);
 	}
 	
 	public Time(int hours, int minutes, int seconds){

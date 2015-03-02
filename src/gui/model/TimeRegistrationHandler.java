@@ -95,7 +95,7 @@ public class TimeRegistrationHandler {
 	}
 
 	private boolean isNumerical(String startNumber) {
-		return startNumber.matches("[1-9][0-9]*");
+		return startNumber.matches("[0-9]*");
 	}
 	
 	/**

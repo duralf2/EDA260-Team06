@@ -27,9 +27,8 @@ public abstract class CompetitionType {
 	 * @param useShortFormat
 	 * @return
 	 */
-	public String toResultString(boolean useShortFormat)
-	{
-			return sorter.toResultString(useShortFormat);
+	public String toResultString(boolean useShortFormat) {
+		return sorter.toResultString(useShortFormat);
 	}
 	
 	/**

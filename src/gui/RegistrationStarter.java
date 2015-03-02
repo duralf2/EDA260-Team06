@@ -73,7 +73,7 @@ public class RegistrationStarter {
 				defaultProperties.setProperty(Configuration.KEY_NAME_FILE_PATH, "RegistrationData/namn.txt");
 			}
 			if(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH) == null) {
-				defaultProperties.setProperty(Configuration.KEY_TIME_FILE_PATH, "RegistrationData/atimes.txt");
+				defaultProperties.setProperty(Configuration.KEY_TIME_FILE_PATH, "RegistrationData/times.txt");
 			}
 			defaultProperties.store(new FileOutputStream(props), null);
 			in.close();
@@ -91,6 +91,12 @@ public class RegistrationStarter {
 	private void startRegistration() {
 		File nameFile = new File(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
 		File timeFile = new File(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
+        try {
+            nameFile.createNewFile();
+            timeFile.createNewFile();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
 		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
 		if (FormatErrorHandler.getErrorCount() > 0) {
 			JOptionPane.showMessageDialog(null, FormatErrorHandler.errorToString());

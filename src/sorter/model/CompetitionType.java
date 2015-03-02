@@ -141,7 +141,7 @@ public abstract class CompetitionType {
 	private void sortByClass(List<AbstractContestant> contestants) {
 		Collections.sort(contestants, new Comparator<AbstractContestant>() {
 			public int compare(AbstractContestant contestant1, AbstractContestant contestant2) {
-				return contestant2.getClassName().compareTo(contestant1.getClassName());
+				return contestant1.getClassName().compareTo(contestant2.getClassName());
 			}
 		});
 	}

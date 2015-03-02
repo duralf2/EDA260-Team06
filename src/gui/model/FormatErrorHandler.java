@@ -3,10 +3,9 @@ package gui.model;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Properties;
 import java.util.TreeSet;
-
-import javax.swing.JOptionPane;
 
 import sorter.SorterMain;
 import sorter.model.Configuration;
@@ -47,8 +46,13 @@ public class FormatErrorHandler {
 	
 	private static void setUp() {
 		
-		File workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
-		System.setProperty("user.dir", workingDirectory.getParent());
+		File workingDirectory = null;
+		try {
+			workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
+			System.setProperty("user.dir", workingDirectory.getParent());
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
 		
         if(tree == null) {
             tree = new TreeSet<String>();

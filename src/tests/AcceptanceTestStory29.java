@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import sorter.Sorter;
+import sorter.SorterSetUp;
 import sorter.model.AbstractContestant;
 import sorter.model.Configuration;
 import sorter.model.ContestantFactory;
@@ -79,7 +79,7 @@ public class AcceptanceTestStory29 extends AbstractFileComparisonTest {
 		reader.readFinishTime(new File(finishTimesFilepath1), db);
 		reader.readFinishTime(new File(finishTimesFilepath2), db);
 		
-		Sorter sorter = new Sorter(new Database(), config);
+		SorterSetUp sorter = new SorterSetUp(new Database(), config);
 		sorter.sort(new File(namesFilepath), new File[] { new File(startTimesFilepath) }, new File[] { new File(finishTimesFilepath1), new File(finishTimesFilepath2) });
 
 		String printedResult = readFileAsString(outfile);

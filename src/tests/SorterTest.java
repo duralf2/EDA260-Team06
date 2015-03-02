@@ -9,13 +9,13 @@ import java.io.PrintWriter;
 import org.junit.Before;
 import org.junit.Test;
 
-import sorter.Sorter;
+import sorter.SorterSetUp;
 import sorter.model.AbstractContestant;
 import sorter.model.Configuration;
 import sorter.model.Database;
 
 public class SorterTest extends AbstractFileComparisonTest {
-	private Sorter sorter;
+	private SorterSetUp sorter;
 	private File startTime;
 	private File nameFile;
 	private File[] finishTimes;
@@ -43,7 +43,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 		
 		AbstractContestant.setConfiguration(conf);
 		
-		sorter = new Sorter(new Database(), conf);
+		sorter = new SorterSetUp(new Database(), conf);
 		sorter.sortLapTimes(nameFile, new File[] { startTime }, finishTimes);
 		
 		String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest10/resultat.txt"));
@@ -71,7 +71,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 		
 		AbstractContestant.setConfiguration(conf);
 		
-		sorter = new Sorter(new Database(), conf);
+		sorter = new SorterSetUp(new Database(), conf);
 		sorter.sort(nameFile, new File[] { startTime }, finishTimes);
 		
 		String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest18NoClasses/sortresultat.txt"));
@@ -97,7 +97,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 			
 			AbstractContestant.setConfiguration(conf);
 			
-			sorter = new Sorter(new Database(), conf);
+			sorter = new SorterSetUp(new Database(), conf);
 			sorter.sort(nameFile, new File[] { startTime }, finishTimes);
 			
 			String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/acceptanstest18/sortresultat.txt"));
@@ -124,7 +124,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 			
 			AbstractContestant.setConfiguration(conf);
 			
-			sorter = new Sorter(new Database(), conf);
+			sorter = new SorterSetUp(new Database(), conf);
 			sorter.sort(nameFile, new File[] { startTime }, finishTimes);
 			
 			String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/varvlopptid-fullt/sortresultat.txt"));

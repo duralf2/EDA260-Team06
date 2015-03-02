@@ -32,3 +32,12 @@ table {
 th, td {
 	border: 1px solid black;
 }
+
+li {
+    padding-left: 4px;
+}
+
+span.new, li.new {
+    padding-left: 2px;
+    border-left: 2px solid rgb(0, 180, 0);
+}

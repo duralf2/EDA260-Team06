@@ -20,7 +20,7 @@ build
 data
 data/*
 *.xml
-RegistrationData/times.txt
+RegistrationData/*
 
 local.properties
 .settings/

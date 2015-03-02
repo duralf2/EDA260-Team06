@@ -89,14 +89,14 @@ public class RegistrationStarter {
 	private void startRegistration() {
 		File nameFile = new File(workingDirectory, defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
 		File timeFile = new File(workingDirectory, defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
+
 		try {
 			nameFile.createNewFile();
 			timeFile.createNewFile();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		ContestantTimes times = new ContestantTimes(nameFile, timeFile);
 		if (FormatErrorHandler.getErrorCount() > 0) {
 			JOptionPane.showMessageDialog(null, FormatErrorHandler.errorToString());

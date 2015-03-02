@@ -30,6 +30,7 @@
 		<jar destfile="build/jar/Enduro GUI.jar" basedir="bin">
 			<manifest>
 				<attribute name="Main-Class" value="gui.RegistrationStarter" />
+				<attribute name="Class-Path" value="." />
 				<!--Sets the main class of the program -->
 			</manifest>
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />
@@ -124,16 +125,8 @@
 
 
 	<target name="example_files">
-		<copy todir="build/release/example_files" flatten="true">
-			<fileset dir=".">
-				<include name="RegistrationData/namn.txt" />
-				<!-- <include name="testfiles/namnWithClasses.txt" /> -->
-				<!-- <include name="testfiles/namnMoreColumns.txt" /> -->
-				<include name="testfiles/test1.txt" />
-				<include name="testfiles/config/marathonContestant.ini" />
-				<include name="testfiles/config/lapContestant.ini" />
-				<include name="testfiles/config/stageContestant.ini" />
-			</fileset>
+		<copy todir="build/release/example_files">
+			<fileset dir="Documentation/Exempelfiler" />
 		</copy>
 	</target>
 
@@ -157,6 +150,7 @@
 				<include name="data/**" />
 			</fileset>
 		</copy>
+
 
 	</target>
 

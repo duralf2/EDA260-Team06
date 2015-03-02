@@ -13,15 +13,19 @@ public class FormatErrorHandler {
 	
 	private static TreeSet<String> tree;
 	private static Properties conf;
-	private static boolean initialized;
-	
+
+    /**
+     * Adds an error to the output
+     * @param type Decides if the error concerns the namefile or timefile.
+     * @param line Which line number the error occurs at, doesn't apply to time.
+     */
 	public static void addError(int type, int line) {
-		setUp();
-		if (type == NAME) {
-			tree.add("Format error in " + conf.getProperty(Configuration.KEY_NAME_FILE_PATH) + " at line " + line);
-		} else if (type == TIME) {
-			tree.add("Format error in " + conf.getProperty(Configuration.KEY_TIME_FILE_PATH));
-		}
+        setUp();
+        if (type == NAME) {
+            tree.add("Format error in " + conf.getProperty(Configuration.KEY_NAME_FILE_PATH) + " at line " + line);
+        } else if (type == TIME) {
+            tree.add("Format error in " + conf.getProperty(Configuration.KEY_TIME_FILE_PATH));
+        }
 	}
 	
 	public static int getErrorCount() {
@@ -39,15 +43,24 @@ public class FormatErrorHandler {
 	}
 	
 	private static void setUp() {
-		if (!initialized) {
-			tree = new TreeSet<String>();
-			try {
+        if(tree == null) {
+            tree = new TreeSet<String>();
+        }
+		if (conf == null) {
+            try {
 				conf = new Properties();
 				conf.load(new FileReader(new File("RegistrationData/registration.properties")));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			initialized = true;
 		}
 	}
+    
+    public static void setConf(Properties aconf) {
+        if (aconf != null) {
+            conf = aconf;
+        } else {
+            throw new NullPointerException();
+        }
+    }
 }

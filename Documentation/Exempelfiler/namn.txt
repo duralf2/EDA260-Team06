@@ -1,0 +1,9 @@
+StartNr; Namn; Klubb
+DAMER
+1; Ella Eriksson; A
+2; Therese Magnusson; Drake
+HERRAR
+3; Adam A; A
+4; Bertil B; C
+5; Cecil C; Drake
+6; David D; Drake

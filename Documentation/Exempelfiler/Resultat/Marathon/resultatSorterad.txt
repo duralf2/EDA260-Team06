@@ -1,0 +1,10 @@
+HERRAR
+Plac; StartNr; Namn; Klubb; TotalTid
+1; 4; Bertil B; C; 00.44.23
+2; 6; David D; Drake; 00.44.59
+3; 5; Cecil C; Drake; 00.48.12
+4; 3; Adam A; A; 00.50.40
+DAMER
+Plac; StartNr; Namn; Klubb; TotalTid
+1; 2; Therese Magnusson; Drake; 00.40.48
+2; 1; Ella Eriksson; A; 00.59.00

@@ -30,11 +30,11 @@ public class RegistrationStarter {
 	private Properties defaultProperties;
 	private File workingDirectory;
 
-	public static void main(String[] args) throws URISyntaxException {
+	public static void main(String[] args) {
 		new RegistrationStarter();
 	}
 
-	public RegistrationStarter() throws URISyntaxException {
+	public RegistrationStarter() {
 		workingDirectory = new WorkingDirectory().getDirectory();
 		
 		UIManager.put("Table.gridColor", new ColorUIResource(Color.gray));

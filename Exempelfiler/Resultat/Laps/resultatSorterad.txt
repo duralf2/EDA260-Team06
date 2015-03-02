@@ -1,0 +1,10 @@
+HERRAR
+Plac; StartNr; Namn; Klubb; #Varv; TotalTid; Varv1; Varv2; Varv3
+1; 6; David D; Drake; 3; 01.05.00; 00.20.27; 00.24.32; 00.20.01
+2; 5; Cecil C; Drake; 3; 01.11.04; 00.19.36; 00.28.36; 00.22.52
+3; 3; Adam A; A; 3; 01.15.00; 00.28.05; 00.22.35; 00.24.20
+4; 4; Bertil B; C; 2; 01.10.05; 00.44.23; 00.25.42;
+DAMER
+Plac; StartNr; Namn; Klubb; #Varv; TotalTid; Varv1; Varv2; Varv3
+1; 2; Therese Magnusson; Drake; 3; 01.00.59; 00.15.01; 00.25.47; 00.20.11
+2; 1; Ella Eriksson; A; 3; 01.15.56; 00.20.00; 00.39.00; 00.16.56

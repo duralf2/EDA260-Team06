@@ -31,6 +31,7 @@ public class Sorter {
 	public Sorter(Database db, Configuration conf) throws IOException {
 		this.db = db;
 		this.conf = conf;
+		
 		fileWriter = new FileWriter(
 				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
 	}

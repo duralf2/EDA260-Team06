@@ -135,7 +135,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 			AbstractContestant.setConfiguration(c);
 		}
 		
-		@Test
+		/*@Test
 		public void testVarvlopptidFulltUnsorted() throws IOException {
 			finishTimes = new File[1];
 			startTime = new File("testfiles/acceptanstest/Iteration2/varvlopptid-fullt/starttider.txt");
@@ -160,7 +160,7 @@ public class SorterTest extends AbstractFileComparisonTest {
 			assertEquals(s1,s2);
 			
 			AbstractContestant.setConfiguration(c);
-		}
+		}*/
 		
 	
 	//TODO add test marathon race : IS DONE

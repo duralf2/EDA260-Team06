@@ -20,7 +20,7 @@ import sorter.model.Time;
 
 public class ContestantTimesTest {
 	File nameFile = new File("testfiles/RegistrationTestFiles/namn.txt");
-	File timeFile = new File("testfiles/RegistrationTestFiles/times.txt");
+	File timeFile = new File("testfiles/RegistrationTestFiles/atimes.txt");
 	ContestantTimes times;
 
 	@Before

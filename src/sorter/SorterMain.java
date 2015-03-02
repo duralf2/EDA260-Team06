@@ -58,7 +58,7 @@ public class SorterMain {
 	private static void sort(Configuration config, File nameFile,
 			File startTimeFolder, File finishTimeFolder) throws IOException {
 		Database db = new Database();
-		Sorter sorter = new Sorter(db, config);
+		SorterSetUp sorter = new SorterSetUp(db, config);
 		sorter.sort(nameFile, startTimeFolder.listFiles(), finishTimeFolder.listFiles());
 	}
 

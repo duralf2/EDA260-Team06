@@ -1,5 +1,6 @@
 package sorter.model;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,7 +16,13 @@ public class Database {
 	private String[] contestantColumnNames;
 
 	public Database() {
-		contestantEntries = new TreeMap<String, AbstractContestant>();
+		contestantEntries = new TreeMap<String, AbstractContestant>(new Comparator<String>() {
+			public int compare(String startNbr1, String startNbr2) {
+				Integer nbr1 = Integer.parseInt(startNbr1);
+				Integer nbr2 = Integer.parseInt(startNbr2);
+				return nbr1.compareTo(nbr2);
+			}
+		});
 	}
 	
 	/**

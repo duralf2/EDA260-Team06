@@ -90,9 +90,6 @@ public class SorterSetUp {
 	public void sort(File nameFile, File[] startTime, File[] finishTimes)
 			throws IOException {
 		setUp(nameFile, startTime, finishTimes);
-		if( conf.getProperty(Configuration.KEY_RESULT_SORTED).equals("true"))
 			fileWriter.writeResultList( conf, db, true);
-		else
-			fileWriter.writeResultList( conf, db, false);
 	}
 }

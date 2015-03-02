@@ -23,24 +23,22 @@ public abstract class CompetitionType {
 	
 
 	/**
-	 * Writes the contents of this competition to a string and returns it. The result
-	 *  will be formatted like a result file in the excel file format, including the header. 
-	 * @param useShortFormat Whether or not to print all the columns into the result
-	 * @return A string with the results.
+	 * 
+	 * @param useShortFormat
+	 * @return
 	 */
 	public String toResultString(boolean useShortFormat) {
 		return sorter.toResultString(useShortFormat);
 	}
 	
 	/**
-	 * Writes the contents of this competition to a string and returns it. The result
-	 *  will be formatted like a result file in the excel file format, including the header. 
-	 *  This method also adds placement to the contestants.
-	 * @param useShortFormat Whether or not to print all the columns into the result
-	 * @return A string with the results.
+	 * 
+	 * @param useShortFormat
+	 * @param config
+	 * @return
 	 */
-	public String toResultStringWithPlacement(boolean useShortFormat) {
-		return sorter.toResultStringWithPlacement(useShortFormat);
+	public String resultList(boolean useShortFormat, Configuration config) {
+			return sorter.toResultStringWithPlacement(useShortFormat);
 	}
 	
 	

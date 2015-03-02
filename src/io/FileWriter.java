@@ -89,13 +89,10 @@ public class FileWriter {
 	 */
 	public void writeResultList(Configuration config, Database db, boolean useShortFormat)
 			throws IOException {
-			CompetitionFactory competitionFactory = new CompetitionFactory(config);
-			CompetitionType competition = competitionFactory.createCompetition(db);
-			String resultAsCsv;
-			if( config.getProperty(Configuration.KEY_RESULT_SORTED).equals("true"))
-				resultAsCsv = competition.toResultStringWithPlacement(useShortFormat);
-			else
-				resultAsCsv = competition.toResultString(useShortFormat);
+		CompetitionFactory competitionFactory = new CompetitionFactory(config);
+		CompetitionType competition = competitionFactory.createCompetition(db);
+		
+		String resultAsCsv = competition.resultList(useShortFormat,config);
 		
 		boolean printAsHtml = config.getProperty(Configuration.KEY_RESULT_FORMAT).equals(Configuration.VALUE_FORMAT_HTML);
 		writeString(printAsHtml ? new HTMLParser().resultToHTML(resultAsCsv) : resultAsCsv);

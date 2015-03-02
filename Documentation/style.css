@@ -11,7 +11,7 @@ code {
     background-color: #DDD;
     border-radius: 2px;
     padding: 0px;
-    font-family: "Monospaced";
+    font-family: "Monospace";
     font-size: 14px;
 }
 
@@ -31,4 +31,22 @@ table {
 
 th, td {
 	border: 1px solid black;
+}
+
+li {
+    padding-left: 4px;
+}
+
+span.new, li.new {
+    padding-left: 2px;
+    border-left: 2px solid rgb(0, 180, 0);
+}
+
+code.block {
+    display: block;
+    width: 100%;
+    white-space: pre;
+    font-family: "Monospace";
+    padding: 3px;
+    border-radius: 5px;
 }

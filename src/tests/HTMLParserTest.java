@@ -27,7 +27,7 @@ public class HTMLParserTest {
 				+ "3; Kaos; KTH\n"
 				+ "4;; BTH");
 		
-		String expected = "<style> table #header{ font-weight: bold; }</style>\n" +
+		String expected = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n" + "<style> table #header{ font-weight: bold; }</style>\n" +
 							"<html> <body> <h3>Klassnamn</h3><table border=\"1\">\n" +
 							"<tr><th>Start Number</th><th>Namn</th><th> Klubb</th><th> Godissort</th></tr>\n" +
 							"<tr><td>0</td><td> Bertil</td><td>LTH</td><td> Lakritskola</td></tr>\n" +

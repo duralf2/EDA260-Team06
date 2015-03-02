@@ -95,10 +95,16 @@ public abstract class CompetitionType {
 					if(contestantsByClass.size() > 0) {
 						sb.append(contestantsByClass.get(0).getClassName() + "\n");
 						sortWithinClass(contestantsByClass, sb);
+						printIncorrectlyRegisteredContestants(incorrectlyRegisteredContestants, sb, useShortFormat);
 					}
-					contestantsByClass = new ArrayList<AbstractContestant>();
+					contestantsByClass.clear();
+					incorrectlyRegisteredContestants.clear();
 				}
-				contestantsByClass.add(contestant);
+				
+				if(contestant.completedRace())
+					contestantsByClass.add(contestant);
+				else
+					incorrectlyRegisteredContestants.add(contestant);
 			}
 		}
 		
@@ -108,14 +114,18 @@ public abstract class CompetitionType {
 		}
 		
 		if(incorrectlyRegisteredContestants.size() > 0){
-			sb.append("Icke existerande startnummer\n");
-			sb.append(generateHeader(incorrectlyRegisteredContestants, useShortFormat));
             for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
-                sb.append(contestant.toString(this, useShortFormat) + "\n");
+                sb.append(";" + contestant.toString(this, useShortFormat) + "\n");
             }
 		}
 		
 		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
+	}
+	
+	private void printIncorrectlyRegisteredContestants(List<AbstractContestant> contestants, StringBuilder sb, Boolean useShortFormat) {
+		for( AbstractContestant c : contestants) {
+			sb.append(";" + c.toString(this, useShortFormat) + "\n" );
+		}
 	}
 	
 	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb) {

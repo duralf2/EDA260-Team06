@@ -18,7 +18,7 @@ public class HTMLParser {
 
 		StringBuilder sb = new StringBuilder();
 		List<String> lines = new ArrayList<String>(Arrays.asList(csvInput.split("\n")));
-		
+		sb.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n");
 		sb.append("<style> table #header{ font-weight: bold; }</style>\n");
 		sb.append("<html> <body> <table border=\"1\">\n");
 

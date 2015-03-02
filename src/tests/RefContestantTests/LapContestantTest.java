@@ -109,7 +109,7 @@ public class LapContestantTest {
 		lapContestant2.addLapTime(new Time("00.03.00"));
 		lapContestant2.addLapTime(new Time("00.04.00"));
 
-		assertTrue(lapContestant.compareTo(lapContestant2) > 0);
+		assertTrue(lapContestant.compareTo(lapContestant2) < 0);
 	}
 
 	@Test

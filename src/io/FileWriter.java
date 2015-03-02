@@ -134,7 +134,10 @@ public class FileWriter {
 			throws IOException {
 			CompetitionFactory competitionFactory = new CompetitionFactory(config);
 			CompetitionType competition = competitionFactory.createCompetition(db);
-			writeString(competition.toResultStringWithPlacement(useShortFormat));
+			if( config.getProperty(Configuration.KEY_RESULT_SORTED).equals("true"))
+				writeString(competition.toResultStringWithPlacement(useShortFormat));
+			else
+				writeString(competition.toResultString(useShortFormat));
 	}
 
 	/**

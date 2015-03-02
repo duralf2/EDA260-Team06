@@ -112,7 +112,6 @@ public class EntryList extends JTable implements Observer {
 	/**
 	 * Handles the pre-registration.
 	 */
-	// TODO - Add code to update model
 	private class PreRegistrationEditListener implements ListSelectionListener {
 		
 		/**

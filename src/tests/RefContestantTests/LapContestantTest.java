@@ -82,15 +82,6 @@ public class LapContestantTest {
 				lapContestant.toString(new LapCompetition(db)));
 	}
 
-	// "StartNr;Namn;#Varv;TotalTid;Varv1;Varv2;Start;Varvning1;Mål",
-
-	// lapContestant.addStartTime(new Time("00.00.00"));
-	// lapContestant.addLapTime(new Time("00.02.00"));
-	// lapContestant.addLapTime(new Time("00.06.00"));
-	// lapContestant.addFinishTime(new Time("00.10.01"));
-	//
-	// db.addContestantEntry("1", lapContestant);
-	// TODO: Doesnt work as story 15.
 	@Test
 	public void testToStringMissingData() {
 		lapContestant = new LapContestant(racerInfo);

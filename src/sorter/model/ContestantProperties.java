@@ -35,7 +35,6 @@ public class ContestantProperties {
 		return value;
 	}
 	
-	// TODO Den här metoden returnerar bara data motsvarande den i headern, toString kanske är fel metod?
 	/**
 	 * @return the header data for the contestant properties.
 	 * 

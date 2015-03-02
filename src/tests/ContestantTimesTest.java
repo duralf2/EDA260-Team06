@@ -115,7 +115,7 @@ public class ContestantTimesTest {
 	}
 
 	@Test
-	public void testisRegistered() {
+	public void testIsRegistered() {
 		// Start numbers in namefile
 		for (int i = 1; i < 6; i++) {
 			assertTrue(times.isRegistered(i + ""));

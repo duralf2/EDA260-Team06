@@ -1,21 +1,21 @@
-Tester för  (stories 1-6) av iteration 1
+Tester fï¿½r  (stories 1-6) av iteration 1
 
-Detta är en uppsättning mycket korta acceptanstester för att testa den helt grundläggande funktionaliteten  under iteration 1. Förhoppningsvis är det mesta självklart, men här är några korta kommentarer.
-Filerna för respektive acceptanstest  ligger i vars en katalog men namn efter story.
-Varje katalog innehåller filer:
-- starttider.txt: innehåller rader med par: StartNo; Tid - ex; 1; 12.00.00
+Detta ï¿½r en uppsï¿½ttning mycket korta acceptanstester fï¿½r att testa den helt grundlï¿½ggande funktionaliteten  under iteration 1. Fï¿½rhoppningsvis ï¿½r det mesta sjï¿½lvklart, men hï¿½r ï¿½r nï¿½gra korta kommentarer.
+Filerna fï¿½r respektive acceptanstest  ligger i vars en katalog men namn efter story.
+Varje katalog innehï¿½ller filer:
+- starttider.txt: innehï¿½ller rader med par: StartNr; Tid - ex; 1; 12.00.00
 - maltider.txt: samma format som starttider
-- namnfil.txt: namnuppgifter enl format story 4 (denna fil finns ej för story 3)
-- resultat.txt: rader med förväntat resultata som byggs på efter varje story.
+- namnfil.txt: namnuppgifter enl format story 4 (denna fil finns ej fï¿½r story 3)
+- resultat.txt: rader med fï¿½rvï¿½ntat resultata som byggs pï¿½ efter varje story.
 
-Små saker som kan ställa till problem:
-- raderna innehåller ett blanktecken efter varje ; - för att underlätta läsbarhet. Inläsning bör klara så kallad "white space" runt de uppgifter det förväntar sig. Utmatningen bör lämpligen också skriva ett blanktecken efter ; så att resultatet enkelt kan jämföras med det förväntade med t ex diff, och lättare att läsa.
-- tiderna innehåller inledande nolla, t ex 01.23.56 och 00.12.34  (om detta är ett stort problem för alla kan vi ändra det till typ 1.23.56 resp 0.12.34)
-- inget av namnen i dessa inledande exempel innehåller åäö eller andra specialtecken, men det kommer naturligtvis sen.
+Smï¿½ saker som kan stï¿½lla till problem:
+- raderna innehï¿½ller ett blanktecken efter varje ; - fï¿½r att underlï¿½tta lï¿½sbarhet. Inlï¿½sning bï¿½r klara sï¿½ kallad "white space" runt de uppgifter det fï¿½rvï¿½ntar sig. Utmatningen bï¿½r lï¿½mpligen ocksï¿½ skriva ett blanktecken efter ; sï¿½ att resultatet enkelt kan jï¿½mfï¿½ras med det fï¿½rvï¿½ntade med t ex diff, och lï¿½ttare att lï¿½sa.
+- tiderna innehï¿½ller inledande nolla, t ex 01.23.56 och 00.12.34  (om detta ï¿½r ett stort problem fï¿½r alla kan vi ï¿½ndra det till typ 1.23.56 resp 0.12.34)
+- inget av namnen i dessa inledande exempel innehï¿½ller ï¿½ï¿½ï¿½ eller andra specialtecken, men det kommer naturligtvis sen.
 
-Story4 och Story5 kan utföras parallellt. och det finns två acceptanstester som kan användas i respektive fall:
-- Story3 färdig, testa Story4 - använd acceptanstest3_4
-- Story3 färdig, testa Story5 - använd acceptanstest3_5
-- Story3&4 färdiga, testa Story5 - använd acceptanstest5
-När Story3,4,5 alla är färdiga kan man fortsätta att använda acceptanstest5 (medan 3, 3_4 och 3_5 är inaktuella).
-Dessutom förutsätter Acceptanstest6 att story 3,4,5 är färdiga, men kan enkelt anpassas för att fungera även om story  4 ej är färdig (ta bort kolumnen med Namn i resultat.txt)
+Story4 och Story5 kan utfï¿½ras parallellt. och det finns tvï¿½ acceptanstester som kan anvï¿½ndas i respektive fall:
+- Story3 fï¿½rdig, testa Story4 - anvï¿½nd acceptanstest3_4
+- Story3 fï¿½rdig, testa Story5 - anvï¿½nd acceptanstest3_5
+- Story3&4 fï¿½rdiga, testa Story5 - anvï¿½nd acceptanstest5
+Nï¿½r Story3,4,5 alla ï¿½r fï¿½rdiga kan man fortsï¿½tta att anvï¿½nda acceptanstest5 (medan 3, 3_4 och 3_5 ï¿½r inaktuella).
+Dessutom fï¿½rutsï¿½tter Acceptanstest6 att story 3,4,5 ï¿½r fï¿½rdiga, men kan enkelt anpassas fï¿½r att fungera ï¿½ven om story  4 ej ï¿½r fï¿½rdig (ta bort kolumnen med Namn i resultat.txt)

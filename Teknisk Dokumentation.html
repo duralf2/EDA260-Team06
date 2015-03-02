@@ -36,6 +36,12 @@
     		</tr>
     		<tr>
     			<td>GUI</td>
+    			
+
+    
+
+    
+    			
     			<td>Innehåller de klasser som bygger upp programmets användargränssnitt</td>
     		</tr>
     		<tr>
@@ -107,6 +113,9 @@
     <img class="center" src="img/register.png">
     
     <h4>Model</h4>
+    
+           <img src="uml/GUIModelUML.jpg" >
+    
     <p>
         Modellen utgörs av klassen <code>ContestantTimes</code> som är <code>Observable</code>. 
         Klassen lagrar vilka tider som är associerade med ett visst startnummer. 
@@ -114,6 +123,9 @@
     </p>
     
     <h4>View</h4>
+    
+   
+    
     <p>
         Utgörs huvudsakligen av klasserna <code>RegistrationGUI</code> och <code>EntryList</code>.
         Utöver dessa finns ett antal mindre klasser som motsvarar olika komponenter i användargränssnittet
@@ -169,8 +181,12 @@
     </p>
 
     <h4>Tävlingsdeltagare</h4>
-
-    <img class="center" src="img/contestant.png">
+	
+	
+	<img class="center" src="img/contestant.png">
+	<br>
+	<br>
+    <img src="uml/ContestantsUML.jpg" style="width:1000px;height:900px">
 
     <p>
         Den abstrakta klassen <code>AbstractContestant</code> beskriver en allmän deltagare.
@@ -188,7 +204,12 @@
 
     <h4>Tävling</h4>
     
+    
+    
     <img class="center" src="img/competition.png">
+    <br>
+    <br>
+    <img src="uml/CompetitionUML.jpg" >
     
     <p>
         På motsvarande sätt som för tävlingsdeltagare används Factory method-mönstret i klassen <code>CompetitionFactory</code> 
@@ -196,6 +217,21 @@
     </p>
     
     <h4>Övriga Klasser</h4>
+    
+    
+    <h3>io-paketet</h3>
+    
+    <img src="uml/IOUML.jpg" >
+    
+    <p>
+        Här finns gemensamma klasser för inläsning och utskrift av filer. 
+        För att läsa CSV används biblioteket <a href="https://code.google.com/p/jcsv/">JCSV</a>.
+    </p>
+    
+    
+    <br>
+    <br>
+    
     <p>
         Klassen Time används för att representera tider inom programmet. Här finns även metoder för beräkningar av tider. 
     </p>
@@ -214,11 +250,6 @@
     
     <h2>Övriga filer och klasser</h2>
 
-    <h3>io-paketet</h3>
-    <p>
-        Här finns gemensamma klasser för inläsning och utskrift av filer. 
-        För att läsa CSV används biblioteket <a href="https://code.google.com/p/jcsv/">JCSV</a>.
-    </p>
     
     <h3>Test</h3>
     <p>
@@ -239,10 +270,6 @@
             <th>Value</th>
         </tr>
         <tr>
-            <td>guiOutputFilePath</td>
-            <td></td>
-        </tr>
-        <tr>
             <td>resultFilePath</td>
             <td>Sökväg dit resultatfilen ska sparas</td>
         </tr>
@@ -250,33 +277,21 @@
             <td>nameFilePath</td>
             <td>Sökvägen till namnfilen</td>
         </tr>
-        <tr>
-            <td>maximumRaceDuration</td>
-            <td></td>
+          <tr>
+            <td>startTimeFilePath</td>
+            <td>Sökvägen till fil med starttider.</td>
         </tr>
         <tr>
-            <td>minimumRaceDuration</td>
-            <td></td>
+            <td>resultTimeFilePath</td>
+            <td>Sökvägen till fil med resultattider.</td>
         </tr>
         <tr>
-            <td>maximumLapDuration</td>
-            <td></td>
+            <td>shortestPossibleTime</td>
+            <td>Minsta möjliga tid för ett lopp enligt följande form: "hh.mm.ss".</td>
         </tr>
-        <tr>
-            <td>minimumStageDuration</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>stageAmount</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>stageNames</td>
-            <td>Kommaseparerade etappnamn ex) etapp1,etapp2</td>
-        </tr>
-        <tr>
-            <td>specialStageNames</td>
-            <td>Etapper med bonus ex) etapp1*2</td>
+         <tr>
+            <td>startTimeLimit</td>
+            <td>Hur lång tid innan nästa målgång räknas som sluttid(varvlopp) form: "hh.mm.ss".</td>
         </tr>
         <tr>
             <td>resultFormat</td>
@@ -292,7 +307,7 @@
         </tr>
     </table>
     
-    <p> Tabellen nedan beskriver gilitga nyckel-värde par för registreringsprogrammet.</p>
+    <p> Tabellen nedan beskriver gilitga nyckel-värde par för registration.properties, vilket hanterar vart programmet läser efter startnr med namn samt tidinläsning.</p>
 
     <table>
         <tr>

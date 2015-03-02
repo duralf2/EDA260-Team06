@@ -24,7 +24,11 @@ public class MarathonCompetition extends CompetitionType {
 		StringBuilder sb = new StringBuilder();
 		for (String h : db.getContestantColumnNames())
 			sb.append(h + ";");
-		sb.append("TotalTid;Starttider;Måltider\n");
+		
+		sb.append("TotalTid");
+		if (!useShortFormat)
+			sb.append(";Starttider;Måltider");
+		sb.append('\n');
 		return sb.toString();
 	}
 

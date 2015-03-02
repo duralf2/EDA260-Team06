@@ -104,9 +104,15 @@ public class MarathonContestantTest {
 		String match = "Hannah;00.01.00;12.00.00;12.01.00;Omöjlig totaltid?";
 		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
 	}
+
+
 	
-	
-	
-	
-	
+	@Test
+	public void testToStringShortFormat() throws IOException
+	{
+		marathonContestant.addStartTime(new Time("12.00.01"));
+		marathonContestant.addFinishTime(new Time("12.21.15"));
+		String match = "Hannah;00.21.14";
+		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database()), true));
+	}
 }

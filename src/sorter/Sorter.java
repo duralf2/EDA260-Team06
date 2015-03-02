@@ -86,9 +86,7 @@ public class Sorter {
 		String currentClass = "";
 		
 		for (AbstractContestant contestant : contestants) {
-			System.out.println(contestant.getInformation("Namn"));
 			if (contestant.getInformation("Namn").equals("")){
-				System.out.println(contestant.getInformation("Namn") + " har inget namn");
                 contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
 				incorrectlyRegisteredContestants.add(contestant);
 			} else {

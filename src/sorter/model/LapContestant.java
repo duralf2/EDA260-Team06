@@ -138,7 +138,7 @@ public class LapContestant extends AbstractContestant {
 	
 	
 	private String formattedTotalTime(){
-		if(startTimeSize() > 0 && (lapTimes.size() > 0 || finishTimeSize() > 0)){
+		if(startTimeSize() > 0 && finishTimeSize() > 0){
 			return getTotalTime().toString();
 		}
 		return "--.--.--";
@@ -155,9 +155,6 @@ public class LapContestant extends AbstractContestant {
 		Time finishTime = startTime;
 		if (finishTimeSize() > 0) {
 			finishTime = getFinishTime();
-		}
-		else if (!lapTimes.isEmpty()) {
-			finishTime = lapTimes.getLast();
 		}
 		return Time.getTotalTime(startTime, finishTime);
 	}

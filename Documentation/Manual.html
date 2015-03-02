@@ -151,26 +151,17 @@ JUNIOR
          <li>
              <h4>Konfigurationsfil</h4>
              <p>
-                 Konfigurationsfilen bestämmer hur sorteringsprogrammet fungerar. Den är formaterad som klassiska ini-filer (med "inställning=val"). Följande inställningar finns:
+                 Konfigurationsfilen bestämmer hur sorteringsprogrammet fungerar. Den är formaterad som klassiska ini-filer (med <code>inställning=val</code>). Följande inställningar finns:
                  <ul>
-        			<li> nameFilePath - Specificerar var namnfilen finns.
-             		</li>
-             		<li> startTimeFilePath - Specificerar var mappen med starttider finns.
-             		</li>
-        			<li> finishTimeFilePath - Specificerar var mappen med starttider finns.
-        			</li>
-             		<li> resultFilePath - Specificerar var resultatfilen ska sparas. Om html-format används är det lämpligt att välja filändelsen .html istället för .txt för att resultatet ska visas korrekt.
-             		</li>
-             		<li> raceType - Vilken typ av tävling som ska sorteras (kan vara "marathon" eller "laps").
-             		</li>
-             		<li> shortestPossibleTime - Minsta godkända totaltid på ett varv eller tävling.
-             		</li>
-             		<li> startTimeLimit - Under hur lång tid nya varv kan påbörjas (endast varvlopp).
-             		</li>
-					<li> resultFormat - Vilket format resultatet ska levereras i, om html specificeras är det även lämpligt att ändra filändelsen på resultatfilen (resultFilePath) till .html.
-             		</li>
-             		<li> resultSorted - Hurvida resultatet ska sorteras efter placering.
-             		</li>
+        			<li> nameFilePath - Specificerar var namnfilen finns. Default: <code>data/namn.txt</code>
+             		<li> startTimeFilePath - Specificerar var mappen med starttider finns. Default: <code>data/starttimes/</code>
+        			<li> finishTimeFilePath - Specificerar var mappen med starttider finns. Default: <code>data/finishtimes/</code>
+             		<li> resultFilePath - Specificerar var resultatfilen ska sparas. Om html-format används är det lämpligt att välja filändelsen .html istället för .txt för att resultatet ska visas korrekt. Default: <code>data/result.txt</code>
+             		<li> raceType - Vilken typ av tävling som ska sorteras (kan vara "marathon" eller "laps"). Default: <code>marathon</code>
+             		<li> shortestPossibleTime - Minsta godkända totaltid på ett varv eller tävling. Default: <code>00.15.00</code>
+             		<li> startTimeLimit - Under hur lång tid nya varv kan påbörjas (endast varvlopp). Default: <code>01.00.00</code>
+					<li> resultFormat - Vilket format resultatet ska levereras i, om html specificeras är det även lämpligt att ändra filändelsen på resultatfilen (resultFilePath) till <code>.html</code>. Default: <code>csv</code>
+             		<li> resultSorted - Hurvida resultatet ska sorteras efter placering. Default: <code>false</code>
              	</ul>
              </p>
          </li>

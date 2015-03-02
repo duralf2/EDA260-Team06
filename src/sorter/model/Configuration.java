@@ -81,6 +81,7 @@ public class Configuration extends Properties {
 		}
 		else
 		{
+            // NOTE: IF YOU CHANGE THIS, ALSO CHANGE THE DEFAULTS IN Manual.html
 			put(KEY_NAME_FILE_PATH, "data/namn.txt");
 			put(KEY_START_TIME_FOLDER_PATH, "data/starttimes/");
 			put(KEY_FINISH_TIME_FOLDER_PATH, "data/finishtimes/");

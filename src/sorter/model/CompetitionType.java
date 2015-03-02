@@ -94,7 +94,7 @@ public abstract class CompetitionType {
 					currentClass = contestant.getClassName();
 					if(contestantsByClass.size() > 0) {
 						sb.append(contestantsByClass.get(0).getClassName() + "\n");
-						sortWithinClass(contestantsByClass, sb);
+						sortWithinClass(contestantsByClass, sb, useShortFormat);
 						printIncorrectlyRegisteredContestants(incorrectlyRegisteredContestants, sb, useShortFormat);
 					}
 					contestantsByClass.clear();
@@ -110,7 +110,7 @@ public abstract class CompetitionType {
 		
 		if(contestantsByClass.size() > 0) {
 			sb.append(currentClass + "\n");
-			sortWithinClass(contestantsByClass, sb);
+			sortWithinClass(contestantsByClass, sb, useShortFormat);
 		}
 		
 		if(incorrectlyRegisteredContestants.size() > 0){
@@ -122,26 +122,27 @@ public abstract class CompetitionType {
 		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
 	}
 	
-	private void printIncorrectlyRegisteredContestants(List<AbstractContestant> contestants, StringBuilder sb, Boolean useShortFormat) {
+	private void printIncorrectlyRegisteredContestants(List<AbstractContestant> contestants, StringBuilder sb, boolean useShortFormat) {
 		for( AbstractContestant c : contestants) {
 			sb.append(";" + c.toString(this, useShortFormat) + "\n" );
 		}
 	}
 	
-	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb) {
+	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb, boolean useShortFormat) {
 		Collections.sort(contestants);
 		String incompleted = "";
 
-		sb.append("Plac;" + generateHeader(new ArrayList<AbstractContestant>(contestants), true));
+		sb.append("Plac;" + generateHeader(new ArrayList<AbstractContestant>(contestants), useShortFormat));
 		int place = 1;
-		for (int i = 0; i < contestants.size(); i++) {
+		for (int i = contestants.size()-1; i >= 0 ; i--) {
 			AbstractContestant contestant = contestants.get(i);
 			if (contestant.completedRace()) {
-				sb.append(place + ";" + contestant.toString(this, true)
+				contestant.toString(this,true);
+				sb.append(place + ";" + contestant.toString(this, useShortFormat)
 						+ "\n");
 				place++;
 			} else {
-				incompleted += ";" + contestant.toString(this, true)
+				incompleted += ";" + contestant.toString(this, useShortFormat)
 						+ "\n";
 			}
 		}

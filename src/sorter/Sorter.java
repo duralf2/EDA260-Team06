@@ -110,6 +110,13 @@ public class Sorter {
 				if (!currentClass.equals(contestant.getClassName())) {
 					sb.append(currentClass + "\n");
 					currentClass = contestant.getClassName();
+
+					sb.append("Plac;"
+							+ competitionType.generateHeader(
+									new ArrayList<AbstractContestant>(contestants),
+									useShortFormat));
+				
+					
 					if (contestantsByClass.size() > 0) {
 						sortWithinClass(contestantsByClass, sb, useShortFormat);
 					}
@@ -176,10 +183,6 @@ public class Sorter {
 		TreeMap<String, String> t = new TreeMap<String, String>(
 				new StartNumberComparator());
 
-		sb.append("Plac;"
-				+ competitionType.generateHeader(
-						new ArrayList<AbstractContestant>(contestants),
-						useShortFormat));
 		int place = 1;
 		for (int i = contestants.size() - 1; i >= 0; i--) {
 			AbstractContestant contestant = contestants.get(i);

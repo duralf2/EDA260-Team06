@@ -17,7 +17,6 @@ Documentation/javadocs/
 *.out
 Crystal
 build
-data
 data/*
 *.xml
 RegistrationData/*

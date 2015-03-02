@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.plaf.SliderUI;
-
 public class HTMLParser {
 	private final Map<String, String> headerMap;
 	public HTMLParser()

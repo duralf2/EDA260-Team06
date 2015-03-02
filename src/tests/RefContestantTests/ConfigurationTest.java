@@ -42,7 +42,7 @@ public class ConfigurationTest {
 		assertEquals("#", scanner.nextLine());
 		assertEquals("#Valid result formats:", scanner.nextLine());
 		assertEquals("# - " + Configuration.VALUE_FORMAT_CSV, scanner.nextLine());
-		assertEquals("# - " + Configuration.VALUE_FORMAT_HTML + " (not supported yet)", scanner.nextLine());
+		assertEquals("# - " + Configuration.VALUE_FORMAT_HTML, scanner.nextLine());
 		assertEquals("#", scanner.nextLine());
 		scanner.nextLine(); // Skip the line with the timestamp
 		while (scanner.hasNextLine())

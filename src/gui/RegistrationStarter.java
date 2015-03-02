@@ -73,7 +73,7 @@ public class RegistrationStarter {
 				defaultProperties.setProperty(Configuration.KEY_NAME_FILE_PATH, "RegistrationData/namn.txt");
 			}
 			if(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH) == null) {
-				defaultProperties.setProperty(Configuration.KEY_TIME_FILE_PATH, "RegistrationData/times.txt");
+				defaultProperties.setProperty(Configuration.KEY_TIME_FILE_PATH, "RegistrationData/atimes.txt");
 			}
 			defaultProperties.store(new FileOutputStream(props), null);
 			in.close();

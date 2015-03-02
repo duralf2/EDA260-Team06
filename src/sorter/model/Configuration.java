@@ -1,14 +1,13 @@
 package sorter.model;
 
+import io.WorkingDirectory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Properties;
-
-import sorter.SorterMain;
 
 /**
  * Contains standard keys for different settings.
@@ -40,18 +39,10 @@ public class Configuration extends Properties {
 	public static final String KEY_RESULT_SORTED = "resultSorted"; //true or false
 	
 	public Configuration() throws IOException {
-		// Set the working directory of the program to the folder containing the program.
-		// If you double-click a jar-file in linux the working directory is set to the user home by default.
-		// We want it to be set to the folder of the program, therefore these lines are necessary
-		try {
-			File workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
-			System.setProperty("user.dir", workingDirectory.getParent());
-			File defaultProperties = new File(workingDirectory, DEFAULT_PROPERTIES_FILE);
+		File workingDirectory = new WorkingDirectory().getDirectory();
+		File defaultProperties = new File(workingDirectory, DEFAULT_PROPERTIES_FILE);
 			
-			init(defaultProperties);
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
+		init(defaultProperties);
 	}
 	/**
 	 * Creates a new Properties while passing the path to the config file as a parameter.

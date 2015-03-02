@@ -3,6 +3,7 @@ package sorter;
 import gui.RegistrationStarter;
 import io.FileReader;
 import io.FileWriter;
+import io.WorkingDirectory;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,18 +41,9 @@ public class SorterSetUp {
 		// to the user home by default.
 		// We want it to be set to the folder of the program, therefore these
 		// lines are necessary
-		File workingDirectory;
-		try {
-			workingDirectory = new File(RegistrationStarter.class
-					.getProtectionDomain().getCodeSource().getLocation().toURI())
-					.getParentFile();
-			System.setProperty("user.dir", workingDirectory.getParent());
-			
-			fileWriter = new FileWriter(new File(workingDirectory,
-					conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+		File workingDirectory = new WorkingDirectory().getDirectory();
+		fileWriter = new FileWriter(new File(workingDirectory,
+				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
 	}
 
 	/**

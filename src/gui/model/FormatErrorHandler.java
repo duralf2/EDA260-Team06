@@ -1,13 +1,13 @@
 package gui.model;
 
+import io.WorkingDirectory;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Properties;
 import java.util.TreeSet;
 
-import sorter.SorterMain;
 import sorter.model.Configuration;
 
 public class FormatErrorHandler {
@@ -46,13 +46,7 @@ public class FormatErrorHandler {
 	
 	private static void setUp() {
 		
-		File workingDirectory = null;
-		try {
-			workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
-			System.setProperty("user.dir", workingDirectory.getParent());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
+		File workingDirectory = new WorkingDirectory().getDirectory();
 		
         if(tree == null) {
             tree = new TreeSet<String>();

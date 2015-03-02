@@ -3,6 +3,7 @@ package gui;
 import gui.model.ContestantTimes;
 import gui.model.FormatErrorHandler;
 import gui.model.TimeRegistrationHandler;
+import io.WorkingDirectory;
 
 import java.awt.Color;
 import java.io.File;
@@ -34,12 +35,7 @@ public class RegistrationStarter {
 	}
 
 	public RegistrationStarter() throws URISyntaxException {
-		// Set the working directory of the program to the folder containing the program.
-		// If you double-click a jar-file in linux the working directory is set to the user home by default.
-		// We want it to be set to the folder of the program, therefore these lines are necessary
-		URL path = RegistrationStarter.class.getProtectionDomain().getCodeSource().getLocation();
-		workingDirectory = new File(path.toURI()).getParentFile();
-		System.setProperty("user.dir", workingDirectory.getParent());
+		workingDirectory = new WorkingDirectory().getDirectory();
 		
 		UIManager.put("Table.gridColor", new ColorUIResource(Color.gray));
 		loadProperties();

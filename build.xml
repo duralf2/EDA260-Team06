@@ -114,7 +114,8 @@
 	<target name="documents">
 		<copy todir="build/release/documents">
 			<fileset dir="Documentation">
-				<include name="**" />
+				<exclude name="Exempelfiler/**" />
+				<exclude name="kundkommentarer/**" />
 			</fileset>
 		</copy>
 	</target>

@@ -17,13 +17,15 @@ public abstract class CompetitionType {
 		this.db = db;
 	}
 	
-	/**
-	 * Writes the contents of this competition to a string and returns it. The result
-	 *  will be formatted like a result file in the excel file format, including the header.
-	 */
-	public String toResultString() {
-		return toResultString(false);
-	}
+//TODO: Remove?
+//	/**
+//	 * Writes the contents of this competition to a string and returns it. The result
+//	 *  will be formatted like a result file in the excel file format, including the header.
+//	 */
+//	public String toResultString() {
+//		return toResultString(false);
+//	}
+	
 	/**
 	 * Writes the contents of this competition to a string and returns it. The result
 	 *  will be formatted like a result file in the excel file format, including the header. 
@@ -43,7 +45,7 @@ public abstract class CompetitionType {
 		
 		for (AbstractContestant contestant : contestants) {
 			if (contestant.getInformation("Namn").equals("")){
-                contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
+                contestant.setClassName("Icke existerande startnummer");
 				incorrectlyRegisteredContestants.add(contestant);
 			} else {
 				if (!currentClass.equals(contestant.getClassName())) {

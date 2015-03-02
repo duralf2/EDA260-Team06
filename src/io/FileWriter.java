@@ -48,39 +48,6 @@ public class FileWriter {
 	}
 
 	/**
-	 * Write the result with all specified information sorted according to the
-	 * competition type.
-	 * 
-	 * @param contestants
-	 *            The contestants to the race.
-	 * @param conf
-	 *            The information about competition type, and what informaion we
-	 *            have on the contestants.
-	 * @param db
-	 *            The database for the race.
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	//TODO this method is not used - remove?
-	public void writeSortedResult(ArrayList<AbstractContestant> contestants,
-			Configuration conf, Database db) throws FileNotFoundException,
-			IOException {
-		StringBuilder sb = new StringBuilder();
-
-		CompetitionFactory competitionFactory = new CompetitionFactory(conf);
-		CompetitionType competition = competitionFactory.createCompetition(db);
-		
-		// Write header to file
-		sb.append(competition.generateHeader());
-		for (AbstractContestant contestant : contestants) {
-			sb.append(contestant.toString(competition));
-			sb.append("\n");
-		}
-
-		writeString(sb.toString());
-	}
-
-	/**
 	 * Write the result with all specified information.
 	 * 
 	 * @param config

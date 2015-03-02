@@ -52,17 +52,17 @@ public class MarathonCompetitionTest {
 	@Test
 	public void testPrintResults() throws IOException {
 		
-		ContestantProperties ri = new ContestantProperties(new String[] { "StartNr", "Namn" });
-		ri.put("StartNr", "1");
-		db.addContestantEntry("1", new MarathonContestant(ri));
-		ri = new ContestantProperties(new String[] { "StartNr", "Namn" });
-		ri.put("StartNr", "2");
-		MarathonContestant contestant = new MarathonContestant(ri);
+		ContestantProperties cp = new ContestantProperties(new String[] { "StartNr", "Namn" });
+		cp.put("StartNr", "1");
+		db.addContestantEntry("1", new MarathonContestant(cp));
+		cp = new ContestantProperties(new String[] { "StartNr", "Namn" });
+		cp.put("StartNr", "2");
+		MarathonContestant contestant = new MarathonContestant(cp);
 		contestant.addStartTime(new Time("10.00.00"));
 		contestant.addFinishTime(new Time("12.00.00"));
 		contestant.putInformation("Namn", "Bertil");
 		db.addContestantEntry("2", contestant);
-		
+	
 		fw.writeString(race.toResultString(false));
 		Scanner scan = null;
 		try {

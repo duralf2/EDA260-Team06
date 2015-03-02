@@ -28,21 +28,36 @@ public class StartNumberComparator implements Comparator<String> {
 		if (pre2) {
 			return 1;
 		}
-		try {
-			BigInteger start1 = new BigInteger(o1);
-			try {
-				BigInteger start2 = new BigInteger(o2);
-				return start1.compareTo(start2);
-			} catch (NumberFormatException e) {
-				return 1;
-			}
-		} catch (NumberFormatException e) {
+//		try {
+//			BigInteger start1 = new BigInteger(o1);
+//			try {
+//				BigInteger start2 = new BigInteger(o2);
+//				return start1.compareTo(start2);
+//			} catch (NumberFormatException e) {
+//				return 1;
+//			}
+//		} catch (NumberFormatException e) {
+//			return -1;
+//		}
+		
+		if (o1.length() > o2.length()) {
+			return 1;
+		} else if (o2.length() > o1.length()) {
 			return -1;
+		} else {
+			for (int i = 0; i < o1.length(); i++) {
+				if (o1.charAt(i) > o2.charAt(i)) {
+					return 1;
+				} else if (o2.charAt(i) > o1.charAt(i)) {
+					return -1;
+				}
+			}
 		}
+		return 0;
 	}
 	
 	public static boolean isStartNumber(String startNumber) {
-		return startNumber.matches("[1-9][0-9]*") || startNumber.equals("Pre-registered time");
+		return startNumber.matches("[0-9]*") || startNumber.equals("Pre-registered time");
 	}
 
 }

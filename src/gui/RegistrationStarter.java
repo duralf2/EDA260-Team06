@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -27,16 +29,17 @@ public class RegistrationStarter {
 	private Properties defaultProperties;
 	private File workingDirectory;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws URISyntaxException {
 		new RegistrationStarter();
 	}
 
-	public RegistrationStarter() {
+	public RegistrationStarter() throws URISyntaxException {
 		// Set the working directory of the program to the folder containing the program.
 		// If you double-click a jar-file in linux the working directory is set to the user home by default.
 		// We want it to be set to the folder of the program, therefore these lines are necessary
 		
-		workingDirectory = new File(RegistrationStarter.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
+		URL path = RegistrationStarter.class.getProtectionDomain().getCodeSource().getLocation();
+		workingDirectory = new File(path.toURI()).getParentFile();
 		System.setProperty("user.dir", workingDirectory.getParent());
 		UIManager.put("Table.gridColor", new ColorUIResource(Color.gray));
 		loadProperties();

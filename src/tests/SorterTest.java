@@ -100,7 +100,6 @@ public class SorterTest extends AbstractFileComparisonTest {
 
 	@Test
 	public void testSortedResultListWithClasses() throws IOException {
-		System.out.println("test start");
 		startTime = new File(
 				"testfiles/acceptanstest/Iteration2/acceptanstest18/starttider.txt");
 		File startTime2 = new File("testfiles/invalidTimeFile.txt");

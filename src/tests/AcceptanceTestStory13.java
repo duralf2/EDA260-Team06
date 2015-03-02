@@ -47,7 +47,7 @@ public class AcceptanceTestStory13 extends AbstractFileComparisonTest {
 	}
 
 	@Test
-	public void testStory16() throws IOException, FileNotFoundException {
+	public void testStory13() throws IOException, FileNotFoundException {
 		Database db = new Database();
 		
 		reader.readNames(new File(namesFilepath), db);
@@ -60,8 +60,6 @@ public class AcceptanceTestStory13 extends AbstractFileComparisonTest {
 		String printedResult = readFileAsString(outfile);
 		String acceptenceResult = readFileAsString(new File(resultFilepath));
 		
-		// TODO AcceptanceStory13; FIxa så att det går igenom. Olika klasser ska ha olika många kolumner i resultatet!
-		assertTrue(true);
 		assertEquals(acceptenceResult, printedResult);
 	}
 }

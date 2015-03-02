@@ -1,8 +1,5 @@
 package sorter.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import sorter.Sorter;
@@ -64,12 +61,4 @@ public abstract class CompetitionType {
 	 * @return a String representation of the header.
 	 */
     public abstract String generateHeader(List<AbstractContestant> contestants, boolean useShortFormat);
-	
-	/**
-	 * Sorts the contents of the database associated with this competition type
-	 *  and returns it as a list. The algorithm used for sorting depends on the
-	 *  competition type.
-	 * @return A sorted list, containing all contestants
-	 */
-	public abstract List<AbstractContestant> sort();
 }

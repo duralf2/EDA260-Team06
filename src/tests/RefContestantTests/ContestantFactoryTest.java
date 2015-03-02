@@ -37,7 +37,6 @@ public class ContestantFactoryTest {
 				"testfiles/FactoryTestNames.txt");
 		FileReader rf = new FileReader(factory);
 		rf.readNames(new File((String) properties.get(Configuration.KEY_NAME_FILE_PATH)), database);
-//		factory.createRegisteredContestants(database);
 	}
 
 	

@@ -76,11 +76,4 @@ public class LapCompetition extends CompetitionType {
         }
         return maxLaps;
     }
-
-    @Override
-	public List<AbstractContestant> sort() {
-		// TODO LapRace; Implement sort algorithm! Take a look at the algorithm
-		// in the Sorter class
-		return new ArrayList<AbstractContestant>();
-	}
 }

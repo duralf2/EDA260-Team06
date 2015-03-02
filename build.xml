@@ -142,7 +142,6 @@
 		<copy todir="build/release/program/runnable">
 			<fileset dir="build/jar" />
 		</copy>
-		<copy file="RegistrationData/registration.properties" todir="build/release/program/runnable/RegistrationData"/>
 		<copy file="antSetup/namn.txt" todir="build/release/program/runnable/RegistrationData"/>
 		<touch file="build/release/program/runnable/RegistrationData/times.txt" />
 		

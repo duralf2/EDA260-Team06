@@ -50,6 +50,19 @@ public class MarathonCompetitionTest {
 	}
 	
 	@Test
+	public void testPrintColumnNamesShortFormat() throws IOException {
+		fw.writeString(race.toResultString(true));
+		Scanner scan = null;
+		try {
+			scan = new Scanner(outfile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		assertEquals("StartNr; Namn; TotalTid",scan.nextLine());
+		scan.close();
+	}
+	
+	@Test
 	public void testPrintResults() throws IOException {
 		
 		ContestantProperties cp = new ContestantProperties(new String[] { "StartNr", "Namn" });

@@ -70,7 +70,7 @@ public class AcceptanceTestStory29 extends AbstractFileComparisonTest {
 	@Test
 	public void testStory29Sorted() throws IOException, FileNotFoundException {
 		config.put(Configuration.KEY_RESULT_SORTED, "true");
-		config.put(Configuration.KEY_RESULT_FILE_PATH, outfile.getAbsolutePath());
+		config.put(Configuration.KEY_RESULT_FILE_PATH, outfile.getPath());
 		
 		Database db = new Database();
 		

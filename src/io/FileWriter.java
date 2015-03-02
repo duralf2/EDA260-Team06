@@ -87,12 +87,16 @@ public class FileWriter {
 	 *            as the total times
 	 * @throws IOException
 	 */
-	public void writeResultList(Configuration config, Database db,
-			boolean useShortFormat) throws IOException {
-		CompetitionFactory competitionFactory = new CompetitionFactory(config);
-		CompetitionType competition = competitionFactory.createCompetition(db);
+	public void writeResultList(Configuration config, Database db, boolean useShortFormat)
+			throws IOException {
+			CompetitionFactory competitionFactory = new CompetitionFactory(config);
+			CompetitionType competition = competitionFactory.createCompetition(db);
+			String resultAsCsv;
+			if( config.getProperty(Configuration.KEY_RESULT_SORTED).equals("true"))
+				resultAsCsv = competition.toResultStringWithPlacement(useShortFormat);
+			else
+				resultAsCsv = competition.toResultString(useShortFormat);
 		
-		String resultAsCsv = competition.toResultStringWithPlacement(useShortFormat);
 		boolean printAsHtml = config.getProperty(Configuration.KEY_RESULT_FORMAT).equals(Configuration.VALUE_FORMAT_HTML);
 		writeString(printAsHtml ? new HTMLParser().resultToHTML(resultAsCsv) : resultAsCsv);
 	}

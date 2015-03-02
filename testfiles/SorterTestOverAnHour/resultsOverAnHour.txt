@@ -1,0 +1,4 @@
+Plac; StartNr; Namn; Klubb; MC; #Varv; TotalTid; Varv1; Varv2
+1; 1; Anders Asson; FMCK Astad; ATM; 1; 02.00.00; 02.00.00;
+2; 3; Cengt Csson; FMCK Cstad; CTM; 2; 01.26.21; 00.26.21; 01.00.00
+; 2; Bengt Bsson; FMCK Bstad; BTM; 1; --.--.--; 00.22.22;

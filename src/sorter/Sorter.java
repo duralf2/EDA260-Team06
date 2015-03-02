@@ -1,95 +1,154 @@
 package sorter;
 
-import io.FileReader;
-import io.FileWriter;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import sorter.model.AbstractContestant;
-import sorter.model.Configuration;
-import sorter.model.ContestantFactory;
+import sorter.model.CompetitionType;
 import sorter.model.Database;
 
-/**
- * This class is responsible for loading the data collected during the contests
- * and compile it into sorted result files.
- */
 public class Sorter {
-	private Database db;
-	private Configuration conf;
-	private FileWriter fileWriter;
-	private Map<String, AbstractContestant> contestants;
 
-	public Sorter(Database db) throws IOException {
+	private CompetitionType competitionType;
+	private Database db;
+
+	public Sorter( CompetitionType competitionType, Database db) {
+		this.competitionType = competitionType;
 		this.db = db;
-		conf = new Configuration();
 	}
 
-	public Sorter(Database db, Configuration conf) throws IOException {
-		this.db = db;
-		this.conf = conf;
+	/**
+	 * Writes the contents of this competition to a string and returns it. The result
+	 *  will be formatted like a result file in the excel file format, including the header. 
+	 * @param useShortFormat Whether or not to print all the columns into the result
+	 * @return A string with the results.
+	 */
+	public String toResultString(boolean useShortFormat)
+	{
+		StringBuilder sb = new StringBuilder();
+		List<AbstractContestant> incorrectlyRegisteredContestants = new ArrayList<AbstractContestant>();
+		String headerLine = competitionType.generateHeader(useShortFormat);
 		
-		fileWriter = new FileWriter(
-				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH));
+		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
+		
+		sortByClass(contestants);
+		String currentClass = "";
+		
+		for (AbstractContestant contestant : contestants) {
+			if (contestant.getInformation("Namn").equals("")){
+                contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
+				incorrectlyRegisteredContestants.add(contestant);
+			} else {
+				if (!currentClass.equals(contestant.getClassName())) {
+					currentClass = contestant.getClassName();
+                    headerLine = competitionType.generateHeader(new ArrayList<AbstractContestant>(db.getAllContestantsByClass(currentClass).values()), useShortFormat);
+                    sb.append(currentClass + "\n");
+            		sb.append(headerLine);
+				}
+				sb.append(contestant.toString(competitionType, useShortFormat) + "\n");
+			}
+		}
+		if(incorrectlyRegisteredContestants.size() > 0){
+			sb.append("Icke existerande startnummer\n");
+			sb.append(competitionType.generateHeader(incorrectlyRegisteredContestants, useShortFormat));
+            for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
+                sb.append(contestant.toString(competitionType, useShortFormat) + "\n");
+            }
+		}
+		
+		if (currentClass.equals(""))
+			sb.insert(0, headerLine);
+		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
 	}
 	
 	/**
-	 * Generates a sorted result file for a lap event based on the input files.
-	 * @param nameFile a File object of the file with the contestant name and start number mapping
-	 * @param startTime a File[] object containing the files with all the start times
-	 * @param finishTimes a File[] containing the files with finish times
-	 * @throws IOException if any of the files could not be read
+	 * Writes the contents of this competition to a string and returns it. The result
+	 *  will be formatted like a result file in the excel file format, including the header. 
+	 *  This method also adds placement to the contestants.
+	 * @param useShortFormat Whether or not to print all the columns into the result
+	 * @return A string with the results.
 	 */
-	public void sortLapTimes(File nameFile, File[] startTime, File[] finishTimes) throws IOException {
-		setUp(nameFile, startTime, finishTimes);
+	public String toResultStringWithPlacement(boolean useShortFormat) {
+		StringBuilder sb = new StringBuilder();
 		
-		ArrayList<AbstractContestant> list = new ArrayList<AbstractContestant>();
-		for( AbstractContestant c : contestants.values()) {
-			list.add(c);
+		List<AbstractContestant> incorrectlyRegisteredContestants = new ArrayList<AbstractContestant>();
+		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
+		List<AbstractContestant> contestantsByClass = new ArrayList<AbstractContestant>();
+		
+		sortByClass(contestants);
+		String currentClass = "";
+		
+		for (AbstractContestant contestant : contestants) {
+			if (contestant.getInformation("Namn").equals("")){
+                contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
+				incorrectlyRegisteredContestants.add(contestant);
+			} else {
+				if (!currentClass.equals(contestant.getClassName())) {
+					currentClass = contestant.getClassName();
+					if(contestantsByClass.size() > 0) {
+						sb.append(contestantsByClass.get(0).getClassName() + "\n");
+						sortWithinClass(contestantsByClass, sb, useShortFormat);
+						printIncorrectlyRegisteredContestants(incorrectlyRegisteredContestants, sb, useShortFormat);
+					}
+					contestantsByClass.clear();
+					incorrectlyRegisteredContestants.clear();
+				}
+				
+				if(contestant.completedRace())
+					contestantsByClass.add(contestant);
+				else
+					incorrectlyRegisteredContestants.add(contestant);
+			}
 		}
-		fileWriter.writeResults(conf, db, false);
+		
+		if(contestantsByClass.size() > 0) {
+			sb.append(currentClass + "\n");
+			sortWithinClass(contestantsByClass, sb, useShortFormat);
+		}
+		
+		if(incorrectlyRegisteredContestants.size() > 0){
+            for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
+                sb.append(";" + contestant.toString(competitionType, useShortFormat) + "\n");
+            }
+		}
+		
+		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
 	}
 	
-	private void setUp(File nameFile, File[] startTimes, File[] finishTimes)
-			throws IOException {
-		if (!new File("data").isDirectory())
-			// Create the data directory if it doesn't exist
-			new File("data").mkdir();
-		
-		db.clearContestantEntries();
-
-		ContestantFactory factory = new ContestantFactory(conf);
-		
-		FileReader read = new FileReader(factory);
-
-		read.readNames(nameFile, db);
-		
-		for (int i = 0; i < startTimes.length; i++) {
-			read.readStartTime(startTimes[i], db);
+	private void printIncorrectlyRegisteredContestants(List<AbstractContestant> contestants, StringBuilder sb, boolean useShortFormat) {
+		for( AbstractContestant c : contestants) {
+			sb.append(";" + c.toString(competitionType, useShortFormat) + "\n" );
 		}
-		for (int i = 0; i < finishTimes.length; i++) {
-			read.readFinishTime(finishTimes[i], db);
-		}
+	}
+	
+	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb, boolean useShortFormat) {
+		Collections.sort(contestants);
+		String incompleted = "";
 
-		 contestants = db.getAllContestantEntries();
+		sb.append("Plac;" + competitionType.generateHeader(new ArrayList<AbstractContestant>(contestants), useShortFormat));
+		int place = 1;
+		for (int i = contestants.size()-1; i >= 0 ; i--) {
+			AbstractContestant contestant = contestants.get(i);
+			if (contestant.completedRace()) {
+				sb.append(place + ";" + contestant.toString(competitionType, useShortFormat)
+						+ "\n");
+				place++;
+			} else {
+				incompleted += ";" + contestant.toString(competitionType, useShortFormat)
+						+ "\n";
+			}
+		}
+		sb.append(incompleted);
 	}
 
-    /**
-	 * Reads and sorts the collected data. After the data is sorted it is
-	 * printed to a results file.
-	 * 
-	 * @param nameFile a File object of the file with the contestant name and start number mapping
-	 * @param startTime a File[] object containing the files with all the start times
-	 * @param finishTimes a File[] containing the files with finish times
-	 * @throws IOException
-	 *             If any of the files doesn't exist or couldn't be closed
-	 */
-	public void sort(File nameFile, File[] startTime, File[] finishTimes)
-			throws IOException {
-		setUp(nameFile, startTime, finishTimes);
-		fileWriter.writeResultList( conf, db, true);
+	private void sortByClass(List<AbstractContestant> contestants) {
+		Collections.sort(contestants, new Comparator<AbstractContestant>() {
+			public int compare(AbstractContestant contestant1, AbstractContestant contestant2) {
+				return contestant2.getClassName().compareTo(contestant1.getClassName());
+			}
+		});
 	}
+
 }

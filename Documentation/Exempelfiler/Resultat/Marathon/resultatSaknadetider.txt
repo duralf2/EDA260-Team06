@@ -1,0 +1,9 @@
+StartNr; Namn; Klubb; TotalTid; Starttider; Måltider
+HERRAR
+3; Adam A; A; --.--.--; start?; 12.50.40
+4; Bertil B; C; 00.44.23; 12.05.00; 12.49.23
+5; Cecil C; Drake; 00.48.12; 12.10.00; 12.58.12
+6; David D; Drake; 00.44.59; 12.15.00; 12.59.59
+DAMER
+1; Ella Eriksson; A; 00.59.00; 11.40.00; 12.39.00
+2; Therese Magnusson; Drake; --.--.--; 11.50.01; slut?

@@ -1,0 +1,5 @@
+StartNr; Namn
+1; Ella Eriksson
+2; Ella Eriksson
+3; Therese Magnusson
+3; Arvid Gustafsson

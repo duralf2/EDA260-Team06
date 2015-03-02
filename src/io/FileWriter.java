@@ -3,16 +3,13 @@ package io;
 import gui.model.StartNumberComparator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import sorter.model.AbstractContestant;
 import sorter.model.CompetitionFactory;
 import sorter.model.CompetitionType;
 import sorter.model.Configuration;
@@ -26,23 +23,10 @@ import sorter.model.Database;
 public class FileWriter {
 	private File target;
 
-	/**
-	 * Constructor for <code>FileRWriter</code>.
-	 * 
-	 * @param targetPath
-	 *            The pathway to find the file where the data will be stored.
-	 */
 	public FileWriter(String targetPath) {
 		target = new File(targetPath);
-
 	}
 
-	/**
-	 * Constructor for <code>FileWriter</code>.
-	 * 
-	 * @param file
-	 *            the file where the data will be stored.
-	 */
 	public FileWriter(File file) {
 		target = file;
 	}
@@ -54,16 +38,20 @@ public class FileWriter {
 	 *            The information we have on the contestants.
 	 * @param db
 	 *            The database for the race
-	 * @param useShortFormat TODO
+	 * @param useShortFormat
+	 *            Whether or not to include the start/lap/finish times as well
+	 *            as the total times
 	 * @throws IOException
 	 */
-	public void writeResults(Configuration config, Database db, boolean useShortFormat)
-			throws IOException {
+	public void writeResults(Configuration config, Database db,
+			boolean useShortFormat) throws IOException {
 		CompetitionFactory competitionFactory = new CompetitionFactory(config);
 		CompetitionType competition = competitionFactory.createCompetition(db);
-		writeString(competition.toResultString(useShortFormat));
+		
+		String resultAsCsv = competition.toResultString(useShortFormat);
+		boolean printAsHtml = config.getProperty(Configuration.KEY_RESULT_FORMAT).equals(Configuration.VALUE_FORMAT_HTML);
+		writeString(printAsHtml ? new HTMLParser().resultToHTML(resultAsCsv) : resultAsCsv);
 	}
-	
 
 	/**
 	 * Writes a string to the file.
@@ -71,6 +59,7 @@ public class FileWriter {
 	 * @param data
 	 *            String to be printed
 	 * @throws IOException
+	 * @throws IllegalArgumentException If data is <code>null</code>
 	 */
 	public void writeString(String data) throws IOException {
 		if (data != null) {
@@ -88,20 +77,28 @@ public class FileWriter {
 	/**
 	 * Write the result with all specified information with placement in race.
 	 * 
-	 * @param sortedContestants
-	 *            The contestants to the race sorted by their placement in race.
-	 * @param conf
+	 * @param config
 	 *            The information about competition type, and what informaion we
 	 *            have on the contestants.
 	 * @param db
 	 *            The database for the race.
+	 * @param useShortFormat
+	 *            Whether or not to include the start/lap/finish times as well
+	 *            as the total times
 	 * @throws IOException
 	 */
 	public void writeResultList(Configuration config, Database db, boolean useShortFormat)
 			throws IOException {
 			CompetitionFactory competitionFactory = new CompetitionFactory(config);
 			CompetitionType competition = competitionFactory.createCompetition(db);
-			writeString(competition.toResultStringWithPlacement(useShortFormat));
+			String resultAsCsv;
+			if( config.getProperty(Configuration.KEY_RESULT_SORTED).equals("true"))
+				resultAsCsv = competition.toResultStringWithPlacement(useShortFormat);
+			else
+				resultAsCsv = competition.toResultString(useShortFormat);
+		
+		boolean printAsHtml = config.getProperty(Configuration.KEY_RESULT_FORMAT).equals(Configuration.VALUE_FORMAT_HTML);
+		writeString(printAsHtml ? new HTMLParser().resultToHTML(resultAsCsv) : resultAsCsv);
 	}
 
 	/**
@@ -124,7 +121,8 @@ public class FileWriter {
 			for (String time : entryTimes) {
 				sb.append(startNumber + "; " + time + "\n");
 			}
-			if (entryTimes.size() == 0 && !StartNumberComparator.isStartNumber(startNumber)) {
+			if (entryTimes.size() == 0
+					&& !StartNumberComparator.isStartNumber(startNumber)) {
 				sb.append(startNumber + "\n");
 			}
 		}

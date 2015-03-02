@@ -5,10 +5,13 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.Format;
+import java.text.Normalizer;
 import java.util.Properties;
 
 import gui.model.FormatErrorHandler;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,13 +22,19 @@ public class FormatErrorHandlerTest {
 
 	@Before
 	public void setUp() {
-		try {
-			conf = new Properties();
-			conf.load(new FileReader(new File("RegistrationData/registration.properties")));
-		} catch (IOException e) {
-			fail("Could not read config file.");
-		}
+        try {
+            conf = new Properties();
+            conf.load(new FileReader(new File("testfiles/custom/FormatErrorHandler/registration.properties")));
+        } catch (IOException e) {
+            fail("Could not read config file.");
+        }
+        FormatErrorHandler.setConf(conf);
 	}
+    
+    @After
+    public void tearDown() {
+        conf = null;
+    }
 
 	@Test
 	public void testAddErrors() {
@@ -48,21 +57,23 @@ public class FormatErrorHandlerTest {
 	public void testPrintOneError() {
 		FormatErrorHandler.addError(FormatErrorHandler.TIME, 1);
 		String s = FormatErrorHandler.errorToString();
-		assertEquals(
-				"Format error in "
-						+ conf.getProperty(Configuration.KEY_TIME_FILE_PATH),
-				s);
+		assertEquals("Format error in " + conf.getProperty(Configuration.KEY_TIME_FILE_PATH), s);
 	}
 
 	@Test
 	public void testPrintMultipleErrors() {
-		FormatErrorHandler.addError(FormatErrorHandler.TIME, 1);
-		FormatErrorHandler.addError(FormatErrorHandler.NAME, 3);
-		assertEquals(
-				"Format error in "
-						+ conf.getProperty(Configuration.KEY_NAME_FILE_PATH)
-						+ " at line 3" + "\nFormat error in "
-						+ conf.getProperty(Configuration.KEY_TIME_FILE_PATH),
-				FormatErrorHandler.errorToString());
+        FormatErrorHandler.addError(FormatErrorHandler.NAME, 2);
+		FormatErrorHandler.addError(FormatErrorHandler.TIME, 3);
+        String[] error = FormatErrorHandler.errorToString().split("\n");
+        for(String s : error) {
+            if(s.contains(conf.getProperty(Configuration.KEY_NAME_FILE_PATH))) {
+                assertEquals("Format error in " + conf.getProperty(Configuration.KEY_NAME_FILE_PATH) + " at line 2", s);
+            } else if(s.contains(conf.getProperty(Configuration.KEY_TIME_FILE_PATH))) {
+                assertEquals("Format error in " + conf.getProperty(Configuration.KEY_TIME_FILE_PATH), s);
+            } else {
+                fail("Invalid error message for paths '" + conf.getProperty(Configuration.KEY_TIME_FILE_PATH) +
+                     "' and '" + conf.getProperty(Configuration.KEY_NAME_FILE_PATH) + "': " + s);
+            }
+        }
 	}
 }

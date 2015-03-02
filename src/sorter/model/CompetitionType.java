@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import sorter.Sorter;
+
 /**
  * Abstract superclass to the different types of competitions, contains methods needed by each
  * subclass.
@@ -12,62 +14,22 @@ import java.util.List;
 public abstract class CompetitionType {
 	
 	protected Database db;
+	protected Sorter sorter;
 
 	public CompetitionType(Database db) {
 		this.db = db;
+		sorter = new Sorter(this, db);
 	}
 	
-//TODO: Remove?
-//	/**
-//	 * Writes the contents of this competition to a string and returns it. The result
-//	 *  will be formatted like a result file in the excel file format, including the header.
-//	 */
-//	public String toResultString() {
-//		return toResultString(false);
-//	}
-	
+
 	/**
 	 * Writes the contents of this competition to a string and returns it. The result
 	 *  will be formatted like a result file in the excel file format, including the header. 
 	 * @param useShortFormat Whether or not to print all the columns into the result
 	 * @return A string with the results.
 	 */
-	public String toResultString(boolean useShortFormat)
-	{
-		StringBuilder sb = new StringBuilder();
-		List<AbstractContestant> incorrectlyRegisteredContestants = new ArrayList<AbstractContestant>();
-		String headerLine = generateHeader(useShortFormat);
-		
-		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
-		
-		sortByClass(contestants);
-		String currentClass = "";
-		
-		for (AbstractContestant contestant : contestants) {
-			if (contestant.getInformation("Namn").equals("")){
-                contestant.setClassName("Icke existerande startnummer");
-				incorrectlyRegisteredContestants.add(contestant);
-			} else {
-				if (!currentClass.equals(contestant.getClassName())) {
-					currentClass = contestant.getClassName();
-                    headerLine = generateHeader(new ArrayList<AbstractContestant>(db.getAllContestantsByClass(currentClass).values()), useShortFormat);
-                    sb.append(currentClass + "\n");
-            		sb.append(headerLine);
-				}
-				sb.append(contestant.toString(this, useShortFormat) + "\n");
-			}
-		}
-		if(incorrectlyRegisteredContestants.size() > 0){
-			sb.append("Icke existerande startnummer\n");
-			sb.append(generateHeader(incorrectlyRegisteredContestants, useShortFormat));
-            for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
-                sb.append(contestant.toString(this, useShortFormat) + "\n");
-            }
-		}
-		
-		if (currentClass.equals(""))
-			sb.insert(0, headerLine);
-		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
+	public String toResultString(boolean useShortFormat) {
+		return sorter.toResultString(useShortFormat);
 	}
 	
 	/**
@@ -78,74 +40,7 @@ public abstract class CompetitionType {
 	 * @return A string with the results.
 	 */
 	public String toResultStringWithPlacement(boolean useShortFormat) {
-		StringBuilder sb = new StringBuilder();
-		
-		List<AbstractContestant> incorrectlyRegisteredContestants = new ArrayList<AbstractContestant>();
-		List<AbstractContestant> contestants = new ArrayList<AbstractContestant>(db.getAllContestantEntries().values());
-		List<AbstractContestant> contestantsByClass = new ArrayList<AbstractContestant>();
-		
-		sortByClass(contestants);
-		String currentClass = "";
-		
-		for (AbstractContestant contestant : contestants) {
-			if (contestant.getInformation("Namn").equals("")){
-                contestant.setClassName("ICKE-EXISTERANDE-STARTNUMMER");
-				incorrectlyRegisteredContestants.add(contestant);
-			} else {
-				if (!currentClass.equals(contestant.getClassName())) {
-					currentClass = contestant.getClassName();
-					if(contestantsByClass.size() > 0) {
-						sb.append(contestantsByClass.get(0).getClassName() + "\n");
-						sortWithinClass(contestantsByClass, sb);
-					}
-					contestantsByClass = new ArrayList<AbstractContestant>();
-				}
-				contestantsByClass.add(contestant);
-			}
-		}
-		
-		if(contestantsByClass.size() > 0) {
-			sb.append(currentClass + "\n");
-			sortWithinClass(contestantsByClass, sb);
-		}
-		
-		if(incorrectlyRegisteredContestants.size() > 0){
-			sb.append("Icke existerande startnummer\n");
-			sb.append(generateHeader(incorrectlyRegisteredContestants, useShortFormat));
-            for(AbstractContestant contestant : incorrectlyRegisteredContestants) {
-                sb.append(contestant.toString(this, useShortFormat) + "\n");
-            }
-		}
-		
-		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
-	}
-	
-	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb) {
-		Collections.sort(contestants);
-		String incompleted = "";
-
-		sb.append("Plac;" + generateHeader(new ArrayList<AbstractContestant>(contestants), true));
-		int place = 1;
-		for (int i = 0; i < contestants.size(); i++) {
-			AbstractContestant contestant = contestants.get(i);
-			if (contestant.completedRace()) {
-				sb.append(place + ";" + contestant.toString(this, true)
-						+ "\n");
-				place++;
-			} else {
-				incompleted += ";" + contestant.toString(this, true)
-						+ "\n";
-			}
-		}
-		sb.append(incompleted);
-	}
-
-	private void sortByClass(List<AbstractContestant> contestants) {
-		Collections.sort(contestants, new Comparator<AbstractContestant>() {
-			public int compare(AbstractContestant contestant1, AbstractContestant contestant2) {
-				return contestant2.getClassName().compareTo(contestant1.getClassName());
-			}
-		});
+		return sorter.toResultStringWithPlacement(useShortFormat);
 	}
 	
 	

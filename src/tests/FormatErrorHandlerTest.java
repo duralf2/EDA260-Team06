@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.Format;
-import java.text.Normalizer;
 import java.util.Properties;
 
 import gui.model.FormatErrorHandler;

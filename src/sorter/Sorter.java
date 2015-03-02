@@ -7,8 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.TreeSet;
-
 import sorter.model.AbstractContestant;
 import sorter.model.CompetitionType;
 import sorter.model.Database;

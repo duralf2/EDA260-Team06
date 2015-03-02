@@ -4,18 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import sorter.Sorter;
 import sorter.SorterSetUp;
 import sorter.model.AbstractContestant;
 import sorter.model.Configuration;
-import sorter.model.ContestantProperties;
 import sorter.model.Database;
-import sorter.model.LapContestant;
 
 public class SorterTest extends AbstractFileComparisonTest {
 	private SorterSetUp sorter;

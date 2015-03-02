@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
 public class PreRegistrationPopUp extends JDialog implements ActionListener {

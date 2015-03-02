@@ -1,13 +1,11 @@
 package sorter;
 
-import gui.RegistrationStarter;
 import io.FileReader;
 import io.FileWriter;
 import io.WorkingDirectory;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Map;
 

@@ -1,6 +1,5 @@
 package tests;
 
-import static org.junit.Assert.*;
 import gui.RegistrationStarter;
 
 import org.junit.Before;

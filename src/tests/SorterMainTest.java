@@ -9,10 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sorter.SorterMain;
-import sorter.SorterSetUp;
 import sorter.model.AbstractContestant;
 import sorter.model.Configuration;
-import sorter.model.Database;
 
 public class SorterMainTest extends AbstractFileComparisonTest {
 	private Configuration conf;

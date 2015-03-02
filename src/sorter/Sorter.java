@@ -1,5 +1,7 @@
 package sorter;
 
+import gui.model.StartNumberComparator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -136,7 +138,7 @@ public class Sorter {
 	private void sortWithinClass(List<AbstractContestant> contestants, StringBuilder sb, boolean useShortFormat) {
 		Collections.sort(contestants);
 		String incompleted = "";
-		TreeMap<String, String> t = new TreeMap<String, String>();
+		TreeMap<String, String> t = new TreeMap<String, String>(new StartNumberComparator());
 
 		sb.append("Plac;" + competitionType.generateHeader(new ArrayList<AbstractContestant>(contestants), useShortFormat));
 		int place = 1;

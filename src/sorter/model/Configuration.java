@@ -102,6 +102,7 @@ public class Configuration extends Properties {
 				+ "\n"
 				+ "Valid result formats:\n"
 				+ " - " + VALUE_FORMAT_CSV + "\n"
-				+ " - " + VALUE_FORMAT_HTML + " (not supported yet)\n";
+				+ " - " + VALUE_FORMAT_HTML + "\n";
+		
 	}
 }

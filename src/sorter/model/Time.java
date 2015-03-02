@@ -15,7 +15,7 @@ public class Time implements Comparable<Time> {
 	public Time(String time) {
 		time = time.trim();
 		
-		if(!time.matches("(([0-1][0-9])|(2[0-3])).[0-5][0-9].[0-5][0-9]")){
+		if(!time.matches("(([0-1][0-9])|(2[0-3]))\\.[0-5][0-9]\\.[0-5][0-9]")){
 			throw new IllegalArgumentException();
 		}
 

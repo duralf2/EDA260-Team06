@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Enduro.makejar" default="main" basedir=".">
 	<!--Starts script at main-->
-	
+
 	<path id="classpath">
 		<fileset dir="lib/" includes="**/*.jar" />
 	</path>
@@ -10,17 +10,18 @@
 	<target name="clean" description="Destroys all previously generated files and dirs.">
 		<delete dir="build" />
 		<delete dir="testreports" />
-        <delete dir="bin" />
+		<delete dir="bin" />
 	</target>
 
 	<target name="compile">
-        <mkdir dir="bin" />
-		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath" source="1.6" target="1.6"/>
+		<mkdir dir="bin" />
+		<javac srcdir="src" destdir="bin" includeAntRuntime="true" classpathref="classpath" source="1.6" target="1.6" />
 	</target>
 
-    <target name="javadoc">
-        <javadoc sourcepath="src" destdir="Documentation/javadocs"></javadoc>
-    </target>
+	<target name="javadoc">
+		<javadoc sourcepath="src" destdir="Documentation/javadocs">
+		</javadoc>
+	</target>
 
 	<target name="jar" depends="compile">
 		<mkdir dir="build/jar" />
@@ -34,16 +35,16 @@
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />
 		</jar>
 		<jar destfile="build/jar/Result Generator.jar" basedir="bin">
-					<manifest>
-						<attribute name="Main-Class" value="sorter.SorterMain" />
-						<!--Sets the main class of the program -->
-					</manifest>
-					<zipgroupfileset dir="lib/" includes="**/*.jar" />
+			<manifest>
+				<attribute name="Main-Class" value="sorter.SorterMain" />
+				<!--Sets the main class of the program -->
+			</manifest>
+			<zipgroupfileset dir="lib/" includes="**/*.jar" />
 		</jar>
-		<chmod file="build/jar/Enduro GUI.jar" perm="700"/>
-		<chmod file="build/jar/Result Generator.jar" perm="700"/>
+		<chmod file="build/jar/Enduro GUI.jar" perm="700" />
+		<chmod file="build/jar/Result Generator.jar" perm="700" />
 	</target>
-	
+
 	<target name="main" depends="clean,jar,test, copy-data" />
 	<!--Runs clean, jar and test in order-->
 
@@ -77,34 +78,90 @@
 
 	</target>
 
-    <target name="test" depends="compile">
-        <junit printsummary="yes" haltonfailure="yes" haltonerror="yes">
-            <classpath>
-                <pathelement location="lib/hamcrest-core-1.3.jar" />
-                <pathelement location="lib/junit-4.12.jar" />
-                <pathelement location="lib/jcsv-1.4.0.jar" />
-                <pathelement path="bin" />
-            </classpath>
+	<target name="test" depends="compile">
+		<junit printsummary="yes" haltonfailure="yes" haltonerror="yes">
+			<classpath>
+				<pathelement location="lib/hamcrest-core-1.3.jar" />
+				<pathelement location="lib/junit-4.12.jar" />
+				<pathelement location="lib/jcsv-1.4.0.jar" />
+				<pathelement path="bin" />
+			</classpath>
 
-            <batchtest fork="yes">
-                <fileset dir="src">
-                    <include name="tests/**" />
-                	<not>
-                    	<filename name="tests/AbstractFileComparisonTest.java" />
-                	</not>
-                </fileset>
-            </batchtest>
-        </junit>
-    </target>
-	
+			<batchtest fork="yes">
+				<fileset dir="src">
+					<include name="tests/**" />
+					<not>
+						<filename name="tests/AbstractFileComparisonTest.java" />
+					</not>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
 	<target name="copy-data" depends="test">
 		<mkdir dir="build/jar/data" />
 		<copy todir="build/jar/data">
-		    <fileset dir="data" />
+			<fileset dir="data" />
 		</copy>
 		<mkdir dir="build/jar/RegistrationData" />
 		<copy todir="build/jar/RegistrationData">
 			<fileset dir="RegistrationData" />
 		</copy>
+	</target>
+
+
+
+	<target name="documents">
+		<copy todir="build/release/documents">
+			<fileset dir="Documentation">
+				<include name="img/**" />
+				<include name="Manual.html" />
+				<include name="Teknisk Dokumentation.html" />
+				<include name="style.css" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="example_files">
+		<copy todir="build/release/example_files" flatten="true">
+			<fileset dir=".">
+				<include name="RegistrationData/namn.txt" />
+				<!-- <include name="testfiles/namnWithClasses.txt" /> -->
+				<!-- <include name="testfiles/namnMoreColumns.txt" /> -->
+				<include name="testfiles/test1.txt" />
+				<include name="testfiles/config/marathonContestant.ini" />
+				<include name="testfiles/config/lapContestant.ini" />
+				<include name="testfiles/config/stageContestant.ini" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="program" depends="jar">
+
+		<copy todir="build/release/program/project">
+			<fileset dir=".">
+				<include name="src/**" />
+				<include name="lib/**" />
+				<include name="data/**" />
+				<include name="RegistrationData/**" />
+				<include name="testfiles/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+
+		<copy todir="build/release/program/runnable">
+			<fileset dir="build/jar" />
+			<fileset dir=".">
+				<include name="RegistrationData/**" />
+				<include name="data/**" />
+			</fileset>
+		</copy>
+
+	</target>
+
+
+	<target name="release" depends="clean, program, example_files, documents">
+		<zip destfile="build/release.zip" basedir="build/release" update="true" />
 	</target>
 </project>

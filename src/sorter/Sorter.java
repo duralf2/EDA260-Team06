@@ -95,38 +95,28 @@ public class Sorter {
 		List<AbstractContestant> contestantsByClass = new ArrayList<AbstractContestant>();
 
 		List<AbstractContestant> missingName = new ArrayList<AbstractContestant>();
-		
-		
-		
-		
+
 		sortByClass(contestants);
 		String currentClass = "";
 
 		for (AbstractContestant contestant : contestants) {
-			if (contestant.getInformation("Namn").equals("")) {			
-				missingName.add(contestant);	
-			} 
-			else {
+
+			if (contestant.getInformation("Namn").equals("")) {
+				missingName.add(contestant);
+			} else {
 				if (!currentClass.equals(contestant.getClassName())) {
 					sb.append(currentClass + "\n");
 					currentClass = contestant.getClassName();
-
-					sb.append("Plac;"
-							+ competitionType.generateHeader(
-									new ArrayList<AbstractContestant>(contestants),
-									useShortFormat));
-				
-					
 					if (contestantsByClass.size() > 0) {
 						sortWithinClass(contestantsByClass, sb, useShortFormat);
 					}
 					printIncorrectlyRegisteredContestants(
 							incorrectlyRegisteredContestants, sb,
-							useShortFormat);
+							useShortFormat, contestantsByClass.size() == 0);
 					contestantsByClass.clear();
 					incorrectlyRegisteredContestants.clear();
 				}
-				
+
 				if (contestant.completedRace())
 					contestantsByClass.add(contestant);
 				else
@@ -140,27 +130,16 @@ public class Sorter {
 			sortWithinClass(contestantsByClass, sb, useShortFormat);
 		}
 
-		if (incorrectlyRegisteredContestants.size() > 0) {
-			// sb.append("Icke existerande startnummer\n");
-			// sb.append(competitionType.generateHeader(incorrectlyRegisteredContestants,
-			// useShortFormat));
-			// for(AbstractContestant contestant :
-			// incorrectlyRegisteredContestants) {
-			// sb.append(contestant.toString(competitionType, useShortFormat) +
-			// "\n");
-			// }
-			for (AbstractContestant contestant : incorrectlyRegisteredContestants) {
-				sb.append(";"
-						+ contestant.toString(competitionType, useShortFormat)
-						+ "\n");
-			}
-		}
-		
-		if(missingName.size() > 0) {
+		printIncorrectlyRegisteredContestants(incorrectlyRegisteredContestants,
+				sb, useShortFormat, contestantsByClass.size() == 0);
+
+		if (missingName.size() > 0) {
 			sb.append("Icke existerande startnummer\n");
-			sb.append(competitionType.generateHeader(missingName, useShortFormat));
+			sb.append(competitionType.generateHeader(missingName,
+					useShortFormat));
 			for (AbstractContestant contestant : missingName) {
-				sb.append(contestant.toString(competitionType, useShortFormat) +"\n");
+				sb.append(contestant.toString(competitionType, useShortFormat)
+						+ "\n");
 			}
 		}
 
@@ -170,9 +149,19 @@ public class Sorter {
 
 	private void printIncorrectlyRegisteredContestants(
 			List<AbstractContestant> contestants, StringBuilder sb,
-			boolean useShortFormat) {
-		for (AbstractContestant c : contestants) {
-			sb.append(";" + c.toString(competitionType, useShortFormat) + "\n");
+			boolean useShortFormat, boolean writeHeader) {
+
+		if (contestants.size() > 0) {
+			if (writeHeader) {
+				sb.append("Plac;"
+						+ competitionType.generateHeader(
+								new ArrayList<AbstractContestant>(contestants),
+								useShortFormat));
+			}
+			for (AbstractContestant c : contestants) {
+				sb.append(";" + c.toString(competitionType, useShortFormat)
+						+ "\n");
+			}
 		}
 	}
 
@@ -183,6 +172,10 @@ public class Sorter {
 		TreeMap<String, String> t = new TreeMap<String, String>(
 				new StartNumberComparator());
 
+		sb.append("Plac;"
+				+ competitionType.generateHeader(
+						new ArrayList<AbstractContestant>(contestants),
+						useShortFormat));
 		int place = 1;
 		for (int i = contestants.size() - 1; i >= 0; i--) {
 			AbstractContestant contestant = contestants.get(i);

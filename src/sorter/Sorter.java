@@ -63,6 +63,7 @@ public class Sorter {
 		return sb.toString().replaceAll(";", "; ").replaceAll("\\s+\n", "\n").trim();
 	}
 	
+	
 	/**
 	 * Writes the contents of this competition to a string and returns it. The result
 	 *  will be formatted like a result file in the excel file format, including the header. 

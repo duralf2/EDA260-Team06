@@ -39,10 +39,7 @@ public abstract class CompetitionType {
 	 * @return
 	 */
 	public String resultList(boolean useShortFormat, Configuration config) {
-		if( config.getProperty(Configuration.KEY_RESULT_SORTED).equals("true"))
 			return sorter.toResultStringWithPlacement(useShortFormat);
-		else
-			return sorter.toResultString(useShortFormat);
 	}
 	
 	

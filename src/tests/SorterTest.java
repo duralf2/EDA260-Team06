@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import org.junit.Before;
 import org.junit.Test;
 
+import sorter.SorterMain;
 import sorter.SorterSetUp;
 import sorter.model.AbstractContestant;
 import sorter.model.Configuration;
@@ -134,32 +135,6 @@ public class SorterTest extends AbstractFileComparisonTest {
 			AbstractContestant.setConfiguration(c);
 		}
 		
-		/*@Test
-		public void testVarvlopptidFulltUnsorted() throws IOException {
-			finishTimes = new File[1];
-			startTime = new File("testfiles/acceptanstest/Iteration2/varvlopptid-fullt/starttider.txt");
-			finishTimes[0] = new File("testfiles/acceptanstest/Iteration2/varvlopptid-fullt/maltider.txt");
-			nameFile = new File("testfiles/acceptanstest/Iteration2/varvlopptid-fullt/namnfil.txt");	
-			
-			conf.setProperty(Configuration.KEY_RACE_TYPE, Configuration.VALUE_RACE_LAPS);
-			conf.setProperty(Configuration.KEY_SHORTEST_POSSIBLE_TIME, "00.00.00");
-			conf.setProperty(Configuration.KEY_START_TIME_LIMIT, "03.00.00");
-			conf.setProperty(Configuration.KEY_RESULT_SORTED, "false");
-			
-			Configuration c = AbstractContestant.getConfiguration();
-			
-			AbstractContestant.setConfiguration(conf);
-			
-			sorter = new Sorter(new Database(), conf);
-			sorter.sort(nameFile, new File[] { startTime }, finishTimes);
-			
-			String s1 = readFileAsString(new File("testfiles/acceptanstest/Iteration2/varvlopptid-fullt/resultat.txt"));
-			String s2 = readFileAsString(new File(conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
-		
-			assertEquals(s1,s2);
-			
-			AbstractContestant.setConfiguration(c);
-		}*/
 		
 		@Test
 		public void testOneLapOverAnHour() throws IOException{

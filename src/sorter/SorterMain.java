@@ -62,7 +62,8 @@ public class SorterMain {
 		sorter.sort(nameFile, startTimeFolder.listFiles(), finishTimeFolder.listFiles());
 	}
 
-	private static void noSort(Configuration config, File nameFile,
+	//used in SorterMainTest
+	public static void noSort(Configuration config, File nameFile,
 			File startTimeFolder, File finishTimeFolder, File resultFile) throws IOException {
 
 		Database db = new Database();

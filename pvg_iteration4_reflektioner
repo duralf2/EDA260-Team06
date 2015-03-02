@@ -1,0 +1,13 @@
+Det gick bra även om inte så mycket blev klart enligt XP regler. Refaktoriseringsbranchen är nu helt 'klar' och förberedd inför branch merge, det blir nog en spike eller två på att fixa det. Massa teknisk dokumentation har skrivits och är realtivt uppdaterad vilket är trevligt. Nästa iteration kommer vi nog hinna med massor med spikes.
+
+
+Det var ett hel okej planeringsmöte. Fortfarande är det så att vissa lite drar sig för att vara med på riktigt, och senare kommer och klagar på vad som gjorts och inte gjorts. Parbytet händer inte över huvud taget, had nog kunnat vara mycket bättre ifall coacherna var mer aktiva.
+
+
+Det går sämre med tiden. Rent generellt så upplever nog ingen att gruppen har gott kundfokus på projektet - det ska snarare hellre bli färdigt är passande för kunden. Ofta är inställningen att kunden har fel.
+
+
+De är trevliga och gör inget opassande eller olämpligt direkt. Däremot så är båda oftast passiva och det bidrar till en 'vild' stämning - man gör lite som man vill, bara man arbetar. 
+
+
+* Iteration 4 har varit en lång dag med mycket refaktorisering och ändring av testkod. Den tekniska dokumentationen har skrivits och behöver uppdateras lite efter refaktoriseringen men annars är den klar - vi får nog invänta feedback från annat team så länge. TDD följdes av vissa men inte så mycket av andra par. Mycket att göra inom refaktoriseringen med flera att-göra listor, i princip allt blev klart där! Parbyte fungerar fortfarande dåligt, nästan sämre än tidigare iterationers långlabbar. Verkar inte störa någon direkt dock.

@@ -33,7 +33,7 @@ public class FileWriterTest {
 
 		String expected = "abcd\nedfg";
 		
-		new FileWriter(outfile.getAbsolutePath()).writeString(expected);
+		new FileWriter(outfile.getPath()).writeString(expected);
 
 		String printedResult = readFileAsString(outfile);
 		

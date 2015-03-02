@@ -16,7 +16,8 @@ public class MarathonContestant extends AbstractContestant {
 	@Override
 	public int compareTo(AbstractContestant o) {
 		if (o instanceof MarathonContestant) {
-			return getTotalTime().compareTo(o.getTotalTime());
+//			return getTotalTime().compareTo(o.getTotalTime());
+			return o.getTotalTime().compareTo(getTotalTime());
 		}
 		throw new IllegalArgumentException(
 				"Wrong type of object sent to compareTo()");

@@ -114,10 +114,7 @@
 	<target name="documents">
 		<copy todir="build/release/documents">
 			<fileset dir="Documentation">
-				<include name="img/**" />
-				<include name="Manual.html" />
-				<include name="Teknisk Dokumentation.html" />
-				<include name="style.css" />
+				<include name="**" />
 			</fileset>
 		</copy>
 	</target>

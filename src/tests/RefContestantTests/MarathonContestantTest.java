@@ -64,7 +64,7 @@ public class MarathonContestantTest {
 		marathonContestant.addFinishTime(new Time("12.02.15"));
 		racerAwesome.addStartTime(new Time("12.00.01"));
 		racerAwesome.addFinishTime(new Time("12.01.15"));
-		assertTrue(marathonContestant.compareTo(racerAwesome) > 0 );
+		assertTrue(marathonContestant.compareTo(racerAwesome) < 0 );
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -104,6 +104,7 @@ public class MarathonContestantTest {
 		String match = "Hannah;00.01.00;12.00.00;12.01.00;Omöjlig totaltid?";
 		assertEquals(match, marathonContestant.toString(new MarathonCompetition(new Database())));
 	}
+
 
 	
 	@Test

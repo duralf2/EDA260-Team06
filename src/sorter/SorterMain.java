@@ -5,6 +5,7 @@ import io.FileWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.swing.JOptionPane;
 
@@ -37,8 +38,13 @@ public class SorterMain {
 		// Set the working directory of the program to the folder containing the program.
 		// If you double-click a jar-file in linux the working directory is set to the user home by default.
 		// We want it to be set to the folder of the program, therefore these lines are necessary
-		File workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile();
-		System.setProperty("user.dir", workingDirectory.getParent());
+		File workingDirectory = null;
+		try {
+			workingDirectory = new File(SorterMain.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile();
+			System.setProperty("user.dir", workingDirectory.getParent());
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
 
 		Configuration config = new Configuration();
 		

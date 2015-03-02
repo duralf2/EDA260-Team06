@@ -6,6 +6,7 @@ import io.FileWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -39,13 +40,18 @@ public class SorterSetUp {
 		// to the user home by default.
 		// We want it to be set to the folder of the program, therefore these
 		// lines are necessary
-		File workingDirectory = new File(RegistrationStarter.class
-				.getProtectionDomain().getCodeSource().getLocation().getPath())
-				.getParentFile();
-		System.setProperty("user.dir", workingDirectory.getParent());
-
-		fileWriter = new FileWriter(new File(workingDirectory,
-				conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
+		File workingDirectory;
+		try {
+			workingDirectory = new File(RegistrationStarter.class
+					.getProtectionDomain().getCodeSource().getLocation().toURI())
+					.getParentFile();
+			System.setProperty("user.dir", workingDirectory.getParent());
+			
+			fileWriter = new FileWriter(new File(workingDirectory,
+					conf.getProperty(Configuration.KEY_RESULT_FILE_PATH)));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

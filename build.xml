@@ -30,6 +30,7 @@
 		<jar destfile="build/jar/Enduro GUI.jar" basedir="bin">
 			<manifest>
 				<attribute name="Main-Class" value="gui.RegistrationStarter" />
+				<attribute name="Class-Path" value="." />
 				<!--Sets the main class of the program -->
 			</manifest>
 			<zipgroupfileset dir="lib/" includes="**/*.jar" />

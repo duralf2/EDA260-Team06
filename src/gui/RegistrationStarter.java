@@ -89,8 +89,8 @@ public class RegistrationStarter {
 	}
 
 	private void startRegistration() {
-		File nameFile = new File(defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
-		File timeFile = new File(defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
+		File nameFile = new File(workingDirectory, defaultProperties.getProperty(Configuration.KEY_NAME_FILE_PATH));
+		File timeFile = new File(workingDirectory, defaultProperties.getProperty(Configuration.KEY_TIME_FILE_PATH));
         try {
             nameFile.createNewFile();
             timeFile.createNewFile();
